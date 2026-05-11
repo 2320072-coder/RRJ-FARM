@@ -15,85 +15,120 @@
         .header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
         .logo h1 { font-size: 1.6rem; background: linear-gradient(135deg, #ffffff, #ffea8c, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .logo p { font-size: 0.7rem; color: #c8e6c8; }
-        .nav-menu ul { display: flex; gap: 0.5rem; list-style: none; flex-wrap: wrap; }
-        .nav-menu a { color: #e0f0e0; text-decoration: none; font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 40px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; cursor: pointer; }
-        .nav-menu a i { font-size: 1rem; }
+        .nav-menu ul { display: flex; gap: 0.5rem; list-style: none; flex-wrap: wrap; justify-content: center; }
+        .nav-menu a { color: #e0f0e0; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 40px; transition: all 0.3s; display: flex; align-items: center; gap: 6px; font-size: 0.85rem; cursor: pointer; }
+        .nav-menu a i { font-size: 0.85rem; }
         .nav-menu a:hover { background: rgba(255, 215, 0, 0.15); color: #ffea8c; transform: translateY(-2px); }
         .nav-menu a.active { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a3a1a; box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
         
         .user-menu { position: relative; display: flex; align-items: center; gap: 0.8rem; }
-        .user-avatar { background: #ffd700; color: #1a2e1a; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; }
-        .profile-dropdown { position: absolute; top: 55px; right: 0; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); width: 220px; display: none; z-index: 1100; overflow: hidden; }
+        .user-avatar { background: #ffd700; color: #1a2e1a; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
+        .profile-dropdown { position: absolute; top: 50px; right: 0; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); width: 200px; display: none; z-index: 1100; overflow: hidden; }
         .profile-dropdown.show { display: block; }
-        .dropdown-item { padding: 0.8rem 1.2rem; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; transition: 0.2s; border-bottom: 1px solid #f0f0f0; }
+        .dropdown-item { padding: 0.7rem 1rem; display: flex; align-items: center; gap: 0.7rem; cursor: pointer; transition: 0.2s; border-bottom: 1px solid #f0f0f0; font-size: 0.8rem; }
         .dropdown-item:hover { background: #eef3ea; }
-        .dropdown-item i { width: 22px; color: #2d6a2d; }
+        .dropdown-item i { width: 20px; color: #2d6a2d; }
         .logout-item { color: #dc3545; }
         .logout-item i { color: #dc3545; }
         
+        /* Login Reminder Modal */
+        .reminder-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+        .reminder-modal.active { display: flex; }
+        .reminder-content { background: white; border-radius: 28px; max-width: 380px; width: 90%; padding: 1.5rem; text-align: center; animation: fadeUp 0.3s ease; }
+        .reminder-icon { font-size: 3rem; margin-bottom: 0.8rem; }
+        .reminder-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .reminder-message { color: #4a5b4a; margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.4; }
+        .reminder-buttons { display: flex; gap: 0.8rem; margin-top: 1rem; }
+        .btn-login-reminder { flex: 1; background: #2d6a2d; color: white; border: none; padding: 0.7rem; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+        .btn-cancel-reminder { flex: 1; background: #eef2e8; color: #1a2e1a; border: none; padding: 0.7rem; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+        
         /* Hero Section */
-        .hero-subscription { background: linear-gradient(135deg, #1a4d1a, #2d6a2d); border-radius: 32px; padding: 3rem; margin: 1.5rem 0 2rem; color: white; text-align: center; }
-        .hero-subscription h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .hero-subscription p { font-size: 1.1rem; opacity: 0.9; }
+        .hero-subscription { background: linear-gradient(135deg, #1a4d1a, #2d6a2d); border-radius: 32px; padding: 2rem; margin: 1.5rem 0 2rem; color: white; text-align: center; }
+        .hero-subscription h1 { font-size: 2rem; margin-bottom: 1rem; }
+        .hero-subscription p { font-size: 1rem; opacity: 0.9; }
         
         /* Subscription Cards */
-        .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
-        .plan-card { background: white; border-radius: 32px; overflow: hidden; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
-        .plan-card:hover { transform: translateY(-8px); box-shadow: 0 25px 40px -12px rgba(0,0,0,0.15); }
-        .plan-header { padding: 2rem; text-align: center; color: white; }
+        .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .plan-card { background: white; border-radius: 28px; overflow: hidden; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+        .plan-card:hover { transform: translateY(-5px); }
+        .plan-header { padding: 1.5rem; text-align: center; color: white; }
         .plan-header.researcher { background: linear-gradient(135deg, #1e3a5f, #2c5282); }
         .plan-header.member { background: linear-gradient(135deg, #2d6a2d, #1a4d1a); }
-        .plan-icon { font-size: 3rem; margin-bottom: 1rem; }
-        .plan-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .plan-price { font-size: 2.5rem; font-weight: 800; margin: 1rem 0; }
-        .plan-price small { font-size: 0.9rem; font-weight: 400; }
-        .plan-duration { font-size: 0.8rem; opacity: 0.8; }
+        .plan-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+        .plan-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .plan-price { font-size: 2rem; font-weight: 800; margin: 0.8rem 0; }
+        .plan-price small { font-size: 0.8rem; font-weight: 400; }
+        .plan-duration { font-size: 0.7rem; opacity: 0.8; }
         
-        .plan-body { padding: 1.5rem 2rem 2rem; }
-        .benefit-list { list-style: none; margin-bottom: 1.5rem; }
-        .benefit-list li { padding: 0.7rem 0; display: flex; align-items: center; gap: 0.8rem; border-bottom: 1px solid #e8f0e8; font-size: 0.9rem; }
-        .benefit-list li i { width: 24px; color: #2d6a2d; font-size: 1rem; }
-        .benefit-list li .fa-times { color: #dc3545; }
-        .benefit-list li .fa-check { color: #2d6a2d; }
-        .badge { background: #ffd700; color: #1a3a1a; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-left: 0.5rem; }
-        .voucher-tag { background: #eef3ea; padding: 0.2rem 0.5rem; border-radius: 12px; font-size: 0.7rem; color: #2d6a2d; margin-left: 0.5rem; }
+        .plan-body { padding: 1.2rem 1.5rem 1.5rem; }
+        .benefit-list { list-style: none; margin-bottom: 1rem; }
+        .benefit-list li { padding: 0.5rem 0; display: flex; align-items: center; gap: 0.6rem; border-bottom: 1px solid #e8f0e8; font-size: 0.85rem; }
+        .benefit-list li i { width: 20px; color: #2d6a2d; font-size: 0.9rem; }
+        .badge { background: #ffd700; color: #1a3a1a; padding: 0.2rem 0.5rem; border-radius: 20px; font-size: 0.65rem; font-weight: 600; margin-left: 0.3rem; }
+        .voucher-tag { background: #eef3ea; padding: 0.2rem 0.4rem; border-radius: 12px; font-size: 0.65rem; color: #2d6a2d; margin-left: 0.3rem; }
         
-        .btn-subscribe { width: 100%; padding: 1rem; border: none; border-radius: 50px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s; background: #2d6a2d; color: white; }
-        .btn-subscribe:hover { background: #1a4d1a; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .btn-subscribe { width: 100%; padding: 0.8rem; border: none; border-radius: 50px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.3s; background: #2d6a2d; color: white; }
+        .btn-subscribe:hover { background: #1a4d1a; transform: translateY(-2px); }
         
         /* Comparison Table */
-        .comparison-section { background: white; border-radius: 32px; padding: 2rem; margin-bottom: 3rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .comparison-section h2 { margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
-        .comparison-table { width: 100%; border-collapse: collapse; }
-        .comparison-table th, .comparison-table td { padding: 1rem; text-align: left; border-bottom: 1px solid #e8f0e8; }
+        .comparison-section { background: white; border-radius: 28px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); overflow-x: auto; }
+        .comparison-section h2 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.3rem; }
+        .comparison-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        .comparison-table th, .comparison-table td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #e8f0e8; font-size: 0.8rem; }
         .comparison-table th { background: #f0f4e8; font-weight: 600; }
-        .comparison-table td i.fa-check { color: #2d6a2d; }
-        .comparison-table td i.fa-times { color: #dc3545; }
-        .table-responsive { overflow-x: auto; }
         
-        /* Modal */
+        /* RESPONSIVE MODAL - SMALLER ON MOBILE */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
         .modal.active { display: flex; }
-        .modal-content { background: white; border-radius: 32px; max-width: 550px; width: 90%; padding: 0; animation: fadeUp 0.3s ease; }
-        .modal-header { padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eef3ea; }
-        .modal-header h3 { font-size: 1.3rem; display: flex; align-items: center; gap: 0.5rem; }
-        .modal-body { padding: 1.5rem; }
-        .modal-footer { padding: 1rem 1.5rem; display: flex; gap: 1rem; justify-content: flex-end; border-top: 1px solid #eef3ea; }
-        .close-modal { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #999; transition: 0.2s; }
+        .modal-content { background: white; border-radius: 28px; max-width: 500px; width: 90%; padding: 0; animation: fadeUp 0.3s ease; }
+        .modal-header { padding: 1rem 1.2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eef3ea; }
+        .modal-header h3 { font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
+        .modal-body { padding: 1.2rem; }
+        .modal-footer { padding: 0.8rem 1.2rem; display: flex; gap: 0.8rem; justify-content: flex-end; border-top: 1px solid #eef3ea; }
+        .close-modal { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; transition: 0.2s; }
         .close-modal:hover { color: #dc3545; }
-        .btn-primary { background: #2d6a2d; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; }
-        .btn-secondary { background: #eef2e8; color: #1a2e1a; padding: 0.8rem 1.5rem; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; }
-        .modal-input { width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 16px; margin: 0.5rem 0; font-family: inherit; }
-        .payment-options { display: flex; gap: 1rem; margin: 1rem 0; flex-wrap: wrap; }
-        .payment-option { flex: 1; text-align: center; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 16px; cursor: pointer; transition: all 0.3s; background: white; }
+        .btn-primary { background: #2d6a2d; color: white; padding: 0.6rem 1.2rem; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
+        .btn-secondary { background: #eef2e8; color: #1a2e1a; padding: 0.6rem 1.2rem; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
+        .modal-input { width: 100%; padding: 0.7rem; border: 2px solid #e0e0e0; border-radius: 14px; margin: 0.5rem 0; font-family: inherit; font-size: 0.85rem; }
+        .payment-options { display: flex; gap: 0.8rem; margin: 0.8rem 0; flex-wrap: wrap; }
+        .payment-option { flex: 1; text-align: center; padding: 0.6rem; border: 2px solid #e0e0e0; border-radius: 14px; cursor: pointer; transition: all 0.3s; background: white; font-size: 0.8rem; }
         .payment-option.selected { border-color: #2d6a2d; background: #e8f0e8; }
-        .payment-option i { font-size: 1.5rem; display: block; margin-bottom: 0.3rem; }
+        .payment-option i { font-size: 1.2rem; display: block; margin-bottom: 0.2rem; }
         
-        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 1rem 2rem; border-radius: 50px; display: none; z-index: 2100; animation: slideInRight 0.3s ease; }
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .container { padding: 0 1rem; }
+            .hero-subscription { padding: 1.2rem; }
+            .hero-subscription h1 { font-size: 1.4rem; }
+            .plans-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .plan-header { padding: 1rem; }
+            .plan-title { font-size: 1.2rem; }
+            .plan-price { font-size: 1.5rem; }
+            .plan-body { padding: 1rem; }
+            .benefit-list li { font-size: 0.75rem; padding: 0.4rem 0; }
+            
+            .modal-content { max-width: 95%; width: 95%; border-radius: 20px; }
+            .modal-header { padding: 0.8rem 1rem; }
+            .modal-header h3 { font-size: 1rem; }
+            .modal-body { padding: 1rem; }
+            .modal-footer { flex-direction: column; gap: 0.5rem; }
+            .modal-footer button { width: 100%; }
+            .payment-options { flex-direction: column; gap: 0.5rem; }
+            .payment-option { width: 100%; }
+            .close-modal { font-size: 1.3rem; }
+            
+            .comparison-section { padding: 1rem; }
+            .comparison-section h2 { font-size: 1.1rem; }
+            .nav-menu ul { gap: 0.3rem; justify-content: center; }
+            .nav-menu a { font-size: 0.7rem; padding: 0.3rem 0.6rem; }
+            .logo h1 { font-size: 1.1rem; }
+            .logo p { font-size: 0.55rem; }
+        }
+        
+        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem 1.2rem; border-radius: 50px; display: none; z-index: 2100; animation: slideInRight 0.3s ease; font-size: 0.8rem; }
         
         @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @media (max-width: 800px) { .plans-grid { grid-template-columns: 1fr; } .container { padding: 0 1rem; } }
     </style>
 </head>
 <body>
@@ -103,16 +138,22 @@
                 <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Batangas, Laguna & Quezon</p></div>
                 <nav class="nav-menu">
                     <ul>
-                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="marketplace.html"><i class="fas fa-store"></i> Marketplace</a></li>
-                        <li><a href="workshops.html"><i class="fas fa-chalkboard-user"></i> Workshops</a></li>
-                        <li><a href="cooperative.html"><i class="fas fa-handshake"></i> Cooperative</a></li>
+                        <li><a href="marketplace.html">Marketplace</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="cooperative.html">Cooperative</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="subscriptions.html" class="active"><i class="fas fa-ticket-alt"></i> Subscriptions</a></li>
-                        <li><a href="login.html"><i class="fas fa-user"></i> Login/Register</a></li>
+                        <li><a href="subscriptions.html" class="active">Subscriptions</a></li>
+                        <li><a href="login.html">Login</a></li>
                     </ul>
                 </nav>
+                <div class="user-menu">
+                    <div class="user-avatar" id="userAvatar">JD</div>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div class="dropdown-item" id="editProfileBtn">Edit Profile</div>
+                        <div class="dropdown-item" id="changePasswordBtn">Change Password</div>
+                        <div class="dropdown-item logout-item" id="logoutBtn">Logout</div>
                     </div>
                 </div>
             </div>
@@ -121,13 +162,11 @@
 
     <main>
         <div class="container">
-            <!-- Hero Section -->
             <div class="hero-subscription">
-                <h1><i class="fas fa-ticket-alt"></i> Subscriptions & Memberships</h1>
+                <h1>Subscriptions & Memberships</h1>
                 <p>Choose the plan that fits your needs — access workshops, AI tools, exclusive discounts, and more!</p>
             </div>
 
-            <!-- Subscription Plans Grid -->
             <div class="plans-grid">
                 <!-- Researcher / Student Plan -->
                 <div class="plan-card">
@@ -144,16 +183,14 @@
                             <li><i class="fas fa-ticket-alt"></i> +2 Vouchers <span class="badge">Every Month</span></li>
                             <li><i class="fas fa-tag"></i> 50% OFF <span class="voucher-tag">1st Training</span></li>
                             <li><i class="fas fa-tag"></i> 20% OFF <span class="voucher-tag">2nd Training</span></li>
-                            <li><i class="fas fa-truck"></i> 10% OFF <span class="voucher-tag">Free Delivery Discount</span></li>
-                            <li><i class="fas fa-store"></i> Marketplace Discount <span class="voucher-tag">Included</span></li>
-                            <li><i class="fas fa-chart-line"></i> Research Data Access</li>
-                            <li><i class="fas fa-users"></i> Community Forum Access</li>
+                            <li><i class="fas fa-truck"></i> 10% OFF Delivery</li>
+                            <li><i class="fas fa-store"></i> Marketplace Discount</li>
                         </ul>
-                        <button class="btn-subscribe" onclick="openSubscribeModal('researcher')"><i class="fas fa-shopping-cart"></i> Subscribe Now</button>
+                        <button class="btn-subscribe" onclick="checkLoginAndSubscribe('researcher')">Subscribe Now</button>
                     </div>
                 </div>
 
-                <!-- Members Plan (formerly CSA) -->
+                <!-- Members Plan -->
                 <div class="plan-card">
                     <div class="plan-header member">
                         <div class="plan-icon"><i class="fas fa-users"></i></div>
@@ -164,39 +201,33 @@
                     <div class="plan-body">
                         <ul class="benefit-list">
                             <li><i class="fas fa-check-circle"></i> Full Workshop Access</li>
-                            <li><i class="fas fa-microchip"></i> AI Integration <span class="badge">Included</span></li>
+                            <li><i class="fas fa-microchip"></i> AI Tools <span class="badge">Included</span></li>
                             <li><i class="fas fa-ticket-alt"></i> +3 Vouchers <span class="badge">Every Month</span></li>
                             <li><i class="fas fa-tag"></i> 50% OFF <span class="voucher-tag">1st Training</span></li>
                             <li><i class="fas fa-tag"></i> 20% OFF <span class="voucher-tag">2nd Training</span></li>
                             <li><i class="fas fa-truck"></i> Free Delivery <span class="voucher-tag">3x per month</span></li>
-                            <li><i class="fas fa-store"></i> Marketplace Discount <span class="voucher-tag">Included</span></li>
-                            <li><i class="fas fa-chart-line"></i> Priority Support</li>
+                            <li><i class="fas fa-store"></i> Marketplace Discount</li>
                             <li><i class="fas fa-handshake"></i> Cooperative Voting Rights</li>
                         </ul>
-                        <button class="btn-subscribe" onclick="openSubscribeModal('member')"><i class="fas fa-crown"></i> Become a Member</button>
+                        <button class="btn-subscribe" onclick="checkLoginAndSubscribe('member')">Become a Member</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Comparison Table -->
             <div class="comparison-section">
-                <h2><i class="fas fa-chart-simple"></i> Plan Comparison</h2>
+                <h2>Plan Comparison</h2>
                 <div class="table-responsive">
                     <table class="comparison-table">
-                        <thead>
-                            <tr><th>Feature</th><th>Researcher & Student</th><th>Members</th></tr>
-                        </thead>
+                        <thead><tr><th>Feature</th><th>Researcher & Student</th><th>Members</th></tr></thead>
                         <tbody>
                             <tr><td>Price</td><td><strong>₱1,000/month</strong></td><td><strong>₱1,500/month</strong></td></tr>
-                            <tr><td>Workshop Access</td><td><i class="fas fa-check"></i> Full Access</td><td><i class="fas fa-check"></i> Full Access</td></tr>
-                            <tr><td>AI Integration Tools</td><td><i class="fas fa-check"></i> Included</td><td><i class="fas fa-check"></i> Included</td></tr>
-                            <tr><td>Monthly Vouchers</td><td><i class="fas fa-check"></i> +2 Every Month</td><td><i class="fas fa-check"></i> +3 Every Month</td></tr>
+                            <tr><td>Workshop Access</td><td><i class="fas fa-check"></i> Full</td><td><i class="fas fa-check"></i> Full</td></tr>
+                            <tr><td>AI Tools</td><td><i class="fas fa-check"></i> Included</td><td><i class="fas fa-check"></i> Included</td></tr>
+                            <tr><td>Monthly Vouchers</td><td><i class="fas fa-check"></i> +2</td><td><i class="fas fa-check"></i> +3</td></tr>
                             <tr><td>1st Training Discount</td><td><i class="fas fa-check"></i> 50% OFF</td><td><i class="fas fa-check"></i> 50% OFF</td></tr>
                             <tr><td>2nd Training Discount</td><td><i class="fas fa-check"></i> 20% OFF</td><td><i class="fas fa-check"></i> 20% OFF</td></tr>
-                            <tr><td>Free Delivery</td><td><i class="fas fa-check"></i> 10% OFF Discount</td><td><i class="fas fa-check"></i> 3x per month</td></tr>
-                            <tr><td>Marketplace Discount</td><td><i class="fas fa-check"></i> Included</td><td><i class="fas fa-check"></i> Included</td></tr>
-                            <tr><td>Priority Support</td><td><i class="fas fa-times"></i> Standard</td><td><i class="fas fa-check"></i> Priority</td></tr>
-                            <tr><td>Cooperative Benefits</td><td><i class="fas fa-times"></i> Not Included</td><td><i class="fas fa-check"></i> Voting Rights</td></tr>
+                            <tr><td>Free Delivery</td><td>10% OFF</td><td>3x per month</td></tr>
+                            <tr><td>Cooperative Benefits</td><td>Not Included</td><td><i class="fas fa-check"></i> Voting Rights</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -204,15 +235,28 @@
         </div>
     </main>
 
-    <!-- Subscription Modal -->
+    <!-- LOGIN REMINDER MODAL -->
+    <div id="reminderModal" class="reminder-modal">
+        <div class="reminder-content">
+            <div class="reminder-icon">⚠️</div>
+            <div class="reminder-title">Login Required</div>
+            <div class="reminder-message" id="reminderMessage">Please login or register to subscribe.</div>
+            <div class="reminder-buttons">
+                <button class="btn-login-reminder" onclick="redirectToLogin()">Login / Register</button>
+                <button class="btn-cancel-reminder" onclick="closeReminderModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBSCRIPTION MODAL -->
     <div id="subscribeModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modalTitle"><i class="fas fa-ticket-alt"></i> Subscribe</h3>
+                <h3 id="modalTitle">Subscribe</h3>
                 <button class="close-modal" onclick="closeSubscribeModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <div id="planDetails" class="form-group"></div>
+                <div id="planDetails" style="background:#e8f0e8; padding:0.8rem; border-radius:14px; margin-bottom:1rem;"></div>
                 <div class="form-group">
                     <label>Full Name</label>
                     <input type="text" id="subscriberName" class="modal-input" placeholder="Enter your full name">
@@ -229,7 +273,7 @@
                         <div class="payment-option" data-method="bank" onclick="selectPaymentMethod('bank')"><i class="fas fa-university"></i> Bank Transfer</div>
                     </div>
                 </div>
-                <div id="paymentDetails" class="form-group" style="background:#eef3ea; padding:0.8rem; border-radius:16px; font-size:0.8rem;"></div>
+                <div id="paymentDetails" style="background:#eef3ea; padding:0.8rem; border-radius:14px; font-size:0.8rem;"></div>
             </div>
             <div class="modal-footer">
                 <button class="btn-secondary" onclick="closeSubscribeModal()">Cancel</button>
@@ -241,26 +285,41 @@
     <div id="successToast" class="success-toast"></div>
 
     <script>
-        // User Data (simulated login)
-        let currentUser = { 
-            name: 'Juan Dela Cruz', 
-            avatarInitials: 'JD',
-            email: 'juan.delacruz@example.com'
-        };
-        
+        // ========== CHECK LOGIN FIRST ==========
         let selectedPlan = null;
         let selectedPaymentMethod = 'gcash';
-        
-        // Store subscriptions in localStorage
-        let userSubscriptions = JSON.parse(localStorage.getItem('rrjfarm_subscriptions')) || [];
-        
-        function showToast(msg) { 
-            let t = document.getElementById('successToast'); 
-            t.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`; 
-            t.style.display = 'block'; 
-            setTimeout(() => t.style.display = 'none', 3000); 
+        let currentUser = null;
+
+        function isUserLoggedIn() {
+            const userJson = localStorage.getItem('rrjfarm_current_user');
+            if (userJson) {
+                currentUser = JSON.parse(userJson);
+                return true;
+            }
+            return false;
         }
-        
+
+        function showReminderModal(message) {
+            document.getElementById('reminderMessage').innerHTML = message;
+            document.getElementById('reminderModal').classList.add('active');
+        }
+
+        function closeReminderModal() {
+            document.getElementById('reminderModal').classList.remove('active');
+        }
+
+        function redirectToLogin() {
+            window.location.href = 'login.html';
+        }
+
+        function checkLoginAndSubscribe(planType) {
+            if (!isUserLoggedIn()) {
+                showReminderModal('Please login or register to subscribe to a membership plan.');
+                return;
+            }
+            openSubscribeModal(planType);
+        }
+
         function openSubscribeModal(planType) {
             selectedPlan = planType;
             const modalTitle = document.getElementById('modalTitle');
@@ -269,42 +328,37 @@
             if (planType === 'researcher') {
                 modalTitle.innerHTML = '<i class="fas fa-graduation-cap"></i> Subscribe to Researcher & Student Plan';
                 planDetails.innerHTML = `
-                    <div style="background:#e8f0e8; padding:1rem; border-radius:16px; margin-bottom:1rem;">
-                        <strong>Researcher & Student Plan - ₱1,000/month</strong><br>
-                        <small>✓ Full Workshop Access<br>✓ AI Tools<br>✓ +2 Vouchers/month<br>
-                        ✓ 50% OFF 1st Training<br>✓ 20% OFF 2nd Training<br>
-                        ✓ 10% OFF Free Delivery<br>✓ Marketplace Discount</small>
-                    </div>
+                    <strong>Researcher & Student Plan - ₱1,000/month</strong><br>
+                    <small>✓ Full Workshop Access<br>✓ AI Tools<br>✓ +2 Vouchers/month<br>
+                    ✓ 50% OFF 1st Training<br>✓ 20% OFF 2nd Training<br>
+                    ✓ 10% OFF Delivery<br>✓ Marketplace Discount</small>
                 `;
-                document.getElementById('confirmSubscribeBtn').innerHTML = '<i class="fas fa-credit-card"></i> Pay ₱1,000 & Subscribe';
+                document.getElementById('confirmSubscribeBtn').innerHTML = 'Pay ₱1,000 & Subscribe';
             } else {
                 modalTitle.innerHTML = '<i class="fas fa-users"></i> Become a Member';
                 planDetails.innerHTML = `
-                    <div style="background:#e8f0e8; padding:1rem; border-radius:16px; margin-bottom:1rem;">
-                        <strong>Members Plan - ₱1,500/month</strong><br>
-                        <small>✓ Full Workshop Access<br>✓ AI Tools<br>✓ +3 Vouchers/month<br>
-                        ✓ 50% OFF 1st Training<br>✓ 20% OFF 2nd Training<br>
-                        ✓ Free Delivery (3x/month)<br>✓ Marketplace Discount<br>
-                        ✓ Priority Support<br>✓ Cooperative Voting Rights</small>
-                    </div>
+                    <strong>Members Plan - ₱1,500/month</strong><br>
+                    <small>✓ Full Workshop Access<br>✓ AI Tools<br>✓ +3 Vouchers/month<br>
+                    ✓ 50% OFF 1st Training<br>✓ 20% OFF 2nd Training<br>
+                    ✓ Free Delivery (3x/month)<br>✓ Marketplace Discount<br>
+                    ✓ Priority Support<br>✓ Cooperative Voting Rights</small>
                 `;
-                document.getElementById('confirmSubscribeBtn').innerHTML = '<i class="fas fa-crown"></i> Pay ₱1,500 & Become Member';
+                document.getElementById('confirmSubscribeBtn').innerHTML = 'Pay ₱1,500 & Become Member';
             }
             
             // Pre-fill with current user data
-            document.getElementById('subscriberName').value = currentUser.name;
-            document.getElementById('subscriberEmail').value = currentUser.email;
+            document.getElementById('subscriberName').value = currentUser.name || '';
+            document.getElementById('subscriberEmail').value = currentUser.email || '';
             
-            // Reset payment selection
             selectPaymentMethod('gcash');
             document.getElementById('subscribeModal').classList.add('active');
         }
-        
+
         function closeSubscribeModal() {
             document.getElementById('subscribeModal').classList.remove('active');
             selectedPlan = null;
         }
-        
+
         function selectPaymentMethod(method) {
             selectedPaymentMethod = method;
             document.querySelectorAll('#paymentOptions .payment-option').forEach(opt => opt.classList.remove('selected'));
@@ -312,14 +366,21 @@
             
             const detailsDiv = document.getElementById('paymentDetails');
             if (method === 'gcash') {
-                detailsDiv.innerHTML = '<strong><i class="fab fa-gcash"></i> GCash Payment</strong><br>Account: 0912 345 6789 (RRJ FARM)<br>Reference: SUB-' + Date.now() + '<br>Send exact amount and screenshot to our support.';
+                detailsDiv.innerHTML = '<strong>GCash Payment</strong><br>Account: 0912 345 6789 (RRJ FARM)<br>Reference: SUB-' + Date.now();
             } else if (method === 'paymaya') {
-                detailsDiv.innerHTML = '<strong><i class="fas fa-mobile-alt"></i> PayMaya Payment</strong><br>Account: 0912 345 6789 (RRJ FARM)<br>Reference: SUB-' + Date.now();
+                detailsDiv.innerHTML = '<strong>PayMaya Payment</strong><br>Account: 0912 345 6789 (RRJ FARM)<br>Reference: SUB-' + Date.now();
             } else {
-                detailsDiv.innerHTML = '<strong><i class="fas fa-university"></i> Bank Transfer</strong><br>BPI Account: 1234-5678-90<br>Account Name: RRJ FARM Cooperative<br>Reference: SUB-' + Date.now();
+                detailsDiv.innerHTML = '<strong>Bank Transfer</strong><br>BPI Account: 1234-5678-90<br>Account Name: RRJ FARM Cooperative<br>Reference: SUB-' + Date.now();
             }
         }
-        
+
+        function showToast(msg) { 
+            let t = document.getElementById('successToast'); 
+            t.innerHTML = msg; 
+            t.style.display = 'block'; 
+            setTimeout(() => t.style.display = 'none', 3000); 
+        }
+
         function confirmSubscription() {
             const name = document.getElementById('subscriberName').value.trim();
             const email = document.getElementById('subscriberEmail').value.trim();
@@ -329,19 +390,31 @@
                 return;
             }
             
-            // Update current user info
-            currentUser.name = name;
-            currentUser.email = email;
-            currentUser.avatarInitials = name.split(' ').map(n => n[0]).join('').toUpperCase();
-            document.getElementById('userAvatar').innerText = currentUser.avatarInitials;
-            
             const price = selectedPlan === 'researcher' ? 1000 : 1500;
             const planName = selectedPlan === 'researcher' ? 'Researcher & Student' : 'Members';
             
+            // Get current wallet balance
+            let walletBalance = parseInt(localStorage.getItem('rrjfarm_wallet_balance')) || 0;
+            
+            // Check if user has enough balance
+            if (walletBalance >= price) {
+                // Deduct from wallet
+                walletBalance -= price;
+                localStorage.setItem('rrjfarm_wallet_balance', walletBalance);
+                processSubscription(name, email, price, planName);
+            } else {
+                // Show payment instructions
+                alert(`Please send ₱${price} via ${selectedPaymentMethod.toUpperCase()} to complete your subscription.\n\nReference: SUB-${Date.now()}\nWe will activate your subscription upon payment confirmation.`);
+                processSubscription(name, email, price, planName);
+            }
+        }
+
+        function processSubscription(name, email, price, planName) {
             const subscription = {
                 id: 'SUB' + Date.now(),
                 plan: planName,
                 planType: selectedPlan,
+                amount: price,
                 price: price,
                 status: 'Active',
                 startDate: new Date().toISOString().split('T')[0],
@@ -351,51 +424,46 @@
                 paymentMethod: selectedPaymentMethod
             };
             
-            // Add to subscriptions array
+            // Save to localStorage
+            let userSubscriptions = JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions') || '[]');
             userSubscriptions.push(subscription);
-            localStorage.setItem('rrjfarm_subscriptions', JSON.stringify(userSubscriptions));
+            localStorage.setItem('rrjfarm_user_subscriptions', JSON.stringify(userSubscriptions));
             
-            // Also save to session for dashboard
+            // Save to session for dashboard
             sessionStorage.setItem('rrjfarm_subscription_active', 'true');
             sessionStorage.setItem('rrjfarm_subscription_plan', subscription.plan);
             
             // Generate vouchers based on plan
-            let vouchers = JSON.parse(localStorage.getItem('rrjfarm_vouchers')) || [];
+            let vouchers = JSON.parse(localStorage.getItem('rrjfarm_vouchers') || []);
             
             if (selectedPlan === 'researcher') {
                 vouchers.push(
-                    { code: 'RES_TRAIN50_' + Date.now(), discount: '50% OFF', description: '50% OFF on 1st Training', expires: new Date(Date.now() + 90*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'RES_TRAIN20_' + Date.now(), discount: '20% OFF', description: '20% OFF on 2nd Training', expires: new Date(Date.now() + 90*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'RES_FREEDELIVERY_' + Date.now(), discount: '10% OFF', description: '10% OFF on Delivery', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'RES_MARKET20_' + Date.now(), discount: '20% OFF', description: '20% OFF on Marketplace', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'RES_MONTHLY1_' + Date.now(), discount: 'Monthly Voucher', description: '+2 Monthly Vouchers', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'RES_MONTHLY2_' + Date.now(), discount: 'Monthly Voucher', description: '+2 Monthly Vouchers', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0], used: false }
+                    { code: 'RES_TRAIN50_' + Date.now(), discount: '50% OFF', description: '50% OFF on 1st Training', expires: new Date(Date.now() + 90*24*60*60*1000).toISOString().split('T')[0] },
+                    { code: 'RES_TRAIN20_' + Date.now(), discount: '20% OFF', description: '20% OFF on 2nd Training', expires: new Date(Date.now() + 90*24*60*60*1000).toISOString().split('T')[0] },
+                    { code: 'RES_FREEDELIVERY_' + Date.now(), discount: '10% OFF', description: '10% OFF on Delivery', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0] },
+                    { code: 'RES_MARKET20_' + Date.now(), discount: '20% OFF', description: '20% OFF on Marketplace', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0] }
                 );
-                showToast(`✅ Subscribed to Researcher & Student Plan! Vouchers added.`);
+                showToast('Subscribed to Researcher & Student Plan! Vouchers added.');
             } else {
                 vouchers.push(
-                    { code: 'MEMBER_TRAIN50_' + Date.now(), discount: '50% OFF', description: '50% OFF on 1st Training', expires: new Date(Date.now() + 90*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'MEMBER_TRAIN20_' + Date.now(), discount: '20% OFF', description: '20% OFF on 2nd Training', expires: new Date(Date.now() + 90*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'MEMBER_FREEDELIVERY1_' + Date.now(), discount: 'Free Delivery', description: 'Free Delivery (1 of 3/month)', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'MEMBER_FREEDELIVERY2_' + Date.now(), discount: 'Free Delivery', description: 'Free Delivery (2 of 3/month)', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'MEMBER_FREEDELIVERY3_' + Date.now(), discount: 'Free Delivery', description: 'Free Delivery (3 of 3/month)', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'MEMBER_MARKET20_' + Date.now(), discount: '20% OFF', description: '20% OFF on Marketplace', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'MEMBER_MONTHLY1_' + Date.now(), discount: 'Monthly Voucher', description: '+3 Monthly Vouchers', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'MEMBER_MONTHLY2_' + Date.now(), discount: 'Monthly Voucher', description: '+3 Monthly Vouchers', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0], used: false },
-                    { code: 'MEMBER_MONTHLY3_' + Date.now(), discount: 'Monthly Voucher', description: '+3 Monthly Vouchers', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0], used: false }
+                    { code: 'MEMBER_TRAIN50_' + Date.now(), discount: '50% OFF', description: '50% OFF on 1st Training', expires: new Date(Date.now() + 90*24*60*60*1000).toISOString().split('T')[0] },
+                    { code: 'MEMBER_TRAIN20_' + Date.now(), discount: '20% OFF', description: '20% OFF on 2nd Training', expires: new Date(Date.now() + 90*24*60*60*1000).toISOString().split('T')[0] },
+                    { code: 'MEMBER_FREEDELIVERY1_' + Date.now(), discount: 'Free Delivery', description: 'Free Delivery (1 of 3/month)', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0] },
+                    { code: 'MEMBER_FREEDELIVERY2_' + Date.now(), discount: 'Free Delivery', description: 'Free Delivery (2 of 3/month)', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0] },
+                    { code: 'MEMBER_FREEDELIVERY3_' + Date.now(), discount: 'Free Delivery', description: 'Free Delivery (3 of 3/month)', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0] },
+                    { code: 'MEMBER_MARKET20_' + Date.now(), discount: '20% OFF', description: '20% OFF on Marketplace', expires: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0] }
                 );
-                showToast(`✅ Welcome, Member! You now have full access to all benefits.`);
+                showToast('Welcome, Member! You now have full access to all benefits.');
             }
             
             localStorage.setItem('rrjfarm_vouchers', JSON.stringify(vouchers));
             closeSubscribeModal();
             
-            // Redirect to dashboard after 1.5 seconds
             setTimeout(() => {
                 window.location.href = 'memberdashboard.html';
-            }, 1500);
+            }, 2000);
         }
-        
+
         // Profile Dropdown
         function toggleProfileDropdown() { 
             document.getElementById('profileDropdown').classList.toggle('show'); 
@@ -411,11 +479,10 @@
         });
         
         document.getElementById('editProfileBtn').onclick = () => { 
-            const newName = prompt('Enter your full name:', currentUser.name);
+            const newName = prompt('Enter your full name:', currentUser?.name || 'User');
             if (newName && newName.trim()) {
-                currentUser.name = newName.trim();
-                currentUser.avatarInitials = newName.trim().split(' ').map(n => n[0]).join('').toUpperCase();
-                document.getElementById('userAvatar').innerText = currentUser.avatarInitials;
+                if (currentUser) currentUser.name = newName.trim();
+                document.getElementById('userAvatar').innerText = newName.trim().split(' ').map(n => n[0]).join('').toUpperCase();
                 showToast('Profile updated!');
             }
         };
@@ -430,15 +497,19 @@
             window.location.href = 'index.html'; 
         };
         
-        // Initialize user avatar
-        document.getElementById('userAvatar').innerText = currentUser.avatarInitials;
+        // Initialize user avatar if logged in
+        if (isUserLoggedIn()) {
+            document.getElementById('userAvatar').innerText = (currentUser.avatarInitials || (currentUser.name?.split(' ').map(n => n[0]).join('') || 'U')).toUpperCase();
+        }
         
-        // Expose functions globally
         window.openSubscribeModal = openSubscribeModal;
         window.closeSubscribeModal = closeSubscribeModal;
         window.selectPaymentMethod = selectPaymentMethod;
         window.confirmSubscription = confirmSubscription;
         window.toggleProfileDropdown = toggleProfileDropdown;
+        window.checkLoginAndSubscribe = checkLoginAndSubscribe;
+        window.closeReminderModal = closeReminderModal;
+        window.redirectToLogin = redirectToLogin;
     </script>
 </body>
 </html>
