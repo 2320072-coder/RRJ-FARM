@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>RRJ FARM Marketplace | Blockchain-Powered Trading</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f7f2; color: #1a2e1a; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        
+        .modern-header { background: linear-gradient(135deg, #0d2b0d, #1a4d1a); position: sticky; top: 0; z-index: 1000; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo h1 { font-size: 1.5rem; background: linear-gradient(135deg, #ffffff, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo p { font-size: 0.7rem; color: #a8c8a8; }
+        .nav-menu ul { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+        .nav-menu a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; padding: 0.5rem 0; }
+        .nav-menu a:hover, .nav-menu a.active { color: #ffd700; border-bottom: 2px solid #ffd700; }
+        
+        /* REMINDER MODAL */
+        .reminder-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+        .reminder-modal.active { display: flex; }
+        .reminder-content { background: white; border-radius: 32px; max-width: 450px; width: 90%; padding: 2rem; text-align: center; animation: fadeUp 0.3s ease; }
+        .reminder-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .reminder-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #1a2e1a; }
+        .reminder-message { color: #4a5b4a; margin-bottom: 1.5rem; line-height: 1.5; }
+        .reminder-buttons { display: flex; gap: 1rem; margin-top: 0.5rem; }
+        .btn-login-reminder { flex: 1; background: #2d6a2d; color: white; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .btn-cancel-reminder { flex: 1; background: #eef2e8; color: #1a2e1a; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        
+        .blockchain-status-modern { background: linear-gradient(135deg, #0f172a, #1e293b); border-radius: 20px; padding: 1rem 2rem; margin: 2rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .ledger-status { display: flex; align-items: center; gap: 1rem; }
+        .ledger-dot { width: 12px; height: 12px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.1); } }
+        .stats-grid { display: flex; gap: 2rem; }
+        .stat-value { font-size: 1.3rem; font-weight: 700; color: #ffd700; }
+        .stat-label { font-size: 0.7rem; color: #94a3b8; }
+        
+        .market-hero { background: linear-gradient(135deg, #1a4d1a, #2d6a2d); border-radius: 30px; padding: 3rem; margin: 2rem 0; color: white; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+        .hero-text h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .hero-badge { background: rgba(255,215,0,0.2); padding: 0.3rem 1rem; border-radius: 50px; display: inline-block; font-size: 0.8rem; margin-top: 0.5rem; }
+        .btn-sell-main { background: linear-gradient(135deg, #ff8c00, #e67e00); color: white; border: none; padding: 1rem; border-radius: 50px; font-weight: 700; font-size: 1.1rem; cursor: pointer; width: 100%; margin-bottom: 1.5rem; transition: all 0.3s; }
+        .btn-sell-main:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,140,0,0.3); }
+        
+        .products-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+        .search-wrapper { position: relative; flex: 1; max-width: 400px; }
+        .search-wrapper i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #aaa; }
+        .search-wrapper input { width: 100%; padding: 0.8rem 1rem 0.8rem 2.5rem; border: 2px solid #e8f0e8; border-radius: 50px; font-family: inherit; }
+        .filter-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .chip { padding: 0.5rem 1.2rem; background: white; border: 2px solid #e8f0e8; border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s; }
+        .chip:hover, .chip.active { background: #2d6a2d; color: white; border-color: #2d6a2d; }
+        
+        .products-grid-modern { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .product-card-modern { background: white; border-radius: 24px; overflow: hidden; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; }
+        .product-card-modern:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15); }
+        .product-badge-blockchain { position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, #1a4d1a, #2d6a2d); color: white; font-size: 0.7rem; padding: 0.3rem 0.8rem; border-radius: 50px; display: flex; align-items: center; gap: 0.3rem; z-index: 10; }
+        .product-image-modern { height: 180px; background: linear-gradient(135deg, #e8f0e8, #d4e4d4); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .product-info-modern { padding: 1.2rem; }
+        .product-title-modern { font-size: 1.1rem; font-weight: 700; color: #1a4d1a; margin-bottom: 0.3rem; }
+        .product-price-modern { font-size: 1.3rem; font-weight: 800; color: #ff8c00; margin: 0.5rem 0; }
+        .product-meta { display: flex; gap: 1rem; font-size: 0.75rem; color: #666; margin: 0.5rem 0; flex-wrap: wrap; }
+        .product-actions-modern { display: flex; gap: 0.8rem; margin-top: 1rem; }
+        .btn-buy-modern { flex: 1; background: linear-gradient(135deg, #2d6a2d, #1a4d1a); color: white; border: none; padding: 0.7rem; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-blockchain { background: #f0f4e8; color: #2d6a2d; border: none; padding: 0.7rem; border-radius: 12px; font-weight: 600; cursor: pointer; }
+        
+        /* Modal Styles */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-overlay.active { display: flex; }
+        .modal-container { background: white; border-radius: 32px; max-width: 1050px; width: 90%; max-height: 85vh; overflow-y: auto; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 1.5rem; border-bottom: 2px solid #e8f0e8; }
+        .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; }
+        .modal-close:hover { color: #dc3545; }
+        .modal-three-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; padding: 1.5rem; }
+        .modal-col { padding: 0 0.5rem; }
+        .modal-col:not(:last-child) { border-right: 1px solid #e8f0e8; }
+        .form-group-modal { margin-bottom: 1rem; }
+        .form-group-modal label { display: block; font-weight: 600; margin-bottom: 0.4rem; color: #1a2e1a; font-size: 0.85rem; }
+        .form-group-modal input, .form-group-modal select, .form-group-modal textarea { width: 100%; padding: 0.7rem 0.8rem; border: 2px solid #e0e0e0; border-radius: 14px; font-family: inherit; font-size: 0.85rem; }
+        .payment-options { display: flex; gap: 0.5rem; margin-top: 0.3rem; }
+        .payment-option { flex: 1; padding: 0.5rem; border: 2px solid #e0e0e0; border-radius: 12px; text-align: center; cursor: pointer; font-size: 0.8rem; }
+        .payment-option.selected { border-color: #2d6a2d; background: #e8f0e8; }
+        .voucher-section { background: #f0f4e8; border-radius: 14px; padding: 0.8rem; margin: 0.5rem 0; }
+        .voucher-list { margin-top: 0.5rem; }
+        .voucher-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: white; border-radius: 10px; margin-bottom: 0.3rem; cursor: pointer; }
+        .fee-info { background: #e8f0e8; border-radius: 14px; padding: 0.8rem; margin: 0.8rem 0; font-size: 0.75rem; }
+        .total-with-fee { background: #f0f4e8; border-radius: 16px; padding: 0.8rem; margin: 0.8rem 0; }
+        .total-with-fee .total-amount { font-size: 1.2rem; font-weight: 800; color: #ff8c00; }
+        .btn-confirm { width: 100%; padding: 0.8rem; background: linear-gradient(135deg, #2d6a2d, #1a4d1a); color: white; border: none; border-radius: 40px; font-weight: 700; cursor: pointer; margin-top: 0.5rem; }
+        
+        .logistics-section { background: linear-gradient(135deg, #e8f0e8, #f0f4e8); border-radius: 24px; padding: 2rem; margin: 2rem 0; }
+        .hub-spoke-visual { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0; }
+        .hub-center { background: linear-gradient(135deg, #1a4d1a, #2d6a2d); color: white; padding: 1.2rem; border-radius: 50%; width: 100px; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .spoke-node { background: white; padding: 0.8rem 1.2rem; border-radius: 40px; font-weight: 500; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        
+        .qr-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
+        .qr-modal-overlay.active { display: flex; }
+        .qr-modal-content { background: white; border-radius: 32px; max-width: 450px; width: 90%; padding: 2rem; text-align: center; }
+        .tracking-steps { text-align: left; margin: 1.5rem 0; }
+        .track-step { display: flex; align-items: center; gap: 1rem; padding: 0.7rem; border-left: 2px solid #ddd; position: relative; }
+        .track-step.completed { border-left-color: #2d6a2d; }
+        .track-step.completed .step-dot { background: #2d6a2d; }
+        .step-dot { width: 12px; height: 12px; background: #ccc; border-radius: 50%; position: absolute; left: -6px; }
+        
+        .modern-footer { background: #0d2b0d; color: #a8c8a8; padding: 3rem 0 1rem; margin-top: 3rem; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #2a4a2a; }
+        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 1rem 2rem; border-radius: 50px; display: none; z-index: 1500; animation: slideInRight 0.3s ease; }
+        @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        @media (max-width: 1000px) { .modal-three-columns { grid-template-columns: 1fr; } .modal-col { border-right: none !important; } .container { padding: 0 1rem; } .nav-menu ul { gap: 0.8rem; } }
+        .empty-state { text-align: center; padding: 3rem; color: #888; }
+    </style>
+</head>
+<body>
+    <header class="modern-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Blockchain-Powered • Digital Cooperative • Batangas, Laguna & Quezon</p></div>
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="marketplace.html" class="active"><i class="fas fa-store"></i> Marketplace</a></li>
+                        <li><a href="workshops.html"><i class="fas fa-chalkboard-user"></i> Workshops</a></li>
+                        <li><a href="cooperative.html"><i class="fas fa-handshake"></i> Cooperative</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="subscriptions.html"><i class="fas fa-ticket-alt"></i> Subscriptions</a></li>
+                        <li><a href="login.html"><i class="fas fa-user"></i> Login/Register</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="blockchain-status-modern">
+                <div class="ledger-status"><div class="ledger-dot"></div><span><i class="fas fa-link"></i> Hyperledger Fabric Active</span></div>
+                <div class="stats-grid"><div class="stat-item"><div class="stat-value" id="txCount">0</div><div class="stat-label">Transactions</div></div><div class="stat-item"><div class="stat-value">₱<span id="escrowBalance">0</span></div><div class="stat-label">Escrow Balance</div></div></div>
+            </div>
+
+            <div class="market-hero">
+                <div class="hero-text"><h2>🌾 Fresh from Farm to Table</h2><p>Blockchain-verified products from small-scale farmers</p><div class="hero-badge"><i class="fas fa-check-circle"></i> RA 9520 Cooperative | <i class="fas fa-shield-alt"></i> Smart Contract Escrow</div></div>
+                <div><i class="fas fa-tractor" style="font-size: 5rem; opacity: 0.5;"></i></div>
+            </div>
+
+            <button class="btn-sell-main" onclick="checkLoginAndOpenSell()"><i class="fas fa-plus-circle"></i> Sell Your Products</button>
+
+            <div>
+                <div class="products-header">
+                    <div class="search-wrapper"><i class="fas fa-search"></i><input type="text" id="searchProducts" placeholder="Search products..." onkeyup="filterProducts()"></div>
+                    <div class="filter-chips"><button class="chip active" data-category="all" onclick="filterByCategory('all')">All</button><button class="chip" data-category="Vegetables" onclick="filterByCategory('Vegetables')">🥬 Vegetables</button><button class="chip" data-category="Fruits" onclick="filterByCategory('Fruits')">🍎 Fruits</button><button class="chip" data-category="Rice" onclick="filterByCategory('Rice')">🌾 Rice</button></div>
+                </div>
+                <div id="productsGrid" class="products-grid-modern"><div class="empty-state"><i class="fas fa-spinner fa-spin"></i> Loading products...</div></div>
+            </div>
+
+            <div class="logistics-section">
+                <h3 style="margin-bottom: 1rem;"><i class="fas fa-truck"></i> RRJ FARM Logistics Network</h3>
+                <p>Hub-and-Spoke Aggregation System with Last-Mile Delivery Partners</p>
+                <div class="hub-spoke-visual"><div class="hub-center"><i class="fas fa-warehouse" style="font-size: 2rem;"></i><strong>MAIN HUB</strong><small>Lipa City</small></div><i class="fas fa-arrow-right"></i><div class="spoke-node">Batangas City</div><div class="spoke-node">Tanauan</div><div class="spoke-node">Malvar</div><div class="spoke-node">Sto. Tomas</div><div class="spoke-node">Los Baños</div><div class="spoke-node">Calamba</div></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- REMINDER MODAL -->
+    <div id="reminderModal" class="reminder-modal">
+        <div class="reminder-content">
+            <div class="reminder-icon"><i class="fas fa-exclamation-triangle" style="color: #ff8c00;"></i></div>
+            <div class="reminder-title">Login Required</div>
+            <div class="reminder-message" id="reminderMessage">Please login or register to access this feature.</div>
+            <div class="reminder-buttons">
+                <button class="btn-login-reminder" onclick="redirectToLogin()"><i class="fas fa-sign-in-alt"></i> Login / Register</button>
+                <button class="btn-cancel-reminder" onclick="closeReminderModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SELL MODAL -->
+    <div id="sellModal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header"><h3><i class="fas fa-plus-circle"></i> List Your Product</h3><button class="modal-close" onclick="closeSellModal()">&times;</button></div>
+            <div class="modal-three-columns">
+                <div class="modal-col">
+                    <div class="form-group-modal"><label>Product Name *</label><input type="text" id="sellProductName" placeholder="e.g., Sitao, Ampalaya" required></div>
+                    <div class="form-group-modal"><label>Category *</label><select id="sellCategory" required><option value="">Select</option><option value="Vegetables">🥬 Vegetables</option><option value="Fruits">🍎 Fruits</option><option value="Rice">🌾 Rice</option></select></div>
+                    <div class="form-group-modal"><label>Price (₱) *</label><input type="number" id="sellPrice" placeholder="Price per unit" required></div>
+                    <div class="form-group-modal"><label>Quantity & Unit *</label><div style="display: flex; gap: 0.5rem;"><input type="number" id="sellQuantity" placeholder="Quantity" style="width: 60%;"><select id="sellUnit" style="width: 40%;"><option value="kg">kg</option><option value="pcs">pcs</option><option value="grams">grams</option><option value="bundle">bundle</option></select></div></div>
+                </div>
+                <div class="modal-col">
+                    <div class="form-group-modal"><label>Farm Location *</label><select id="sellFarmLocation" required><option value="">Select</option><option value="Batangas - Lipa City">🌿 Batangas - Lipa City</option><option value="Batangas - Tanauan City">🌿 Batangas - Tanauan City</option><option value="Laguna - Los Baños">🌾 Laguna - Los Baños</option></select></div>
+                    <div class="form-group-modal"><label>Farmer Name *</label><input type="text" id="sellFarmerName" placeholder="Enter your full name" required></div>
+                    <div class="form-group-modal"><label>Payment Method *</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectSellPayment('gcash')">📱 GCash</div><div class="payment-option" data-method="bank" onclick="selectSellPayment('bank')">🏦 Bank</div><div class="payment-option" data-method="cash" onclick="selectSellPayment('cash')">💵 Cash</div></div><input type="hidden" id="sellPaymentMethod" value="gcash"></div>
+                </div>
+                <div class="modal-col">
+                    <div class="form-group-modal"><label>Apply Voucher</label><div class="voucher-input-group" style="display: flex; gap: 0.5rem;"><input type="text" id="voucherCodeInput" placeholder="Enter voucher code" style="flex:1; padding:0.6rem;"><button onclick="applyVoucher()" style="background:#2d6a2d; color:white; border:none; padding:0 1rem; border-radius:12px;">Apply</button></div></div>
+                    <div class="voucher-section"><div id="voucherList" class="voucher-list"></div></div>
+                    <div class="fee-info" id="sellFeeInfo"><small><i class="fas fa-info-circle"></i> Transaction fee: 5% (₱300-₱1000) or 10% (₱1000+)</small></div>
+                </div>
+            </div>
+            <div style="padding: 0 1.5rem 1.5rem 1.5rem;"><button class="btn-confirm" onclick="confirmSell()"><i class="fas fa-link"></i> List on Blockchain</button></div>
+        </div>
+    </div>
+
+    <!-- BUY MODAL -->
+    <div id="buyModal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header"><h3><i class="fas fa-shopping-cart"></i> Order Summary</h3><button class="modal-close" onclick="closeBuyModal()">&times;</button></div>
+            <div class="modal-three-columns">
+                <div class="modal-col"><div id="buyProductDetails" class="fee-info"></div><div class="form-group-modal"><label>Your Name *</label><input type="text" id="buyerName" placeholder="Full name" required></div><div class="form-group-modal"><label>Contact Number *</label><input type="tel" id="buyerPhone" placeholder="0912 345 6789" required></div><div class="form-group-modal"><label>Delivery Address *</label><textarea id="buyerAddress" rows="2" placeholder="Complete address" required></textarea></div></div>
+                <div class="modal-col"><div class="form-group-modal"><label>Quantity (Available: <span id="availableStock">0</span>)</label><input type="number" id="buyQuantity" min="1" value="1" onchange="updateBuyTotal()" required></div><div class="form-group-modal"><label>Payment Method *</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectBuyPayment('gcash')">📱 GCash</div><div class="payment-option" data-method="bank" onclick="selectBuyPayment('bank')">🏦 Bank</div><div class="payment-option" data-method="cash" onclick="selectBuyPayment('cash')">💵 Cash</div></div><input type="hidden" id="buyPaymentMethod" value="gcash"></div><div id="feeBreakdown" class="fee-info"></div><div class="total-with-fee"><div style="display: flex; justify-content: space-between;"><span>Total Amount:</span><span class="total-amount" id="modalTotalAmount">₱0</span></div></div></div>
+                <div class="modal-col"><div class="form-group-modal"><label>Apply Voucher</label><div class="voucher-input-group" style="display: flex; gap: 0.5rem;"><input type="text" id="buyVoucherCodeInput" placeholder="Enter voucher code" style="flex:1; padding:0.6rem;"><button onclick="applyBuyVoucher()" style="background:#2d6a2d; color:white; border:none; padding:0 1rem; border-radius:12px;">Apply</button></div></div><div class="voucher-section"><div id="buyVoucherList" class="voucher-list"></div></div><div id="voucherDiscountDisplay" class="fee-info" style="display: none;"></div></div>
+            </div>
+            <div style="padding: 0 1.5rem 1.5rem 1.5rem;"><button class="btn-confirm" onclick="confirmPurchase()"><i class="fas fa-check-circle"></i> Confirm Purchase</button></div>
+        </div>
+    </div>
+
+    <!-- QR MODAL -->
+    <div id="qrModal" class="qr-modal-overlay"><div class="qr-modal-content"><h3><i class="fas fa-qrcode"></i> QR Delivery Tracking</h3><div id="qrCode" style="background: white; padding: 1rem; margin: 1rem 0;"></div><div id="trackingInfo" class="tracking-steps"><div class="track-step completed"><span class="step-dot"></span><span>✅ Order Confirmed</span></div><div class="track-step" id="stepPickup"><span class="step-dot"></span><span>🚜 Picked up from Farm</span></div><div class="track-step" id="stepHub"><span class="step-dot"></span><span>🏢 Arrived at Hub</span></div><div class="track-step" id="stepDelivery"><span class="step-dot"></span><span>🚚 Out for Delivery</span></div><div class="track-step" id="stepDelivered"><span class="step-dot"></span><span>🏠 Delivered</span></div></div><button class="btn-close-modal" onclick="closeQRModal()" style="background:#1a4d1a; color:white; border:none; padding:0.8rem 2rem; border-radius:40px; cursor:pointer;">Close</button></div></div>
+
+    <footer class="modern-footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 RRJ FARM - Digital Cooperative - RA 9520 Compliant</p></div></div></footer>
+    <div id="successToast" class="success-toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script>
+        // ========== LOGIN CHECK FUNCTIONS ==========
+        function isUserLoggedIn() {
+            return localStorage.getItem('rrjfarm_current_user') !== null;
+        }
+        
+        function showReminderModal(message) {
+            document.getElementById('reminderMessage').innerHTML = message;
+            document.getElementById('reminderModal').classList.add('active');
+        }
+        
+        function closeReminderModal() {
+            document.getElementById('reminderModal').classList.remove('active');
+        }
+        
+        function redirectToLogin() {
+            window.location.href = 'login.html';
+        }
+        
+        function checkLoginAndOpenSell() {
+            if (!isUserLoggedIn()) {
+                showReminderModal('Please login or register to sell products on the marketplace.');
+                return;
+            }
+            openSellModal();
+        }
+        
+        function checkLoginAndOpenBuy(productId) {
+            if (!isUserLoggedIn()) {
+                showReminderModal('Please login or register to purchase products on the marketplace.');
+                return;
+            }
+            openBuyModal(productId);
+        }
+        
+        // ========== MARKETPLACE DATA ==========
+        let blockchainTransactions = [];
+        let products = [];
+        let currentCategory = 'all';
+        let currentSelectedProduct = null;
+        let appliedVoucher = null;
+        let appliedBuyVoucher = null;
+        
+        const availableVouchers = [
+            { code: "WELCOME20", discount: 20, type: "percentage", minPurchase: 0, description: "20% OFF on first purchase" },
+            { code: "FREESHIP", discount: 100, type: "fixed", minPurchase: 500, description: "₱100 OFF on min ₱500" },
+            { code: "RRJ10", discount: 10, type: "percentage", minPurchase: 300, description: "10% OFF on min ₱300" }
+        ];
+        
+        function loadVouchers() {
+            const sellList = document.getElementById('voucherList');
+            const buyList = document.getElementById('buyVoucherList');
+            if (sellList) sellList.innerHTML = availableVouchers.map(v => `<div class="voucher-item" onclick="selectVoucher('${v.code}')"><div><span class="voucher-code">${v.code}</span><br><span class="voucher-discount">${v.type === 'percentage' ? v.discount + '% OFF' : '₱' + v.discount + ' OFF'}</span></div></div>`).join('');
+            if (buyList) buyList.innerHTML = availableVouchers.map(v => `<div class="voucher-item" onclick="selectBuyVoucher('${v.code}')"><div><span class="voucher-code">${v.code}</span><br><span class="voucher-discount">${v.type === 'percentage' ? v.discount + '% OFF' : '₱' + v.discount + ' OFF'}</span></div></div>`).join('');
+        }
+        
+        function selectVoucher(code) { document.getElementById('voucherCodeInput').value = code; applyVoucher(); }
+        function selectBuyVoucher(code) { document.getElementById('buyVoucherCodeInput').value = code; applyBuyVoucher(); }
+        
+        function applyVoucher() {
+            const code = document.getElementById('voucherCodeInput').value.toUpperCase();
+            const voucher = availableVouchers.find(v => v.code === code);
+            if (voucher) { appliedVoucher = voucher; document.getElementById('sellFeeInfo').innerHTML = `<small><i class="fas fa-check-circle"></i> Voucher applied! ${voucher.description}</small><br><small>Transaction fee still applies</small>`; }
+            else { appliedVoucher = null; document.getElementById('sellFeeInfo').innerHTML = `<small><i class="fas fa-info-circle"></i> Invalid voucher code</small>`; }
+        }
+        
+        function applyBuyVoucher() {
+            const code = document.getElementById('buyVoucherCodeInput').value.toUpperCase();
+            const voucher = availableVouchers.find(v => v.code === code);
+            if (voucher) { appliedBuyVoucher = voucher; updateBuyTotal(); }
+            else { appliedBuyVoucher = null; updateBuyTotal(); }
+        }
+        
+        function calculateTransactionFee(amount) {
+            if (amount >= 1000) return { rate: 0.10, fee: amount * 0.10, label: "10% Transaction Fee" };
+            else if (amount >= 300) return { rate: 0.05, fee: amount * 0.05, label: "5% Transaction Fee" };
+            else return { rate: 0, fee: 0, label: "No Transaction Fee" };
+        }
+        
+        function calculateDiscount(amount, voucher) {
+            if (!voucher || amount < voucher.minPurchase) return 0;
+            if (voucher.type === 'percentage') return amount * (voucher.discount / 100);
+            return Math.min(voucher.discount, amount);
+        }
+        
+        function loadBlockchain() { const saved = localStorage.getItem('rrjfarm_blockchain'); if (saved) { blockchainTransactions = JSON.parse(saved); updateBlockchainStats(); } }
+        function updateBlockchainStats() { document.getElementById('txCount').innerText = blockchainTransactions.length; let escrowTotal = blockchainTransactions.filter(tx => tx.status === 'escrow').reduce((sum, tx) => sum + (tx.amount || 0), 0); document.getElementById('escrowBalance').innerText = escrowTotal; }
+        
+        function loadProducts() { const saved = localStorage.getItem('rrjfarm_marketplace'); if (saved) { products = JSON.parse(saved); } else { products = [ { id: 1, name: "Fresh Sitao", category: "Vegetables", price: 45, quantity: 100, unit: "kg", farm: "Batangas - Lipa City", farmer: "Maria Santos", imageUrl: "" }, { id: 2, name: "Ampalaya", category: "Vegetables", price: 60, quantity: 80, unit: "kg", farm: "Batangas - Tanauan City", farmer: "Jose Dela Cruz", imageUrl: "" }, { id: 3, name: "Batangas Brown Rice", category: "Rice", price: 55, quantity: 200, unit: "kg", farm: "Batangas - Malvar", farmer: "Anna Reyes", imageUrl: "" } ]; saveProducts(); } displayProducts(); }
+        function saveProducts() { localStorage.setItem('rrjfarm_marketplace', JSON.stringify(products)); }
+        function getProductEmoji(category) { const emojis = { 'Vegetables': '🥬', 'Fruits': '🍎', 'Rice': '🌾' }; return emojis[category] || '🌱'; }
+        
+        function displayProducts() {
+            const grid = document.getElementById('productsGrid'); let filtered = products;
+            const searchTerm = document.getElementById('searchProducts')?.value.toLowerCase() || '';
+            if (searchTerm) filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm));
+            if (currentCategory !== 'all') filtered = filtered.filter(p => p.category === currentCategory);
+            if (filtered.length === 0) { grid.innerHTML = '<div class="empty-state"><i class="fas fa-box-open"></i> No products available. Click "Sell Your Products" to list!</div>'; return; }
+            grid.innerHTML = filtered.map(p => `<div class="product-card-modern"><div class="product-badge-blockchain"><i class="fas fa-link"></i> Blockchain Verified</div><div class="product-image-modern">${p.imageUrl ? `<img src="${p.imageUrl}" style="width:100%; height:100%; object-fit:cover;">` : getProductEmoji(p.category)}</div><div class="product-info-modern"><h3 class="product-title-modern">${p.name}</h3><div class="product-price-modern">₱${p.price}<small>/${p.unit}</small></div><div class="product-meta"><span><i class="fas fa-map-marker-alt"></i> ${p.farm}</span><span><i class="fas fa-boxes"></i> ${p.quantity} ${p.unit} left</span></div><div class="product-meta"><span><i class="fas fa-user-farmer"></i> ${p.farmer}</span></div><div class="product-actions-modern"><button class="btn-buy-modern" onclick="checkLoginAndOpenBuy(${p.id})"><i class="fas fa-shopping-cart"></i> Buy</button><button class="btn-blockchain" onclick="viewBlockchainRecord(${p.id})"><i class="fas fa-link"></i></button></div></div></div>`).join('');
+        }
+        
+        function openSellModal() { document.getElementById('sellModal').classList.add('active'); loadVouchers(); }
+        function closeSellModal() { document.getElementById('sellModal').classList.remove('active'); appliedVoucher = null; document.getElementById('voucherCodeInput').value = ''; document.getElementById('sellFeeInfo').innerHTML = '<small><i class="fas fa-info-circle"></i> Transaction fee: 5% (₱300-₱1000) or 10% (₱1000+)</small>'; }
+        function selectSellPayment(method) { document.getElementById('sellPaymentMethod').value = method; document.querySelectorAll('#sellModal .payment-option').forEach(opt => opt.classList.remove('selected')); document.querySelector(`#sellModal .payment-option[data-method="${method}"]`).classList.add('selected'); }
+        
+        function confirmSell() {
+            const productName = document.getElementById('sellProductName').value, category = document.getElementById('sellCategory').value, price = parseFloat(document.getElementById('sellPrice').value), quantity = parseInt(document.getElementById('sellQuantity').value), unit = document.getElementById('sellUnit').value, farm = document.getElementById('sellFarmLocation').value, farmer = document.getElementById('sellFarmerName').value;
+            if (!productName || !category || !price || !quantity || !farm || !farmer) { alert("❌ Please fill out all required fields!"); return; }
+            const newProduct = { id: Date.now(), name: productName, category: category, price: price, quantity: quantity, unit: unit, farm: farm, farmer: farmer, imageUrl: "" };
+            products.unshift(newProduct); saveProducts(); displayProducts();
+            alert(`✅ Product Listed!\n\n${productName}\nPrice: ₱${price}/${unit}\nQuantity: ${quantity} ${unit}\nFarm: ${farm}`);
+            closeSellModal();
+        }
+        
+        function openBuyModal(productId) {
+            currentSelectedProduct = products.find(p => p.id === productId);
+            if (!currentSelectedProduct) return;
+            document.getElementById('buyProductDetails').innerHTML = `<div><strong>${currentSelectedProduct.name}</strong></div><div>Farmer: ${currentSelectedProduct.farmer}</div><div>Price: ₱${currentSelectedProduct.price}/${currentSelectedProduct.unit}</div>`;
+            document.getElementById('availableStock').innerText = currentSelectedProduct.quantity;
+            document.getElementById('buyQuantity').max = currentSelectedProduct.quantity;
+            document.getElementById('buyQuantity').value = 1;
+            appliedBuyVoucher = null; document.getElementById('buyVoucherCodeInput').value = '';
+            updateBuyTotal();
+            document.getElementById('buyModal').classList.add('active');
+            loadVouchers();
+        }
+        
+        function updateBuyTotal() {
+            const quantity = parseInt(document.getElementById('buyQuantity').value) || 0;
+            const subtotal = currentSelectedProduct.price * quantity;
+            const discount = calculateDiscount(subtotal, appliedBuyVoucher);
+            const afterDiscount = subtotal - discount;
+            const feeInfo = calculateTransactionFee(afterDiscount);
+            const total = afterDiscount + feeInfo.fee;
+            document.getElementById('feeBreakdown').innerHTML = `<div style="display: flex; justify-content: space-between;"><span>Subtotal:</span><span>₱${subtotal}</span></div>${discount > 0 ? `<div style="display: flex; justify-content: space-between; color:#2d6a2d;"><span>Voucher Discount:</span><span>-₱${discount}</span></div>` : ''}<div style="display: flex; justify-content: space-between;"><span>${feeInfo.label}:</span><span class="highlight">₱${feeInfo.fee}</span></div>`;
+            document.getElementById('modalTotalAmount').innerHTML = `₱${total}`;
+            if (appliedBuyVoucher) document.getElementById('voucherDiscountDisplay').innerHTML = `<div><i class="fas fa-check-circle"></i> Voucher applied: ${appliedBuyVoucher.code}</div>`;
+            else document.getElementById('voucherDiscountDisplay').style.display = 'none';
+        }
+        
+        function closeBuyModal() { document.getElementById('buyModal').classList.remove('active'); currentSelectedProduct = null; }
+        
+        function confirmPurchase() {
+            const buyerName = document.getElementById('buyerName').value.trim(), buyerPhone = document.getElementById('buyerPhone').value.trim(), buyerAddress = document.getElementById('buyerAddress').value.trim(), quantity = parseInt(document.getElementById('buyQuantity').value);
+            if (!buyerName || !buyerPhone || !buyerAddress) { alert("❌ Please fill out all required fields!"); return; }
+            if (isNaN(quantity) || quantity <= 0 || quantity > currentSelectedProduct.quantity) { alert("❌ Invalid quantity!"); return; }
+            const subtotal = currentSelectedProduct.price * quantity;
+            const discount = calculateDiscount(subtotal, appliedBuyVoucher);
+            const afterDiscount = subtotal - discount;
+            const feeInfo = calculateTransactionFee(afterDiscount);
+            const totalAmount = afterDiscount + feeInfo.fee;
+            if (confirm(`🛒 ORDER SUMMARY\n\nProduct: ${currentSelectedProduct.name}\nFarmer: ${currentSelectedProduct.farmer}\nQuantity: ${quantity} ${currentSelectedProduct.unit}\nSubtotal: ₱${subtotal}\n${discount > 0 ? `Discount: -₱${discount}\n` : ''}${feeInfo.label}: ₱${feeInfo.fee}\nTotal: ₱${totalAmount}\n\n✅ Proceed?`)) {
+                currentSelectedProduct.quantity -= quantity; saveProducts(); displayProducts(); closeBuyModal();
+                alert(`✅ ORDER PLACED!\n\nAmount: ₱${totalAmount}\nDelivery to: ${buyerAddress}\nYou will receive updates via SMS.`);
+            }
+        }
+        
+        function viewBlockchainRecord(productId) { const product = products.find(p => p.id === productId); if (product) alert(`🔗 BLOCKCHAIN VERIFIED\n\nProduct: ${product.name}\nFarmer: ${product.farmer}\nPrice: ₱${product.price}/${product.unit}`); }
+        function closeQRModal() { document.getElementById('qrModal').classList.remove('active'); }
+        function filterByCategory(category) { currentCategory = category; document.querySelectorAll('.chip').forEach(chip => chip.classList.remove('active')); event.target.classList.add('active'); displayProducts(); }
+        function filterProducts() { displayProducts(); }
+        function selectBuyPayment(method) { document.getElementById('buyPaymentMethod').value = method; document.querySelectorAll('#buyModal .payment-option').forEach(opt => opt.classList.remove('selected')); document.querySelector(`#buyModal .payment-option[data-method="${method}"]`).classList.add('selected'); }
+        
+        loadBlockchain(); loadProducts(); loadVouchers();
+        
+        window.filterByCategory = filterByCategory; window.filterProducts = filterProducts; window.checkLoginAndOpenBuy = checkLoginAndOpenBuy; window.checkLoginAndOpenSell = checkLoginAndOpenSell;
+        window.closeBuyModal = closeBuyModal; window.updateBuyTotal = updateBuyTotal; window.confirmPurchase = confirmPurchase; window.viewBlockchainRecord = viewBlockchainRecord;
+        window.openSellModal = openSellModal; window.closeSellModal = closeSellModal; window.selectSellPayment = selectSellPayment; window.selectBuyPayment = selectBuyPayment;
+        window.applyVoucher = applyVoucher; window.applyBuyVoucher = applyBuyVoucher; window.selectVoucher = selectVoucher; window.selectBuyVoucher = selectBuyVoucher;
+        window.closeQRModal = closeQRModal; window.closeReminderModal = closeReminderModal; window.redirectToLogin = redirectToLogin;
+    </script>
+</body>
+</html>

@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>RRJ FARM | Contact Us - Batangas, Laguna & Quezon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ============================================
+           RRJ FARM - PREMIUM CONTACT PAGE UI
+           Clean White Theme - No Blockchain
+           ============================================ */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7f2;
+            color: #1a2e1a;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Modern Header */
+        .modern-header {
+            background: linear-gradient(135deg, #0d2b0d 0%, #1a4d1a 100%);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .logo p {
+            font-size: 0.7rem;
+            color: #a8c8a8;
+        }
+        
+        .nav-menu ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-menu a:hover, .nav-menu a.active {
+            color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+        }
+        
+        /* Hero Section - White Premium */
+        .contact-hero-premium {
+            background: white;
+            border-radius: 30px;
+            margin: 2rem 0;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 3rem;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: #1a2e1a;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #4a5b4a;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-badge {
+            background: #f0f4e8;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #2d6a2d;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            background: #f0f4e8;
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+        
+        .hero-stat {
+            text-align: center;
+        }
+        
+        .hero-stat .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #2d6a2d;
+        }
+        
+        .hero-stat .label {
+            font-size: 0.7rem;
+            color: #4a5b4a;
+        }
+        
+        /* Contact Container */
+        .contact-container-premium {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        /* Contact Info Card */
+        .contact-info-premium {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .contact-info-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
+        }
+        
+        .section-header-premium {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f4e8;
+        }
+        
+        .section-header-premium i {
+            font-size: 1.8rem;
+            color: #2d6a2d;
+        }
+        
+        .section-header-premium h2 {
+            font-size: 1.3rem;
+            color: #1a2e1a;
+        }
+        
+        .location-badge-premium {
+            display: inline-block;
+            background: #ff8c00;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .info-item-premium {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem;
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+        
+        .info-item-premium:hover {
+            background: #f0f4e8;
+            transform: translateX(5px);
+        }
+        
+        .info-icon-premium {
+            font-size: 1.5rem;
+            min-width: 40px;
+        }
+        
+        .info-details-premium h3 {
+            color: #1a2e1a;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .info-details-premium p, .info-details-premium a {
+            color: #4a5b4a;
+            text-decoration: none;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        
+        .info-details-premium a:hover {
+            color: #ff8c00;
+        }
+        
+        /* Office Hours */
+        .office-hours-premium {
+            background: #f0f4e8;
+            padding: 1rem;
+            border-radius: 16px;
+            margin: 1.5rem 0;
+        }
+        
+        .office-hours-premium h3 {
+            color: #1a2e1a;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .office-hours-premium p {
+            font-size: 0.8rem;
+            color: #4a5b4a;
+            margin: 0.3rem 0;
+        }
+        
+        /* Social Links */
+        .social-links-premium {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .social-link-premium {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #f0f4e8;
+            border-radius: 40px;
+            text-decoration: none;
+            color: #2d6a2d;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .social-link-premium:hover {
+            background: #2d6a2d;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Contact Form */
+        .contact-form-premium {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .contact-form-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-group-premium {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group-premium label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1a2e1a;
+            font-size: 0.85rem;
+        }
+        
+        .form-group-premium input,
+        .form-group-premium select,
+        .form-group-premium textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 14px;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: white;
+            color: #1a2e1a;
+        }
+        
+        .form-group-premium input:focus,
+        .form-group-premium select:focus,
+        .form-group-premium textarea:focus {
+            outline: none;
+            border-color: #2d6a2d;
+            box-shadow: 0 0 0 3px rgba(45,106,45,0.1);
+        }
+        
+        .full-width {
+            grid-column: span 2;
+        }
+        
+        .btn-send-premium {
+            background: linear-gradient(135deg, #2d6a2d, #1a4d1a);
+            color: white;
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+        }
+        
+        .btn-send-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Map Container */
+        .map-container-premium {
+            margin: 2rem 0;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .map-container-premium iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+        }
+        
+        /* Directions Section */
+        .directions-section {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .directions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .direction-card {
+            background: #f0f4e8;
+            padding: 1rem;
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+        
+        .direction-card:hover {
+            transform: translateY(-3px);
+            background: #e8f0e8;
+        }
+        
+        .direction-card strong {
+            color: #1a2e1a;
+        }
+        
+        .direction-card p {
+            font-size: 0.85rem;
+            color: #4a5b4a;
+            margin-top: 0.5rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section-premium {
+            margin: 3rem 0;
+        }
+        
+        .faq-section-premium h2 {
+            text-align: center;
+            color: #1a2e1a;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        
+        .faq-grid-premium {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .faq-item-premium {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .faq-item-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .faq-question-premium {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            color: #1a2e1a;
+        }
+        
+        .faq-answer-premium {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #4a5b4a;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        
+        .faq-item-premium.active .faq-answer-premium {
+            max-height: 200px;
+            margin-top: 1rem;
+        }
+        
+        .faq-icon-premium {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: #ff8c00;
+        }
+        
+        .faq-item-premium.active .faq-icon-premium {
+            transform: rotate(180deg);
+        }
+        
+        /* Footer */
+        .modern-footer {
+            background: #0d2b0d;
+            color: #a8c8a8;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-info h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links h4, .footer-legal h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links ul, .footer-legal ul {
+            list-style: none;
+        }
+        
+        .footer-links a, .footer-legal li {
+            color: #a8c8a8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #2a4a2a;
+        }
+        
+        /* Toast Message */
+        .success-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2d6a2d;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: none;
+            z-index: 1500;
+            animation: slideInRight 0.3s ease;
+            font-weight: 500;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .contact-container-premium {
+                grid-template-columns: 1fr;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .full-width {
+                grid-column: span 1;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+            .nav-menu ul {
+                gap: 0.8rem;
+                flex-wrap: wrap;
+            }
+            .directions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="modern-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><i class="fas fa-leaf"></i> RRJ FARM</h1>
+                    <p>Regenerative Living • Community Land Trust • Batangas, Laguna & Quezon</p>
+                </div>
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="marketplace.html"><i class="fas fa-store"></i> Marketplace</a></li>
+                        <li><a href="workshops.html"><i class="fas fa-chalkboard-user"></i> Workshops</a></li>
+                        <li><a href="cooperative.html"><i class="fas fa-handshake"></i> Cooperative</a></li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
+                        <li><a href="subscriptions.html"><i class="fas fa-ticket-alt"></i> Subscriptions</a></li>
+                        <li><a href="login.html"><i class="fas fa-user"></i> Login/Register</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="contact-hero-premium">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1>📞 Get in Touch</h1>
+                        <p>Have questions about land stewardship, workshops, or becoming a member? We're here to help!</p>
+                        <div>
+                            <span class="hero-badge"><i class="fas fa-map-marker-alt"></i> Lipa City, Batangas</span>
+                            <span class="hero-badge"><i class="fas fa-check-circle"></i> 24-48hr Response</span>
+                        </div>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="number">156</div>
+                            <div class="label">Happy Members</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="number">98%</div>
+                            <div class="label">Satisfaction</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="number">24h</div>
+                            <div class="label">Avg Response</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Container -->
+            <div class="contact-container-premium">
+                <!-- Left Side: Contact Information -->
+                <div class="contact-info-premium">
+                    <div class="section-header-premium">
+                        <i class="fas fa-map-pin"></i>
+                        <h2>Our Location</h2>
+                    </div>
+                    <div class="location-badge-premium">🌿 Main Campus • Lipa City, Batangas</div>
+                    
+                    <div class="info-item-premium">
+                        <div class="info-icon-premium">🏢</div>
+                        <div class="info-details-premium">
+                            <h3>RRJ FARM Main Office</h3>
+                            <p>Brgy. San Celestino, Lipa City<br>Batangas 4217, Philippines</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item-premium">
+                        <div class="info-icon-premium">🏡</div>
+                        <div class="info-details-premium">
+                            <h3>Demo Farm Location</h3>
+                            <p>Brgy. Bulacnin, Lipa City<br>Batangas 4217</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item-premium">
+                        <div class="info-icon-premium">📞</div>
+                        <div class="info-details-premium">
+                            <h3>Phone Numbers</h3>
+                            <p>📱 Globe: <a href="tel:+639123456789">0912 345 6789</a><br>
+                            📱 Smart: <a href="tel:+639987654321">0998 765 4321</a><br>
+                            🏢 Landline: (043) 123 4567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item-premium">
+                        <div class="info-icon-premium">✉️</div>
+                        <div class="info-details-premium">
+                            <h3>Email Addresses</h3>
+                            <p>📧 General: <a href="mailto:info@rrjfarm.com">info@rrjfarm.com</a><br>
+                            📧 Membership: <a href="mailto:membership@rrjfarm.com">membership@rrjfarm.com</a><br>
+                            📧 Workshops: <a href="mailto:workshops@rrjfarm.com">workshops@rrjfarm.com</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="office-hours-premium">
+                        <h3>🕐 Office Hours</h3>
+                        <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                        <p>Saturday: 9:00 AM - 3:00 PM</p>
+                        <p>Sunday: Closed (Farm visits by appointment)</p>
+                    </div>
+                    
+                    <div class="social-links-premium">
+                        <a href="#" class="social-link-premium"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#" class="social-link-premium"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#" class="social-link-premium"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="#" class="social-link-premium"><i class="fab fa-viber"></i> Viber</a>
+                    </div>
+                </div>
+
+                <!-- Right Side: Contact Form -->
+                <div class="contact-form-premium">
+                    <div class="section-header-premium">
+                        <i class="fas fa-envelope"></i>
+                        <h2>Send Us a Message</h2>
+                    </div>
+                    <form id="contactForm">
+                        <div class="form-grid">
+                            <div class="form-group-premium">
+                                <label><i class="fas fa-user"></i> Full Name *</label>
+                                <input type="text" id="fullName" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group-premium">
+                                <label><i class="fas fa-envelope"></i> Email Address *</label>
+                                <input type="email" id="emailAddress" placeholder="youremail@example.com" required>
+                            </div>
+                            <div class="form-group-premium">
+                                <label><i class="fas fa-phone"></i> Phone Number</label>
+                                <input type="tel" id="phoneNumber" placeholder="0912 345 6789">
+                            </div>
+                            <div class="form-group-premium">
+                                <label><i class="fas fa-tag"></i> Inquiry Type *</label>
+                                <select id="inquiryType" required>
+                                    <option value="">Select inquiry type</option>
+                                    <option value="membership">📋 Membership / Land Stewardship</option>
+                                    <option value="workshop">📚 Workshop Registration</option>
+                                    <option value="marketplace">🛒 Marketplace / Selling</option>
+                                    <option value="farmtour">🚜 Farm Tour Booking</option>
+                                    <option value="general">💬 General Inquiry</option>
+                                    <option value="support">🆘 Technical Support</option>
+                                    <option value="partnership">🤝 Partnership / Collaboration</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group-premium">
+                            <label><i class="fas fa-heading"></i> Subject *</label>
+                            <input type="text" id="subject" placeholder="Brief subject of your message" required>
+                        </div>
+                        
+                        <div class="form-group-premium">
+                            <label><i class="fas fa-comment"></i> Message *</label>
+                            <textarea id="message" rows="4" placeholder="Please provide details about your inquiry..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group-premium">
+                            <label><i class="fas fa-comment-dots"></i> Preferred Contact Method</label>
+                            <select id="preferredContact">
+                                <option value="email">📧 Email</option>
+                                <option value="phone">📞 Phone Call</option>
+                                <option value="viber">💬 Viber/WhatsApp</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn-send-premium">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                        <div id="formSuccess" class="success-message" style="display: none; margin-top: 1rem; background: #d4edda; color: #155724; padding: 1rem; border-radius: 12px;"></div>
+                        <div id="formError" class="error-message" style="display: none; margin-top: 1rem; background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 12px;"></div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="map-container-premium">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247361.88272209583!2d121.06285445!3d13.9416967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd146254b2f139%3A0x8098072a3c6602a5!2sLipa%20City%2C%20Batangas!5e0!3m2!1sen!2sph!4v1700000000000!5m2!1sen!2sph" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <!-- Directions Section -->
+            <div class="directions-section">
+                <div class="section-header-premium" style="border-bottom: none; padding-bottom: 0; margin-bottom: 1rem;">
+                    <i class="fas fa-directions"></i>
+                    <h2>How to Get to RRJ FARM Lipa City</h2>
+                </div>
+                <div class="directions-grid">
+                    <div class="direction-card">
+                        <strong><i class="fas fa-bus"></i> From Manila (Bus)</strong>
+                        <p>Take a bus from Buendia or Cubao going to Lipa City (ALPS, JAM, or DLTB). Travel time: 1.5-2 hours. Fare: ₱200-250. From Lipa Grand Terminal, take a tricycle to RRJ FARM (₱50).</p>
+                    </div>
+                    <div class="direction-card">
+                        <strong><i class="fas fa-car"></i> From Manila (Private Car)</strong>
+                        <p>Take SLEX to STAR Tollway, exit at Lipa City. Follow signs to Lipa City proper. Waze/Google Maps: "RRJ FARM Lipa City". Parking available on-site.</p>
+                    </div>
+                    <div class="direction-card">
+                        <strong><i class="fas fa-van-shuttle"></i> From Batangas City</strong>
+                        <p>Take a jeepney or van from Batangas Grand Terminal to Lipa City. Travel time: 45 minutes. Fare: ₱80-100.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section-premium">
+                <h2>❓ Frequently Asked Questions</h2>
+                <div class="faq-grid-premium">
+                    <div class="faq-item-premium" onclick="toggleFaq(this)">
+                        <div class="faq-question-premium">
+                            <span>How do I apply for land stewardship?</span>
+                            <span class="faq-icon-premium">▼</span>
+                        </div>
+                        <div class="faq-answer-premium">
+                            You can apply through our website! Go to the Home page and fill out the "Apply for Land Stewardship" form. A CLT administrator will contact you within 3 business days.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-premium" onclick="toggleFaq(this)">
+                        <div class="faq-question-premium">
+                            <span>What are the CLT fees?</span>
+                            <span class="faq-icon-premium">▼</span>
+                        </div>
+                        <div class="faq-answer-premium">
+                            CLT fees range from ₱3,000 to ₱9,000 per month depending on farm size (0.5 to 2 hectares). This includes land maintenance, property tax, and access to shared infrastructure.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-premium" onclick="toggleFaq(this)">
+                        <div class="faq-question-premium">
+                            <span>Can I visit RRJ FARM before applying?</span>
+                            <span class="faq-icon-premium">▼</span>
+                        </div>
+                        <div class="faq-answer-premium">
+                            Yes! We encourage farm visits. Please schedule an appointment through our contact form or call 0912 345 6789. Farm tours are available every Saturday at 9:00 AM and 2:00 PM.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-premium" onclick="toggleFaq(this)">
+                        <div class="faq-question-premium">
+                            <span>Do I need farming experience to join?</span>
+                            <span class="faq-icon-premium">▼</span>
+                        </div>
+                        <div class="faq-answer-premium">
+                            Not at all! RRJ FARM welcomes beginners. We offer hands-on workshops and mentorship programs. Many of our successful members started with zero experience.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-premium" onclick="toggleFaq(this)">
+                        <div class="faq-question-premium">
+                            <span>How do I sell products on the marketplace?</span>
+                            <span class="faq-icon-premium">▼</span>
+                        </div>
+                        <div class="faq-answer-premium">
+                            Go to our Marketplace page and fill out the "Sell Your Product" form. Your listing will appear immediately. You can deliver products to our Lipa City hub.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-premium" onclick="toggleFaq(this)">
+                        <div class="faq-question-premium">
+                            <span>Is there parking available?</span>
+                            <span class="faq-icon-premium">▼</span>
+                        </div>
+                        <div class="faq-answer-premium">
+                            Yes, we have free parking spaces available for members and visitors at both our Main Office in Brgy. San Celestino and Demo Farm in Brgy. Bulacnin.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="modern-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h3><i class="fas fa-leaf"></i> RRJ FARM</h3>
+                    <p>An RRJ Farm Research Project</p>
+                    <p>📍 Brgy. San Celestino, Lipa City, Batangas 4217</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="marketplace.html">Marketplace</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="cooperative.html">Cooperative</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-legal">
+                    <h4>Legal Framework</h4>
+                    <ul>
+                        <li>RA 10752 (Land Valuation)</li>
+                        <li>RA 10068 (Organic Agriculture)</li>
+                        <li>RA 11321 (Sagip Saka Act)</li>
+                        <li>RA 9520 (Cooperative Code)</li>
+                        <li>CREATE Act (RA 11524)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 RRJ FARM - Digital Cooperative - All Rights Reserved</p>
+                <p style="font-size: 0.7rem; margin-top: 0.5rem;">RA 9520 Compliant | CDA Registered | Member-Owned</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="successToast" class="success-toast">
+        <i class="fas fa-check-circle"></i> Message sent successfully!
+    </div>
+
+    <script>
+        // Toggle FAQ items
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+        }
+        
+        // Handle contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('emailAddress').value;
+            const inquiryType = document.getElementById('inquiryType').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Validation
+            if (!fullName || !email || !inquiryType || !subject || !message) {
+                const errorDiv = document.getElementById('formError');
+                errorDiv.innerHTML = '❌ Please fill out all required fields.';
+                errorDiv.style.display = 'block';
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                }, 3000);
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                const errorDiv = document.getElementById('formError');
+                errorDiv.innerHTML = '❌ Please enter a valid email address.';
+                errorDiv.style.display = 'block';
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                }, 3000);
+                return;
+            }
+            
+            // Save to localStorage
+            const inquiries = JSON.parse(localStorage.getItem('rrjfarm_inquiries') || '[]');
+            inquiries.push({
+                id: Date.now(),
+                name: fullName,
+                email: email,
+                inquiryType: inquiryType,
+                subject: subject,
+                message: message,
+                location: 'Lipa City, Batangas',
+                date: new Date().toLocaleString()
+            });
+            localStorage.setItem('rrjfarm_inquiries', JSON.stringify(inquiries));
+            
+            // Show success
+            const typeLabels = {
+                'membership': 'Membership / Land Stewardship',
+                'workshop': 'Workshop Registration',
+                'marketplace': 'Marketplace / Selling',
+                'farmtour': 'Farm Tour Booking',
+                'general': 'General Inquiry',
+                'support': 'Technical Support',
+                'partnership': 'Partnership / Collaboration'
+            };
+            
+            const successDiv = document.getElementById('formSuccess');
+            successDiv.innerHTML = `✅ Message Sent Successfully!<br><br><strong>Thank you ${fullName}!</strong><br>Your ${typeLabels[inquiryType] || inquiryType} inquiry has been received.<br>The RRJ FARM team will respond to <strong>${email}</strong> within 24-48 hours.<br><br>Reference #: RRJ-${Date.now().toString().slice(-8)}`;
+            successDiv.style.display = 'block';
+            
+            document.getElementById('contactForm').reset();
+            
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+        });
+        
+        // Pre-fill inquiry type from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const inquiryParam = urlParams.get('type');
+        if (inquiryParam) {
+            const select = document.getElementById('inquiryType');
+            if (select && select.querySelector(`option[value="${inquiryParam}"]`)) {
+                select.value = inquiryParam;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>RRJ FARM | Digital Cooperative (RA 9520)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f7f2; color: #1a2e1a; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        
+        .modern-header { background: linear-gradient(135deg, #0d2b0d, #1a4d1a); position: sticky; top: 0; z-index: 1000; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo h1 { font-size: 1.5rem; background: linear-gradient(135deg, #ffffff, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo p { font-size: 0.7rem; color: #a8c8a8; }
+        .nav-menu ul { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+        .nav-menu a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; padding: 0.5rem 0; }
+        .nav-menu a:hover, .nav-menu a.active { color: #ffd700; border-bottom: 2px solid #ffd700; }
+        
+        /* REMINDER MODAL */
+        .reminder-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+        .reminder-modal.active { display: flex; }
+        .reminder-content { background: white; border-radius: 32px; max-width: 450px; width: 90%; padding: 2rem; text-align: center; animation: fadeUp 0.3s ease; }
+        .reminder-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .reminder-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #1a2e1a; }
+        .reminder-message { color: #4a5b4a; margin-bottom: 1.5rem; line-height: 1.5; }
+        .reminder-buttons { display: flex; gap: 1rem; margin-top: 0.5rem; }
+        .btn-login-reminder { flex: 1; background: #2d6a2d; color: white; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .btn-cancel-reminder { flex: 1; background: #eef2e8; color: #1a2e1a; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        
+        @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .coop-hero-premium { background: white; border-radius: 30px; margin: 2rem 0; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1); overflow: hidden; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem; }
+        .hero-content h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: #1a2e1a; }
+        .hero-content p { font-size: 1.1rem; color: #4a5b4a; margin-bottom: 1.5rem; }
+        .hero-badge { background: #f0f4e8; display: inline-block; padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #2d6a2d; margin-right: 0.5rem; margin-bottom: 0.5rem; }
+        .hero-stats { display: flex; gap: 2rem; justify-content: center; align-items: center; background: #f0f4e8; border-radius: 20px; padding: 1.5rem; }
+        .hero-stat { text-align: center; }
+        .hero-stat .number { font-size: 2rem; font-weight: 800; color: #2d6a2d; }
+        .hero-stat .label { font-size: 0.7rem; color: #4a5b4a; }
+        
+        .section-header { text-align: center; margin: 3rem 0 2rem; }
+        .section-header h2 { font-size: 2rem; color: #1a2e1a; margin-bottom: 0.5rem; }
+        .section-header .underline { width: 60px; height: 3px; background: #ffd700; margin: 0.5rem auto; border-radius: 3px; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .stat-card { background: white; padding: 1.8rem; border-radius: 24px; text-align: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-number { font-size: 2rem; font-weight: 800; color: #2d6a2d; }
+        
+        .profit-sharing-premium { background: white; border-radius: 24px; padding: 2rem; margin: 2rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .profit-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .profit-header i { font-size: 2rem; color: #ff8c00; }
+        .profit-header h3 { font-size: 1.5rem; color: #1a2e1a; }
+        .profit-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .profit-item { background: #f0f4e8; padding: 1rem; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; }
+        .profit-item .value { font-weight: 800; color: #2d6a2d; }
+        
+        .voting-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .proposal-card-premium { background: white; border-radius: 24px; padding: 1.5rem; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .proposal-card-premium:hover { transform: translateY(-5px); }
+        .proposal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .proposal-id { background: #ff8c00; color: white; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+        .proposal-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .proposal-description { color: #4a5b4a; font-size: 0.9rem; margin: 0.8rem 0; line-height: 1.5; }
+        .proposal-budget { font-weight: 600; color: #ff8c00; margin: 0.5rem 0; }
+        .vote-progress { margin: 1rem 0; }
+        .progress-bar { background: #e8f0e8; border-radius: 10px; height: 8px; overflow: hidden; }
+        .progress-fill { background: #2d6a2d; height: 100%; border-radius: 10px; transition: width 0.3s; }
+        .vote-stats { display: flex; justify-content: space-between; font-size: 0.75rem; color: #666; margin-top: 0.3rem; }
+        .vote-buttons { display: flex; gap: 1rem; margin-top: 1rem; }
+        .vote-yes { flex: 1; background: linear-gradient(135deg, #2d6a2d, #1a4d1a); color: white; border: none; padding: 0.6rem; border-radius: 40px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .vote-yes:hover { transform: translateY(-2px); }
+        .vote-no { flex: 1; background: #dc3545; color: white; border: none; padding: 0.6rem; border-radius: 40px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .vote-no:hover { background: #c82333; transform: translateY(-2px); }
+        
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .benefit-card { background: white; padding: 2rem; border-radius: 24px; text-align: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .benefit-card:hover { transform: translateY(-5px); }
+        .benefit-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        
+        .modern-footer { background: #0d2b0d; color: #a8c8a8; padding: 3rem 0 1rem; margin-top: 3rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #2a4a2a; }
+        
+        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 1rem 2rem; border-radius: 50px; display: none; z-index: 1500; animation: slideInRight 0.3s ease; }
+        @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        
+        @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; text-align: center; } .hero-stats { justify-content: center; } .container { padding: 0 1rem; } .nav-menu ul { gap: 0.8rem; } }
+    </style>
+</head>
+<body>
+    <header class="modern-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Regenerative Living • Community Land Trust • Batangas, Laguna & Quezon</p></div>
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="marketplace.html"><i class="fas fa-store"></i> Marketplace</a></li>
+                        <li><a href="workshops.html"><i class="fas fa-chalkboard-user"></i> Workshops</a></li>
+                        <li><a href="cooperative.html" class="active"><i class="fas fa-handshake"></i> Cooperative</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="subscriptions.html"><i class="fas fa-ticket-alt"></i> Subscriptions</a></li>
+                        <li><a href="login.html"><i class="fas fa-user"></i> Login/Register</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="coop-hero-premium">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1>🤝 RRJ FARM Multi-Purpose Cooperative</h1>
+                        <p>Registered under RA 9520 (Philippine Cooperative Code) — a democratic, member-owned organization dedicated to sustainable agriculture and community development.</p>
+                        <div><span class="hero-badge"><i class="fas fa-check-circle"></i> CDA Registered</span><span class="hero-badge"><i class="fas fa-check-circle"></i> RA 9520 Compliant</span><span class="hero-badge"><i class="fas fa-check-circle"></i> Member-Owned</span></div>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat"><div class="number">156</div><div class="label">Active Members</div></div>
+                        <div class="hero-stat"><div class="number">89</div><div class="label">Farmer-Members</div></div>
+                        <div class="hero-stat"><div class="number">₱2.4M</div><div class="label">Total Sales</div></div>
+                        <div class="hero-stat"><div class="number">15%</div><div class="label">Profit Sharing</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-number">156</div><div class="stat-label">Total Members</div></div>
+                <div class="stat-card"><div class="stat-icon">🌾</div><div class="stat-number">89</div><div class="stat-label">Farmer Members</div></div>
+                <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-number">₱2.4M</div><div class="stat-label">2026 Sales</div></div>
+                <div class="stat-card"><div class="stat-icon">🏆</div><div class="stat-number">15%</div><div class="stat-label">Patronage Refund</div></div>
+            </div>
+
+            <div class="profit-sharing-premium">
+                <div class="profit-header"><i class="fas fa-chart-line"></i><h3>Profit Sharing & Patronage Refund</h3></div>
+                <p style="color: #4a5b4a; margin-bottom: 1.5rem;">Under RA 9520, cooperative members receive patronage refunds based on their transactions with the cooperative. The more you transact, the higher your share!</p>
+                <div class="profit-list">
+                    <div class="profit-item"><span class="label">Q1 2026 Patronage Refund</span><span class="value">8% of purchases</span></div>
+                    <div class="profit-item"><span class="label">Q2 2026 (Projected)</span><span class="value">10-12% of purchases</span></div>
+                    <div class="profit-item"><span class="label">Total Distributed to Members</span><span class="value">₱187,500</span></div>
+                    <div class="profit-item"><span class="label">Year-End Bonus (Projected)</span><span class="value">₱250,000+</span></div>
+                </div>
+            </div>
+
+            <div class="section-header"><h2>🗳️ Cooperative Governance</h2><div class="underline"></div><p>One member, one vote — participate in shaping our cooperative's future</p></div>
+
+            <div class="voting-grid" id="votingSection">
+                <div class="proposal-card-premium">
+                    <div class="proposal-header"><span class="proposal-id">PROPOSAL #001</span><span style="font-size: 0.7rem; color: #888;">Voting Period: March 1-31, 2026</span></div>
+                    <h3 class="proposal-title">📍 Hub Expansion Project</h3>
+                    <p class="proposal-description">Establish an additional aggregation hub in Quezon province to serve more farmers and reduce delivery time for members.</p>
+                    <p class="proposal-budget">💰 Budget: ₱500,000</p>
+                    <div class="vote-progress"><div class="progress-bar"><div class="progress-fill" id="progress1" style="width: 91%"></div></div><div class="vote-stats"><span>✅ Yes: <span id="yes1">142</span> votes</span><span>❌ No: <span id="no1">14</span> votes</span></div></div>
+                    <div class="vote-buttons"><button class="vote-yes" onclick="checkLoginAndVote('001', 'yes')"><i class="fas fa-check"></i> Vote Yes</button><button class="vote-no" onclick="checkLoginAndVote('001', 'no')"><i class="fas fa-times"></i> Vote No</button></div>
+                </div>
+                <div class="proposal-card-premium">
+                    <div class="proposal-header"><span class="proposal-id">PROPOSAL #002</span><span style="font-size: 0.7rem; color: #888;">Voting Period: March 1-31, 2026</span></div>
+                    <h3 class="proposal-title">📚 Digital Literacy Training Fund</h3>
+                    <p class="proposal-description">Allocate funds for digital literacy training for 50 farmer-members, teaching them how to use the RRJ FARM platform, blockchain basics, and digital payments.</p>
+                    <p class="proposal-budget">💰 Budget: ₱150,000</p>
+                    <div class="vote-progress"><div class="progress-bar"><div class="progress-fill" id="progress2" style="width: 88%"></div></div><div class="vote-stats"><span>✅ Yes: <span id="yes2">138</span> votes</span><span>❌ No: <span id="no2">18</span> votes</span></div></div>
+                    <div class="vote-buttons"><button class="vote-yes" onclick="checkLoginAndVote('002', 'yes')"><i class="fas fa-check"></i> Vote Yes</button><button class="vote-no" onclick="checkLoginAndVote('002', 'no')"><i class="fas fa-times"></i> Vote No</button></div>
+                </div>
+                <div class="proposal-card-premium">
+                    <div class="proposal-header"><span class="proposal-id">PROPOSAL #003</span><span style="font-size: 0.7rem; color: #888;">Voting Period: March 1-31, 2026</span></div>
+                    <h3 class="proposal-title">🚚 Delivery Fleet Purchase</h3>
+                    <p class="proposal-description">Purchase 2 refrigerated vans for direct farm-to-market delivery, ensuring freshness of products and reducing logistics costs for members.</p>
+                    <p class="proposal-budget">💰 Budget: ₱2,500,000</p>
+                    <div class="vote-progress"><div class="progress-bar"><div class="progress-fill" id="progress3" style="width: 63%"></div></div><div class="vote-stats"><span>✅ Yes: <span id="yes3">98</span> votes</span><span>❌ No: <span id="no3">58</span> votes</span></div></div>
+                    <div class="vote-buttons"><button class="vote-yes" onclick="checkLoginAndVote('003', 'yes')"><i class="fas fa-check"></i> Vote Yes</button><button class="vote-no" onclick="checkLoginAndVote('003', 'no')"><i class="fas fa-times"></i> Vote No</button></div>
+                </div>
+            </div>
+
+            <div class="section-header"><h2>🎯 Member Benefits</h2><div class="underline"></div><p>Join the cooperative and enjoy these exclusive benefits</p></div>
+            <div class="benefits-grid">
+                <div class="benefit-card"><div class="benefit-icon">💰</div><h3>Patronage Refund</h3><p>Receive up to 15% of your purchases back as cash refund.</p></div>
+                <div class="benefit-card"><div class="benefit-icon">📚</div><h3>Discounted Training</h3><p>Up to 50% off workshop regular prices.</p></div>
+                <div class="benefit-card"><div class="benefit-icon">🏦</div><h3>Access to Loans</h3><p>Production loans at competitive interest rates.</p></div>
+                <div class="benefit-card"><div class="benefit-icon">🛒</div><h3>Marketplace Discounts</h3><p>Exclusive member discounts on all products.</p></div>
+                <div class="benefit-card"><div class="benefit-icon">🗳️</div><h3>Voting Rights</h3><p>One member, one vote on major proposals.</p></div>
+                <div class="benefit-card"><div class="benefit-icon">📊</div><h3>Profit Sharing</h3><p>Share in the cooperative's annual net surplus.</p></div>
+            </div>
+
+            <div class="profit-sharing-premium">
+                <div class="profit-header"><i class="fas fa-gavel"></i><h3>RA 9520 Compliance</h3></div>
+                <p style="color: #4a5b4a; margin-bottom: 1rem;">RRJ FARM Multi-Purpose Cooperative is fully compliant with the Philippine Cooperative Code of 2008 (RA 9520).</p>
+                <div class="profit-list">
+                    <div class="profit-item"><span class="label">📜 Democratic Member Control</span><span class="value">✓ Compliant</span></div>
+                    <div class="profit-item"><span class="label">💰 Member Economic Participation</span><span class="value">✓ Compliant</span></div>
+                    <div class="profit-item"><span class="label">🤝 Autonomy & Independence</span><span class="value">✓ Compliant</span></div>
+                    <div class="profit-item"><span class="label">📚 Education & Training</span><span class="value">✓ Compliant</span></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- REMINDER MODAL -->
+    <div id="reminderModal" class="reminder-modal">
+        <div class="reminder-content">
+            <div class="reminder-icon"><i class="fas fa-exclamation-triangle" style="color: #ff8c00;"></i></div>
+            <div class="reminder-title">Membership Required</div>
+            <div class="reminder-message" id="reminderMessage">Please login as a member to vote on cooperative proposals.</div>
+            <div class="reminder-buttons">
+                <button class="btn-login-reminder" onclick="redirectToLogin()"><i class="fas fa-sign-in-alt"></i> Login / Register</button>
+                <button class="btn-cancel-reminder" onclick="closeReminderModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="modern-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info"><h3><i class="fas fa-leaf"></i> RRJ FARM</h3><p>CDA Registered Cooperative No. 2026-001</p><p>📍 Batangas, Laguna & Quezon, Philippines</p></div>
+                <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="marketplace.html">Marketplace</a></li><li><a href="workshops.html">Workshops</a></li><li><a href="cooperative.html">Cooperative</a></li></ul></div>
+                <div class="footer-legal"><h4>Legal Framework</h4><ul><li>RA 9520 (Cooperative Code)</li><li>RA 10068 (Organic Agriculture)</li><li>RA 11321 (Sagip Saka Act)</li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 RRJ FARM - Multi-Purpose Cooperative - All Rights Reserved</p></div>
+        </div>
+    </footer>
+
+    <div id="successToast" class="success-toast"></div>
+
+    <script>
+        let votes = {
+            '001': { yes: 142, no: 14 },
+            '002': { yes: 138, no: 18 },
+            '003': { yes: 98, no: 58 }
+        };
+        
+        // ========== LOGIN & MEMBERSHIP CHECK FUNCTIONS ==========
+        function isUserLoggedIn() {
+            return localStorage.getItem('rrjfarm_current_user') !== null;
+        }
+        
+        function hasActiveMembership() {
+            const userSubscriptions = localStorage.getItem('rrjfarm_user_subscriptions');
+            if (userSubscriptions) {
+                const subs = JSON.parse(userSubscriptions);
+                return subs.some(sub => sub.status === 'Active');
+            }
+            return false;
+        }
+        
+        function showReminderModal(message) {
+            document.getElementById('reminderMessage').innerHTML = message;
+            document.getElementById('reminderModal').classList.add('active');
+        }
+        
+        function closeReminderModal() {
+            document.getElementById('reminderModal').classList.remove('active');
+        }
+        
+        function redirectToLogin() {
+            window.location.href = 'login.html';
+        }
+        
+        function checkLoginAndVote(proposalId, choice) {
+            if (!isUserLoggedIn()) {
+                showReminderModal('Please login or register to vote on cooperative proposals.');
+                return;
+            }
+            
+            // Check if user has active membership (subscription)
+            if (!hasActiveMembership()) {
+                showReminderModal('Only active members with a subscription can vote. Please subscribe to a membership plan.');
+                return;
+            }
+            
+            // Proceed with voting
+            castVote(proposalId, choice);
+        }
+        
+        function updateProgressBars() {
+            for (let prop in votes) {
+                const total = votes[prop].yes + votes[prop].no;
+                const yesPercent = (votes[prop].yes / total) * 100;
+                document.getElementById(`progress${prop}`).style.width = `${yesPercent}%`;
+                document.getElementById(`yes${prop}`).innerText = votes[prop].yes;
+                document.getElementById(`no${prop}`).innerText = votes[prop].no;
+            }
+        }
+        
+        function castVote(proposalId, choice) {
+            const toast = document.getElementById('successToast');
+            
+            if (choice === 'yes') {
+                votes[proposalId].yes++;
+                toast.innerHTML = `<i class="fas fa-check-circle"></i> Vote recorded! Proposal #${proposalId} · You voted YES`;
+            } else {
+                votes[proposalId].no++;
+                toast.innerHTML = `<i class="fas fa-check-circle"></i> Vote recorded! Proposal #${proposalId} · You voted NO`;
+            }
+            
+            updateProgressBars();
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+        
+        updateProgressBars();
+        
+        // Expose functions globally
+        window.checkLoginAndVote = checkLoginAndVote;
+        window.redirectToLogin = redirectToLogin;
+        window.closeReminderModal = closeReminderModal;
+    </script>
+</body>
+</html>

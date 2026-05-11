@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RRJ FARM | Blockchain Transaction Ledger</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .ledger-container {
+            padding: 2rem 0;
+        }
+        .ledger-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .ledger-table th, .ledger-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .ledger-table th {
+            background: #1a4d1a;
+            color: white;
+        }
+        .hash {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .status-escrow { color: #ff8c00; font-weight: bold; }
+        .status-released { color: #4caf50; font-weight: bold; }
+        .blockchain-summary {
+            background: #16213e;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>🌱 RRJ FARM</h1>
+                <p>Hyperledger Fabric • Immutable Transaction Ledger</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="marketplace.html">Marketplace</a></li>
+                    <li><a href="cooperative.html">Cooperative</a></li>
+                    <li><a href="blockchain.html" class="active">Blockchain Ledger</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container ledger-container">
+            <div class="blockchain-summary">
+                <h2>🔗 Hyperledger Fabric Network</h2>
+                <p>Network Status: <span style="color:#4caf50;">● Active</span></p>
+                <p>Consensus Mechanism: Raft | Channel: rrjfarm-channel | Chaincode: v2.0</p>
+            </div>
+
+            <h2>📜 Immutable Transaction Ledger</h2>
+            <table class="ledger-table" id="ledgerTable">
+                <thead>
+                    <tr><th>Transaction ID</th><th>Timestamp</th><th>Type</th><th>Details</th><th>Amount</th><th>Block Hash</th><th>Status</th></tr>
+                </thead>
+                <tbody id="ledgerBody">
+                    <tr><td colspan="7">Loading blockchain data...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        function loadLedger() {
+            const blockchain = JSON.parse(localStorage.getItem('rrjfarm_blockchain') || '[]');
+            const tbody = document.getElementById('ledgerBody');
+            
+            if (blockchain.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7">No transactions found. Start trading on the marketplace!</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = blockchain.slice().reverse().map(tx => {
+                let type = tx.action || (tx.product ? 'SALE' : 'TRANSACTION');
+                let details = tx.product ? `${tx.product} - ${tx.buyer} → ${tx.farmer}` : (tx.proposal ? `Vote on Proposal #${tx.proposal}` : 'Blockchain Record');
+                let amount = tx.amount ? `₱${tx.amount}` : '-';
+                let statusClass = tx.status === 'escrow' ? 'status-escrow' : (tx.status === 'released' ? 'status-released' : '');
+                
+                return `<tr>
+                    <td>${tx.txId || '-'}</td>
+                    <td>${new Date(tx.timestamp).toLocaleString()}</td>
+                    <td>${type}</td>
+                    <td>${details}</td>
+                    <td>${amount}</td>
+                    <td class="hash">${(tx.blockHash || tx.txId || '0x...').substring(0, 16)}...</td>
+                    <td class="${statusClass}">${tx.status || 'Confirmed'}</td>
+                </tr>`;
+            }).join('');
+        }
+        
+        loadLedger();
+    </script>
+</body>
+</html>

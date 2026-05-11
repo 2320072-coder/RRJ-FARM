@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>RRJ FARM | Member Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f7f2; color: #1a2e1a; overflow-x: hidden; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        
+        .modern-header { background: linear-gradient(135deg, #0a2e0a, #145214); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo h1 { font-size: 1.6rem; background: linear-gradient(135deg, #ffffff, #ffea8c, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo p { font-size: 0.7rem; color: #c8e6c8; }
+        
+        .nav-menu ul { display: flex; gap: 0.5rem; list-style: none; flex-wrap: wrap; }
+        .nav-menu a { color: #e0f0e0; text-decoration: none; font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 40px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
+        .nav-menu a i { font-size: 1rem; }
+        .nav-menu a:hover { background: rgba(255, 215, 0, 0.15); color: #ffea8c; transform: translateY(-2px); }
+        .nav-menu a.active { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a3a1a; box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
+        
+        .user-menu { position: relative; display: flex; align-items: center; gap: 0.8rem; }
+        .user-avatar { background: #ffd700; color: #1a2e1a; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; }
+        .profile-dropdown { position: absolute; top: 55px; right: 0; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); width: 280px; display: none; z-index: 1100; overflow: hidden; }
+        .profile-dropdown.show { display: block; }
+        .dropdown-item { padding: 0.8rem 1.2rem; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; transition: 0.2s; border-bottom: 1px solid #f0f0f0; }
+        .dropdown-item:hover { background: #eef3ea; }
+        .dropdown-item i { width: 22px; color: #2d6a2d; }
+        .logout-item { color: #dc3545; }
+        .logout-item i { color: #dc3545; }
+        
+        .access-badge { display: inline-block; padding: 0.2rem 0.8rem; border-radius: 50px; font-size: 0.7rem; font-weight: 600; margin-left: 0.5rem; }
+        .badge-member { background: #d4edda; color: #155724; }
+        .badge-nonmember { background: #fff3cd; color: #856404; }
+        
+        .reminder-banner { background: linear-gradient(135deg, #fff3cd, #ffe8b3); color: #856404; padding: 0.8rem 1rem; border-radius: 16px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-left: 4px solid #ffc107; }
+        .btn-subscribe-banner { background: #ff8c00; color: white; border: none; padding: 0.4rem 1rem; border-radius: 30px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
+        
+        .restricted-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+        .restricted-modal.active { display: flex; }
+        .restricted-content { background: white; border-radius: 32px; max-width: 500px; width: 90%; padding: 2rem; text-align: center; animation: fadeUp 0.3s ease; }
+        .restricted-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .restricted-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .restricted-message { color: #4a5b4a; margin-bottom: 1.5rem; line-height: 1.5; }
+        .restricted-buttons { display: flex; gap: 1rem; }
+        .btn-subscribe-restricted { flex: 1; background: #ff8c00; color: white; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .btn-cancel-restricted { flex: 1; background: #eef2e8; color: #1a2e1a; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        
+        .confirm-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+        .confirm-modal.active { display: flex; }
+        .confirm-content { background: white; border-radius: 32px; max-width: 450px; width: 90%; padding: 2rem; text-align: center; animation: fadeUp 0.3s ease; }
+        .confirm-buttons { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .btn-confirm-yes { flex: 1; background: #dc3545; color: white; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .btn-confirm-no { flex: 1; background: #eef2e8; color: #1a2e1a; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        
+        .chat-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+        .chat-modal.active { display: flex; }
+        .chat-content { background: white; border-radius: 32px; max-width: 550px; width: 90%; padding: 1.5rem; animation: fadeUp 0.3s ease; }
+        .chat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e8f0e8; }
+        .chat-messages { height: 300px; overflow-y: auto; background: #f8f9fa; border-radius: 20px; padding: 1rem; margin: 1rem 0; }
+        .chat-bubble { margin-bottom: 1rem; }
+        .chat-bubble.user { text-align: right; }
+        .chat-bubble.farmer { text-align: left; }
+        .chat-bubble .message { display: inline-block; padding: 0.6rem 1rem; border-radius: 20px; max-width: 80%; word-wrap: break-word; }
+        .chat-bubble.user .message { background: #2d6a2d; color: white; border-radius: 20px 5px 20px 20px; }
+        .chat-bubble.farmer .message { background: #e8f0e8; color: #1a2e1a; border-radius: 5px 20px 20px 20px; }
+        .chat-input-area { display: flex; gap: 0.5rem; margin-top: 1rem; }
+        .chat-input-area input { flex: 1; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 30px; font-family: inherit; }
+        .chat-input-area button { background: #2d6a2d; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 30px; cursor: pointer; }
+        
+        .dashboard-tabs { display: flex; gap: 0.5rem; margin: 2rem 0; background: white; padding: 0.5rem; border-radius: 60px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); flex-wrap: wrap; justify-content: center; }
+        .dashboard-tab { padding: 0.7rem 1.2rem; background: none; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; transition: all 0.3s; color: #4a5b4a; font-size: 0.85rem; white-space: nowrap; }
+        .dashboard-tab i { margin-right: 0.3rem; }
+        .dashboard-tab.active { background: #2d6a2d; color: white; }
+        .dashboard-tab.hidden { display: none; }
+        .tab-content { display: none; animation: fadeIn 0.2s ease; }
+        .tab-content.active { display: block; }
+        
+        .dashboard-card { background: white; border-radius: 24px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 2px solid #e8f0e8; flex-wrap: wrap; gap: 0.5rem; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .stat-card { background: linear-gradient(135deg, #fff, #fafefa); padding: 1.2rem; border-radius: 20px; text-align: center; border: 1px solid #e0ebdd; }
+        .stat-number { font-size: 1.8rem; font-weight: 800; color: #2d6a2d; }
+        
+        .order-item, .product-item { border: 1px solid #e8f0e8; border-radius: 18px; padding: 1rem; margin-bottom: 1rem; background: white; transition: 0.2s; cursor: pointer; }
+        .order-item:hover, .product-item:hover { background: #fefce8; border-color: #ffd700; }
+        .order-status { padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; display: inline-block; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-processing { background: #cce5ff; color: #004085; }
+        .status-shipped { background: #d4edda; color: #155724; }
+        .status-delivered { background: #2d6a2d; color: white; }
+        .status-cancelled { background: #f8d7da; color: #721c24; }
+        .btn-action { padding: 0.4rem 1rem; border-radius: 30px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 600; margin: 0.2rem; background: #eef2e8; }
+        .btn-rate { background: #ffd700; color: #1a2e1a; }
+        .wallet-btn { flex: 1; padding: 0.8rem; border-radius: 40px; font-weight: bold; border: none; background: #2d6a2d; color: white; cursor: pointer; margin: 0.5rem; }
+        .subscription-card { background: #eef3ea; border-radius: 20px; padding: 1rem; margin-bottom: 1rem; border-left: 6px solid #ffd700; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        
+        .filter-search-bar { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .search-input { flex: 1; padding: 0.6rem 1rem; border: 2px solid #e0e0e0; border-radius: 30px; font-family: inherit; }
+        .order-stats { display: flex; gap: 0.5rem; margin-top: 0.5rem; font-size: 0.7rem; color: #666; }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+        .product-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; cursor: pointer; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-img { height: 160px; background: linear-gradient(135deg, #c8e6c8, #a5d6a5); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; }
+        .product-info { padding: 1rem; }
+        .product-price { font-size: 1.2rem; font-weight: 700; color: #2d6a2d; }
+        .btn-buy { background: #2d6a2d; color: white; border: none; padding: 0.5rem; border-radius: 30px; cursor: pointer; width: 100%; margin-top: 0.5rem; font-weight: 600; }
+        
+        .workshop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+        .workshop-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; cursor: pointer; }
+        .workshop-card:hover { transform: translateY(-5px); }
+        .workshop-img { height: 130px; background: linear-gradient(135deg, #ffe0b3, #ffcc80); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .workshop-info { padding: 1rem; }
+        .enroll-btn { background: #ff8c00; color: white; border: none; padding: 0.5rem; border-radius: 30px; cursor: pointer; width: 100%; margin-top: 0.5rem; font-weight: 600; }
+        
+        .voting-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .proposal-card { background: white; border-radius: 24px; padding: 1.5rem; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .proposal-card:hover { transform: translateY(-5px); }
+        .vote-buttons { display: flex; gap: 1rem; margin-top: 1rem; }
+        .vote-yes { flex: 1; background: linear-gradient(135deg, #2d6a2d, #1a4d1a); color: white; border: none; padding: 0.6rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .vote-no { flex: 1; background: #dc3545; color: white; border: none; padding: 0.6rem; border-radius: 40px; cursor: pointer; }
+        
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .benefit-card { background: white; padding: 1.5rem; border-radius: 20px; text-align: center; transition: transform 0.3s; }
+        .benefit-card:hover { transform: translateY(-5px); }
+        .benefit-icon { font-size: 2rem; margin-bottom: 1rem; }
+        
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
+        .modal.active { display: flex; }
+        .modal-content { background: white; border-radius: 32px; max-width: 1000px; width: 90%; max-height: 85vh; overflow-y: auto; padding: 0; animation: fadeUp 0.3s ease; }
+        .modal-header { padding: 1.2rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eef3ea; }
+        .modal-header h3 { font-size: 1.3rem; display: flex; align-items: center; gap: 0.5rem; }
+        .modal-body { padding: 1.5rem; }
+        .modal-footer { padding: 1rem 1.5rem; display: flex; gap: 1rem; justify-content: flex-end; border-top: 1px solid #eef3ea; }
+        .close-modal-btn { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #999; }
+        .close-modal-btn:hover { color: #dc3545; }
+        .btn-primary { background: #2d6a2d; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; }
+        .btn-secondary { background: #eef2e8; color: #1a2e1a; padding: 0.8rem 1.5rem; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; }
+        .modal-input { width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 16px; margin: 0.5rem 0; font-family: inherit; }
+        .payment-options { display: flex; gap: 1rem; margin: 1rem 0; flex-wrap: wrap; }
+        .payment-option { flex: 1; text-align: center; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 16px; cursor: pointer; transition: all 0.3s; background: white; }
+        .payment-option.selected { border-color: #2d6a2d; background: #e8f0e8; }
+        .rating-stars { display: flex; justify-content: center; gap: 0.5rem; margin: 1rem 0; }
+        .rating-star { font-size: 2rem; cursor: pointer; color: #ddd; transition: 0.2s; }
+        .rating-star:hover, .rating-star.active { color: #ffd700; }
+        .map-container { height: 200px; border-radius: 20px; margin: 1rem 0; background: #e9ecef; }
+        .voucher-section { background: #f0f4e8; border-radius: 14px; padding: 0.8rem; margin: 0.8rem 0; }
+        .voucher-list { margin-top: 0.5rem; max-height: 150px; overflow-y: auto; }
+        .voucher-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: white; border-radius: 10px; margin-bottom: 0.3rem; cursor: pointer; }
+        .voucher-item:hover { background: #e8f0e8; }
+        
+        /* Tracking Timeline */
+        .tracking-timeline { margin: 1rem 0; }
+        .timeline-step { display: flex; margin-bottom: 1rem; position: relative; }
+        .timeline-step:not(:last-child)::before { content: ''; position: absolute; left: 15px; top: 35px; width: 2px; height: 40px; background: #ddd; }
+        .timeline-step.completed:not(:last-child)::before { background: #2d6a2d; }
+        .step-icon { width: 32px; height: 32px; border-radius: 50%; background: #e8f0e8; display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0; }
+        .timeline-step.completed .step-icon { background: #2d6a2d; color: white; }
+        .timeline-step.active .step-icon { background: #ff8c00; color: white; }
+        .step-content { flex: 1; }
+        .step-title { font-weight: 600; font-size: 0.9rem; }
+        .step-date { font-size: 0.7rem; color: #888; }
+        
+        .print-receipt { background: #2d6a2d; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
+        
+        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem 1.5rem; border-radius: 50px; z-index: 2100; display: none; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @media (max-width: 900px) { .dashboard-tabs { flex-direction: column; border-radius: 28px; align-items: stretch; } .dashboard-tab { text-align: center; } .container { padding: 0 1rem; } }
+    </style>
+</head>
+<body>
+<header class="modern-header">
+    <div class="container">
+        <div class="header-content">
+            <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Batangas, Laguna & Quezon</p></div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="memberdashboard.html" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="ai-advisor.html"><i class="fas fa-robot"></i> AI Advisor</a></li>
+                    <li><a href="chat-system.html"><i class="fas fa-comments"></i> Chat</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <div class="user-avatar" id="userAvatar">JD</div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-item" id="profileUserInfo"><i class="fas fa-user-circle"></i> <span id="profileName">Loading...</span><br><small id="profileEmail"></small></div>
+                    <div class="dropdown-item" id="subscriptionStatusItem"><i class="fas fa-ticket-alt"></i> <span id="profileSubStatus">Checking...</span></div>
+                    <div class="dropdown-item" id="mySubscriptionsBtn"><i class="fas fa-calendar-check"></i> My Subscriptions</div>
+                    <div class="dropdown-item" id="editProfileBtn"><i class="fas fa-user-edit"></i> Edit Profile</div>
+                    <div class="dropdown-item" id="changePasswordBtn"><i class="fas fa-lock"></i> Change Password</div>
+                    <div class="dropdown-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div id="reminderBanner" class="reminder-banner" style="display: none;">
+            <div><i class="fas fa-info-circle"></i> 🔔 You currently have Basic Access. <strong>Subscribe now</strong> to unlock full member benefits including Overview, My Products, and Cooperative voting.</div>
+            <button class="btn-subscribe-banner" onclick="window.location.href='subscriptions.html'">Subscribe Now →</button>
+        </div>
+
+        <div class="dashboard-tabs" id="dashboardTabs">
+            <button class="dashboard-tab active" data-tab="overview" onclick="switchTab('overview')"><i class="fas fa-chart-line"></i> Overview</button>
+            <button class="dashboard-tab" data-tab="orders" onclick="switchTab('orders')"><i class="fas fa-shopping-cart"></i> My Orders</button>
+            <button class="dashboard-tab" data-tab="products" onclick="switchTab('products')"><i class="fas fa-store"></i> My Products</button>
+            <button class="dashboard-tab" data-tab="marketplace" onclick="switchTab('marketplace')"><i class="fas fa-store"></i> Marketplace</button>
+            <button class="dashboard-tab" data-tab="workshops" onclick="switchTab('workshops')"><i class="fas fa-chalkboard-user"></i> Workshops</button>
+            <button class="dashboard-tab" data-tab="cooperative" onclick="switchTab('cooperative')"><i class="fas fa-handshake"></i> Cooperative</button>
+            <button class="dashboard-tab" data-tab="subscriptions" onclick="switchTab('subscriptions')"><i class="fas fa-ticket-alt"></i> Subscriptions</button>
+            <button class="dashboard-tab" data-tab="wallet" onclick="switchTab('wallet')"><i class="fas fa-wallet"></i> Wallet</button>
+        </div>
+
+        <!-- OVERVIEW TAB -->
+        <div id="overviewTab" class="tab-content active">
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-number">₱<span id="totalRevenue">18,200</span></div><div class="stat-label">Total Revenue</div></div>
+                <div class="stat-card"><div class="stat-number">₱<span id="totalExpenses">4,850</span></div><div class="stat-label">Total Expenses</div></div>
+                <div class="stat-card"><div class="stat-number">₱<span id="netProfit">13,350</span></div><div class="stat-label">Net Profit</div></div>
+                <div class="stat-card"><div class="stat-number">₱<span id="walletShort">5,200</span></div><div class="stat-label">Wallet Balance</div></div>
+            </div>
+            <div class="dashboard-card"><div class="card-header"><h3>Recent Orders</h3></div><div id="recentActivity"></div></div>
+            <div class="dashboard-card"><div class="card-header"><h3>📋 My Subscription</h3></div><div id="overviewSubscriptionStatus">Checking subscription...</div></div>
+            <div class="dashboard-card"><div class="card-header"><h3>👛 My Wallet Summary</h3></div><div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;"><div><span class="stat-number">₱<span id="overviewWalletBalance">5,200</span></span><div>Available Balance</div></div><div><button class="btn-action" onclick="switchTab('wallet')">View Wallet →</button></div></div></div>
+        </div>
+
+        <!-- MY ORDERS TAB with Search and Timeline -->
+        <div id="ordersTab" class="tab-content">
+            <div class="dashboard-card">
+                <div class="card-header"><h3>My Orders</h3>
+                    <div class="filter-search-bar">
+                        <input type="text" id="orderSearch" class="search-input" placeholder="🔍 Search by product or farmer..." onkeyup="renderOrders()">
+                        <select id="orderFilter" onchange="renderOrders()" class="search-input" style="width: auto;">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="buyerOrdersList"></div>
+            </div>
+        </div>
+
+        <!-- MY PRODUCTS TAB -->
+        <div id="productsTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Products</h3><button class="btn-action" style="background:#2d6a2d;color:white;" onclick="openAddProductModal()">+ Add Product</button></div><div id="sellerProductsList"></div></div></div>
+        
+        <!-- MARKETPLACE TAB -->
+        <div id="marketplaceTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Fresh Produce</h3><button class="btn-action" style="background:#ff8c00;color:white;" id="sellProductBtnMarketplace" onclick="openSellProductModal()"><i class="fas fa-plus"></i> Sell Product</button></div><div class="product-grid" id="marketplaceProducts"></div></div></div>
+        
+        <!-- WORKSHOPS TAB -->
+        <div id="workshopsTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Upcoming Workshops</h3><span>Member price: ₱299 only</span></div><div class="workshop-grid" id="workshopsList"></div></div><div class="dashboard-card"><div class="card-header"><h3>My Registered Workshops</h3></div><div id="registeredWorkshops"></div></div></div>
+        
+        <!-- COOPERATIVE TAB -->
+        <div id="cooperativeTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>RA 9520 Cooperative Benefits</h3></div><div class="benefits-grid"><div class="benefit-card"><div class="benefit-icon">💰</div><h3>Patronage Refund</h3><p>Receive up to 15% of purchases back</p></div><div class="benefit-card"><div class="benefit-icon">📚</div><h3>Discounted Training</h3><p>Up to 50% off workshops</p></div><div class="benefit-card"><div class="benefit-icon">🏦</div><h3>Access to Loans</h3><p>Production loans at competitive rates</p></div></div><div class="card-header"><h3>🗳️ Cooperative Voting</h3></div><div class="voting-grid" id="votingSection"></div></div>
+        
+        <!-- SUBSCRIPTIONS TAB - WORKING -->
+        <div id="subscriptionsTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Subscriptions</h3><button class="btn-action" style="background:#ff8c00;color:white;" onclick="window.location.href='subscriptions.html'">+ Subscribe</button></div><div id="subscriptionsList"></div></div></div>
+        
+        <!-- WALLET TAB - WORKING -->
+        <div id="walletTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Wallet</h3></div><div style="text-align:center;padding:1rem;"><span class="stat-number">₱<span id="walletBalanceMain">5,200</span></span><div>Available Balance</div></div><div style="display:flex; gap:1rem; margin-bottom:1rem;"><button class="wallet-btn" onclick="openTopUpModal()" style="background:#2d6a2d;">💸 Top Up</button><button class="wallet-btn" onclick="openWithdrawModal()" style="background:#ff8c00;">🏦 Withdraw</button></div><div class="card-header"><h3>Transaction History</h3></div><div id="walletHistory"></div></div></div>
+    </div>
+</main>
+
+<!-- ALL MODALS -->
+<div id="detailModal" class="modal"><div class="modal-content" id="modalDynamicContent"></div></div>
+<div id="ratingModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Rate Product</h3><button class="close-modal-btn" onclick="closeRatingModal()">&times;</button></div><div class="modal-body"><div class="rating-stars" id="ratingStars"><span class="rating-star" data-value="1">★</span><span class="rating-star" data-value="2">★</span><span class="rating-star" data-value="3">★</span><span class="rating-star" data-value="4">★</span><span class="rating-star" data-value="5">★</span></div><textarea id="ratingReview" class="modal-input" rows="3" placeholder="Write your review..."></textarea></div><div class="modal-footer"><button class="btn-secondary" onclick="closeRatingModal()">Cancel</button><button class="btn-primary" onclick="submitRating()">Submit</button></div></div></div>
+<div id="buyProductModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Buy Product</h3><button class="close-modal-btn" onclick="closeBuyProductModal()">&times;</button></div><div class="modal-body"><div id="buyProductInfo"></div><label>Quantity</label><input type="number" id="buyQuantity" class="modal-input" min="1" value="1" onchange="updateBuyTotal()"><label>Total Amount</label><input type="text" id="buyTotal" class="modal-input" readonly><label>Apply Voucher</label><div style="display:flex; gap:0.5rem;"><input type="text" id="buyVoucherCode" class="modal-input" placeholder="Enter voucher code" style="flex:1;"><button class="btn-action" onclick="applyBuyVoucher()">Apply</button></div><div id="buyVoucherList" class="voucher-list"></div><div id="feeBreakdown" class="voucher-section"></div><label>Payment Method</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectBuyPayment('gcash')">GCash</div><div class="payment-option" data-method="paymaya" onclick="selectBuyPayment('paymaya')">PayMaya</div><div class="payment-option" data-method="bank" onclick="selectBuyPayment('bank')">Bank Transfer</div></div><div id="buyPaymentDetails"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeBuyProductModal()">Cancel</button><button class="btn-primary" onclick="confirmBuyProduct()">Confirm Purchase</button></div></div></div>
+<div id="sellProductModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Sell New Product</h3><button class="close-modal-btn" onclick="closeSellProductModal()">&times;</button></div><div class="modal-body"><label>Product Name</label><input type="text" id="prodName"><label>Price (₱)</label><input type="number" id="prodPrice"><label>Unit</label><select id="prodUnit"><option value="kg">kg</option><option value="pcs">pcs</option><option value="bottle">bottle</option></select><label>Emoji</label><input type="text" id="prodImage" value="🌿"></div><div class="modal-footer"><button class="btn-secondary" onclick="closeSellProductModal()">Cancel</button><button class="btn-primary" onclick="addNewProduct()">List Product</button></div></div></div>
+<div id="enrollWorkshopModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Enroll in Workshop</h3><button class="close-modal-btn" onclick="closeEnrollModal()">&times;</button></div><div class="modal-body"><div id="workshopInfo"></div><label>Participants</label><select id="workshopParticipants" onchange="updateWorkshopTotal()"><option value="1">1 person</option><option value="2">2 people (+₱200)</option><option value="3">3 people (+₱400)</option><option value="4">4 people (+₱600)</option></select><label>Apply Voucher</label><div style="display:flex; gap:0.5rem;"><input type="text" id="workshopVoucherCode" class="modal-input" placeholder="Voucher code" style="flex:1;"><button class="btn-action" onclick="applyWorkshopVoucher()">Apply</button></div><div id="workshopVoucherList" class="voucher-list"></div><div id="workshopFeeBreakdown" class="voucher-section"></div><label>Payment Method</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectEnrollPayment('gcash')">GCash</div><div class="payment-option" data-method="paymaya" onclick="selectEnrollPayment('paymaya')">PayMaya</div><div class="payment-option" data-method="bank" onclick="selectEnrollPayment('bank')">Bank Transfer</div></div><div id="enrollPaymentDetails"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeEnrollModal()">Cancel</button><button class="btn-primary" onclick="confirmWorkshopEnrollment()">Confirm Enrollment</button></div></div></div>
+<div id="editProfileModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Edit Profile</h3><button class="close-modal-btn" onclick="closeEditModal()">&times;</button></div><div class="modal-body"><label>Full Name</label><input type="text" id="editName"><label>Address</label><input type="text" id="editAddress"><label>Email</label><input type="email" id="editEmail"><label>Contact</label><input type="text" id="editContact"><hr><h4>Bank Account</h4><label>Bank Name</label><input type="text" id="editBankName"><label>Account Number</label><input type="text" id="editBankAccount"><hr><h4>E-Wallet</h4><select id="editWalletType"><option value="gcash">GCash</option><option value="paymaya">PayMaya</option></select><label>Wallet Number</label><input type="text" id="editWalletNumber"></div><div class="modal-footer"><button class="btn-secondary" onclick="closeEditModal()">Cancel</button><button class="btn-primary" onclick="saveProfile()">Save</button></div></div></div>
+<div id="topupModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Top Up Wallet</h3><button class="close-modal-btn" onclick="closeTopupModal()">&times;</button></div><div class="modal-body"><input type="number" id="topupAmount" class="modal-input" placeholder="Amount (₱)"><label>Payment Method</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectTopupPayment('gcash')">GCash</div><div class="payment-option" data-method="paymaya" onclick="selectTopupPayment('paymaya')">PayMaya</div><div class="payment-option" data-method="bank" onclick="selectTopupPayment('bank')">Bank Transfer</div></div><div id="topupPaymentDetails" style="background:#eef3ea;padding:0.8rem;border-radius:12px;margin-top:0.5rem;"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeTopupModal()">Cancel</button><button class="btn-primary" onclick="processTopup()">Add Funds</button></div></div></div>
+<div id="withdrawModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Withdraw Funds</h3><button class="close-modal-btn" onclick="closeWithdrawModal()">&times;</button></div><div class="modal-body"><input type="number" id="withdrawAmount" class="modal-input" placeholder="Amount (₱)"><label>Withdraw to</label><div class="payment-options"><div class="payment-option" data-method="bank" onclick="selectWithdrawPayment('bank')">Bank Account</div><div class="payment-option" data-method="gcash" onclick="selectWithdrawPayment('gcash')">GCash</div><div class="payment-option" data-method="paymaya" onclick="selectWithdrawPayment('paymaya')">PayMaya</div></div><div id="withdrawPaymentDetails" style="background:#eef3ea;padding:0.8rem;border-radius:12px;margin-top:0.5rem;"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeWithdrawModal()">Cancel</button><button class="btn-primary" onclick="processWithdraw()">Withdraw</button></div></div></div>
+
+<div id="successToast" class="success-toast"></div>
+<div id="confirmModal" class="confirm-modal"><div class="confirm-content"><div class="confirm-title" id="confirmTitle">Confirm Action</div><div class="confirm-message" id="confirmMessage">Are you sure?</div><div class="confirm-buttons"><button class="btn-confirm-yes" id="confirmYesBtn">Yes</button><button class="btn-confirm-no" onclick="closeConfirmModal()">Cancel</button></div></div></div>
+<div id="restrictedModal" class="restricted-modal"><div class="restricted-content"><div class="restricted-icon">🔒</div><div class="restricted-title">Member Only Feature</div><div class="restricted-message" id="restrictedMessage">Subscribe to unlock this feature.</div><div class="restricted-buttons"><button class="btn-subscribe-restricted" onclick="window.location.href='subscriptions.html'">Subscribe Now</button><button class="btn-cancel-restricted" onclick="closeRestrictedModal()">Cancel</button></div></div></div>
+<div id="chatModal" class="chat-modal"><div class="chat-content"><div class="chat-header"><h4 id="chatFarmerName">Chat with Farmer</h4><button class="close-modal-btn" onclick="closeChatModal()">&times;</button></div><div id="chatMessagesContainer" class="chat-messages"></div><div class="chat-input-area"><input type="text" id="chatMessageInput" placeholder="Type your message..."><button onclick="sendChatMessage()">Send</button></div></div></div>
+
+<script>
+    // ========== DATA ==========
+    let currentUser = null;
+    let hasActiveSubscription = false;
+    let walletBalance = 5200;
+    let confirmCallback = null;
+    let currentChatOrder = null;
+    let appliedBuyVoucher = null;
+    let appliedWorkshopVoucher = null;
+    let currentWorkshop = null;
+    let transactionHistory = [{ id:1, desc: "Initial wallet", amount: 5200, type: "credit", date: "2026-05-01" }];
+    let orders = [
+        { id: "ORD001", product: "Fresh Sitao", qty: 2, total: 90, farmerName: "Maria Santos", status: "delivered", rating: null, lat: 13.9409, lng: 121.1620, orderDate: "2026-05-01", deliveredDate: "2026-05-03" },
+        { id: "ORD002", product: "Batangas Rice", qty: 5, total: 275, farmerName: "Anna Reyes", status: "shipped", rating: null, lat: 14.0636, lng: 121.1067, orderDate: "2026-05-05", shippedDate: "2026-05-06" },
+        { id: "ORD003", product: "Ampalaya", qty: 3, total: 180, farmerName: "Jose Dela Cruz", status: "processing", rating: null, lat: 13.8309, lng: 121.2598, orderDate: "2026-05-07" }
+    ];
+    let sellerProducts = [{ id: "P1", name: "Organic Tomatoes", price: 65, unit: "kg", sold: 48, quantity: 120 }, { id: "P2", name: "Fresh Eggplant", price: 50, unit: "kg", sold: 40, quantity: 85 }];
+    let marketplaceItems = [
+        { id: 1, name: "Organic Tomatoes", price: 65, unit: "kg", farmer: "Maria Santos", image: "🍅" },
+        { id: 2, name: "Batangas Rice", price: 55, unit: "kg", farmer: "Anna Reyes", image: "🍚" },
+        { id: 3, name: "Fresh Sitao", price: 45, unit: "kg", farmer: "Jose Cruz", image: "🌱" },
+        { id: 4, name: "Kalamansi", price: 80, unit: "kg", farmer: "Carlos M", image: "🍊" }
+    ];
+    let workshops = [
+        { id: 1, name: "Organic Pest Control", date: "May 25, 2026", time: "10:00 AM", price: 299, image: "🐞", location: "Online via Zoom", remaining: 12, slots: 20 },
+        { id: 2, name: "Vermicomposting 101", date: "June 5, 2026", time: "2:00 PM", price: 299, image: "🪱", location: "RRJ Farm Batangas", remaining: 18, slots: 25 },
+        { id: 3, name: "Backyard Beekeeping", date: "June 15, 2026", time: "9:00 AM", price: 299, image: "🐝", location: "Online via Zoom", remaining: 10, slots: 12 }
+    ];
+    let registeredWorkshops = [];
+    let subscriptions = [];
+    let votes = { '001': { yes: 142, no: 14, title: "Hub Expansion Project", budget: "₱500,000", desc: "Establish an additional aggregation hub in Quezon province." }, '002': { yes: 138, no: 18, title: "Digital Literacy Training", budget: "₱150,000", desc: "Training for 50 farmer-members." }, '003': { yes: 98, no: 58, title: "Delivery Fleet Purchase", budget: "₱2,500,000", desc: "Purchase 2 refrigerated vans." } };
+    let chatMessages = {}; let activeMap = null; let currentOrderForRating = null; let currentEditProductId = null; let currentBuyProduct = null;
+    let selectedBuyPayment = 'gcash'; let selectedTopupPayment = 'gcash'; let selectedWithdrawPayment = 'bank'; let selectedEnrollPayment = 'gcash';
+    
+    const availableVouchers = [{ code: "WELCOME20", discount: 20, type: "percentage", minPurchase: 0, description: "20% OFF" }, { code: "FREESHIP", discount: 100, type: "fixed", minPurchase: 500, description: "₱100 OFF" }];
+    
+    function loadBuyVouchers() { document.getElementById('buyVoucherList').innerHTML = availableVouchers.map(v => `<div class="voucher-item" onclick="applySpecificBuyVoucher('${v.code}')"><span class="voucher-code">${v.code}</span><span>${v.description}</span></div>`).join(''); }
+    function loadWorkshopVouchers() { document.getElementById('workshopVoucherList').innerHTML = availableVouchers.map(v => `<div class="voucher-item" onclick="applySpecificWorkshopVoucher('${v.code}')"><span class="voucher-code">${v.code}</span><span>${v.description}</span></div>`).join(''); }
+    function applySpecificBuyVoucher(code) { document.getElementById('buyVoucherCode').value = code; applyBuyVoucher(); }
+    function applySpecificWorkshopVoucher(code) { document.getElementById('workshopVoucherCode').value = code; applyWorkshopVoucher(); }
+    function applyBuyVoucher() { let code = document.getElementById('buyVoucherCode').value.toUpperCase(); let voucher = availableVouchers.find(v => v.code === code); if (voucher) { appliedBuyVoucher = voucher; updateBuyTotal(); showToast(`Voucher ${code} applied!`); } else { appliedBuyVoucher = null; updateBuyTotal(); showToast('Invalid voucher'); } }
+    function applyWorkshopVoucher() { let code = document.getElementById('workshopVoucherCode').value.toUpperCase(); let voucher = availableVouchers.find(v => v.code === code); if (voucher) { appliedWorkshopVoucher = voucher; updateWorkshopTotal(); showToast(`Voucher ${code} applied!`); } else { appliedWorkshopVoucher = null; updateWorkshopTotal(); showToast('Invalid voucher'); } }
+    function calculateDiscount(amount, voucher) { if (!voucher) return 0; if (amount < voucher.minPurchase) return 0; if (voucher.type === 'percentage') return amount * (voucher.discount / 100); return Math.min(voucher.discount, amount); }
+    function calculateTransactionFee(amount) { if (amount >= 1000) return { fee: amount * 0.10, label: "10% Transaction Fee" }; if (amount >= 300) return { fee: amount * 0.05, label: "5% Transaction Fee" }; return { fee: 0, label: "No Transaction Fee" }; }
+    
+    function checkSession() { let userJson = localStorage.getItem('rrjfarm_current_user'); if (!userJson) { window.location.href = 'login.html'; return false; } currentUser = JSON.parse(userJson); if (!currentUser.isLoggedIn) { window.location.href = 'login.html'; return false; } checkSubscriptionStatus(); updateUIByAccessLevel(); return true; }
+    
+    function checkSubscriptionStatus() { 
+        let userSubscriptions = JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions') || '[]'); 
+        let today = new Date(); 
+        let activeFound = false; 
+        subscriptions = [];
+        userSubscriptions.forEach(sub => { 
+            if (sub.status === 'Active') { 
+                let nextBilling = new Date(sub.nextBilling); 
+                if (nextBilling > today) { 
+                    activeFound = true; 
+                    subscriptions.push(sub);
+                } else { 
+                    sub.status = 'Expired'; 
+                } 
+            } 
+        }); 
+        hasActiveSubscription = activeFound; 
+        sessionStorage.setItem('rrjfarm_has_active_subscription', hasActiveSubscription ? 'true' : 'false'); 
+        loadRegisteredWorkshops(); 
+        updateOverviewSubscription(); 
+        renderSubscriptions();
+        document.getElementById('overviewWalletBalance').innerText = walletBalance;
+        document.getElementById('walletBalanceMain').innerText = walletBalance;
+        renderWalletHistory();
+    }
+    
+    function updateOverviewSubscription() { 
+        let container = document.getElementById('overviewSubscriptionStatus'); 
+        if (hasActiveSubscription && subscriptions.length > 0) { 
+            let sub = subscriptions[0]; 
+            container.innerHTML = `<div style="background:#eef3ea;padding:1rem;border-radius:16px;"><strong>${sub.plan || 'Active Plan'}</strong><br>₱${sub.amount}/month<br>Next billing: ${sub.nextBilling}<br><span class="badge-member">✅ Active</span></div>`; 
+        } else { 
+            container.innerHTML = `<div style="background:#fff3cd;padding:1rem;border-radius:16px;"><strong>No Active Subscription</strong><br>You have basic access.<br><a href="#" onclick="switchTab('subscriptions')" style="color:#2d6a2d;">Subscribe now</a> to unlock member benefits.</div>`; 
+        } 
+    }
+    
+    function renderSubscriptions() { 
+        let container = document.getElementById('subscriptionsList'); 
+        if(container) { 
+            if(subscriptions.length > 0) {
+                container.innerHTML = subscriptions.map(s => `<div class="subscription-card"><div><strong>${s.plan || s.name}</strong><br>₱${s.price || s.amount}/month<br>Next: ${s.nextBilling}<br>Status: <span class="badge-member">Active</span></div><div><button class="btn-action" style="background:#28a745;color:white;" onclick="renewSubscription('${s.id}')">Renew</button><button class="btn-action" onclick="cancelSubscription('${s.id}')">Cancel</button></div></div>`).join(''); 
+            } else {
+                container.innerHTML = '<div class="empty-state">No active subscriptions. <a href="subscriptions.html" style="color:#2d6a2d;">Subscribe now</a> to unlock member benefits!</div>';
+            }
+        } 
+    }
+    
+    function renewSubscription(id) { showToast('Subscription renewed! Please visit Subscriptions page to complete payment.'); }
+    function cancelSubscription(id) { if(confirm('Cancel this subscription?')) { subscriptions = subscriptions.filter(s => s.id !== id); localStorage.setItem('rrjfarm_user_subscriptions', JSON.stringify(subscriptions)); checkSubscriptionStatus(); renderSubscriptions(); updateOverviewSubscription(); showToast('Subscription cancelled'); } }
+    
+    function renderWalletHistory() { let container = document.getElementById('walletHistory'); if(container) container.innerHTML = transactionHistory.map(t => `<div class="order-item" style="cursor:default;"><b>${t.desc}</b> <span style="color:${t.type==='credit'?'green':'red'}">${t.type==='credit'?'+':'−'}₱${t.amount}</span><br><small>${t.date}</small></div>`).join(''); if(transactionHistory.length===0) container.innerHTML = '<div class="empty-state">No transactions yet.</div>'; }
+    
+    function updateUIByAccessLevel() { 
+        document.getElementById('userAvatar').innerText = currentUser.avatarInitials || (currentUser.firstName?.charAt(0) || 'U') + (currentUser.lastName?.charAt(0) || ''); 
+        document.getElementById('profileName').innerHTML = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || 'User'; 
+        document.getElementById('profileEmail').innerText = currentUser.email || ''; 
+        let statusText = hasActiveSubscription ? '✅ Active Member' : '📋 Basic Access'; 
+        document.getElementById('profileSubStatus').innerHTML = `<span class="access-badge ${hasActiveSubscription ? 'badge-member' : 'badge-nonmember'}">${statusText}</span>`; 
+        let overviewTab = document.querySelector('.dashboard-tab[data-tab="overview"]'); 
+        let productsTab = document.querySelector('.dashboard-tab[data-tab="products"]'); 
+        let cooperativeTab = document.querySelector('.dashboard-tab[data-tab="cooperative"]'); 
+        let sellBtn = document.getElementById('sellProductBtnMarketplace'); 
+        if (sellBtn) { if (!hasActiveSubscription) { sellBtn.style.display = 'none'; } else { sellBtn.style.display = 'block'; } } 
+        if (!hasActiveSubscription) { 
+            if (overviewTab) overviewTab.classList.add('hidden'); 
+            if (productsTab) productsTab.classList.add('hidden'); 
+            if (cooperativeTab) cooperativeTab.classList.add('hidden'); 
+            document.getElementById('reminderBanner').style.display = 'flex'; 
+            let activeTab = document.querySelector('.tab-content.active'); 
+            if (activeTab && (activeTab.id === 'overviewTab' || activeTab.id === 'productsTab' || activeTab.id === 'cooperativeTab')) { switchTab('marketplace'); } 
+        } else { 
+            if (overviewTab) overviewTab.classList.remove('hidden'); 
+            if (productsTab) productsTab.classList.remove('hidden'); 
+            if (cooperativeTab) cooperativeTab.classList.remove('hidden'); 
+            document.getElementById('reminderBanner').style.display = 'none'; 
+        } 
+    }
+    
+    function showRestrictedModal(featureName) { document.getElementById('restrictedMessage').innerHTML = `"${featureName}" is a member-only feature. Subscribe to unlock.`; document.getElementById('restrictedModal').classList.add('active'); }
+    function closeRestrictedModal() { document.getElementById('restrictedModal').classList.remove('active'); }
+    function showConfirmModal(title, message, onConfirm) { document.getElementById('confirmTitle').innerText = title; document.getElementById('confirmMessage').innerHTML = message; confirmCallback = onConfirm; document.getElementById('confirmYesBtn').onclick = () => { if (confirmCallback) confirmCallback(); closeConfirmModal(); }; document.getElementById('confirmModal').classList.add('active'); }
+    function closeConfirmModal() { document.getElementById('confirmModal').classList.remove('active'); confirmCallback = null; }
+    function showToast(msg) { let t = document.getElementById('successToast'); t.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); }
+    function updateFinancialUI() { document.getElementById('totalRevenue').innerText = '18,200'; document.getElementById('totalExpenses').innerText = '4,850'; document.getElementById('netProfit').innerText = '13,350'; document.getElementById('walletShort').innerText = walletBalance; document.getElementById('walletBalanceMain').innerText = walletBalance; document.getElementById('overviewWalletBalance').innerText = walletBalance; }
+    
+    // ORDERS with Search, Timeline, Print Receipt
+    function renderOrders() { 
+        let filter = document.getElementById('orderFilter').value; 
+        let searchTerm = document.getElementById('orderSearch').value.toLowerCase();
+        let filtered = orders.filter(o => (filter === 'all' || o.status === filter) && (searchTerm === '' || o.product.toLowerCase().includes(searchTerm) || o.farmerName.toLowerCase().includes(searchTerm))); 
+        let container = document.getElementById('buyerOrdersList'); 
+        if(!container) return; 
+        if(filtered.length === 0) { container.innerHTML = '<div class="empty-state">No orders found</div>'; return; } 
+        container.innerHTML = filtered.map(o => `
+            <div class="order-item" onclick="openOrderModal('${o.id}')">
+                <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+                    <div><strong>${o.product}</strong></div>
+                    <div><span class="order-status status-${o.status}">${o.status.toUpperCase()}</span></div>
+                </div>
+                <div>₱${o.total} | Farmer: ${o.farmerName} | Order Date: ${o.orderDate}</div>
+                <div class="order-stats">
+                    <span><i class="fas fa-box"></i> ${o.qty} ${o.unit || 'kg'}</span>
+                </div>
+                <div class="order-actions" onclick="event.stopPropagation()">
+                    ${o.status === 'delivered' && !o.rating ? `<button class="btn-action btn-rate" onclick="openRatingModal('${o.id}')">⭐ Rate</button>` : ''}
+                    ${o.rating ? `<span class="btn-action">⭐ ${o.rating}/5</span>` : ''}
+                    ${o.status !== 'delivered' && o.status !== 'cancelled' ? `<button class="btn-action" onclick="cancelOrderWithConfirm('${o.id}')">❌ Cancel</button>` : ''}
+                    <button class="btn-action" onclick="requestRefundWithConfirm('${o.id}')">💰 Refund</button>
+                    <button class="btn-action" onclick="openChatModal('${o.id}', '${o.farmerName}')">💬 Chat</button>
+                    <button class="print-receipt" onclick="printReceipt('${o.id}')">🖨️ Print Receipt</button>
+                </div>
+            </div>
+        `).join(''); 
+    }
+    
+    function printReceipt(orderId) { 
+        let order = orders.find(o => o.id === orderId); 
+        if(order) {
+            let printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html><head><title>Receipt - ${order.id}</title>
+                <style>body{font-family:Arial;padding:20px;} .receipt{max-width:400px;margin:0 auto;} .header{text-align:center;border-bottom:1px solid #ccc;padding-bottom:10px;} .total{font-size:18px;font-weight:bold;color:#2d6a2d;}</style>
+                </head><body>
+                <div class="receipt">
+                    <div class="header"><h2>RRJ FARM</h2><p>${order.orderDate}</p></div>
+                    <h3>Order Receipt</h3>
+                    <p><strong>Order ID:</strong> ${order.id}</p>
+                    <p><strong>Product:</strong> ${order.product}</p>
+                    <p><strong>Quantity:</strong> ${order.qty} kg</p>
+                    <p><strong>Farmer:</strong> ${order.farmerName}</p>
+                    <p><strong>Status:</strong> ${order.status.toUpperCase()}</p>
+                    <div class="total"><strong>Total: ₱${order.total}</strong></div>
+                    <div class="footer"><p>Thank you for supporting RRJ FARM!</p></div>
+                </div>
+                </body></html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+    }
+    
+    function getTimeline(order) {
+        let timeline = `<div class="tracking-timeline">`;
+        timeline += `<div class="timeline-step ${order.orderDate ? 'completed' : ''}"><div class="step-icon"><i class="fas fa-check"></i></div><div class="step-content"><div class="step-title">Order Placed</div><div class="step-date">${order.orderDate || 'Pending'}</div></div></div>`;
+        timeline += `<div class="timeline-step ${order.status === 'processing' || order.status === 'shipped' || order.status === 'delivered' ? 'completed' : order.status === 'processing' ? 'active' : ''}"><div class="step-icon"><i class="fas fa-cog"></i></div><div class="step-content"><div class="step-title">Processing</div><div class="step-date">${order.orderDate || 'Processing...'}</div></div></div>`;
+        timeline += `<div class="timeline-step ${order.status === 'shipped' || order.status === 'delivered' ? 'completed' : ''}"><div class="step-icon"><i class="fas fa-truck"></i></div><div class="step-content"><div class="step-title">Shipped</div><div class="step-date">${order.shippedDate || 'Awaiting shipment'}</div></div></div>`;
+        timeline += `<div class="timeline-step ${order.status === 'delivered' ? 'completed' : ''}"><div class="step-icon"><i class="fas fa-home"></i></div><div class="step-content"><div class="step-title">Delivered</div><div class="step-date">${order.deliveredDate || 'Pending'}</div></div></div>`;
+        timeline += `</div>`;
+        return timeline;
+    }
+    
+    function cancelOrderWithConfirm(orderId) { let order = orders.find(o => o.id === orderId); if (!order) return; if (order.status === 'delivered') { showToast('Cannot cancel delivered orders'); return; } showConfirmModal('Cancel Order', `Cancel ${order.product}?`, () => { order.status = 'cancelled'; showToast(`Order ${order.id} cancelled`); renderOrders(); renderRecentActivity(); }); }
+    function requestRefundWithConfirm(orderId) { let order = orders.find(o => o.id === orderId); showConfirmModal('Request Refund', `Request refund for ${order.product}?`, () => { order.status = 'cancelled'; showToast(`Refund requested for ${order.product}`); renderOrders(); }); }
+    function openRatingModal(orderId) { currentOrderForRating = orders.find(o => o.id === orderId); document.getElementById('ratingModal').classList.add('active'); setupRatingStars(); }
+    function closeRatingModal() { document.getElementById('ratingModal').classList.remove('active'); }
+    function setupRatingStars() { document.querySelectorAll('#ratingStars .rating-star').forEach(star => { star.onclick = function() { let val = this.getAttribute('data-value'); document.querySelectorAll('#ratingStars .rating-star').forEach(s => s.classList.remove('active')); for(let i=0; i<val; i++) document.querySelectorAll('#ratingStars .rating-star')[i].classList.add('active'); }; }); }
+    function submitRating() { let rating = document.querySelectorAll('#ratingStars .rating-star.active').length; if(rating === 0) { alert('Select rating'); return; } if(currentOrderForRating) { currentOrderForRating.rating = rating; showToast(`Rated ${currentOrderForRating.product} ${rating}⭐`); closeRatingModal(); renderOrders(); renderRecentActivity(); } }
+    
+    // ========== WALLET FUNCTIONS ==========
+    function openTopUpModal() { document.getElementById('topupModal').classList.add('active'); selectTopupPayment('gcash'); }
+    function closeTopupModal() { document.getElementById('topupModal').classList.remove('active'); }
+    function selectTopupPayment(method) { selectedTopupPayment = method; document.querySelectorAll('#topupModal .payment-option').forEach(opt => opt.classList.remove('selected')); document.querySelector(`#topupModal .payment-option[data-method="${method}"]`).classList.add('selected'); document.getElementById('topupPaymentDetails').innerHTML = method === 'gcash' ? '<strong>GCash</strong><br>Send to: 0912 345 6789 (RRJ FARM)' : method === 'paymaya' ? '<strong>PayMaya</strong><br>Send to: 0912 345 6789' : '<strong>Bank Transfer</strong><br>BPI: 1234-5678-90<br>RRJ FARM Cooperative'; }
+    function processTopup() { let amt = parseInt(document.getElementById('topupAmount').value); if(amt>0 && amt<=50000) { walletBalance += amt; transactionHistory.unshift({ id: Date.now(), desc: `Top-up via ${selectedTopupPayment.toUpperCase()}`, amount: amt, type: "credit", date: new Date().toLocaleDateString() }); updateFinancialUI(); renderWalletHistory(); showToast(`₱${amt} added to wallet!`); closeTopupModal(); document.getElementById('topupAmount').value = ''; } else alert('Enter valid amount (min ₱100)'); }
+    function openWithdrawModal() { document.getElementById('withdrawModal').classList.add('active'); selectWithdrawPayment('bank'); }
+    function closeWithdrawModal() { document.getElementById('withdrawModal').classList.remove('active'); }
+    function selectWithdrawPayment(method) { selectedWithdrawPayment = method; document.querySelectorAll('#withdrawModal .payment-option').forEach(opt => opt.classList.remove('selected')); document.querySelector(`#withdrawModal .payment-option[data-method="${method}"]`).classList.add('selected'); document.getElementById('withdrawPaymentDetails').innerHTML = method === 'gcash' ? `<strong>GCash Withdrawal</strong><br>Will be sent to: ${currentUser.walletNumber || '09123456789'}` : method === 'paymaya' ? `<strong>PayMaya Withdrawal</strong><br>Will be sent to: ${currentUser.walletNumber || '09123456789'}` : `<strong>Bank Transfer</strong><br>Bank: ${currentUser.bankName || 'BPI'}<br>Account: ${currentUser.bankAccount || '1234-5678-90'}`; }
+    function processWithdraw() { let amt = parseInt(document.getElementById('withdrawAmount').value); if(amt>0 && amt<=walletBalance) { walletBalance -= amt; transactionHistory.unshift({ id: Date.now(), desc: `Withdraw to ${selectedWithdrawPayment.toUpperCase()}`, amount: amt, type: "debit", date: new Date().toLocaleDateString() }); updateFinancialUI(); renderWalletHistory(); showToast(`₱${amt} withdrawal requested!`); closeWithdrawModal(); document.getElementById('withdrawAmount').value = ''; } else alert('Insufficient balance or invalid amount'); }
+    
+    function renderSellerProducts() { if (!hasActiveSubscription) return; let container = document.getElementById('sellerProductsList'); if(!container) return; container.innerHTML = sellerProducts.map(p => `<div class="product-item"><div><strong>${p.name}</strong> - ₱${p.price}/${p.unit} | Sold: ${p.sold} units | Stock: ${p.quantity}</div><div class="product-actions"><button class="btn-icon btn-edit" onclick="openEditProductModal('${p.id}')">Edit</button><button class="btn-icon btn-delete" onclick="deleteProduct('${p.id}')">Delete</button></div></div>`).join(''); }
+    function openAddProductModal() { if (!hasActiveSubscription) { showRestrictedModal('Adding Products'); return; } document.getElementById('sellProductModal').classList.add('active'); }
+    function openEditProductModal(productId) { if (!hasActiveSubscription) { showRestrictedModal('Editing Products'); return; } currentEditProductId = productId; let product = sellerProducts.find(p => p.id === productId); if(product) { document.getElementById('editProdName').value = product.name; document.getElementById('editProdPrice').value = product.price; document.getElementById('editProdUnit').value = product.unit; document.getElementById('editProductModal').classList.add('active'); } }
+    function closeEditProductModal() { document.getElementById('editProductModal').classList.remove('active'); }
+    function saveProductEdit() { let product = sellerProducts.find(p => p.id === currentEditProductId); if(product) { product.name = document.getElementById('editProdName').value; product.price = parseInt(document.getElementById('editProdPrice').value); product.unit = document.getElementById('editProdUnit').value; showToast('Product updated!'); renderSellerProducts(); closeEditProductModal(); } }
+    function deleteProduct(productId) { if(confirm('Delete this product?')) { sellerProducts = sellerProducts.filter(p => p.id !== productId); showToast('Product deleted'); renderSellerProducts(); } }
+    function closeSellProductModal() { document.getElementById('sellProductModal').classList.remove('active'); }
+    function addNewProduct() { if (!hasActiveSubscription) { showRestrictedModal('Adding Products'); return; } let name = document.getElementById('prodName').value, price = document.getElementById('prodPrice').value, unit = document.getElementById('prodUnit').value, image = document.getElementById('prodImage').value || '🌿'; if(name && price && unit) { let newId = 'P' + (sellerProducts.length + 3); sellerProducts.push({ id: newId, name: name, price: parseInt(price), unit: unit, sold: 0, quantity: 100 }); marketplaceItems.push({ id: Date.now(), name: name, price: parseInt(price), unit: unit, farmer: currentUser.name, image: image }); showToast(`Product "${name}" added!`); renderSellerProducts(); renderMarketplace(); closeSellProductModal(); } else alert('Fill all fields'); }
+    
+    // MARKETPLACE
+    function renderMarketplace() { let container = document.getElementById('marketplaceProducts'); if(!container) return; container.innerHTML = marketplaceItems.map(p => `<div class="product-card" onclick="openBuyProductModal(${p.id})"><div class="product-img">${p.image}</div><div class="product-info"><h3>${p.name}</h3><p>Farmer: ${p.farmer}</p><div class="product-price">₱${p.price}/${p.unit}</div><button class="btn-buy" onclick="event.stopPropagation(); openBuyProductModal(${p.id})">Buy Now</button></div></div>`).join(''); }
+    function openBuyProductModal(productId) { currentBuyProduct = marketplaceItems.find(p => p.id === productId); if(!currentBuyProduct) return; document.getElementById('buyProductInfo').innerHTML = `<h3>${currentBuyProduct.name}</h3><p>Farmer: ${currentBuyProduct.farmer}</p><p>Price: ₱${currentBuyProduct.price}/${currentBuyProduct.unit}</p>`; document.getElementById('buyQuantity').value = 1; appliedBuyVoucher = null; document.getElementById('buyVoucherCode').value = ''; updateBuyTotal(); loadBuyVouchers(); document.getElementById('buyProductModal').classList.add('active'); selectBuyPayment('gcash'); }
+    function closeBuyProductModal() { document.getElementById('buyProductModal').classList.remove('active'); currentBuyProduct = null; }
+    function updateBuyTotal() { let qty = parseInt(document.getElementById('buyQuantity').value) || 1; let subtotal = qty * currentBuyProduct.price; let discount = calculateDiscount(subtotal, appliedBuyVoucher); let afterDiscount = subtotal - discount; let fee = calculateTransactionFee(afterDiscount); let total = afterDiscount + fee.fee; document.getElementById('buyTotal').value = `₱${total}`; document.getElementById('feeBreakdown').innerHTML = `<div>Subtotal: ₱${subtotal}</div>${discount > 0 ? `<div style="color:#2d6a2d;">Discount: -₱${discount}</div>` : ''}<div>${fee.label}: ₱${fee.fee}</div><div style="font-weight:800;">Total: ₱${total}</div>`; }
+    function selectBuyPayment(method) { selectedBuyPayment = method; document.querySelectorAll('#buyProductModal .payment-option').forEach(opt => opt.classList.remove('selected')); document.querySelector(`#buyProductModal .payment-option[data-method="${method}"]`).classList.add('selected'); document.getElementById('buyPaymentDetails').innerHTML = method === 'gcash' ? 'GCash: 0912 345 6789' : method === 'paymaya' ? 'PayMaya: 0912 345 6789' : 'BPI: 1234-5678-90'; }
+    function confirmBuyProduct() { let qty = parseInt(document.getElementById('buyQuantity').value), subtotal = qty * currentBuyProduct.price, discount = calculateDiscount(subtotal, appliedBuyVoucher), afterDiscount = subtotal - discount, fee = calculateTransactionFee(afterDiscount), total = afterDiscount + fee.fee; if(walletBalance >= total) { walletBalance -= total; transactionHistory.unshift({ id: Date.now(), desc: `Bought ${qty}x ${currentBuyProduct.name}`, amount: total, type: "debit", date: new Date().toLocaleDateString() }); orders.unshift({ id: "ORD" + Date.now(), product: currentBuyProduct.name, qty: qty, total: total, farmerName: currentBuyProduct.farmer, status: "pending", rating: null, lat: 13.9409, lng: 121.1620, orderDate: new Date().toISOString().split('T')[0] }); updateFinancialUI(); renderWalletHistory(); renderOrders(); renderRecentActivity(); showToast(`Purchased ${currentBuyProduct.name}!`); closeBuyProductModal(); } else { alert('Insufficient balance!'); } }
+    function openSellProductModal() { if (!hasActiveSubscription) { showRestrictedModal('Selling Products'); return; } document.getElementById('sellProductModal').classList.add('active'); }
+    
+    // WORKSHOPS
+    function renderWorkshops() { let container = document.getElementById('workshopsList'); if(!container) return; container.innerHTML = workshops.map(w => `<div class="workshop-card" onclick="openWorkshopEnrollModal(${w.id})"><div class="workshop-img">${w.image}</div><div class="workshop-info"><h3>${w.name}</h3><p>📅 ${w.date} | ${w.time}</p><p>📍 ${w.location}</p><p><strong>₱${w.price}</strong></p><button class="enroll-btn" onclick="event.stopPropagation(); openWorkshopEnrollModal(${w.id})">Enroll Now</button></div></div>`).join(''); }
+    function openWorkshopEnrollModal(workshopId) { currentWorkshop = workshops.find(w => w.id === workshopId); if(!currentWorkshop) return; document.getElementById('workshopInfo').innerHTML = `<h3>${currentWorkshop.name}</h3><p>📅 ${currentWorkshop.date} at ${currentWorkshop.time}</p><p>📍 ${currentWorkshop.location}</p><p><strong>Base Price: ₱${currentWorkshop.price}</strong></p>`; document.getElementById('workshopParticipants').value = '1'; appliedWorkshopVoucher = null; document.getElementById('workshopVoucherCode').value = ''; updateWorkshopTotal(); loadWorkshopVouchers(); document.getElementById('enrollWorkshopModal').classList.add('active'); selectEnrollPayment('gcash'); }
+    function closeEnrollModal() { document.getElementById('enrollWorkshopModal').classList.remove('active'); currentWorkshop = null; }
+    function updateWorkshopTotal() { let participants = parseInt(document.getElementById('workshopParticipants').value) || 1; let subtotal = participants === 1 ? currentWorkshop.price : currentWorkshop.price + (participants - 1) * 200; let discount = calculateDiscount(subtotal, appliedWorkshopVoucher); let afterDiscount = subtotal - discount; let fee = calculateTransactionFee(afterDiscount); let total = afterDiscount + fee.fee; document.getElementById('workshopFeeBreakdown').innerHTML = `<div>Base: ₱${currentWorkshop.price}</div>${participants > 1 ? `<div>Additional ${participants-1} pax: ₱${(participants-1)*200}</div>` : ''}${discount > 0 ? `<div style="color:#2d6a2d;">Voucher: -₱${discount}</div>` : ''}<div>${fee.label}: ₱${fee.fee}</div><div style="font-weight:800;">Total: ₱${total}</div>`; }
+    function selectEnrollPayment(method) { selectedEnrollPayment = method; document.querySelectorAll('#enrollWorkshopModal .payment-option').forEach(opt => opt.classList.remove('selected')); document.querySelector(`#enrollWorkshopModal .payment-option[data-method="${method}"]`).classList.add('selected'); document.getElementById('enrollPaymentDetails').innerHTML = method === 'gcash' ? 'GCash: 0912 345 6789' : method === 'paymaya' ? 'PayMaya: 0912 345 6789' : 'BPI: 1234-5678-90'; }
+    function confirmWorkshopEnrollment() { let participants = parseInt(document.getElementById('workshopParticipants').value) || 1; let subtotal = participants === 1 ? currentWorkshop.price : currentWorkshop.price + (participants - 1) * 200; let discount = calculateDiscount(subtotal, appliedWorkshopVoucher); let afterDiscount = subtotal - discount; let fee = calculateTransactionFee(afterDiscount); let total = afterDiscount + fee.fee; if(walletBalance >= total) { walletBalance -= total; transactionHistory.unshift({ id: Date.now(), desc: `Enrolled in ${currentWorkshop.name}${participants > 1 ? ` + ${participants-1} guests` : ''}`, amount: total, type: "debit", date: new Date().toLocaleDateString() }); let registration = { id: Date.now(), workshopId: currentWorkshop.id, workshopTitle: currentWorkshop.name, workshopDate: currentWorkshop.date, participantName: currentUser.name, participantEmail: currentUser.email, participants: participants, totalPrice: total, status: 'Confirmed' }; registeredWorkshops.push(registration); localStorage.setItem('rrjfarm_registered_workshops', JSON.stringify(registeredWorkshops)); updateFinancialUI(); renderWalletHistory(); renderRegisteredWorkshops(); showToast(`Enrolled in ${currentWorkshop.name}!`); closeEnrollModal(); } else { alert('Insufficient balance!'); } }
+    function loadRegisteredWorkshops() { let saved = localStorage.getItem('rrjfarm_registered_workshops'); if (saved) registeredWorkshops = JSON.parse(saved); renderRegisteredWorkshops(); }
+    function renderRegisteredWorkshops() { let container = document.getElementById('registeredWorkshops'); if(!container) return; if(registeredWorkshops.length === 0) { container.innerHTML = '<div class="empty-state">No workshops registered yet.</div>'; return; } container.innerHTML = registeredWorkshops.map(reg => `<div class="order-item" style="cursor:default;"><strong>${reg.workshopTitle}</strong><br><small>${reg.workshopDate} | ${reg.participantName}${reg.participants > 1 ? ` + ${reg.participants-1} guests` : ''}</small><br><small>Total: ₱${reg.totalPrice} | Status: Confirmed</small></div>`).join(''); }
+    
+    function renderCooperative() { let container = document.getElementById('votingSection'); if(!container) return; container.innerHTML = Object.keys(votes).map(id => `<div class="proposal-card"><div class="proposal-header"><span class="proposal-id">PROPOSAL #${id}</span></div><h3 class="proposal-title">${votes[id].title}</h3><p class="proposal-description">${votes[id].desc}</p><p class="proposal-budget">💰 Budget: ${votes[id].budget}</p><div class="vote-progress"><div class="progress-bar"><div class="progress-fill" style="width: ${(votes[id].yes/(votes[id].yes+votes[id].no))*100}%"></div></div><div class="vote-stats"><span>✅ Yes: ${votes[id].yes}</span><span>❌ No: ${votes[id].no}</span></div></div><div class="vote-buttons"><button class="vote-yes" onclick="castVote('${id}', 'yes')">Vote Yes</button><button class="vote-no" onclick="castVote('${id}', 'no')">Vote No</button></div></div>`).join(''); }
+    function castVote(proposalId, choice) { if (!hasActiveSubscription) { showRestrictedModal('Voting on proposals'); return; } if (choice === 'yes') votes[proposalId].yes++; else votes[proposalId].no++; renderCooperative(); showToast(`Vote recorded! You voted ${choice.toUpperCase()}`); }
+    
+    function renderRecentActivity() { let container = document.getElementById('recentActivity'); if(container) container.innerHTML = orders.slice(0,3).map(o=>`<div class="order-item" style="cursor:default;"><b>${o.product}</b> - ${o.status} - ₱${o.total}</div>`).join(''); }
+    
+    function openOrderModal(orderId) { let order = orders.find(o=>o.id===orderId); let modalDiv = document.getElementById('modalDynamicContent'); let timeline = getTimeline(order); modalDiv.innerHTML = `<div class="modal-header"><h3><i class="fas fa-box"></i> ${order.product}</h3><button class="close-modal-btn" onclick="closeModal()">&times;</button></div><div class="modal-body"><div><strong>Status:</strong> <span class="order-status status-${order.status}">${order.status}</span></div><div><strong>Farmer:</strong> ${order.farmerName}</div><div><strong>Total:</strong> ₱${order.total} | <strong>Qty:</strong> ${order.qty}kg</div>${timeline}<div id="trackMap" class="map-container"></div><button class="btn-action" onclick="openChatModal('${order.id}', '${order.farmerName}')">💬 Chat with Farmer</button></div><div class="modal-footer"><button class="btn-secondary" onclick="closeModal()">Close</button><button class="print-receipt" onclick="printReceipt('${order.id}')">🖨️ Print Receipt</button></div></div>`; document.getElementById('detailModal').classList.add('active'); setTimeout(()=>{ let mapDiv = document.getElementById('trackMap'); if(mapDiv && !activeMap){ let map = L.map(mapDiv).setView([order.lat, order.lng], 13); L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map); L.marker([order.lat, order.lng]).addTo(map).bindPopup(order.product).openPopup(); activeMap = map; } }, 100); }
+    function closeModal() { document.getElementById('detailModal').classList.remove('active'); if(activeMap) { activeMap.remove(); activeMap=null; } }
+    
+    function openChatModal(orderId, farmerName) { currentChatOrder = orders.find(o => o.id === orderId); if (!currentChatOrder) return; document.getElementById('chatFarmerName').innerHTML = `<i class="fas fa-user-farmer"></i> Chat with ${farmerName}`; let container = document.getElementById('chatMessagesContainer'); let chatKey = `order_${orderId}`; let existingChat = chatMessages[chatKey] || [{ sender: 'farmer', text: 'Hello! How can I help you?', time: new Date().toLocaleTimeString() }]; container.innerHTML = existingChat.map(msg => `<div class="chat-bubble ${msg.sender === 'user' ? 'user' : 'farmer'}"><div class="message">${msg.text}</div><div class="chat-time">${msg.time || 'Just now'}</div></div>`).join(''); document.getElementById('chatModal').classList.add('active'); container.scrollTop = container.scrollHeight; }
+    function closeChatModal() { document.getElementById('chatModal').classList.remove('active'); currentChatOrder = null; }
+    function sendChatMessage() { let input = document.getElementById('chatMessageInput'); let message = input.value.trim(); if (!message || !currentChatOrder) return; let chatKey = `order_${currentChatOrder.id}`; if (!chatMessages[chatKey]) chatMessages[chatKey] = []; chatMessages[chatKey].push({ sender: 'user', text: message, time: new Date().toLocaleTimeString() }); setTimeout(() => { chatMessages[chatKey].push({ sender: 'farmer', text: 'Thanks! I will get back to you shortly.', time: new Date().toLocaleTimeString() }); openChatModal(currentChatOrder.id, currentChatOrder.farmerName); }, 1000); input.value = ''; openChatModal(currentChatOrder.id, currentChatOrder.farmerName); }
+    
+    function toggleProfileDropdown() { document.getElementById('profileDropdown').classList.toggle('show'); }
+    document.getElementById('userAvatar').addEventListener('click', (e) => { e.stopPropagation(); toggleProfileDropdown(); });
+    document.addEventListener('click', function(e) { let drop = document.getElementById('profileDropdown'); if(drop && !drop.contains(e.target) && e.target !== document.getElementById('userAvatar')) drop.classList.remove('show'); });
+    document.getElementById('editProfileBtn').onclick = () => { document.getElementById('editProfileModal').classList.add('active'); document.getElementById('editName').value = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim(); document.getElementById('editAddress').value = currentUser.address || ''; document.getElementById('editEmail').value = currentUser.email || ''; document.getElementById('editContact').value = currentUser.contact || ''; document.getElementById('editBankName').value = currentUser.bankName || ''; document.getElementById('editBankAccount').value = currentUser.bankAccount || ''; document.getElementById('editWalletType').value = currentUser.walletType || 'gcash'; document.getElementById('editWalletNumber').value = currentUser.walletNumber || ''; };
+    document.getElementById('mySubscriptionsBtn').onclick = () => { switchTab('subscriptions'); };
+    document.getElementById('changePasswordBtn').onclick = () => { showToast('Password reset email sent'); };
+    document.getElementById('logoutBtn').onclick = () => { localStorage.removeItem('rrjfarm_current_user'); sessionStorage.clear(); window.location.href = 'index.html'; };
+    function saveProfile() { let fullName = document.getElementById('editName').value.trim(); let nameParts = fullName.split(' '); currentUser.firstName = nameParts[0]; currentUser.lastName = nameParts.slice(1).join(' ') || ''; currentUser.address = document.getElementById('editAddress').value; currentUser.email = document.getElementById('editEmail').value; currentUser.contact = document.getElementById('editContact').value; currentUser.bankName = document.getElementById('editBankName').value; currentUser.bankAccount = document.getElementById('editBankAccount').value; currentUser.walletType = document.getElementById('editWalletType').value; currentUser.walletNumber = document.getElementById('editWalletNumber').value; currentUser.avatarInitials = (currentUser.firstName?.charAt(0) || 'U') + (currentUser.lastName?.charAt(0) || ''); localStorage.setItem('rrjfarm_current_user', JSON.stringify(currentUser)); document.getElementById('userAvatar').innerText = currentUser.avatarInitials; showToast('Profile updated!'); closeEditModal(); updateUIByAccessLevel(); }
+    function closeEditModal() { document.getElementById('editProfileModal').classList.remove('active'); }
+    
+    function switchTab(tab) { document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active')); document.getElementById(`${tab}Tab`).classList.add('active'); document.querySelectorAll('.dashboard-tab').forEach(btn => btn.classList.remove('active')); if(event && event.target) event.target.classList.add('active'); if(tab === 'orders') renderOrders(); if(tab === 'products') renderSellerProducts(); if(tab === 'marketplace') renderMarketplace(); if(tab === 'workshops') { renderWorkshops(); renderRegisteredWorkshops(); } if(tab === 'cooperative') renderCooperative(); if(tab === 'wallet') renderWalletHistory(); if(tab === 'subscriptions') renderSubscriptions(); if(tab === 'overview') { renderRecentActivity(); updateFinancialUI(); updateOverviewSubscription(); } }
+    
+    if (checkSession()) { renderOrders(); renderSellerProducts(); renderMarketplace(); renderWorkshops(); renderCooperative(); renderWalletHistory(); renderRecentActivity(); renderRegisteredWorkshops(); renderSubscriptions(); updateFinancialUI(); updateOverviewSubscription(); }
+    
+    window.switchTab = switchTab; window.openOrderModal = openOrderModal; window.closeModal = closeModal; window.openRatingModal = openRatingModal; window.closeRatingModal = closeRatingModal; window.submitRating = submitRating;
+    window.openAddProductModal = openAddProductModal; window.closeSellProductModal = closeSellProductModal; window.addNewProduct = addNewProduct; window.openEditProductModal = openEditProductModal; window.closeEditProductModal = closeEditProductModal; window.saveProductEdit = saveProductEdit; window.deleteProduct = deleteProduct;
+    window.openSellProductModal = openSellProductModal; window.openBuyProductModal = openBuyProductModal; window.closeBuyProductModal = closeBuyProductModal; window.updateBuyTotal = updateBuyTotal; window.selectBuyPayment = selectBuyPayment; window.confirmBuyProduct = confirmBuyProduct; window.applyBuyVoucher = applyBuyVoucher;
+    window.openWorkshopEnrollModal = openWorkshopEnrollModal; window.closeEnrollModal = closeEnrollModal; window.selectEnrollPayment = selectEnrollPayment; window.confirmWorkshopEnrollment = confirmWorkshopEnrollment; window.updateWorkshopTotal = updateWorkshopTotal; window.applyWorkshopVoucher = applyWorkshopVoucher;
+    window.openTopUpModal = openTopUpModal; window.closeTopupModal = closeTopupModal; window.selectTopupPayment = selectTopupPayment; window.processTopup = processTopup;
+    window.openWithdrawModal = openWithdrawModal; window.closeWithdrawModal = closeWithdrawModal; window.selectWithdrawPayment = selectWithdrawPayment; window.processWithdraw = processWithdraw;
+    window.saveProfile = saveProfile; window.closeEditModal = closeEditModal; window.renewSubscription = renewSubscription; window.cancelSubscription = cancelSubscription;
+    window.closeRestrictedModal = closeRestrictedModal; window.closeConfirmModal = closeConfirmModal; window.cancelOrderWithConfirm = cancelOrderWithConfirm; window.requestRefundWithConfirm = requestRefundWithConfirm;
+    window.openChatModal = openChatModal; window.closeChatModal = closeChatModal; window.sendChatMessage = sendChatMessage; window.castVote = castVote; window.printReceipt = printReceipt;
+</script>
+</body>
+</html>

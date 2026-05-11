@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>RRJ FARM | Sustainable Homesteading in the Philippines</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f7f2; color: #1a2e1a; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        
+        .modern-header { background: linear-gradient(135deg, #0d2b0d, #1a4d1a); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo h1 { font-size: 1.5rem; background: linear-gradient(135deg, #ffffff, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo p { font-size: 0.7rem; color: #a8c8a8; }
+        .nav-menu ul { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+        .nav-menu a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; padding: 0.5rem 0; }
+        .nav-menu a:hover, .nav-menu a.active { color: #ffd700; border-bottom: 2px solid #ffd700; }
+        
+        /* Login Reminder Modal */
+        .reminder-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+        .reminder-modal.active { display: flex; }
+        .reminder-content { background: white; border-radius: 32px; max-width: 450px; width: 90%; padding: 2rem; text-align: center; animation: fadeUp 0.3s ease; }
+        .reminder-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .reminder-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .reminder-buttons { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .btn-login-reminder { flex: 1; background: #2d6a2d; color: white; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .btn-cancel-reminder { flex: 1; background: #eef2e8; color: #1a2e1a; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; }
+        
+        .hero-section { background: linear-gradient(135deg, #1a4d1a, #2d6a2d); border-radius: 30px; margin: 2rem 0; overflow: hidden; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem; }
+        .hero-content h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: white; }
+        .hero-content p { font-size: 1.1rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; }
+        .btn-primary { background: #ffd700; color: #1a4d1a; padding: 0.8rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-secondary { background: rgba(255,255,255,0.2); color: white; padding: 0.8rem 2rem; border-radius: 50px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(255,255,255,0.3); }
+        .hero-stats { display: flex; gap: 2rem; background: rgba(255,255,255,0.15); border-radius: 20px; padding: 1.5rem; justify-content: center; align-items: center; }
+        .hero-stat .number { font-size: 2rem; font-weight: 800; color: white; }
+        .stats-premium { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin: 3rem 0; }
+        .stat-card { background: white; padding: 1.5rem; border-radius: 24px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: all 0.3s; }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-number { font-size: 1.8rem; font-weight: 800; color: #2d6a2d; }
+        .member-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .member-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .workshop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .workshop-card { background: white; border-radius: 24px; padding: 1.5rem; border-left: 4px solid #ffd700; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .btn-register { background: #ffd700; color: #1a2e1a; border: none; padding: 0.6rem 1rem; border-radius: 30px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 1rem; }
+        .btn-contact { background: #2d6a2d; color: white; border: none; padding: 0.6rem 1rem; border-radius: 30px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 0.5rem; }
+        
+        .contact-white { background: white; border-radius: 30px; padding: 2rem; margin: 3rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .form-group-white { margin-bottom: 1rem; }
+        .form-group-white label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: #1a2e1a; }
+        .form-group-white input, .form-group-white select, .form-group-white textarea { width: 100%; padding: 0.8rem 1rem; border: 2px solid #e0e0e0; border-radius: 14px; font-family: inherit; }
+        .form-group-white input:focus { outline: none; border-color: #2d6a2d; }
+        .full-width { grid-column: span 2; }
+        .btn-submit-white { background: #2d6a2d; color: white; padding: 1rem 2rem; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; width: 100%; }
+        .modern-footer { background: #0d2b0d; color: #a8c8a8; padding: 3rem 0 1rem; margin-top: 3rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #2a4a2a; }
+        
+        /* Location Dropdown Styles */
+        .location-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .price-note { font-size: 0.7rem; color: #2d6a2d; margin-top: 0.2rem; }
+        
+        @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @media (max-width: 900px) { 
+            .hero-grid { grid-template-columns: 1fr; text-align: center; } 
+            .form-grid { grid-template-columns: 1fr; } 
+            .full-width { grid-column: span 1; }
+            .location-row { grid-template-columns: 1fr; }
+            .container { padding: 0 1rem; } 
+            .nav-menu ul { gap: 0.8rem; }
+        }
+        
+        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 1rem 2rem; border-radius: 50px; display: none; z-index: 1500; animation: slideInRight 0.3s ease; }
+        @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    </style>
+</head>
+<body>
+    <header class="modern-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Regenerative Living • Community Land Trust • Batangas, Laguna & Quezon</p></div>
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="marketplace.html"><i class="fas fa-store"></i> Marketplace</a></li>
+                        <li><a href="workshops.html"><i class="fas fa-chalkboard-user"></i> Workshops</a></li>
+                        <li><a href="cooperative.html"><i class="fas fa-handshake"></i> Cooperative</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="subscriptions.html"><i class="fas fa-ticket-alt"></i> Subscriptions</a></li>
+                        <li><a href="login.html"><i class="fas fa-user"></i> Login/Register</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h2>Accessible. Sustainable. Community-Supported.</h2>
+                        <p>Join RRJ FARM, the first integrated Community Land Trust + Digital Platform for aspiring homesteaders in the Philippines.</p>
+                        <div class="hero-buttons">
+                            <a href="#contact" class="btn-primary"><i class="fas fa-leaf"></i> Apply for Land Stewardship</a>
+                            <a href="login.html" class="btn-secondary"><i class="fas fa-users"></i> Join as Member</a>
+                        </div>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat"><div class="number">156</div><div class="label">Active Members</div></div>
+                        <div class="hero-stat"><div class="number">89</div><div class="label">Farmer-Members</div></div>
+                        <div class="hero-stat"><div class="number">₱2.4M</div><div class="label">Total Sales</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-premium">
+                <div class="stat-card"><div class="stat-icon">🌾</div><div class="stat-number">100%</div><div class="stat-label">Organic Products</div></div>
+                <div class="stat-card"><div class="stat-icon">🤝</div><div class="stat-number">RA 9520</div><div class="stat-label">Digital Cooperative</div></div>
+                <div class="stat-card"><div class="stat-icon">🚚</div><div class="stat-number">24-48h</div><div class="stat-label">Delivery</div></div>
+            </div>
+
+            <section id="members">
+                <h2 style="margin-bottom: 1rem;"><i class="fas fa-users"></i> Our Stewardship Members</h2>
+                <div class="member-grid" id="memberGrid"></div>
+            </section>
+
+            <section id="workshops">
+                <h2 style="margin-bottom: 1rem;"><i class="fas fa-chalkboard-user"></i> Upcoming Workshops</h2>
+                <div class="workshop-grid" id="workshopGrid"></div>
+            </section>
+
+            <section id="contact">
+                <h2 style="margin-bottom: 1rem;"><i class="fas fa-file-signature"></i> Apply for Land Stewardship</h2>
+                <div class="contact-white">
+                    <form id="applicationForm">
+                        <div class="form-grid">
+                            <div class="form-group-white"><label>Full Name *</label><input type="text" id="appName" required></div>
+                            <div class="form-group-white"><label>Email Address *</label><input type="email" id="appEmail" required></div>
+                            <div class="form-group-white"><label>Phone Number</label><input type="tel" id="appPhone"></div>
+                            <div class="form-group-white"><label>Address</label><input type="text" id="appAddress"></div>
+                            
+                            <!-- Farm Size with Price Information -->
+                            <div class="form-group-white">
+                                <label><i class="fas fa-arrows-alt"></i> Farm Size (hectares) *</label>
+                                <select id="appLotSize" required>
+                                    <option value="">Select farm size</option>
+                                    <option value="0.5">🌾 0.5 hectare (Starter) - ₱3,000/month (CLT Fee)</option>
+                                    <option value="1">🌾 1 hectare (Family) - ₱5,000/month (CLT Fee)</option>
+                                    <option value="1.5">🌾 1.5 hectares (Growing) - ₱7,000/month (CLT Fee)</option>
+                                    <option value="2">🌾 2 hectares (Production) - ₱9,000/month (CLT Fee)</option>
+                                </select>
+                                <div class="price-note"><i class="fas fa-info-circle"></i> Monthly Community Land Trust fee based on farm size</div>
+                            </div>
+                            
+                            <!-- Location Row with Province and Municipality -->
+                            <div class="full-width">
+                                <div class="location-row">
+                                    <div class="form-group-white">
+                                        <label><i class="fas fa-map-marker-alt"></i> Province *</label>
+                                        <select id="appProvince" required onchange="updateMunicipalities()">
+                                            <option value="">Select Province</option>
+                                            <option value="Batangas">🏞️ Batangas</option>
+                                            <option value="Laguna">🌾 Laguna</option>
+                                            <option value="Quezon">🌿 Quezon</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group-white" id="municipalityContainer" style="display: none;">
+                                        <label><i class="fas fa-city"></i> Municipality / City *</label>
+                                        <select id="appMunicipality" required>
+                                            <option value="">Select Municipality</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Role / Purpose - Updated: Removed Investor, Added Student -->
+                            <div class="form-group-white">
+                                <label><i class="fas fa-user-tag"></i> Role / Purpose *</label>
+                                <select id="appPurpose" required>
+                                    <option value="">Select your role/purpose</option>
+                                    <option value="Farmer">🌾 Farmer - I want to grow and sell produce</option>
+                                    <option value="Homesteader">🏡 Homesteader - I want to live sustainably</option>
+                                    <option value="Researcher">📚 Researcher - I want to study regenerative agriculture</option>
+                                    <option value="Student">🎓 Student - I want to learn farming and sustainability</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group-white full-width">
+                                <label><i class="fas fa-seedling"></i> Farming Experience & Crops Intended</label>
+                                <textarea id="appExperience" rows="3" placeholder="Tell us about your farming experience and what crops you plan to grow..."></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-submit-white"><i class="fas fa-check-circle"></i> Submit Application</button>
+                    </form>
+                    <p id="formMessage" style="margin-top: 1rem; text-align: center;"></p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- LOGIN REMINDER MODAL -->
+    <div id="reminderModal" class="reminder-modal">
+        <div class="reminder-content">
+            <div class="reminder-icon"><i class="fas fa-exclamation-triangle" style="color: #ff8c00;"></i></div>
+            <div class="reminder-title">Login Required</div>
+            <p id="reminderMessage">Please login or register to access this feature.</p>
+            <div class="reminder-buttons">
+                <button class="btn-login-reminder" onclick="redirectToLogin()"><i class="fas fa-sign-in-alt"></i> Login / Register</button>
+                <button class="btn-cancel-reminder" onclick="closeReminderModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="modern-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info"><h3>RRJ FARM</h3><p>CDA Registered Cooperative</p><p>📍 Batangas, Laguna & Quezon</p></div>
+                <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="marketplace.html">Marketplace</a></li><li><a href="workshops.html">Workshops</a></li><li><a href="cooperative.html">Cooperative</a></li><li><a href="subscriptions.html">Subscriptions</a></li></ul></div>
+                <div class="footer-legal"><h4>Legal Framework</h4><ul><li>RA 9520 (Cooperative Code)</li><li>RA 10068 (Organic Agriculture)</li><li>RA 11321 (Sagip Saka Act)</li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 RRJ FARM - Digital Cooperative - All Rights Reserved</p></div>
+        </div>
+    </footer>
+
+    <div id="successToast" class="success-toast"></div>
+
+    <script>
+        // Complete Municipality List by Province
+        const municipalitiesData = {
+            Batangas: [
+                "Agoncillo", "Alitagtag", "Balayan", "Balete", "Batangas City", "Bauan", "Calaca", "Calatagan", 
+                "Cuenca", "Ibaan", "Laurel", "Lemery", "Lian", "Lipa City", "Lobo", "Mabini", "Malvar", 
+                "Mataasnakahoy", "Nasugbu", "Padre Garcia", "Rosario", "San Jose", "San Juan", "San Luis", 
+                "San Nicolas", "San Pascual", "Santa Teresita", "Santo Tomas", "Taal", "Talisay", "Tanauan City", 
+                "Taysan", "Tingloy", "Tuy"
+            ],
+            Laguna: [
+                "Alaminos", "Bay", "Biñan City", "Cabuyao City", "Calamba City", "Calauan", "Cavinti", "Famy", 
+                "Kalayaan", "Liliw", "Los Baños", "Luisiana", "Lumban", "Mabitac", "Magdalena", "Majayjay", 
+                "Nagcarlan", "Paete", "Pagsanjan", "Pakil", "Pangil", "Pila", "Rizal", "San Pablo City", 
+                "San Pedro City", "Santa Cruz", "Santa Maria", "Santa Rosa City", "Siniloan", "Victoria"
+            ],
+            Quezon: [
+                "Agdangan", "Alabat", "Atimonan", "Buenavista", "Burdeos", "Calauag", "Candelaria", "Catanauan", 
+                "Dolores", "General Luna", "General Nakar", "Guinayangan", "Gumaca", "Infanta", "Jomalig", 
+                "Lopez", "Lucban", "Lucena City", "Macalelon", "Mauban", "Mulanay", "Padre Burgos", "Pagbilao", 
+                "Panukulan", "Patnanungan", "Perez", "Pitogo", "Plaridel", "Polillo", "Quezon", "Real", 
+                "Sampaloc", "San Andres", "San Antonio", "San Francisco", "San Narciso", "Sariaya", "Tagkawayan", 
+                "Tayabas City", "Tiaong", "Unisan"
+            ]
+        };
+
+        function updateMunicipalities() {
+            const province = document.getElementById('appProvince').value;
+            const municipalityContainer = document.getElementById('municipalityContainer');
+            const municipalitySelect = document.getElementById('appMunicipality');
+            
+            if (!province || province === "") {
+                municipalityContainer.style.display = "none";
+                municipalitySelect.innerHTML = '<option value="">Select Municipality</option>';
+                return;
+            }
+            
+            // Show the municipality dropdown
+            municipalityContainer.style.display = "block";
+            
+            // Get municipalities for selected province
+            const municipalities = municipalitiesData[province];
+            
+            if (municipalities && municipalities.length > 0) {
+                municipalitySelect.innerHTML = '<option value="">Select Municipality / City</option>' + 
+                    municipalities.map(city => `<option value="${city}">📍 ${city}</option>`).join('');
+            } else {
+                municipalitySelect.innerHTML = '<option value="">No municipalities found</option>';
+            }
+        }
+
+        // Sample Data for Members and Workshops
+        const members = [
+            { name: "Maria Santos", location: "Lipa City, Batangas", farmType: "Organic Vegetables", role: "land_steward" },
+            { name: "Jose Dela Cruz", location: "Tanauan, Batangas", farmType: "Rice Production", role: "farmer" },
+            { name: "Anna Reyes", location: "Los Baños, Laguna", farmType: "Dairy Goats", role: "coop_member" }
+        ];
+        
+        const workshopsList = [
+            { title: "Organic Pest Control", date: "May 25, 2026", price: 500, category: "farming" },
+            { title: "Vermicomposting 101", date: "June 5, 2026", price: 300, category: "sustainable" },
+            { title: "Backyard Beekeeping", date: "June 15, 2026", price: 800, category: "livestock" }
+        ];
+        
+        function checkLoginAndRedirect(action, featureName) {
+            const currentUser = localStorage.getItem('rrjfarm_current_user');
+            if (!currentUser) {
+                document.getElementById('reminderMessage').innerHTML = `Please login or register to ${featureName}.`;
+                document.getElementById('reminderModal').classList.add('active');
+                return false;
+            }
+            return true;
+        }
+        
+        function redirectToLogin() {
+            closeReminderModal();
+            window.location.href = 'login.html';
+        }
+        
+        function closeReminderModal() {
+            document.getElementById('reminderModal').classList.remove('active');
+        }
+        
+        function showToast(msg) { 
+            let t = document.getElementById('successToast'); 
+            t.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`; 
+            t.style.display = 'block'; 
+            setTimeout(() => t.style.display = 'none', 3000); 
+        }
+        
+        function loadMembers() {
+            document.getElementById('memberGrid').innerHTML = members.map(m => `
+                <div class="member-card" style="padding:1.5rem;">
+                    <i class="fas fa-user-circle" style="font-size: 2rem; color: #2d6a2d;"></i>
+                    <h3>${m.name}</h3>
+                    <p>📍 ${m.location}</p>
+                    <p>🌾 ${m.farmType}</p>
+                    <button class="btn-contact" onclick="handleContactMember('${m.name}')"><i class="fas fa-envelope"></i> Contact Member</button>
+                </div>
+            `).join('');
+        }
+        
+        function handleContactMember(memberName) {
+            const currentUser = localStorage.getItem('rrjfarm_current_user');
+            if (!currentUser) {
+                document.getElementById('reminderMessage').innerHTML = `Please login or register to contact ${memberName}.`;
+                document.getElementById('reminderModal').classList.add('active');
+                return;
+            }
+            showToast(`Messaging feature for ${memberName} - Coming soon!`);
+        }
+        
+        function loadWorkshops() {
+            document.getElementById('workshopGrid').innerHTML = workshopsList.map(w => `
+                <div class="workshop-card">
+                    <h3>${w.title}</h3>
+                    <p><i class="fas fa-calendar"></i> ${w.date}</p>
+                    <p><strong>₱${w.price}</strong> (Member price)</p>
+                    <button class="btn-register" onclick="handleWorkshopRegister('${w.title}')">Register Now →</button>
+                </div>
+            `).join('');
+        }
+        
+        function handleWorkshopRegister(workshopTitle) {
+            const currentUser = localStorage.getItem('rrjfarm_current_user');
+            if (!currentUser) {
+                document.getElementById('reminderMessage').innerHTML = `Please login or register to enroll in "${workshopTitle}".`;
+                document.getElementById('reminderModal').classList.add('active');
+                return;
+            }
+            window.location.href = `workshops.html?register=${encodeURIComponent(workshopTitle)}`;
+        }
+        
+        document.getElementById('applicationForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate required fields
+            const name = document.getElementById('appName').value;
+            const email = document.getElementById('appEmail').value;
+            const lotSize = document.getElementById('appLotSize').value;
+            const province = document.getElementById('appProvince').value;
+            const municipality = document.getElementById('appMunicipality').value;
+            const purpose = document.getElementById('appPurpose').value;
+            
+            if (!province || !municipality) {
+                const msg = document.getElementById('formMessage');
+                msg.innerHTML = `❌ Please select both Province and Municipality/City.`;
+                msg.style.color = '#721c24';
+                msg.style.background = '#f8d7da';
+                msg.style.padding = '1rem';
+                msg.style.borderRadius = '8px';
+                setTimeout(() => { msg.innerHTML = ''; msg.style.padding = '0'; }, 3000);
+                return;
+            }
+            
+            const msg = document.getElementById('formMessage');
+            const lotSizeText = document.getElementById('appLotSize').options[document.getElementById('appLotSize').selectedIndex]?.text || lotSize;
+            const roleText = document.getElementById('appPurpose').options[document.getElementById('appPurpose').selectedIndex]?.text || purpose;
+            
+            msg.innerHTML = `✅ Thank you ${name}! Your application as ${roleText} from ${municipality}, ${province} with ${lotSizeText} has been submitted. We will contact you within 3-5 business days.`;
+            msg.style.color = '#155724';
+            msg.style.background = '#d4edda';
+            msg.style.padding = '1rem';
+            msg.style.borderRadius = '8px';
+            
+            // Reset form
+            this.reset();
+            
+            // Hide municipality container
+            document.getElementById('municipalityContainer').style.display = 'none';
+            document.getElementById('appMunicipality').innerHTML = '<option value="">Select Municipality</option>';
+            
+            setTimeout(() => { msg.innerHTML = ''; msg.style.padding = '0'; }, 5000);
+        });
+        
+        // Initialize
+        loadMembers();
+        loadWorkshops();
+        
+        // Expose functions globally
+        window.handleContactMember = handleContactMember;
+        window.handleWorkshopRegister = handleWorkshopRegister;
+        window.redirectToLogin = redirectToLogin;
+        window.closeReminderModal = closeReminderModal;
+        window.updateMunicipalities = updateMunicipalities;
+    </script>
+</body>
+</html>

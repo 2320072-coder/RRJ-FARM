@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>RRJ FARM | AI Farm Advisor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for yield prediction visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f7f2; color: #1a2e1a; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        
+        .modern-header { background: linear-gradient(135deg, #0d2b0d, #1a4d1a); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo h1 { font-size: 1.6rem; background: linear-gradient(135deg, #ffffff, #ffea8c, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo p { font-size: 0.7rem; color: #c8e6c8; }
+        .nav-menu ul { display: flex; gap: 0.5rem; list-style: none; flex-wrap: wrap; }
+        .nav-menu a { color: #e0f0e0; text-decoration: none; font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 40px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; cursor: pointer; }
+        .nav-menu a i { font-size: 1rem; }
+        .nav-menu a:hover { background: rgba(255, 215, 0, 0.15); color: #ffea8c; transform: translateY(-2px); }
+        .nav-menu a.active { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a3a1a; box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
+        
+        .user-menu { position: relative; display: flex; align-items: center; gap: 0.8rem; }
+        .user-avatar { background: #ffd700; color: #1a2e1a; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; }
+        .profile-dropdown { position: absolute; top: 55px; right: 0; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); width: 220px; display: none; z-index: 1100; overflow: hidden; }
+        .profile-dropdown.show { display: block; }
+        .dropdown-item { padding: 0.8rem 1.2rem; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; transition: 0.2s; border-bottom: 1px solid #f0f0f0; }
+        .dropdown-item:hover { background: #eef3ea; }
+        .dropdown-item i { width: 22px; color: #2d6a2d; }
+        .logout-item { color: #dc3545; }
+        
+        /* AI Dashboard Layout */
+        .ai-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .ai-card { background: white; border-radius: 28px; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .card-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; border-left: 4px solid #2d6a2d; padding-left: 1rem; }
+        
+        /* Chatbot Styles */
+        .chat-container { height: 350px; overflow-y: auto; background: #f8f9fa; border-radius: 20px; padding: 1rem; margin-bottom: 1rem; }
+        .chat-message { margin-bottom: 1rem; display: flex; gap: 0.8rem; }
+        .chat-message.user { justify-content: flex-end; }
+        .chat-message.bot .message-bubble { background: #e8f0e8; color: #1a2e1a; border-radius: 20px 20px 20px 5px; }
+        .chat-message.user .message-bubble { background: #2d6a2d; color: white; border-radius: 20px 20px 5px 20px; }
+        .message-bubble { max-width: 80%; padding: 0.8rem 1rem; font-size: 0.9rem; line-height: 1.4; }
+        .chat-avatar { width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #2d6a2d; color: white; }
+        .chat-input-group { display: flex; gap: 0.5rem; }
+        .chat-input { flex: 1; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 30px; font-family: inherit; }
+        .btn-send { background: #2d6a2d; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 30px; cursor: pointer; }
+        .typing-indicator { display: none; padding: 0.5rem; color: #888; font-style: italic; }
+        
+        /* Yield Prediction Form */
+        .prediction-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+        .form-field { margin-bottom: 0.8rem; }
+        .form-field label { display: block; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.8rem; }
+        .form-field input, .form-field select { width: 100%; padding: 0.6rem; border: 2px solid #e0e0e0; border-radius: 12px; }
+        .prediction-result { background: linear-gradient(135deg, #1a4d1a, #2d6a2d); color: white; padding: 1rem; border-radius: 16px; text-align: center; }
+        .prediction-number { font-size: 2rem; font-weight: 800; }
+        
+        /* Recommendations */
+        .rec-list { list-style: none; }
+        .rec-list li { padding: 0.8rem; border-bottom: 1px solid #e8f0e8; display: flex; align-items: center; gap: 0.8rem; }
+        .rec-list li i { width: 30px; color: #2d6a2d; font-size: 1.2rem; }
+        
+        .typing { display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #aaa; animation: pulse 1s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        @media (max-width: 900px) { .ai-grid { grid-template-columns: 1fr; } .container { padding: 0 1rem; } }
+        
+        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 1rem 2rem; border-radius: 50px; display: none; z-index: 2100; animation: slideInRight 0.3s ease; }
+        @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    </style>
+</head>
+<body>
+    <header class="modern-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Batangas, Laguna & Quezon</p></div>
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="marketplace.html"><i class="fas fa-store"></i> Marketplace</a></li>
+                        <li><a href="workshops.html"><i class="fas fa-chalkboard-user"></i> Workshops</a></li>
+                        <li><a href="cooperative.html"><i class="fas fa-handshake"></i> Cooperative</a></li>
+                        <li><a href="subscriptions.html"><i class="fas fa-ticket-alt"></i> Subscriptions</a></li>
+                        <li><a href="ai-advisor.html" class="active"><i class="fas fa-robot"></i> AI Advisor</a></li>
+                        <li><a href="memberdashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    </ul>
+                </nav>
+                <div class="user-menu">
+                    <div class="user-avatar" id="userAvatar">JD</div>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div class="dropdown-item" id="editProfileBtn"><i class="fas fa-user-edit"></i> Edit Profile</div>
+                        <div class="dropdown-item" id="changePasswordBtn"><i class="fas fa-lock"></i> Change Password</div>
+                        <div class="dropdown-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="ai-grid">
+                <!-- Chatbot Section -->
+                <div class="ai-card">
+                    <div class="card-title"><i class="fas fa-robot"></i> Farm Advisor Chatbot</div>
+                    <div class="chat-container" id="chatContainer">
+                        <div class="chat-message bot">
+                            <div class="chat-avatar"><i class="fas fa-leaf"></i></div>
+                            <div class="message-bubble">👋 Hello! I'm your RRJ FARM AI Advisor. Ask me about:<br>• Crop planting and care<br>• Pest control methods<br>• Fertilizer recommendations<br>• Seasonal planting guides<br>• Organic farming tips</div>
+                        </div>
+                    </div>
+                    <div class="typing-indicator" id="typingIndicator"><i class="fas fa-spinner fa-pulse"></i> AI is thinking...</div>
+                    <div class="chat-input-group">
+                        <input type="text" id="chatInput" class="chat-input" placeholder="Ask me anything about farming..." onkeypress="if(event.key==='Enter') sendMessage()">
+                        <button class="btn-send" onclick="sendMessage()"><i class="fas fa-paper-plane"></i> Send</button>
+                    </div>
+                </div>
+
+                <!-- Yield Prediction + Recommendation Engine -->
+                <div class="ai-card">
+                    <div class="card-title"><i class="fas fa-chart-line"></i> Yield Prediction & Recommendations</div>
+                    <div class="prediction-form">
+                        <div class="form-field">
+                            <label>Crop Type</label>
+                            <select id="cropType" onchange="updatePrediction()">
+                                <option value="rice">Rice</option>
+                                <option value="corn">Corn</option>
+                                <option value="tomato">Tomato</option>
+                                <option value="eggplant">Eggplant</option>
+                                <option value="cabbage">Cabbage</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>Land Area (hectares)</label>
+                            <input type="number" id="landArea" value="1" step="0.1" onchange="updatePrediction()">
+                        </div>
+                        <div class="form-field">
+                            <label>Soil Type</label>
+                            <select id="soilType" onchange="updatePrediction()">
+                                <option value="clay">Clay Soil</option>
+                                <option value="loam">Loam Soil</option>
+                                <option value="sandy">Sandy Soil</option>
+                                <option value="silt">Silt Soil</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>Season</label>
+                            <select id="season" onchange="updatePrediction()">
+                                <option value="wet">Wet Season (June-October)</option>
+                                <option value="dry">Dry Season (November-May)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="prediction-result" id="predictionResult">
+                        <div>🌾 Estimated Yield</div>
+                        <div class="prediction-number" id="yieldAmount">4.2</div>
+                        <div id="yieldUnit">tons per hectare</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendation Engine Section -->
+            <div class="ai-card">
+                <div class="card-title"><i class="fas fa-lightbulb"></i> Smart Recommendations</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div>
+                        <h4><i class="fas fa-seedling"></i> Crop Rotation Advice</h4>
+                        <ul class="rec-list" id="rotationList"></ul>
+                    </div>
+                    <div>
+                        <h4><i class="fas fa-flask"></i> Fertilizer Recommendations</h4>
+                        <ul class="rec-list" id="fertilizerList"></ul>
+                    </div>
+                    <div>
+                        <h4><i class="fas fa-bug"></i> Pest Control Tips</h4>
+                        <ul class="rec-list" id="pestList"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="successToast" class="success-toast"></div>
+
+    <script>
+        // ========== LOCAL AGRICULTURAL KNOWLEDGE BASE ==========
+        const agriKnowledgeBase = {
+            // Crop yield factors (base yield in tons/hectare)
+            cropBaseYield: {
+                rice: { clay: 3.5, loam: 5.2, sandy: 2.8, silt: 4.5 },
+                corn: { clay: 4.0, loam: 6.5, sandy: 3.2, silt: 5.5 },
+                tomato: { clay: 15, loam: 25, sandy: 12, silt: 20 },
+                eggplant: { clay: 18, loam: 28, sandy: 14, silt: 22 },
+                cabbage: { clay: 20, loam: 35, sandy: 15, silt: 28 }
+            },
+            seasonMultiplier: { wet: 0.85, dry: 1.15 },
+            
+            // Crop rotation recommendations
+            rotationAdvice: {
+                rice: ["Follow with legumes (mungbean, soybean) to fix nitrogen", "Plant corn or vegetables in the next season", "Consider green manure crops like cowpea"],
+                corn: ["Rotate with peanuts or beans", "Plant rice in wet season for soil restoration", "Consider cover crops like clover"],
+                tomato: ["Rotate with onions or garlic (pest break)", "Plant beans to restore nitrogen", "Avoid planting same family (pepper, eggplant) for 2 years"],
+                eggplant: ["Rotate with leafy greens (kangkong, pechay)", "Plant marigolds as natural pest repellant", "Follow with legumes"],
+                cabbage: ["Rotate with root crops (carrots, radish)", "Plant beans or peas", "Consider cover cropping with buckwheat"]
+            },
+            
+            // Fertilizer recommendations (NPK ratio)
+            fertilizerAdvice: {
+                rice: { type: "Complete (14-14-14)", amount: "200-250 kg/ha", organic: "Apply compost 5-10 tons/ha before planting" },
+                corn: { type: "Urea (46-0-0) + Complete", amount: "150-200 kg/ha urea + 150 kg/ha complete", organic: "Chicken manure 8-10 tons/ha" },
+                tomato: { type: "Complete + Calcium Nitrate", amount: "15-20-15 at 200 kg/ha", organic: "Vermicompost 5 tons/ha" },
+                eggplant: { type: "Complete + Potassium Sulfate", amount: "14-14-14 at 250 kg/ha", organic: "Compost + vermicast 4-6 tons/ha" },
+                cabbage: { type: "Ammonium Sulfate + Complete", amount: "21-0-0 at 200 kg/ha", organic: "Green manure + compost 8 tons/ha" }
+            },
+            
+            // Pest control tips
+            pestTips: {
+                rice: ["Use rice tungro-resistant varieties", "Install pheromone traps for stem borer", "Golden kuhol management - ducks in fields", "Neem extract spray for leaf folder"],
+                corn: ["Intercrop with legumes to reduce pest pressure", "Biological control: Trichogramma wasps for corn borer", "Avoid planting during peak pest season", "Use Bt corn varieties where allowed"],
+                tomato: ["Practice crop rotation (2-3 years)", "Use yellow sticky traps for whiteflies", "Copper spray for blight early detection", "Remove infected leaves promptly"],
+                eggplant: ["Grow marigolds as companion plants", "Use neem oil for fruit and shoot borer", "Install light traps", "Apply Trichoderma for soil health"],
+                cabbage: ["Use BT spray for cabbage worms", "Netting for imported cabbageworm prevention", "Intercrop with dill or cilantro", "Kaolin clay spray for pest deterrence"]
+            }
+        };
+        
+        // ========== CHATBOT RESPONSE ENGINE (LLM-like with local DB) ==========
+        function getChatbotResponse(userMessage) {
+            const msg = userMessage.toLowerCase();
+            
+            // Crop-specific queries
+            const crops = ['rice', 'corn', 'tomato', 'eggplant', 'cabbage', 'sitao', 'ampalaya', 'kalamansi', 'mango', 'banana'];
+            for (let crop of crops) {
+                if (msg.includes(crop) && (msg.includes('plant') || msg.includes('grow') || msg.includes('when'))) {
+                    if (crop === 'rice') return "🌾 Rice is best planted during the wet season (June-July). Choose high-yielding varieties like NSIC Rc 222. Ensure proper water management with alternate wetting and drying technique.";
+                    if (crop === 'corn') return "🌽 Corn is planted in dry season (November-December) for best yield. Use hybrid seeds like NK 6400. Requires 65-75cm row spacing.";
+                    if (crop === 'tomato') return "🍅 Tomatoes are planted in dry season (October-December). Choose varieties like 'Diamante Max' or 'Atlanta'. Staking and mulching recommended for higher yield.";
+                    if (crop === 'eggplant') return "🍆 Eggplant thrives in dry season. Popular variety: 'Mistisa'. Transplant 30-day old seedlings at 75cm x 50cm spacing.";
+                    return `For ${crop}, recommended planting is during dry season (November-May) in Batangas region. Ensure proper soil preparation and organic matter addition.`;
+                }
+                if (msg.includes(crop) && (msg.includes('pest') || msg.includes('disease'))) {
+                    const tips = agriKnowledgeBase.pestTips[crop] || ["Monitor regularly for pests", "Use organic pesticides like neem oil", "Practice crop rotation", "Remove infected plants"];
+                    return `🐛 For ${crop} pest management:\n• ${tips.slice(0,3).join('\n• ')}`;
+                }
+                if (msg.includes(crop) && (msg.includes('fertilizer') || msg.includes('feed'))) {
+                    const fert = agriKnowledgeBase.fertilizerAdvice[crop];
+                    if (fert) return `🌿 For ${crop}: ${fert.type} at ${fert.amount}. ${fert.organic}`;
+                }
+            }
+            
+            // General farming queries
+            if (msg.includes('compost') || msg.includes('organic')) {
+                return "♻️ Organic matter is crucial! Compost: Mix brown (dried leaves) and green (kitchen waste) in 3:1 ratio. Turn every 2 weeks. Apply 5-10 tons/hectare before planting. Vermicomposting uses African nightcrawlers.";
+            }
+            if (msg.includes('mulch') || msg.includes('mulching')) {
+                return "🌾 Mulching conserves water, suppresses weeds, and adds organic matter. Use rice straw, dried leaves, or plastic mulch. Apply 5-10cm thick around plants.";
+            }
+            if (msg.includes('irrigation') || msg.includes('water')) {
+                return "💧 Efficient irrigation: For rice - alternate wetting and drying (AWD). For vegetables - drip irrigation saves 50% water. Water early morning or late afternoon.";
+            }
+            if (msg.includes('harvest') || msg.includes('harvesting')) {
+                return "📅 Harvest at proper maturity: Rice (28-32% moisture), Corn (when husk turns brown), Vegetables (early morning). Use proper post-harvest handling to reduce losses.";
+            }
+            if (msg.includes('soil') && msg.includes('test')) {
+                return "🧪 Soil testing is essential! Contact BPI or DA regional office. Optimal pH: 5.5-6.5 for most crops. For Batangas, loam soil is best for vegetables and rice.";
+            }
+            if (msg.includes('climate') || msg.includes('weather')) {
+                return "☀️ Philippine climate: Wet season (June-October) for rice; Dry season (November-May) for vegetables. Monitor PAGASA weather updates. Consider climate-resilient varieties.";
+            }
+            if (msg.includes('market') || msg.includes('sell') || msg.includes('price')) {
+                return "💰 Check RRJ FARM Marketplace for current prices. Connect with cooperative members for bulk selling. Best selling months: January-March for vegetables, May-June for rice.";
+            }
+            if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
+                return "👋 Hello! Welcome to RRJ FARM AI Advisor. How can I help your farming journey today?";
+            }
+            
+            // Default response
+            return "🤖 I'm your farming assistant! You can ask me about:\n• Specific crops (rice, corn, tomato, eggplant)\n• Pest control methods\n• Fertilizer recommendations\n• Planting seasons\n• Organic farming techniques\nWhat would you like to know?";
+        }
+        
+        // ========== YIELD PREDICTION MODEL ==========
+        function updatePrediction() {
+            const crop = document.getElementById('cropType').value;
+            const area = parseFloat(document.getElementById('landArea').value) || 1;
+            const soil = document.getElementById('soilType').value;
+            const season = document.getElementById('season').value;
+            
+            const baseYield = agriKnowledgeBase.cropBaseYield[crop][soil];
+            const seasonalFactor = agriKnowledgeBase.seasonMultiplier[season];
+            const areaFactor = Math.sqrt(area); // Diminishing returns for larger areas
+            let predictedYield = baseYield * seasonalFactor * (areaFactor / Math.sqrt(1));
+            
+            predictedYield = Math.round(predictedYield * 10) / 10;
+            
+            document.getElementById('yieldAmount').innerText = predictedYield;
+            
+            // Update recommendations based on selected crop
+            updateRecommendations(crop);
+        }
+        
+        function updateRecommendations(crop) {
+            // Update Crop Rotation
+            const rotations = agriKnowledgeBase.rotationAdvice[crop] || ["Rotate with legumes", "Plant cover crops", "Avoid consecutive planting of same family"];
+            document.getElementById('rotationList').innerHTML = rotations.map(r => `<li><i class="fas fa-exchange-alt"></i> ${r}</li>`).join('');
+            
+            // Update Fertilizer Recommendations
+            const fert = agriKnowledgeBase.fertilizerAdvice[crop];
+            if (fert) {
+                document.getElementById('fertilizerList').innerHTML = `
+                    <li><i class="fas fa-flask"></i> <strong>${fert.type}</strong> - ${fert.amount}</li>
+                    <li><i class="fas fa-leaf"></i> Organic: ${fert.organic}</li>
+                `;
+            } else {
+                document.getElementById('fertilizerList').innerHTML = `<li><i class="fas fa-flask"></i> Apply complete fertilizer (14-14-14) at 200kg/ha</li><li><i class="fas fa-leaf"></i> Add compost or vermicast 5 tons/ha</li>`;
+            }
+            
+            // Update Pest Control Tips
+            const pests = agriKnowledgeBase.pestTips[crop] || ["Monitor fields regularly", "Use neem oil spray", "Practice crop rotation", "Remove infected plants"];
+            document.getElementById('pestList').innerHTML = pests.slice(0,4).map(p => `<li><i class="fas fa-bug"></i> ${p}</li>`).join('');
+        }
+        
+        // ========== CHATBOT MESSAGING ==========
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Show typing indicator
+            document.getElementById('typingIndicator').style.display = 'block';
+            
+            // Simulate AI thinking delay
+            setTimeout(() => {
+                document.getElementById('typingIndicator').style.display = 'none';
+                const response = getChatbotResponse(message);
+                addMessage(response, 'bot');
+            }, 500);
+        }
+        
+        function addMessage(text, sender) {
+            const container = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}`;
+            
+            if (sender === 'bot') {
+                messageDiv.innerHTML = `
+                    <div class="chat-avatar"><i class="fas fa-leaf"></i></div>
+                    <div class="message-bubble">${text.replace(/\n/g, '<br>')}</div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="message-bubble">${text}</div>
+                    <div class="chat-avatar" style="background:#ffd700; color:#1a2e1a;"><i class="fas fa-user"></i></div>
+                `;
+            }
+            
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        function showToast(msg) { 
+            let t = document.getElementById('successToast'); 
+            t.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`; 
+            t.style.display = 'block'; 
+            setTimeout(() => t.style.display = 'none', 3000); 
+        }
+        
+        // Profile Dropdown
+        let currentUser = { name: 'Juan Dela Cruz', avatarInitials: 'JD' };
+        
+        function toggleProfileDropdown() { 
+            document.getElementById('profileDropdown').classList.toggle('show'); 
+        }
+        document.getElementById('userAvatar').addEventListener('click', (e) => { 
+            e.stopPropagation(); 
+            toggleProfileDropdown(); 
+        });
+        document.addEventListener('click', function(e) { 
+            let drop = document.getElementById('profileDropdown'); 
+            if(drop && !drop.contains(e.target) && e.target !== document.getElementById('userAvatar')) 
+                drop.classList.remove('show'); 
+        });
+        
+        document.getElementById('editProfileBtn').onclick = () => { showToast('Edit profile feature coming soon'); };
+        document.getElementById('changePasswordBtn').onclick = () => { showToast('Password reset link sent to email'); };
+        document.getElementById('logoutBtn').onclick = () => { window.location.href = 'index.html'; };
+        
+        document.getElementById('userAvatar').innerText = currentUser.avatarInitials;
+        
+        // Initialize
+        updatePrediction();
+        
+        // Expose global functions
+        window.sendMessage = sendMessage;
+        window.updatePrediction = updatePrediction;
+        window.toggleProfileDropdown = toggleProfileDropdown;
+    </script>
+</body>
+</html>

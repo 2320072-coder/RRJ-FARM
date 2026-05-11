@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RRJ FARM | About Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f7f2; color: #1a2e1a; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        
+        .modern-header { background: linear-gradient(135deg, #0d2b0d, #1a4d1a); position: sticky; top: 0; z-index: 1000; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo h1 { font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #ffffff, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo p { font-size: 0.7rem; color: #a8c8a8; }
+        .nav-menu ul { display: flex; gap: 1.5rem; list-style: none; }
+        .nav-menu a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; }
+        .nav-menu a:hover, .nav-menu a.active { color: #ffd700; border-bottom: 2px solid #ffd700; }
+        
+        .about-hero { background: white; border-radius: 30px; margin: 2rem 0; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1); }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem; }
+        .hero-content h1 { font-size: 2.5rem; font-weight: 800; color: #1a2e1a; margin-bottom: 1rem; }
+        .hero-content p { color: #4a5b4a; }
+        .hero-stats { display: flex; gap: 2rem; background: #f0f4e8; border-radius: 20px; padding: 1.5rem; justify-content: center; }
+        .hero-stat { text-align: center; }
+        .hero-stat .number { font-size: 2rem; font-weight: 800; color: #2d6a2d; }
+        
+        .mission-vision { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 3rem 0; }
+        .mission-card, .vision-card { background: white; padding: 2rem; border-radius: 24px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .section-header { text-align: center; margin: 3rem 0 2rem; }
+        .section-header h2 { font-size: 2rem; color: #1a2e1a; }
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .value-card { background: white; padding: 1.8rem; border-radius: 24px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .modern-footer { background: #0d2b0d; color: #a8c8a8; padding: 3rem 0 1rem; margin-top: 3rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #2a4a2a; margin-top: 2rem; }
+        @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; text-align: center; } .mission-vision { grid-template-columns: 1fr; } .container { padding: 0 1rem; } }
+    </style>
+</head>
+<body>
+    <header class="modern-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Regenerative Living • Community Land Trust • Batangas, Laguna & Quezon</p></div>
+                    <nav class="nav-menu"><ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="index.html#members">Members</a></li>
+                    <li><a href="marketplace.html"><i class="fas fa-store"></i> Marketplace</a></li>
+                    <li><a href="workshops.html"><i class="fas fa-chalkboard-user"></i>Workshops</a></li>
+                    <li><a href="cooperative.html"><i class="fas fa-handshake"></i>Cooperative</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="subscriptions.html"><i class="fas fa-ticket-alt"></i> Subscriptions</a></li>
+                    <li><a href="login.html"><i class="fas fa-user"></i> Login/Register</a></li></ul></nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="about-hero">
+                <div class="hero-grid">
+                    <div class="hero-content"><h1>🌱 About RRJ FARM</h1><p>Building a regenerative future, one homestead at a time. We are a digital cooperative committed to democratizing access to land and sustainable living.</p><div class="hero-badge" style="background:#f0f4e8; display:inline-block; padding:0.5rem 1rem; border-radius:50px;">📍 Batangas, Laguna & Quezon, Region IV-A</div></div>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="number">156</div>
+                            <div class="label">Active Members</div>
+                        </div>
+                        <div class="hero-stat"><div class="number">3</div>
+                        <div class="label">Stewarded Lots</div>
+                    </div><div class="hero-stat">
+                        <div class="number">92%</div>
+                        <div class="label">Satisfaction</div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="mission-vision"><div class="mission-card"><div class="mission-icon">🎯</div><h3>Our Mission</h3><p>To democratize access to land and sustainable living resources by creating an integrated ecosystem that combines a Community Land Trust, digital platform, and holistic support services.</p></div><div class="vision-card"><div class="vision-icon">🌟</div><h3>Our Vision</h3><p>A Region IV-A where every motivated individual has access to affordable land, knowledge, and community support to live a regenerative, self-sufficient lifestyle.</p></div></div>
+
+            <div class="section-header"><h2>Our Core Values</h2></div>
+            <div class="values-grid"><div class="value-card"><div class="value-icon">🌱</div><h4>Regeneration</h4><p>Healing the land through sustainable agriculture following RA 10068.</p></div><div class="value-card"><div class="value-icon">🤝</div><h4>Community</h4><p>Building resilient, connected neighborhoods.</p></div><div class="value-card"><div class="value-icon">⚖️</div><h4>Accessibility</h4><p>Removing financial barriers to land ownership.</p></div><div class="value-card"><div class="value-icon">📚</div><h4>Education</h4><p>Empowering through hands-on workshops.</p></div><div class="value-card"><div class="value-icon">🌾</div><h4>Food Security</h4><p>Promoting local food production.</p></div></div>
+
+            <div class="section-header"><h2>Our Journey</h2></div>
+            <div style="display:flex; flex-direction:column; gap:1rem; margin:2rem 0;"><div style="background:white; padding:1rem; border-radius:16px;"><strong>2023</strong> - Research Phase: Identified fragmentation problem in homesteading access.</div><div style="background:white; padding:1rem; border-radius:16px;"><strong>2024</strong> - Pilot Launch: First 32 members joined the Community Land Trust.</div><div style="background:white; padding:1rem; border-radius:16px;"><strong>2025</strong> - Digital Platform: Launched marketplace and workshop registration.</div><div style="background:white; padding:1rem; border-radius:16px;"><strong>2026</strong> - Expansion: Scaling to more municipalities in Batangas, Laguna, and Quezon.</div></div>
+
+            <div class="section-header"><h2>Legal Foundation</h2></div>
+            <div class="values-grid"><div class="value-card"><h4>RA 10752</h4><p>Fair land valuation and acquisition</p></div><div class="value-card"><h4>RA 10068</h4><p>Organic Agriculture</p></div><div class="value-card"><h4>RA 11321</h4><p>Sagip Saka Act</p></div><div class="value-card"><h4>RA 9520</h4><p>Cooperative Code</p></div></div>
+        </div>
+    </main>
+
+    <footer class="modern-footer"><div class="container"><div class="footer-grid"><div class="footer-info"><h3><i class="fas fa-leaf"></i> RRJ FARM</h3><p>CDA Registered Cooperative No. 2026-001</p><p>📍 Batangas, Laguna & Quezon, Region IV-A</p></div><div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="marketplace.html">Marketplace</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 RRJ FARM - All Rights Reserved</p></div></div></footer>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="members.xsl"?>
+<rrj_farm>
+    <members>
+        <!-- ============================================ -->
+        <!-- BATANGAS MEMBERS (Lipa City Area)             -->
+        <!-- ============================================ -->
+        <member id="M001">
+            <name>Maria Santos</name>
+            <location>Lipa City, Batangas</location>
+            <lot_size unit="hectares">0.5</lot_size>
+            <farm_type>Vegetable &amp; Herb Production</farm_type>
+            <join_date>2024-01-15</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">3000</monthly_fee>
+            <email>maria.santos@rrjfarm.com</email>
+            <phone>0912 345 6789</phone>
+            <bio>Passionate organic farmer with 5 years experience in permaculture. Growing lettuce, basil, and native vegetables.</bio>
+            <avatar>👩‍🌾</avatar>
+        </member>
+        
+        <member id="M002">
+            <name>Jose Dela Cruz</name>
+            <location>Tanauan City, Batangas</location>
+            <lot_size unit="hectares">1</lot_size>
+            <farm_type>Backyard Poultry &amp; Vegetables</farm_type>
+            <join_date>2024-01-20</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">5000</monthly_fee>
+            <email>jose.delacruz@rrjfarm.com</email>
+            <phone>0917 123 4567</phone>
+            <bio>Retired government employee now enjoying backyard farming. Expert in native chicken raising and organic vegetables.</bio>
+            <avatar>👨‍🌾</avatar>
+        </member>
+        
+        <member id="M003">
+            <name>Anna Reyes</name>
+            <location>Malvar, Batangas</location>
+            <lot_size unit="hectares">2</lot_size>
+            <farm_type>Rice &amp; Integrated Farming</farm_type>
+            <join_date>2024-02-01</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">9000</monthly_fee>
+            <email>anna.reyes@rrjfarm.com</email>
+            <phone>0918 234 5678</phone>
+            <bio>Agricultural engineer promoting sustainable rice production. Ask me about palayamanan and rice-fish integration!</bio>
+            <avatar>👩‍🔬</avatar>
+        </member>
+        
+        <member id="M004">
+            <name>Carlos Mendoza</name>
+            <location>Sto. Tomas, Batangas</location>
+            <lot_size unit="hectares">1.5</lot_size>
+            <farm_type>Organic Vegetables &amp; Herbs</farm_type>
+            <join_date>2024-02-10</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">7000</monthly_fee>
+            <email>carlos.mendoza@rrjfarm.com</email>
+            <phone>0919 345 6789</phone>
+            <bio>Cool climate vegetable specialist. Growing lettuce, broccoli, celery, and various herbs using organic methods.</bio>
+            <avatar>🧑‍🌾</avatar>
+        </member>
+        
+        <member id="M005">
+            <name>Luzviminda Fernandez</name>
+            <location>Batangas City, Batangas</location>
+            <lot_size unit="hectares">0.5</lot_size>
+            <farm_type>Container Gardening &amp; Microgreens</farm_type>
+            <join_date>2024-02-15</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">3000</monthly_fee>
+            <email>luz.fernandez@rrjfarm.com</email>
+            <phone>0920 456 7890</phone>
+            <bio>Urban homesteader proving you can grow food anywhere. Container gardening and microgreens specialist!</bio>
+            <avatar>👩‍🌾</avatar>
+        </member>
+        
+        <member id="M006">
+            <name>Ramon Garcia</name>
+            <location>San Jose, Batangas</location>
+            <lot_size unit="hectares">1</lot_size>
+            <farm_type>Fruit Trees &amp; Native Pigs</farm_type>
+            <join_date>2024-03-01</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">5000</monthly_fee>
+            <email>ramon.garcia@rrjfarm.com</email>
+            <phone>0921 567 8901</phone>
+            <bio>Agroforestry advocate. Growing native fruit trees like atis, caimito, and duhat, plus raising native pigs.</bio>
+            <avatar>👨‍🌾</avatar>
+        </member>
+        
+        <member id="M007">
+            <name>Patricia Lim</name>
+            <location>Rosario, Batangas</location>
+            <lot_size unit="hectares">0.5</lot_size>
+            <farm_type>Medicinal Plants &amp; Herbs</farm_type>
+            <join_date>2024-03-05</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">3000</monthly_fee>
+            <email>patricia.lim@rrjfarm.com</email>
+            <phone>0922 678 9012</phone>
+            <bio>Herbalist growing traditional Filipino medicinal plants like sambong, lagundi, tsaang gubat, and yerba buena.</bio>
+            <avatar>🧑‍⚕️</avatar>
+        </member>
+        
+        <member id="M008">
+            <name>Fernando Aquino</name>
+            <location>Ibaan, Batangas</location>
+            <lot_size unit="hectares">2</lot_size>
+            <farm_type>Coffee &amp; Cacao Production</farm_type>
+            <join_date>2024-03-12</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">9000</monthly_fee>
+            <email>fernando.aquino@rrjfarm.com</email>
+            <phone>0923 789 0123</phone>
+            <bio>Specialty coffee grower. Ask me about Kapeng Barako, Liberica coffee, and tablea making from cacao!</bio>
+            <avatar>☕</avatar>
+        </member>
+        
+        <member id="M009">
+            <name>Isabella Cruz</name>
+            <location>San Juan, Batangas</location>
+            <lot_size unit="hectares">1</lot_size>
+            <farm_type>Duck Raising &amp; Egg Production</farm_type>
+            <join_date>2024-03-20</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">5000</monthly_fee>
+            <email>isabella.cruz@rrjfarm.com</email>
+            <phone>0924 890 1234</phone>
+            <bio>Itik enthusiast. Producing salted eggs, balut, and penoy. Expert in duck husbandry and native itik raising.</bio>
+            <avatar>🦆</avatar>
+        </member>
+        
+        <member id="M010">
+            <name>Gregory Villanueva</name>
+            <location>Lobo, Batangas</location>
+            <lot_size unit="hectares">0.5</lot_size>
+            <farm_type>Mushroom Cultivation</farm_type>
+            <join_date>2024-04-01</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">3000</monthly_fee>
+            <email>gregory.v@rrjfarm.com</email>
+            <phone>0925 901 2345</phone>
+            <bio>Oyster mushroom grower. Ask me about mushroom spawn production, fruiting, and value-added mushroom products!</bio>
+            <avatar>🍄</avatar>
+        </member>
+    </members>
+    
+    <products>
+        <product id="P001">
+            <name>Organic Vermicast</name>
+            <category>Fertilizer</category>
+            <price currency="PHP">250</price>
+            <unit>kg</unit>
+            <supplier>WormHaven PH</supplier>
+        </product>
+        <product id="P002">
+            <name>Native Vegetable Seed Set</name>
+            <category>Seeds</category>
+            <price currency="PHP">180</price>
+            <unit>pack</unit>
+            <supplier>Farm Harmony</supplier>
+        </product>
+        <product id="P003">
+            <name>Bolo Hand Tractor</name>
+            <category>Tools</category>
+            <price currency="PHP">800</price>
+            <unit>piece</unit>
+            <supplier>Bakal Industries</supplier>
+        </product>
+        <product id="P004">
+            <name>Neem Oil Organic Spray</name>
+            <category>Pest Control</category>
+            <price currency="PHP">350</price>
+            <unit>bottle</unit>
+            <supplier>Natural Defenders</supplier>
+        </product>
+        <product id="P005">
+            <name>Kapeng Barako (Ground)</name>
+            <category>Processed Goods</category>
+            <price currency="PHP">280</price>
+            <unit>250g</unit>
+            <supplier>Fernando Aquino</supplier>
+        </product>
+        <product id="P006">
+            <name>Raw Wild Honey</name>
+            <category>Processed Goods</category>
+            <price currency="PHP">350</price>
+            <unit>bottle</unit>
+            <supplier>Olivia Manalo</supplier>
+        </product>
+        <product id="P007">
+            <name>Organic Dragon Fruit</name>
+            <category>Fruits</category>
+            <price currency="PHP">120</price>
+            <unit>kg</unit>
+            <supplier>Leticia Gomez</supplier>
+        </product>
+        <product id="P008">
+            <name>Fresh Oyster Mushroom</name>
+            <category>Vegetables</category>
+            <price currency="PHP">150</price>
+            <unit>kg</unit>
+            <supplier>Gregory Villanueva</supplier>
+        </product>
+    </products>
+</rrj_farm>
