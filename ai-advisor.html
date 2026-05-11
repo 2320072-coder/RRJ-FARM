@@ -17,20 +17,23 @@
         .header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
         .logo h1 { font-size: 1.6rem; background: linear-gradient(135deg, #ffffff, #ffea8c, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .logo p { font-size: 0.7rem; color: #c8e6c8; }
-        .nav-menu ul { display: flex; gap: 0.5rem; list-style: none; flex-wrap: wrap; }
-        .nav-menu a { color: #e0f0e0; text-decoration: none; font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 40px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; cursor: pointer; }
-        .nav-menu a i { font-size: 1rem; }
+        .nav-menu ul { display: flex; gap: 0.5rem; list-style: none; flex-wrap: wrap; justify-content: center; }
+        .nav-menu a { color: #e0f0e0; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 40px; transition: all 0.3s; display: flex; align-items: center; gap: 6px; font-size: 0.85rem; cursor: pointer; }
+        .nav-menu a i { font-size: 0.85rem; }
         .nav-menu a:hover { background: rgba(255, 215, 0, 0.15); color: #ffea8c; transform: translateY(-2px); }
         .nav-menu a.active { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a3a1a; box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
         
+        /* Profile Dropdown */
         .user-menu { position: relative; display: flex; align-items: center; gap: 0.8rem; }
-        .user-avatar { background: #ffd700; color: #1a2e1a; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; }
-        .profile-dropdown { position: absolute; top: 55px; right: 0; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); width: 220px; display: none; z-index: 1100; overflow: hidden; }
+        .user-avatar { background: #ffd700; color: #1a2e1a; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
+        .user-avatar:active { transform: scale(0.95); }
+        .profile-dropdown { position: absolute; top: 50px; right: 0; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 220px; display: none; z-index: 1100; overflow: hidden; }
         .profile-dropdown.show { display: block; }
-        .dropdown-item { padding: 0.8rem 1.2rem; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; transition: 0.2s; border-bottom: 1px solid #f0f0f0; }
+        .dropdown-item { padding: 0.8rem 1rem; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; transition: 0.2s; border-bottom: 1px solid #f0f0f0; font-size: 0.85rem; }
         .dropdown-item:hover { background: #eef3ea; }
-        .dropdown-item i { width: 22px; color: #2d6a2d; }
+        .dropdown-item i { width: 22px; color: #2d6a2d; font-size: 1rem; }
         .logout-item { color: #dc3545; }
+        .logout-item i { color: #dc3545; }
         
         /* AI Dashboard Layout */
         .ai-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
@@ -44,7 +47,7 @@
         .chat-message.bot .message-bubble { background: #e8f0e8; color: #1a2e1a; border-radius: 20px 20px 20px 5px; }
         .chat-message.user .message-bubble { background: #2d6a2d; color: white; border-radius: 20px 20px 5px 20px; }
         .message-bubble { max-width: 80%; padding: 0.8rem 1rem; font-size: 0.9rem; line-height: 1.4; }
-        .chat-avatar { width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #2d6a2d; color: white; }
+        .chat-avatar { width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #2d6a2d; color: white; flex-shrink: 0; }
         .chat-input-group { display: flex; gap: 0.5rem; }
         .chat-input { flex: 1; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 30px; font-family: inherit; }
         .btn-send { background: #2d6a2d; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 30px; cursor: pointer; }
@@ -63,11 +66,23 @@
         .rec-list li { padding: 0.8rem; border-bottom: 1px solid #e8f0e8; display: flex; align-items: center; gap: 0.8rem; }
         .rec-list li i { width: 30px; color: #2d6a2d; font-size: 1.2rem; }
         
-        .typing { display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #aaa; animation: pulse 1s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-        @media (max-width: 900px) { .ai-grid { grid-template-columns: 1fr; } .container { padding: 0 1rem; } }
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .container { padding: 0 1rem; }
+            .ai-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .ai-card { padding: 1rem; }
+            .card-title { font-size: 1.1rem; }
+            .prediction-form { grid-template-columns: 1fr; gap: 0.5rem; }
+            .chat-container { height: 280px; }
+            .chat-message .message-bubble { max-width: 90%; font-size: 0.8rem; }
+            .nav-menu a { font-size: 0.7rem; padding: 0.3rem 0.6rem; }
+            .logo h1 { font-size: 1.1rem; }
+            .logo p { font-size: 0.55rem; }
+            .profile-dropdown { position: fixed; bottom: 0; left: 0; right: 0; top: auto; width: 100%; border-radius: 20px 20px 0 0; max-height: 50vh; overflow-y: auto; }
+            .user-avatar { width: 36px; height: 36px; font-size: 0.8rem; }
+        }
         
-        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 1rem 2rem; border-radius: 50px; display: none; z-index: 2100; animation: slideInRight 0.3s ease; }
+        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem 1.2rem; border-radius: 50px; display: none; z-index: 2100; animation: slideInRight 0.3s ease; font-size: 0.8rem; }
         @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     </style>
 </head>
@@ -78,18 +93,20 @@
                 <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Batangas, Laguna & Quezon</p></div>
                 <nav class="nav-menu">
                     <ul>
-                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="marketplace.html"><i class="fas fa-store"></i> Marketplace</a></li>
-                        <li><a href="workshops.html"><i class="fas fa-chalkboard-user"></i> Workshops</a></li>
-                        <li><a href="cooperative.html"><i class="fas fa-handshake"></i> Cooperative</a></li>
-                        <li><a href="subscriptions.html"><i class="fas fa-ticket-alt"></i> Subscriptions</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="marketplace.html">Marketplace</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="cooperative.html">Cooperative</a></li>
+                        <li><a href="rent.html">Rent Equipment</a></li>
+                        <li><a href="subscriptions.html">Subscriptions</a></li>
                         <li><a href="ai-advisor.html" class="active"><i class="fas fa-robot"></i> AI Advisor</a></li>
-                        <li><a href="memberdashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                        <li><a href="memberdashboard.html">Dashboard</a></li>
                     </ul>
                 </nav>
                 <div class="user-menu">
                     <div class="user-avatar" id="userAvatar">JD</div>
                     <div class="profile-dropdown" id="profileDropdown">
+                        <div class="dropdown-item" id="profileUserInfo"><i class="fas fa-user-circle"></i> <span id="profileName">Loading...</span><br><small id="profileEmail"></small></div>
                         <div class="dropdown-item" id="editProfileBtn"><i class="fas fa-user-edit"></i> Edit Profile</div>
                         <div class="dropdown-item" id="changePasswordBtn"><i class="fas fa-lock"></i> Change Password</div>
                         <div class="dropdown-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</div>
@@ -183,11 +200,21 @@
     </main>
 
     <div id="successToast" class="success-toast"></div>
+    <div id="editProfileModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center;">
+        <div style="background: white; border-radius: 24px; max-width: 400px; width: 90%; padding: 1.5rem;">
+            <h3>Edit Profile</h3>
+            <input type="text" id="editNameInput" placeholder="Full Name" style="width:100%; padding:0.8rem; margin:1rem 0; border:2px solid #ddd; border-radius:12px;">
+            <input type="email" id="editEmailInput" placeholder="Email" style="width:100%; padding:0.8rem; margin:0.5rem 0; border:2px solid #ddd; border-radius:12px;">
+            <div style="display:flex; gap:1rem; margin-top:1rem;">
+                <button onclick="closeEditModal()" style="flex:1; padding:0.6rem; background:#eef2e8; border:none; border-radius:30px;">Cancel</button>
+                <button onclick="saveEditProfile()" style="flex:1; padding:0.6rem; background:#2d6a2d; color:white; border:none; border-radius:30px;">Save</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // ========== LOCAL AGRICULTURAL KNOWLEDGE BASE ==========
         const agriKnowledgeBase = {
-            // Crop yield factors (base yield in tons/hectare)
             cropBaseYield: {
                 rice: { clay: 3.5, loam: 5.2, sandy: 2.8, silt: 4.5 },
                 corn: { clay: 4.0, loam: 6.5, sandy: 3.2, silt: 5.5 },
@@ -196,17 +223,13 @@
                 cabbage: { clay: 20, loam: 35, sandy: 15, silt: 28 }
             },
             seasonMultiplier: { wet: 0.85, dry: 1.15 },
-            
-            // Crop rotation recommendations
             rotationAdvice: {
                 rice: ["Follow with legumes (mungbean, soybean) to fix nitrogen", "Plant corn or vegetables in the next season", "Consider green manure crops like cowpea"],
                 corn: ["Rotate with peanuts or beans", "Plant rice in wet season for soil restoration", "Consider cover crops like clover"],
-                tomato: ["Rotate with onions or garlic (pest break)", "Plant beans to restore nitrogen", "Avoid planting same family (pepper, eggplant) for 2 years"],
+                tomato: ["Rotate with onions or garlic (pest break)", "Plant beans to restore nitrogen", "Avoid planting same family for 2 years"],
                 eggplant: ["Rotate with leafy greens (kangkong, pechay)", "Plant marigolds as natural pest repellant", "Follow with legumes"],
                 cabbage: ["Rotate with root crops (carrots, radish)", "Plant beans or peas", "Consider cover cropping with buckwheat"]
             },
-            
-            // Fertilizer recommendations (NPK ratio)
             fertilizerAdvice: {
                 rice: { type: "Complete (14-14-14)", amount: "200-250 kg/ha", organic: "Apply compost 5-10 tons/ha before planting" },
                 corn: { type: "Urea (46-0-0) + Complete", amount: "150-200 kg/ha urea + 150 kg/ha complete", organic: "Chicken manure 8-10 tons/ha" },
@@ -214,33 +237,76 @@
                 eggplant: { type: "Complete + Potassium Sulfate", amount: "14-14-14 at 250 kg/ha", organic: "Compost + vermicast 4-6 tons/ha" },
                 cabbage: { type: "Ammonium Sulfate + Complete", amount: "21-0-0 at 200 kg/ha", organic: "Green manure + compost 8 tons/ha" }
             },
-            
-            // Pest control tips
             pestTips: {
                 rice: ["Use rice tungro-resistant varieties", "Install pheromone traps for stem borer", "Golden kuhol management - ducks in fields", "Neem extract spray for leaf folder"],
-                corn: ["Intercrop with legumes to reduce pest pressure", "Biological control: Trichogramma wasps for corn borer", "Avoid planting during peak pest season", "Use Bt corn varieties where allowed"],
+                corn: ["Intercrop with legumes to reduce pest pressure", "Biological control: Trichogramma wasps", "Avoid planting during peak pest season", "Use Bt corn varieties where allowed"],
                 tomato: ["Practice crop rotation (2-3 years)", "Use yellow sticky traps for whiteflies", "Copper spray for blight early detection", "Remove infected leaves promptly"],
                 eggplant: ["Grow marigolds as companion plants", "Use neem oil for fruit and shoot borer", "Install light traps", "Apply Trichoderma for soil health"],
                 cabbage: ["Use BT spray for cabbage worms", "Netting for imported cabbageworm prevention", "Intercrop with dill or cilantro", "Kaolin clay spray for pest deterrence"]
             }
         };
         
-        // ========== CHATBOT RESPONSE ENGINE (LLM-like with local DB) ==========
+        // ========== USER SESSION MANAGEMENT ==========
+        let currentUser = null;
+        
+        function loadUserSession() {
+            const userJson = localStorage.getItem('rrjfarm_current_user');
+            if (userJson) {
+                currentUser = JSON.parse(userJson);
+                updateAvatarDisplay();
+                return true;
+            }
+            // Default fallback
+            currentUser = { name: 'Guest', avatarInitials: 'GU', email: 'guest@rrjfarm.com' };
+            updateAvatarDisplay();
+            return false;
+        }
+        
+        function updateAvatarDisplay() {
+            const avatarEl = document.getElementById('userAvatar');
+            const nameEl = document.getElementById('profileName');
+            const emailEl = document.getElementById('profileEmail');
+            
+            if (currentUser) {
+                let initials = currentUser.avatarInitials;
+                if (!initials && currentUser.name) {
+                    initials = currentUser.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                }
+                if (!initials && currentUser.firstName) {
+                    initials = (currentUser.firstName.charAt(0) + (currentUser.lastName?.charAt(0) || '')).toUpperCase();
+                }
+                avatarEl.innerText = initials || 'JD';
+                nameEl.innerText = currentUser.name || `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || 'User';
+                emailEl.innerText = currentUser.email || 'user@rrjfarm.com';
+            } else {
+                avatarEl.innerText = 'GU';
+                nameEl.innerText = 'Guest User';
+                emailEl.innerText = 'guest@rrjfarm.com';
+            }
+        }
+        
+        function showToast(msg) { 
+            let t = document.getElementById('successToast'); 
+            t.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`; 
+            t.style.display = 'block'; 
+            setTimeout(() => t.style.display = 'none', 3000); 
+        }
+        
+        // ========== CHATBOT RESPONSE ENGINE ==========
         function getChatbotResponse(userMessage) {
             const msg = userMessage.toLowerCase();
+            const crops = ['rice', 'corn', 'tomato', 'eggplant', 'cabbage', 'sitao', 'ampalaya', 'kalamansi'];
             
-            // Crop-specific queries
-            const crops = ['rice', 'corn', 'tomato', 'eggplant', 'cabbage', 'sitao', 'ampalaya', 'kalamansi', 'mango', 'banana'];
             for (let crop of crops) {
                 if (msg.includes(crop) && (msg.includes('plant') || msg.includes('grow') || msg.includes('when'))) {
                     if (crop === 'rice') return "🌾 Rice is best planted during the wet season (June-July). Choose high-yielding varieties like NSIC Rc 222. Ensure proper water management with alternate wetting and drying technique.";
                     if (crop === 'corn') return "🌽 Corn is planted in dry season (November-December) for best yield. Use hybrid seeds like NK 6400. Requires 65-75cm row spacing.";
                     if (crop === 'tomato') return "🍅 Tomatoes are planted in dry season (October-December). Choose varieties like 'Diamante Max' or 'Atlanta'. Staking and mulching recommended for higher yield.";
                     if (crop === 'eggplant') return "🍆 Eggplant thrives in dry season. Popular variety: 'Mistisa'. Transplant 30-day old seedlings at 75cm x 50cm spacing.";
-                    return `For ${crop}, recommended planting is during dry season (November-May) in Batangas region. Ensure proper soil preparation and organic matter addition.`;
+                    return `For ${crop}, recommended planting is during dry season (November-May) in Batangas region.`;
                 }
                 if (msg.includes(crop) && (msg.includes('pest') || msg.includes('disease'))) {
-                    const tips = agriKnowledgeBase.pestTips[crop] || ["Monitor regularly for pests", "Use organic pesticides like neem oil", "Practice crop rotation", "Remove infected plants"];
+                    const tips = agriKnowledgeBase.pestTips[crop] || ["Monitor regularly for pests", "Use organic pesticides like neem oil", "Practice crop rotation"];
                     return `🐛 For ${crop} pest management:\n• ${tips.slice(0,3).join('\n• ')}`;
                 }
                 if (msg.includes(crop) && (msg.includes('fertilizer') || msg.includes('feed'))) {
@@ -249,37 +315,17 @@
                 }
             }
             
-            // General farming queries
             if (msg.includes('compost') || msg.includes('organic')) {
-                return "♻️ Organic matter is crucial! Compost: Mix brown (dried leaves) and green (kitchen waste) in 3:1 ratio. Turn every 2 weeks. Apply 5-10 tons/hectare before planting. Vermicomposting uses African nightcrawlers.";
-            }
-            if (msg.includes('mulch') || msg.includes('mulching')) {
-                return "🌾 Mulching conserves water, suppresses weeds, and adds organic matter. Use rice straw, dried leaves, or plastic mulch. Apply 5-10cm thick around plants.";
-            }
-            if (msg.includes('irrigation') || msg.includes('water')) {
-                return "💧 Efficient irrigation: For rice - alternate wetting and drying (AWD). For vegetables - drip irrigation saves 50% water. Water early morning or late afternoon.";
-            }
-            if (msg.includes('harvest') || msg.includes('harvesting')) {
-                return "📅 Harvest at proper maturity: Rice (28-32% moisture), Corn (when husk turns brown), Vegetables (early morning). Use proper post-harvest handling to reduce losses.";
-            }
-            if (msg.includes('soil') && msg.includes('test')) {
-                return "🧪 Soil testing is essential! Contact BPI or DA regional office. Optimal pH: 5.5-6.5 for most crops. For Batangas, loam soil is best for vegetables and rice.";
-            }
-            if (msg.includes('climate') || msg.includes('weather')) {
-                return "☀️ Philippine climate: Wet season (June-October) for rice; Dry season (November-May) for vegetables. Monitor PAGASA weather updates. Consider climate-resilient varieties.";
-            }
-            if (msg.includes('market') || msg.includes('sell') || msg.includes('price')) {
-                return "💰 Check RRJ FARM Marketplace for current prices. Connect with cooperative members for bulk selling. Best selling months: January-March for vegetables, May-June for rice.";
+                return "♻️ Organic matter is crucial! Compost: Mix brown (dried leaves) and green (kitchen waste) in 3:1 ratio. Turn every 2 weeks. Apply 5-10 tons/hectare before planting.";
             }
             if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
                 return "👋 Hello! Welcome to RRJ FARM AI Advisor. How can I help your farming journey today?";
             }
             
-            // Default response
-            return "🤖 I'm your farming assistant! You can ask me about:\n• Specific crops (rice, corn, tomato, eggplant)\n• Pest control methods\n• Fertilizer recommendations\n• Planting seasons\n• Organic farming techniques\nWhat would you like to know?";
+            return "🤖 I'm your farming assistant! You can ask me about:\n• Specific crops (rice, corn, tomato, eggplant)\n• Pest control methods\n• Fertilizer recommendations\n• Planting seasons\nWhat would you like to know?";
         }
         
-        // ========== YIELD PREDICTION MODEL ==========
+        // ========== YIELD PREDICTION ==========
         function updatePrediction() {
             const crop = document.getElementById('cropType').value;
             const area = parseFloat(document.getElementById('landArea').value) || 1;
@@ -288,36 +334,28 @@
             
             const baseYield = agriKnowledgeBase.cropBaseYield[crop][soil];
             const seasonalFactor = agriKnowledgeBase.seasonMultiplier[season];
-            const areaFactor = Math.sqrt(area); // Diminishing returns for larger areas
+            const areaFactor = Math.sqrt(area);
             let predictedYield = baseYield * seasonalFactor * (areaFactor / Math.sqrt(1));
-            
             predictedYield = Math.round(predictedYield * 10) / 10;
             
             document.getElementById('yieldAmount').innerText = predictedYield;
-            
-            // Update recommendations based on selected crop
             updateRecommendations(crop);
         }
         
         function updateRecommendations(crop) {
-            // Update Crop Rotation
-            const rotations = agriKnowledgeBase.rotationAdvice[crop] || ["Rotate with legumes", "Plant cover crops", "Avoid consecutive planting of same family"];
+            const rotations = agriKnowledgeBase.rotationAdvice[crop] || ["Rotate with legumes", "Plant cover crops"];
             document.getElementById('rotationList').innerHTML = rotations.map(r => `<li><i class="fas fa-exchange-alt"></i> ${r}</li>`).join('');
             
-            // Update Fertilizer Recommendations
             const fert = agriKnowledgeBase.fertilizerAdvice[crop];
             if (fert) {
                 document.getElementById('fertilizerList').innerHTML = `
                     <li><i class="fas fa-flask"></i> <strong>${fert.type}</strong> - ${fert.amount}</li>
                     <li><i class="fas fa-leaf"></i> Organic: ${fert.organic}</li>
                 `;
-            } else {
-                document.getElementById('fertilizerList').innerHTML = `<li><i class="fas fa-flask"></i> Apply complete fertilizer (14-14-14) at 200kg/ha</li><li><i class="fas fa-leaf"></i> Add compost or vermicast 5 tons/ha</li>`;
             }
             
-            // Update Pest Control Tips
-            const pests = agriKnowledgeBase.pestTips[crop] || ["Monitor fields regularly", "Use neem oil spray", "Practice crop rotation", "Remove infected plants"];
-            document.getElementById('pestList').innerHTML = pests.slice(0,4).map(p => `<li><i class="fas fa-bug"></i> ${p}</li>`).join('');
+            const pests = agriKnowledgeBase.pestTips[crop] || ["Monitor fields regularly", "Use neem oil spray", "Practice crop rotation"];
+            document.getElementById('pestList').innerHTML = pests.slice(0,3).map(p => `<li><i class="fas fa-bug"></i> ${p}</li>`).join('');
         }
         
         // ========== CHATBOT MESSAGING ==========
@@ -326,14 +364,10 @@
             const message = input.value.trim();
             if (!message) return;
             
-            // Add user message
             addMessage(message, 'user');
             input.value = '';
             
-            // Show typing indicator
             document.getElementById('typingIndicator').style.display = 'block';
-            
-            // Simulate AI thinking delay
             setTimeout(() => {
                 document.getElementById('typingIndicator').style.display = 'none';
                 const response = getChatbotResponse(message);
@@ -357,47 +391,69 @@
                     <div class="chat-avatar" style="background:#ffd700; color:#1a2e1a;"><i class="fas fa-user"></i></div>
                 `;
             }
-            
             container.appendChild(messageDiv);
             container.scrollTop = container.scrollHeight;
         }
         
-        function showToast(msg) { 
-            let t = document.getElementById('successToast'); 
-            t.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`; 
-            t.style.display = 'block'; 
-            setTimeout(() => t.style.display = 'none', 3000); 
-        }
-        
-        // Profile Dropdown
-        let currentUser = { name: 'Juan Dela Cruz', avatarInitials: 'JD' };
-        
+        // ========== PROFILE DROPDOWN ==========
         function toggleProfileDropdown() { 
             document.getElementById('profileDropdown').classList.toggle('show'); 
         }
+        
         document.getElementById('userAvatar').addEventListener('click', (e) => { 
             e.stopPropagation(); 
             toggleProfileDropdown(); 
         });
+        
         document.addEventListener('click', function(e) { 
             let drop = document.getElementById('profileDropdown'); 
             if(drop && !drop.contains(e.target) && e.target !== document.getElementById('userAvatar')) 
                 drop.classList.remove('show'); 
         });
         
-        document.getElementById('editProfileBtn').onclick = () => { showToast('Edit profile feature coming soon'); };
-        document.getElementById('changePasswordBtn').onclick = () => { showToast('Password reset link sent to email'); };
-        document.getElementById('logoutBtn').onclick = () => { window.location.href = 'index.html'; };
+        // Edit Profile Modal
+        function openEditModal() {
+            document.getElementById('editNameInput').value = currentUser?.name || '';
+            document.getElementById('editEmailInput').value = currentUser?.email || '';
+            document.getElementById('editProfileModal').style.display = 'flex';
+        }
         
-        document.getElementById('userAvatar').innerText = currentUser.avatarInitials;
+        function closeEditModal() {
+            document.getElementById('editProfileModal').style.display = 'none';
+        }
+        
+        function saveEditProfile() {
+            const newName = document.getElementById('editNameInput').value.trim();
+            const newEmail = document.getElementById('editEmailInput').value.trim();
+            
+            if (currentUser) {
+                currentUser.name = newName || currentUser.name;
+                currentUser.email = newEmail || currentUser.email;
+                currentUser.avatarInitials = newName.split(' ').map(n => n[0]).join('').toUpperCase();
+                localStorage.setItem('rrjfarm_current_user', JSON.stringify(currentUser));
+                updateAvatarDisplay();
+                showToast('Profile updated successfully!');
+            }
+            closeEditModal();
+        }
+        
+        document.getElementById('editProfileBtn').onclick = () => { openEditModal(); };
+        document.getElementById('changePasswordBtn').onclick = () => { showToast('Password reset link sent to your email'); };
+        document.getElementById('logoutBtn').onclick = () => { 
+            localStorage.removeItem('rrjfarm_current_user');
+            sessionStorage.clear();
+            window.location.href = 'index.html'; 
+        };
         
         // Initialize
+        loadUserSession();
         updatePrediction();
         
-        // Expose global functions
         window.sendMessage = sendMessage;
         window.updatePrediction = updatePrediction;
         window.toggleProfileDropdown = toggleProfileDropdown;
+        window.closeEditModal = closeEditModal;
+        window.saveEditProfile = saveEditProfile;
     </script>
 </body>
 </html>
