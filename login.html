@@ -11,7 +11,7 @@
         body { font-family: 'Inter', sans-serif; background: #f5f7f2; color: #1a2e1a; }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
         
-        .modern-header { background: linear-gradient(135deg, #0d2b0d, #1a4d1a); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .modern-header { background: linear-gradient(135deg, #0d2b0d, #1a4d1a); position: sticky; top: 0; z-index: 1000; }
         .header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
         .logo h1 { font-size: 1.5rem; background: linear-gradient(135deg, #ffffff, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .logo p { font-size: 0.7rem; color: #a8c8a8; }
@@ -19,38 +19,35 @@
         .nav-menu a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; padding: 0.5rem 0; }
         .nav-menu a:hover, .nav-menu a.active { color: #ffd700; border-bottom: 2px solid #ffd700; }
         
-        /* Selection Modal */
         .selection-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
         .selection-modal.active { display: flex; }
         .selection-content { background: white; border-radius: 40px; max-width: 550px; width: 90%; padding: 2rem; text-align: center; animation: fadeUp 0.3s ease; }
         .selection-icon { font-size: 3rem; margin-bottom: 1rem; }
-        .selection-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem; color: #1a2e1a; }
-        .selection-subtitle { color: #4a5b4a; margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .selection-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; color: #1a2e1a; }
+        .selection-subtitle { color: #4a5b4a; margin-bottom: 1.5rem; font-size: 0.85rem; }
         .account-options { display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; }
-        .account-option { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 24px; cursor: pointer; transition: all 0.3s; background: white; }
+        .account-option { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 24px; cursor: pointer; transition: all 0.3s; background: white; text-align: left; }
         .account-option:hover { border-color: #2d6a2d; background: #eef3ea; transform: translateX(5px); }
         .account-option-icon { width: 50px; height: 50px; background: #f0f4e8; border-radius: 25px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-        .account-option-info { flex: 1; text-align: left; }
-        .account-option-title { font-weight: 700; font-size: 1.1rem; color: #1a2e1a; }
-        .account-option-desc { font-size: 0.75rem; color: #666; }
+        .account-option-info { flex: 1; }
+        .account-option-title { font-weight: 700; font-size: 1rem; color: #1a2e1a; }
+        .account-option-desc { font-size: 0.7rem; color: #666; }
         
-        /* Status Modal (Non-Member / Subscribed) */
         .status-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
         .status-modal.active { display: flex; }
         .status-content { background: white; border-radius: 40px; max-width: 500px; width: 90%; padding: 2rem; text-align: center; animation: fadeUp 0.3s ease; }
-        .status-badge { display: inline-block; padding: 0.3rem 1rem; border-radius: 30px; font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem; }
-        .status-badge.non-member { background: #fff3cd; color: #856404; }
+        .status-badge { display: inline-block; padding: 0.3rem 1rem; border-radius: 30px; font-size: 0.75rem; font-weight: 600; margin-bottom: 1rem; }
         .status-badge.member { background: #d4edda; color: #155724; }
-        .info-card { background: #eef3ea; padding: 1rem; border-radius: 16px; text-align: left; margin: 1rem 0; }
-        .info-row { display: flex; margin-bottom: 0.5rem; }
-        .info-label { font-weight: 600; width: 120px; color: #1a2e1a; }
-        .info-value { color: #2d6a2d; }
+        .status-badge.non-member { background: #fff3cd; color: #856404; }
+        .info-card { background: #eef3ea; padding: 1rem; border-radius: 20px; text-align: left; margin: 1rem 0; font-size: 0.8rem; }
+        .info-row { display: flex; margin-bottom: 0.6rem; flex-wrap: wrap; }
+        .info-label { font-weight: 600; width: 110px; color: #1a2e1a; }
+        .info-value { color: #2d6a2d; flex: 1; }
+        .btn-primary-modal { background: #2d6a2d; color: white; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 0.5rem; }
+        .btn-secondary-modal { background: #eef2e8; color: #1a2e1a; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 0.5rem; }
+        .btn-subscribe { background: #ff8c00; color: white; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; margin-top: 0.5rem; width: 100%; }
+        .btn-dashboard { background: linear-gradient(135deg, #2d6a2d, #1a4d1a); color: white; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 0.5rem; }
         
-        .btn-primary-modal { flex: 1; background: #2d6a2d; color: white; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
-        .btn-secondary-modal { flex: 1; background: #eef2e8; color: #1a2e1a; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
-        .btn-subscribe { background: #ff8c00; color: white; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; margin-top: 0.5rem; }
-        
-        /* Auth Card Styles */
         .auth-container { min-height: calc(100vh - 300px); display: flex; align-items: center; justify-content: center; padding: 3rem 1rem; }
         .auth-card { background: white; border-radius: 32px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-width: 550px; width: 100%; padding: 2.5rem; animation: fadeInUp 0.5s ease; }
         .auth-header { text-align: center; margin-bottom: 2rem; }
@@ -70,27 +67,23 @@
         .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #e0e0e0; }
         .divider span { padding: 0 1rem; color: #888; }
         
-        /* Password Requirements */
         .password-requirements { background: #f8f9fa; padding: 0.8rem; border-radius: 14px; margin-top: 0.5rem; font-size: 0.7rem; }
         .req { display: flex; align-items: center; gap: 0.5rem; margin: 0.3rem 0; color: #666; }
         .req.valid { color: #2d6a2d; }
         .req.invalid { color: #dc3545; }
-        
-        /* Location Row */
         .location-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         
         .error-msg { background: #f8d7da; color: #721c24; padding: 0.8rem; border-radius: 16px; margin-bottom: 1rem; font-size: 0.8rem; display: none; }
         .success-msg { background: #d4edda; color: #155724; padding: 0.8rem; border-radius: 16px; margin-bottom: 1rem; font-size: 0.8rem; display: none; }
         
         .modern-footer { background: #0d2b0d; color: #a8c8a8; padding: 2rem 0 1rem; margin-top: 3rem; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
-        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #2a4a2a; }
+        .footer-bottom { text-align: center; padding-top: 1rem; border-top: 1px solid #2a4a2a; font-size: 0.7rem; }
         
         @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 768px) { .container { padding: 0 1rem; } .auth-card { padding: 1.8rem; } .location-row { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .container { padding: 0 1rem; } .auth-card { padding: 1.5rem; } .info-row { flex-direction: column; } .info-label { width: auto; } }
         
-        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 1rem 2rem; border-radius: 50px; display: none; z-index: 1500; animation: slideInRight 0.3s ease; }
+        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem 1.2rem; border-radius: 50px; display: none; z-index: 1500; animation: slideInRight 0.3s ease; font-size: 0.8rem; }
         @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     </style>
 </head>
@@ -107,34 +100,29 @@
     <main>
         <div class="auth-container">
             <div class="auth-card" id="authCard" style="display: none;">
-                <div class="auth-header"><div class="logo-icon"><i class="fas fa-leaf" style="font-size: 2rem; color: white;"></i></div><h1>RRJ FARM</h1><p id="authSubtitle">Welcome to your homesteading community</p></div>
+                <div class="auth-header"><div class="logo-icon"><i class="fas fa-leaf" style="font-size: 2rem; color: white;"></i></div><h1>RRJ FARM</h1><p id="authSubtitle">Login or Register to continue</p></div>
 
                 <div class="auth-tabs"><button class="auth-tab active" data-tab="login" onclick="switchTab('login')">Login</button><button class="auth-tab" data-tab="register" onclick="switchTab('register')">Register</button></div>
 
                 <div id="loginError" class="error-msg"></div><div id="registerError" class="error-msg"></div><div id="registerSuccess" class="success-msg"></div>
 
-                <!-- LOGIN FORM -->
                 <form id="loginForm" class="auth-form active" onsubmit="return handleLogin(event)">
                     <div class="form-group"><label>Email or Phone Number</label><input type="text" id="loginIdentifier" placeholder="email@example.com or 09123456789" required></div>
                     <div class="form-group"><label>Password</label><input type="password" id="loginPassword" placeholder="Enter your password" required></div>
-                    <button type="submit" class="btn-auth">Login to Account</button>
+                    <button type="submit" class="btn-auth">Login</button>
                     <div class="divider"><span>or</span></div>
                     <button type="button" class="btn-auth" style="background: #4285f4;" onclick="handleGoogleLogin()"><i class="fab fa-google"></i> Continue with Google</button>
                 </form>
 
-                <!-- REGISTER FORM -->
                 <form id="registerForm" class="auth-form" onsubmit="return handleRegister(event)">
                     <div class="form-group"><label>First Name</label><input type="text" id="regFirstName" required></div>
                     <div class="form-group"><label>Last Name</label><input type="text" id="regLastName" required></div>
                     <div class="form-group"><label>Email Address</label><input type="email" id="regEmail" required></div>
                     <div class="form-group"><label>Phone Number</label><input type="tel" id="regPhone" placeholder="09123456789"></div>
-                    
                     <div class="form-group"><label>Province</label><select id="regProvince" onchange="updateMunicipalities()"><option value="">Select Province</option><option value="Batangas">Batangas</option><option value="Laguna">Laguna</option><option value="Quezon">Quezon</option></select></div>
                     <div class="form-group" id="municipalityContainer" style="display: none;"><label>Municipality / City</label><select id="regMunicipality"><option value="">Select Municipality</option></select></div>
-                    
                     <div class="form-group"><label>Password (12-16 characters)</label><input type="password" id="regPassword" placeholder="Min. 12 characters" required onkeyup="validatePassword()"></div>
                     <div class="form-group"><label>Confirm Password</label><input type="password" id="regConfirmPassword" required onkeyup="validatePasswordMatch()"></div>
-                    
                     <div class="password-requirements" id="passwordRequirements">
                         <div class="req" id="reqLength"><i class="fas fa-circle"></i> 12-16 characters</div>
                         <div class="req" id="reqUppercase"><i class="fas fa-circle"></i> At least 1 uppercase letter (A-Z)</div>
@@ -143,8 +131,7 @@
                         <div class="req" id="reqSpecial"><i class="fas fa-circle"></i> At least 1 special character (!@#$%^&*)</div>
                         <div class="req" id="reqMatch"><i class="fas fa-circle"></i> Passwords match</div>
                     </div>
-                    
-                    <button type="submit" class="btn-auth">Create Account</button>
+                    <button type="submit" class="btn-auth">Register</button>
                     <div class="divider"><span>or</span></div>
                     <button type="button" class="btn-auth" style="background: #4285f4;" onclick="handleGoogleRegister()"><i class="fab fa-google"></i> Sign up with Google</button>
                 </form>
@@ -152,202 +139,103 @@
         </div>
     </main>
 
-    <!-- MODAL 1: ACCOUNT TYPE SELECTION -->
     <div id="accountTypeModal" class="selection-modal">
         <div class="selection-content">
-            <div class="selection-icon"><i class="fas fa-user-plus"></i></div>
-            <div class="selection-title">Choose Account Type</div>
-            <div class="selection-subtitle">Select how you want to use RRJ FARM</div>
+            <div class="selection-icon"><i class="fas fa-user-astronaut"></i></div>
+            <div class="selection-title">Welcome to RRJ FARM!</div>
+            <div class="selection-subtitle">Select how you want to use the platform. You can always upgrade later.</div>
             <div class="account-options">
                 <div class="account-option" onclick="selectAccountType('student')">
                     <div class="account-option-icon">🎓</div>
-                    <div class="account-option-info">
-                        <div class="account-option-title">Student / Researcher</div>
-                        <div class="account-option-desc">Access to workshops, research data, and AI tools</div>
-                    </div>
-                    <i class="fas fa-chevron-right" style="color: #2d6a2d;"></i>
+                    <div class="account-option-info"><div class="account-option-title">Student / Researcher</div><div class="account-option-desc">Access workshops, research data, and AI tools</div></div>
+                    <i class="fas fa-chevron-right"></i>
                 </div>
                 <div class="account-option" onclick="selectAccountType('member')">
                     <div class="account-option-icon">👥</div>
-                    <div class="account-option-info">
-                        <div class="account-option-title">Member</div>
-                        <div class="account-option-desc">Full cooperative benefits, voting rights, profit sharing</div>
-                    </div>
-                    <i class="fas fa-chevron-right" style="color: #2d6a2d;"></i>
+                    <div class="account-option-info"><div class="account-option-title">Cooperative Member</div><div class="account-option-desc">Full benefits, voting rights, profit sharing</div></div>
+                    <i class="fas fa-chevron-right"></i>
                 </div>
                 <div class="account-option" onclick="selectAccountType('stewardship')">
                     <div class="account-option-icon">🌾</div>
-                    <div class="account-option-info">
-                        <div class="account-option-title">Land Stewardship</div>
-                        <div class="account-option-desc">Apply for farm land access and management</div>
-                    </div>
-                    <i class="fas fa-chevron-right" style="color: #2d6a2d;"></i>
+                    <div class="account-option-info"><div class="account-option-title">Land Stewardship</div><div class="account-option-desc">Apply for farm land access and management</div></div>
+                    <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 2: SUBSCRIPTION STATUS CHECK -->
     <div id="statusModal" class="status-modal">
         <div class="status-content">
-            <div class="status-badge" id="statusBadge">⚙️ Checking Status</div>
+            <div class="status-badge" id="statusBadge">🔍 Checking</div>
             <div class="selection-icon" id="statusIcon">🔄</div>
             <div class="selection-title" id="statusTitle">Checking Subscription...</div>
-            <div id="statusMessage" class="selection-subtitle">Please wait while we verify your subscription status.</div>
-            <div id="subscribedInfo" style="display: none;"></div>
-            <div class="reminder-buttons" style="display: flex; gap: 1rem; margin-top: 1.5rem;" id="statusButtons">
-                <button class="btn-primary-modal" id="primaryActionBtn">Continue</button>
-            </div>
-            <button class="btn-secondary-modal" style="width:100%; margin-top:0.8rem;" id="cancelActionBtn" onclick="closeStatusModalAndCancel()">Cancel</button>
+            <div id="statusMessage" class="selection-subtitle"></div>
+            <div id="infoCardContainer"></div>
+            <div class="button-group" id="statusButtons"></div>
+            <button class="btn-secondary-modal" id="cancelStatusBtn" onclick="closeStatusModal()">Close</button>
         </div>
     </div>
 
-    <footer class="modern-footer"><div class="container"><div class="footer-grid"><div class="footer-info"><h3>RRJ FARM</h3><p>CDA Registered Cooperative</p></div></div><div class="footer-bottom"><p>&copy; 2026 RRJ FARM - Digital Cooperative</p></div></div></footer>
+    <footer class="modern-footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 RRJ FARM - Digital Cooperative | RA 9520 Compliant</p></div></div></footer>
     <div id="successToast" class="success-toast"></div>
 
     <script>
-        // Municipality Data
         const municipalitiesData = {
-            Batangas: ["Agoncillo", "Alitagtag", "Balayan", "Balete", "Batangas City", "Bauan", "Calaca", "Calatagan", "Cuenca", "Ibaan", "Laurel", "Lemery", "Lian", "Lipa City", "Lobo", "Mabini", "Malvar", "Mataasnakahoy", "Nasugbu", "Padre Garcia", "Rosario", "San Jose", "San Juan", "San Luis", "San Nicolas", "San Pascual", "Santa Teresita", "Santo Tomas", "Taal", "Talisay", "Tanauan City", "Taysan", "Tingloy", "Tuy"],
-            Laguna: ["Alaminos", "Bay", "Biñan City", "Cabuyao City", "Calamba City", "Calauan", "Cavinti", "Famy", "Kalayaan", "Liliw", "Los Baños", "Luisiana", "Lumban", "Mabitac", "Magdalena", "Majayjay", "Nagcarlan", "Paete", "Pagsanjan", "Pakil", "Pangil", "Pila", "Rizal", "San Pablo City", "San Pedro City", "Santa Cruz", "Santa Maria", "Santa Rosa City", "Siniloan", "Victoria"],
-            Quezon: ["Agdangan", "Alabat", "Atimonan", "Buenavista", "Burdeos", "Calauag", "Candelaria", "Catanauan", "Dolores", "General Luna", "General Nakar", "Guinayangan", "Gumaca", "Infanta", "Jomalig", "Lopez", "Lucban", "Lucena City", "Macalelon", "Mauban", "Mulanay", "Padre Burgos", "Pagbilao", "Panukulan", "Patnanungan", "Perez", "Pitogo", "Plaridel", "Polillo", "Quezon", "Real", "Sampaloc", "San Andres", "San Antonio", "San Francisco", "San Narciso", "Sariaya", "Tagkawayan", "Tayabas City", "Tiaong", "Unisan"]
+            Batangas: ["Lipa City", "Tanauan City", "Batangas City", "Santo Tomas", "Malvar", "Balete", "Mataasnakahoy", "Cuenca", "Alitagtag", "Bauan", "San Pascual", "Ibaan", "Taysan", "Rosario", "San Juan", "Lobo"],
+            Laguna: ["Los Baños", "Calamba City", "Santa Cruz", "Pagsanjan", "Liliw", "Nagcarlan", "San Pablo City", "Bay", "Calauan", "Victoria", "Pila", "Santa Maria", "Siniloan", "Famy", "Mabitac"],
+            Quezon: ["Lucena City", "Tayabas City", "Sariaya", "Candelaria", "Tiaong", "San Antonio", "San Francisco", "Pagbilao", "Atimonan", "Unisan", "Gumaca", "Lopez"]
         };
 
-        let selectedAccountType = null;
-        let tempUserData = null;
-        let pendingAction = null;
+        let selectedAccountType = 'member';
 
         function showToast(msg) { let t = document.getElementById('successToast'); t.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); }
 
-        // ========== MODAL 1: ACCOUNT TYPE SELECTION ==========
+        function getActiveSubscription(email) {
+            const userSubscriptions = JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions') || '[]');
+            return userSubscriptions.find(sub => sub.status === 'Active' && sub.subscriberEmail === email);
+        }
+
         function selectAccountType(type) {
             selectedAccountType = type;
             document.getElementById('accountTypeModal').classList.remove('active');
-            
-            // Check if user has existing active subscription
-            const userSubscriptions = JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions') || '[]');
-            const activeSubscription = userSubscriptions.find(sub => sub.status === 'Active');
-            
-            if (activeSubscription) {
-                // USER HAS SUBSCRIPTION - Show subscribed info
-                document.getElementById('statusBadge').className = 'status-badge member';
-                document.getElementById('statusBadge').innerHTML = '✅ MEMBER';
-                document.getElementById('statusIcon').innerHTML = '🎉';
-                document.getElementById('statusTitle').innerHTML = 'You are a Member!';
-                document.getElementById('statusMessage').innerHTML = 'You already have an active subscription. You can now access all member benefits.';
-                document.getElementById('subscribedInfo').style.display = 'block';
-                document.getElementById('subscribedInfo').innerHTML = `
-                    <div class="info-card">
-                        <div class="info-row"><span class="info-label">Name:</span><span class="info-value">${activeSubscription.subscriberName || 'N/A'}</span></div>
-                        <div class="info-row"><span class="info-label">Email:</span><span class="info-value">${activeSubscription.subscriberEmail || 'N/A'}</span></div>
-                        <div class="info-row"><span class="info-label">Phone:</span><span class="info-value">${activeSubscription.subscriberPhone || activeSubscription.phone || 'N/A'}</span></div>
-                        <div class="info-row"><span class="info-label">Reference No.:</span><span class="info-value">${activeSubscription.id || 'SUB-' + Date.now()}</span></div>
-                        <div class="info-row"><span class="info-label">Plan:</span><span class="info-value">${activeSubscription.plan || 'Members Plan'}</span></div>
-                    </div>
-                `;
-                document.getElementById('primaryActionBtn').innerHTML = 'Proceed to Login / Register →';
-                document.getElementById('primaryActionBtn').onclick = () => {
-                    closeStatusModal();
-                    showAuthCard();
-                };
-                document.getElementById('cancelActionBtn').style.display = 'block';
-                document.getElementById('statusModal').classList.add('active');
-            } else {
-                // USER HAS NO SUBSCRIPTION - Show non-member status
-                document.getElementById('statusBadge').className = 'status-badge non-member';
-                document.getElementById('statusBadge').innerHTML = '📋 NON-MEMBER';
-                document.getElementById('statusIcon').innerHTML = '⚠️';
-                document.getElementById('statusTitle').innerHTML = 'You are a Non-Member';
-                document.getElementById('statusMessage').innerHTML = 'You currently have no active subscription. As a non-member, you will only have access to the Marketplace. Subscribe now to unlock full benefits including workshops, AI tools, and cooperative benefits.';
-                document.getElementById('subscribedInfo').style.display = 'none';
-                document.getElementById('primaryActionBtn').innerHTML = 'Continue as Non-Member →';
-                document.getElementById('primaryActionBtn').onclick = () => {
-                    closeStatusModal();
-                    showAuthCard();
-                };
-                document.getElementById('cancelActionBtn').style.display = 'block';
-                document.getElementById('statusModal').classList.add('active');
-            }
-        }
-
-        function closeStatusModal() {
-            document.getElementById('statusModal').classList.remove('active');
-        }
-
-        function closeStatusModalAndCancel() {
-            document.getElementById('statusModal').classList.remove('active');
-            // User canceled - show account type modal again for them to choose
-            document.getElementById('accountTypeModal').classList.add('active');
-        }
-
-        function showAuthCard() {
             document.getElementById('authCard').style.display = 'block';
-            const subtitle = document.getElementById('authSubtitle');
-            if (selectedAccountType === 'student') subtitle.innerHTML = 'Student / Researcher Portal';
-            else if (selectedAccountType === 'member') subtitle.innerHTML = 'Member Portal';
-            else subtitle.innerHTML = 'Land Stewardship Portal';
+            let subtitle = type === 'student' ? 'Student / Researcher Portal - Login or Register' : (type === 'member' ? 'Member Portal - Login or Register' : 'Land Stewardship Portal - Login or Register');
+            document.getElementById('authSubtitle').innerHTML = subtitle;
         }
 
-        // ========== LOCATION FUNCTIONS ==========
-        function updateMunicipalities() {
-            const province = document.getElementById('regProvince').value;
-            const municipalityContainer = document.getElementById('municipalityContainer');
-            const municipalitySelect = document.getElementById('regMunicipality');
-            if (!province || province === "") {
-                municipalityContainer.style.display = "none";
-                municipalitySelect.innerHTML = '<option value="">Select Municipality</option>';
-                return;
-            }
-            municipalityContainer.style.display = "block";
-            const municipalities = municipalitiesData[province];
-            if (municipalities && municipalities.length > 0) {
-                municipalitySelect.innerHTML = '<option value="">Select Municipality / City</option>' + municipalities.map(city => `<option value="${city}">📍 ${city}</option>`).join('');
+        function showStatusModal(user, subscription) {
+            const hasSubscription = subscription !== undefined;
+            const badge = document.getElementById('statusBadge');
+            const icon = document.getElementById('statusIcon');
+            const title = document.getElementById('statusTitle');
+            const message = document.getElementById('statusMessage');
+            const infoCard = document.getElementById('infoCardContainer');
+            const btnGroup = document.getElementById('statusButtons');
+
+            if (hasSubscription) {
+                badge.className = 'status-badge member';
+                badge.innerHTML = '✅ ACTIVE MEMBER';
+                icon.innerHTML = '🎉';
+                title.innerHTML = `Welcome ${user.firstName}! You're a Member`;
+                message.innerHTML = `You have an active ${subscription.plan} subscription. Enjoy all member benefits!`;
+                infoCard.innerHTML = `<div class="info-card"><div class="info-row"><span class="info-label">Plan:</span><span class="info-value">${subscription.plan}</span></div><div class="info-row"><span class="info-label">Member since:</span><span class="info-value">${subscription.startDate || 'N/A'}</span></div><div class="info-row"><span class="info-label">Next billing:</span><span class="info-value">${subscription.nextBilling || 'N/A'}</span></div></div>`;
+                btnGroup.innerHTML = `<button class="btn-primary-modal" onclick="goToDashboard()">Go to Member Dashboard →</button>`;
             } else {
-                municipalitySelect.innerHTML = '<option value="">No municipalities found</option>';
+                badge.className = 'status-badge non-member';
+                badge.innerHTML = '📋 NON-MEMBER';
+                icon.innerHTML = '👤';
+                title.innerHTML = `Welcome ${user.firstName}!`;
+                message.innerHTML = `You are currently a Non-Member. Subscribe now to unlock full benefits including workshops, AI tools, and cooperative voting rights.`;
+                infoCard.innerHTML = `<div class="info-card"><div class="info-row"><span class="info-label">Status:</span><span class="info-value">Free Account (Non-Member)</span></div><div class="info-row"><span class="info-label">Access:</span><span class="info-value">Marketplace only</span></div></div>`;
+                btnGroup.innerHTML = `<button class="btn-subscribe" onclick="goToSubscribe()">🔔 Subscribe Now (Unlock Full Benefits)</button><button class="btn-dashboard" onclick="goToDashboard()">Continue to Dashboard →</button>`;
             }
+            document.getElementById('statusModal').classList.add('active');
         }
 
-        // ========== PASSWORD VALIDATION ==========
-        function validatePassword() {
-            const password = document.getElementById('regPassword').value;
-            const hasLength = password.length >= 12 && password.length <= 16;
-            const hasUppercase = /[A-Z]/.test(password);
-            const hasLowercase = /[a-z]/.test(password);
-            const hasNumber = /[0-9]/.test(password);
-            const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
-            updateRequirement('reqLength', hasLength);
-            updateRequirement('reqUppercase', hasUppercase);
-            updateRequirement('reqLowercase', hasLowercase);
-            updateRequirement('reqNumber', hasNumber);
-            updateRequirement('reqSpecial', hasSpecial);
-            validatePasswordMatch();
-            return hasLength && hasUppercase && hasLowercase && hasNumber && hasSpecial;
-        }
+        function goToDashboard() { window.location.href = 'memberdashboard.html'; }
+        function goToSubscribe() { window.location.href = 'subscriptions.html'; }
+        function closeStatusModal() { document.getElementById('statusModal').classList.remove('active'); }
 
-        function validatePasswordMatch() {
-            const password = document.getElementById('regPassword').value;
-            const confirm = document.getElementById('regConfirmPassword').value;
-            const matches = password === confirm && password.length > 0;
-            updateRequirement('reqMatch', matches);
-            return matches;
-        }
-
-        function updateRequirement(id, isValid) {
-            const element = document.getElementById(id);
-            if (element) {
-                if (isValid) {
-                    element.classList.add('valid');
-                    element.classList.remove('invalid');
-                    element.innerHTML = '<i class="fas fa-check-circle"></i> ' + element.innerHTML.split('</i>')[1];
-                } else {
-                    element.classList.add('invalid');
-                    element.classList.remove('valid');
-                    element.innerHTML = '<i class="fas fa-times-circle"></i> ' + element.innerHTML.split('</i>')[1];
-                }
-            }
-        }
-
-        // ========== AUTH FUNCTIONS ==========
         function switchTab(tabName) {
             document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
             document.querySelector(`.auth-tab[data-tab="${tabName}"]`).classList.add('active');
@@ -356,18 +244,74 @@
             document.getElementById(`${tabName}Form`).classList.add('active');
         }
 
+        function updateMunicipalities() {
+            const province = document.getElementById('regProvince').value;
+            const container = document.getElementById('municipalityContainer');
+            const select = document.getElementById('regMunicipality');
+            if (!province) { container.style.display = "none"; return; }
+            container.style.display = "block";
+            const municipalities = municipalitiesData[province] || [];
+            select.innerHTML = '<option value="">Select Municipality</option>' + municipalities.map(c => `<option value="${c}">${c}</option>`).join('');
+        }
+
+        function validatePassword() {
+            const pwd = document.getElementById('regPassword').value;
+            const checks = { reqLength: pwd.length >= 12 && pwd.length <= 16, reqUppercase: /[A-Z]/.test(pwd), reqLowercase: /[a-z]/.test(pwd), reqNumber: /[0-9]/.test(pwd), reqSpecial: /[!@#$%^&*]/.test(pwd) };
+            for (let [id, valid] of Object.entries(checks)) {
+                const el = document.getElementById(id);
+                if (el) {
+                    const text = el.innerHTML.split('</i>')[1];
+                    if (valid) { el.classList.add('valid'); el.classList.remove('invalid'); el.innerHTML = '<i class="fas fa-check-circle"></i>' + text; }
+                    else { el.classList.add('invalid'); el.classList.remove('valid'); el.innerHTML = '<i class="fas fa-times-circle"></i>' + text; }
+                }
+            }
+            validatePasswordMatch();
+            return Object.values(checks).every(v => v === true);
+        }
+
+        function validatePasswordMatch() {
+            const pwd = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regConfirmPassword').value;
+            const match = pwd === confirm && pwd.length > 0;
+            const el = document.getElementById('reqMatch');
+            if (el) {
+                if (match) { el.classList.add('valid'); el.classList.remove('invalid'); el.innerHTML = '<i class="fas fa-check-circle"></i> Passwords match'; }
+                else { el.classList.add('invalid'); el.classList.remove('valid'); el.innerHTML = '<i class="fas fa-times-circle"></i> Passwords match'; }
+            }
+            return match;
+        }
+
+        // ========== HANDLE LOGIN WITH ADMIN DETECTION ==========
         function handleLogin(event) {
             event.preventDefault();
             const identifier = document.getElementById('loginIdentifier').value;
             const password = document.getElementById('loginPassword').value;
-            const users = JSON.parse(localStorage.getItem('rrjfarm_users') || '[]');
             
+            // ADMIN LOGIN CHECK
+            if (identifier === "admin@rrjfarm.com" && password === "Admin123") {
+                const adminUser = {
+                    id: "admin001",
+                    firstName: "Admin",
+                    lastName: "User",
+                    email: "admin@rrjfarm.com",
+                    role: "admin",
+                    isLoggedIn: true,
+                    profileCompleted: true
+                };
+                localStorage.setItem('rrjfarm_current_user', JSON.stringify(adminUser));
+                showSuccessMessage('loginError', '✅ Admin login successful! Redirecting to Admin Dashboard...');
+                setTimeout(() => { window.location.href = 'admindashboard.html'; }, 1500);
+                return false;
+            }
+            
+            // REGULAR USER LOGIN
+            const users = JSON.parse(localStorage.getItem('rrjfarm_users') || '[]');
             const user = users.find(u => (u.email === identifier || u.phone === identifier) && u.password === password);
             if (user) {
-                const sessionUser = { id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, location: user.location, role: user.role, accountType: selectedAccountType, isLoggedIn: true, profileCompleted: user.profileCompleted || false };
+                const sessionUser = { id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, location: user.location, accountType: selectedAccountType, isLoggedIn: true };
                 localStorage.setItem('rrjfarm_current_user', JSON.stringify(sessionUser));
-                showSuccessMessage('loginError', '✅ Login successful! Redirecting...');
-                setTimeout(() => { window.location.href = 'memberdashboard.html'; }, 1500);
+                const subscription = getActiveSubscription(user.email);
+                showStatusModal(sessionUser, subscription);
             } else { showError('loginError', '❌ Invalid credentials.'); }
             return false;
         }
@@ -385,48 +329,39 @@
             
             if (!firstName || !lastName || !email || !password) { showError('registerError', 'Please fill all required fields'); return false; }
             if (password !== confirm) { showError('registerError', 'Passwords do not match'); return false; }
-            
-            const isValidLength = password.length >= 12 && password.length <= 16;
-            const hasUppercase = /[A-Z]/.test(password);
-            const hasLowercase = /[a-z]/.test(password);
-            const hasNumber = /[0-9]/.test(password);
-            const hasSpecial = /[!@#$%^&*]/.test(password);
-            if (!isValidLength || !hasUppercase || !hasLowercase || !hasNumber || !hasSpecial) {
-                showError('registerError', 'Password must be 12-16 characters with uppercase, lowercase, number, and special character.');
-                return false;
-            }
+            if (!validatePassword()) { showError('registerError', 'Password does not meet requirements'); return false; }
             
             const location = province && municipality ? `${municipality}, ${province}` : (province || '');
-            
             const users = JSON.parse(localStorage.getItem('rrjfarm_users') || '[]');
             if (users.some(u => u.email === email)) { showError('registerError', 'Email already registered'); return false; }
             
-            const newUser = { id: Date.now(), firstName, lastName, email, phone: phone || '', password, location, role: selectedAccountType || 'buyer', accountType: selectedAccountType, profileCompleted: true, registrationDate: new Date().toISOString() };
+            const newUser = { id: Date.now(), firstName, lastName, email, phone: phone || '', password, location, accountType: selectedAccountType, role: selectedAccountType, profileCompleted: true, registrationDate: new Date().toISOString() };
             users.push(newUser);
             localStorage.setItem('rrjfarm_users', JSON.stringify(users));
             
-            const sessionUser = { id: newUser.id, firstName, lastName, email, phone, location, role: selectedAccountType, accountType: selectedAccountType, isLoggedIn: true, profileCompleted: true };
+            const sessionUser = { id: newUser.id, firstName, lastName, email, phone, location, accountType: selectedAccountType, isLoggedIn: true };
             localStorage.setItem('rrjfarm_current_user', JSON.stringify(sessionUser));
-            
-            showSuccessMessage('registerSuccess', '✅ Account created successfully! Redirecting...');
-            setTimeout(() => { window.location.href = 'memberdashboard.html'; }, 1500);
+            const subscription = getActiveSubscription(email);
+            showStatusModal(sessionUser, subscription);
             return false;
         }
 
-        function handleGoogleLogin() { window.location.href = 'memberdashboard.html'; }
-        function handleGoogleRegister() { window.location.href = 'memberdashboard.html'; }
-        
+        function handleGoogleLogin() { 
+            const demoUser = { id: 999, firstName: "Google", lastName: "User", email: "google@example.com", phone: "", location: "", accountType: selectedAccountType, isLoggedIn: true };
+            localStorage.setItem('rrjfarm_current_user', JSON.stringify(demoUser));
+            const subscription = getActiveSubscription(demoUser.email);
+            showStatusModal(demoUser, subscription);
+        }
+        function handleGoogleRegister() { handleGoogleLogin(); }
         function showError(id, msg) { const el = document.getElementById(id); el.innerHTML = msg; el.style.display = 'block'; setTimeout(() => el.style.display = 'none', 3000); }
         function showSuccessMessage(id, msg) { const el = document.getElementById(id); el.innerHTML = msg; el.style.display = 'block'; setTimeout(() => el.style.display = 'none', 2000); }
 
-        // Initialize - Show account type modal first
         document.getElementById('accountTypeModal').classList.add('active');
-        document.getElementById('cancelActionBtn').style.display = 'block';
-
         window.switchTab = switchTab; window.handleLogin = handleLogin; window.handleRegister = handleRegister;
         window.handleGoogleLogin = handleGoogleLogin; window.handleGoogleRegister = handleGoogleRegister;
         window.updateMunicipalities = updateMunicipalities; window.selectAccountType = selectAccountType;
-        window.closeStatusModal = closeStatusModal; window.closeStatusModalAndCancel = closeStatusModalAndCancel;
+        window.closeStatusModal = closeStatusModal; window.goToDashboard = goToDashboard;
+        window.goToSubscribe = goToSubscribe; window.validatePassword = validatePassword; window.validatePasswordMatch = validatePasswordMatch;
     </script>
 </body>
 </html>
