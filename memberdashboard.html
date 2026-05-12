@@ -13,102 +13,107 @@
         body { font-family: 'Inter', sans-serif; background: #f5f7f2; color: #1a2e1a; overflow-x: hidden; }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
         
-        .modern-header { background: linear-gradient(135deg, #0a2e0a, #145214); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .modern-header { background: linear-gradient(135deg, #0a2e0a, #145214); position: sticky; top: 0; z-index: 1000; }
         .header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
         .logo h1 { font-size: 1.6rem; background: linear-gradient(135deg, #ffffff, #ffea8c, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .logo p { font-size: 0.7rem; color: #c8e6c8; }
         
-        .nav-menu ul { display: flex; gap: 0.5rem; list-style: none; flex-wrap: wrap; justify-content: center; }
-        .nav-menu a { color: #e0f0e0; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 40px; transition: all 0.3s; display: flex; align-items: center; gap: 6px; font-size: 0.85rem; cursor: pointer; }
-        .nav-menu a i { font-size: 0.85rem; }
-        .nav-menu a:hover { background: rgba(255, 215, 0, 0.15); color: #ffea8c; transform: translateY(-2px); }
-        .nav-menu a.active { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a3a1a; box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
+        .nav-menu ul { display: flex; gap: 1rem; list-style: none; flex-wrap: wrap; }
+        .nav-menu a { color: #e0f0e0; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 40px; transition: all 0.3s; display: flex; align-items: center; gap: 6px; font-size: 0.85rem; }
+        .nav-menu a:hover { background: rgba(255, 215, 0, 0.15); color: #ffea8c; }
         
-        /* Profile Dropdown - Mobile Friendly */
         .user-menu { position: relative; display: flex; align-items: center; gap: 0.8rem; }
-        .user-avatar { background: #ffd700; color: #1a2e1a; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
-        .user-avatar:active { transform: scale(0.95); }
-        .profile-dropdown { position: absolute; top: 50px; right: 0; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 250px; display: none; z-index: 1100; overflow: hidden; }
+        .user-avatar { background: #ffd700; color: #1a2e1a; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; }
+        .profile-dropdown { position: absolute; top: 50px; right: 0; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 280px; display: none; z-index: 1100; overflow: hidden; }
         .profile-dropdown.show { display: block; }
-        .dropdown-item { padding: 0.8rem 1rem; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; transition: 0.2s; border-bottom: 1px solid #f0f0f0; font-size: 0.85rem; }
+        .dropdown-item { padding: 0.8rem 1rem; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; border-bottom: 1px solid #f0f0f0; }
         .dropdown-item:hover { background: #eef3ea; }
-        .dropdown-item i { width: 22px; color: #2d6a2d; font-size: 1rem; }
+        .dropdown-item i { width: 22px; color: #2d6a2d; }
         .logout-item { color: #dc3545; }
         .logout-item i { color: #dc3545; }
+        .profile-sub-status { font-size: 0.7rem; color: #666; margin-top: 0.2rem; }
         
-        .access-badge { display: inline-block; padding: 0.2rem 0.8rem; border-radius: 50px; font-size: 0.7rem; font-weight: 600; margin-left: 0.5rem; }
-        .badge-member { background: #d4edda; color: #155724; }
-        .badge-nonmember { background: #fff3cd; color: #856404; }
+        .reminder-banner { background: linear-gradient(135deg, #fff3cd, #ffe8b3); color: #856404; padding: 0.8rem 1rem; border-radius: 16px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-left: 4px solid #ffc107; }
+        .btn-subscribe-banner { background: #ff8c00; color: white; border: none; padding: 0.4rem 1rem; border-radius: 30px; cursor: pointer; font-weight: 600; }
         
-        .reminder-banner { background: linear-gradient(135deg, #fff3cd, #ffe8b3); color: #856404; padding: 0.8rem 1rem; border-radius: 16px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-left: 4px solid #ffc107; font-size: 0.8rem; }
-        .btn-subscribe-banner { background: #ff8c00; color: white; border: none; padding: 0.4rem 1rem; border-radius: 30px; cursor: pointer; font-weight: 600; font-size: 0.75rem; }
-        
-        .dashboard-tabs { display: flex; gap: 0.5rem; margin: 1.5rem 0; background: white; padding: 0.5rem; border-radius: 60px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); flex-wrap: wrap; justify-content: center; }
-        .dashboard-tab { padding: 0.6rem 1rem; background: none; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; transition: all 0.3s; color: #4a5b4a; font-size: 0.8rem; white-space: nowrap; }
-        .dashboard-tab i { margin-right: 0.3rem; }
+        .dashboard-tabs { display: flex; gap: 0.5rem; margin: 1.5rem 0; background: white; padding: 0.5rem; border-radius: 60px; flex-wrap: wrap; justify-content: center; }
+        .dashboard-tab { padding: 0.6rem 1rem; background: none; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; color: #4a5b4a; font-size: 0.8rem; }
         .dashboard-tab.active { background: #2d6a2d; color: white; }
         .dashboard-tab.hidden { display: none; }
-        .tab-content { display: none; animation: fadeIn 0.2s ease; }
+        .tab-content { display: none; animation: fadeIn 0.2s; }
         .tab-content.active { display: block; }
         
-        .dashboard-card { background: white; border-radius: 20px; padding: 1.2rem; margin-bottom: 1.2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 2px solid #e8f0e8; flex-wrap: wrap; gap: 0.5rem; }
-        .card-header h3 { font-size: 1.1rem; }
-        
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.8rem; margin-bottom: 1rem; }
-        .stat-card { background: linear-gradient(135deg, #fff, #fafefa); padding: 0.8rem; border-radius: 16px; text-align: center; border: 1px solid #e0ebdd; }
+        .dashboard-card { background: white; border-radius: 24px; padding: 1.2rem; margin-bottom: 1.2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 2px solid #e8f0e8; flex-wrap: wrap; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin-bottom: 1rem; }
+        .stat-card { background: #fafefa; padding: 0.8rem; border-radius: 16px; text-align: center; border: 1px solid #e0ebdd; }
         .stat-number { font-size: 1.3rem; font-weight: 800; color: #2d6a2d; }
-        .stat-label { font-size: 0.7rem; color: #4a5b4a; }
         
-        .order-item, .product-item { border: 1px solid #e8f0e8; border-radius: 16px; padding: 0.8rem; margin-bottom: 0.8rem; background: white; transition: 0.2s; cursor: pointer; }
-        .order-item:hover, .product-item:hover { background: #fefce8; border-color: #ffd700; }
+        /* Original Marketplace/Workshops/Subscriptions Design */
+        .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .plan-card { background: white; border-radius: 28px; overflow: hidden; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1); }
+        .plan-header { padding: 1.5rem; text-align: center; color: white; }
+        .plan-header.researcher { background: linear-gradient(135deg, #1e3a5f, #2c5282); }
+        .plan-header.member { background: linear-gradient(135deg, #2d6a2d, #1a4d1a); }
+        .plan-price { font-size: 2rem; font-weight: 800; }
+        .plan-price small { font-size: 0.8rem; }
+        .plan-body { padding: 1.2rem 1.5rem 1.5rem; }
+        .benefit-list { list-style: none; margin-bottom: 1rem; }
+        .benefit-list li { padding: 0.5rem 0; display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; }
+        .benefit-list li i { color: #2d6a2d; width: 20px; }
+        .btn-subscribe-plan { width: 100%; padding: 0.8rem; background: #2d6a2d; color: white; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; }
+        
+        .products-grid-modern { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .product-card-modern { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; }
+        .product-image-modern { height: 160px; background: linear-gradient(135deg, #e8f0e8, #d4e4d4); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .product-info-modern { padding: 1rem; }
+        .product-title-modern { font-weight: 700; margin-bottom: 0.3rem; }
+        .product-price-modern { font-size: 1.2rem; font-weight: 800; color: #ff8c00; margin: 0.5rem 0; }
+        .product-meta { font-size: 0.7rem; color: #666; display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.3rem 0; }
+        .btn-buy-modern { width: 100%; background: linear-gradient(135deg, #2d6a2d, #1a4d1a); color: white; border: none; padding: 0.6rem; border-radius: 12px; font-weight: 600; cursor: pointer; }
+        
+        .workshops-grid-premium { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+        .workshop-card-premium { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; }
+        .workshop-image { height: 140px; background: linear-gradient(135deg, #e8f0e8, #d4e4d4); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .workshop-content-premium { padding: 1rem; }
+        .workshop-title-premium { font-weight: 700; margin-bottom: 0.5rem; }
+        .workshop-meta-premium { display: flex; flex-wrap: wrap; gap: 0.8rem; font-size: 0.7rem; color: #666; margin: 0.5rem 0; }
+        .workshop-price-premium { font-size: 1.2rem; font-weight: 800; color: #ff8c00; margin: 0.5rem 0; }
+        .slots-left { font-size: 0.7rem; color: #2d6a2d; background: #e8f0e8; padding: 0.2rem 0.5rem; border-radius: 20px; }
+        .btn-register-premium { width: 100%; background: linear-gradient(135deg, #2d6a2d, #1a4d1a); color: white; border: none; padding: 0.6rem; border-radius: 12px; font-weight: 600; cursor: pointer; }
+        
+        .order-item { border: 1px solid #e8f0e8; border-radius: 16px; padding: 0.8rem; margin-bottom: 0.8rem; background: white; }
         .order-status { padding: 0.2rem 0.6rem; border-radius: 30px; font-size: 0.65rem; font-weight: 600; display: inline-block; }
-        .status-pending { background: #fff3cd; color: #856404; }
-        .status-processing { background: #cce5ff; color: #004085; }
-        .status-shipped { background: #d4edda; color: #155724; }
         .status-delivered { background: #2d6a2d; color: white; }
-        .btn-action { padding: 0.3rem 0.8rem; border-radius: 30px; border: none; cursor: pointer; font-size: 0.65rem; font-weight: 600; margin: 0.1rem; background: #eef2e8; }
-        .btn-rate { background: #ffd700; color: #1a2e1a; }
-        .wallet-btn { flex: 1; padding: 0.6rem; border-radius: 40px; font-weight: bold; border: none; background: #2d6a2d; color: white; cursor: pointer; margin: 0.3rem; font-size: 0.8rem; }
-        .subscription-card { background: #eef3ea; border-radius: 16px; padding: 0.8rem; margin-bottom: 0.8rem; border-left: 4px solid #ffd700; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.8rem; }
+        .status-shipped { background: #d4edda; color: #155724; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .btn-action { padding: 0.3rem 0.8rem; border-radius: 30px; border: none; cursor: pointer; font-size: 0.65rem; background: #eef2e8; }
         
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
         .modal.active { display: flex; }
-        .modal-content { background: white; border-radius: 24px; max-width: 500px; width: 90%; padding: 0; animation: fadeUp 0.3s ease; max-height: 85vh; overflow-y: auto; }
+        .modal-content { background: white; border-radius: 28px; max-width: 500px; width: 90%; padding: 0; max-height: 85vh; overflow-y: auto; }
         .modal-header { padding: 1rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eef3ea; position: sticky; top: 0; background: white; }
-        .modal-header h3 { font-size: 1.1rem; }
         .modal-body { padding: 1rem; }
-        .modal-footer { padding: 0.8rem 1rem; display: flex; gap: 0.8rem; justify-content: flex-end; border-top: 1px solid #eef3ea; }
-        .close-modal-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; }
-        .btn-primary { background: #2d6a2d; color: white; padding: 0.5rem 1rem; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; font-size: 0.8rem; }
-        .btn-secondary { background: #eef2e8; color: #1a2e1a; padding: 0.5rem 1rem; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; font-size: 0.8rem; }
-        .modal-input { width: 100%; padding: 0.6rem; border: 2px solid #e0e0e0; border-radius: 12px; margin: 0.5rem 0; font-family: inherit; font-size: 0.8rem; }
+        .modal-footer { padding: 0.8rem 1rem; display: flex; gap: 0.8rem; justify-content: flex-end; border-top: 1px solid #eef3ea; flex-wrap: wrap; }
+        .close-modal-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+        .btn-primary { background: #2d6a2d; color: white; padding: 0.5rem 1rem; border: none; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .btn-secondary { background: #eef2e8; color: #1a2e1a; padding: 0.5rem 1rem; border: none; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .modal-input { width: 100%; padding: 0.6rem; border: 2px solid #e0e0e0; border-radius: 12px; margin: 0.5rem 0; }
         .payment-options { display: flex; gap: 0.5rem; margin: 0.5rem 0; flex-wrap: wrap; }
         .payment-option { flex: 1; text-align: center; padding: 0.5rem; border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer; font-size: 0.75rem; }
         .payment-option.selected { border-color: #2d6a2d; background: #e8f0e8; }
+        .voucher-item { padding: 0.3rem; background: white; border-radius: 8px; margin-bottom: 0.3rem; cursor: pointer; border: 1px solid #e0e0e0; }
+        .map-container { height: 150px; border-radius: 12px; margin: 0.5rem 0; background: #e9ecef; }
         
-        /* Mobile Responsive */
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
             .container { padding: 0 1rem; }
-            .dashboard-tabs { flex-direction: column; border-radius: 28px; align-items: stretch; }
-            .dashboard-tab { text-align: center; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-            .stat-card { padding: 0.6rem; }
-            .stat-number { font-size: 1rem; }
-            .nav-menu a { font-size: 0.7rem; padding: 0.3rem 0.5rem; }
-            .logo h1 { font-size: 1.1rem; }
-            .logo p { font-size: 0.55rem; }
-            .profile-dropdown { position: fixed; top: auto; bottom: 0; left: 0; right: 0; width: 100%; border-radius: 20px 20px 0 0; max-height: 60vh; overflow-y: auto; }
-            .user-avatar { width: 36px; height: 36px; font-size: 0.8rem; }
-            .card-header h3 { font-size: 0.95rem; }
-            .modal-content { max-width: 95%; border-radius: 20px; }
+            .dashboard-tabs { flex-direction: column; border-radius: 28px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .profile-dropdown { position: fixed; top: auto; bottom: 0; left: 0; right: 0; width: 100%; border-radius: 20px 20px 0 0; }
+            .plans-grid, .products-grid-modern, .workshops-grid-premium { grid-template-columns: 1fr; }
         }
-        
-        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem 1.2rem; border-radius: 50px; display: none; z-index: 2100; animation: slideInRight 0.3s ease; font-size: 0.8rem; }
-        
+        .success-toast { position: fixed; bottom: 20px; left: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem; border-radius: 50px; display: none; z-index: 2100; text-align: center; font-size: 0.8rem; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     </style>
 </head>
 <body>
@@ -116,387 +121,458 @@
     <div class="container">
         <div class="header-content">
             <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Batangas, Laguna & Quezon</p></div>
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="marketplace.html">Marketplace</a></li>
-                    <li><a href="workshops.html">Workshops</a></li>
-                    <li><a href="cooperative.html">Cooperative</a></li>
-                    <li><a href="memberdashboard.html" class="active">Dashboard</a></li>
-                    <li><a href="rent.html">Rent Equipment</a></li>
-                    <li><a href="subscriptions.html">Subscriptions</a></li>
-                </ul>
-            </nav>
-            <div class="user-menu">
-                <div class="user-avatar" id="userAvatar">JD</div>
-                <div class="profile-dropdown" id="profileDropdown">
-                    <div class="dropdown-item" id="profileUserInfo"><i class="fas fa-user-circle"></i> <span id="profileName">Loading...</span><br><small id="profileEmail"></small></div>
-                    <div class="dropdown-item" id="subscriptionStatusItem"><i class="fas fa-ticket-alt"></i> <span id="profileSubStatus">Checking...</span></div>
-                    <div class="dropdown-item" id="mySubscriptionsBtn"><i class="fas fa-calendar-check"></i> My Subscriptions</div>
-                    <div class="dropdown-item" id="editProfileBtn"><i class="fas fa-user-edit"></i> Edit Profile</div>
-                    <div class="dropdown-item" id="changePasswordBtn"><i class="fas fa-lock"></i> Change Password</div>
-                    <div class="dropdown-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</div>
-                </div>
-            </div>
+            <nav class="nav-menu"><ul><li><a href="ai-advisor.html"><i class="fas fa-robot"></i> AI Advisor</a></li><li><a href="chat-system.html"><i class="fas fa-comments"></i> Chat System</a></li></ul></nav>
+            <div class="user-menu"><div class="user-avatar" id="userAvatar">JD</div><div class="profile-dropdown" id="profileDropdown"><div class="dropdown-item" id="editProfileBtn"><i class="fas fa-user-edit"></i> Edit Profile</div><div class="dropdown-item" id="changePasswordBtn"><i class="fas fa-lock"></i> Change Password</div><div class="dropdown-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</div></div></div>
         </div>
     </div>
 </header>
 
-<main>
-    <div class="container">
-        <div id="reminderBanner" class="reminder-banner" style="display: none;">
-            <div><i class="fas fa-info-circle"></i> You currently have Basic Access. <strong>Subscribe now</strong> to unlock full member benefits.</div>
-            <button class="btn-subscribe-banner" onclick="window.location.href='subscriptions.html'">Subscribe Now →</button>
-        </div>
+<main><div class="container">
+    <div id="reminderBanner" class="reminder-banner" style="display: none;"><div><i class="fas fa-info-circle"></i> You currently have Basic Access. <strong>Subscribe now</strong> to unlock full member benefits.</div><button class="btn-subscribe-banner" id="subscribeNowBannerBtn">Subscribe Now →</button></div>
 
-        <div class="dashboard-tabs" id="dashboardTabs">
-            <button class="dashboard-tab active" data-tab="overview" onclick="switchTab('overview')"><i class="fas fa-chart-line"></i> Overview</button>
-            <button class="dashboard-tab" data-tab="orders" onclick="switchTab('orders')"><i class="fas fa-shopping-cart"></i> My Orders</button>
-            <button class="dashboard-tab" data-tab="products" onclick="switchTab('products')"><i class="fas fa-store"></i> My Products</button>
-            <button class="dashboard-tab" data-tab="marketplace" onclick="switchTab('marketplace')"><i class="fas fa-store"></i> Marketplace</button>
-            <button class="dashboard-tab" data-tab="workshops" onclick="switchTab('workshops')"><i class="fas fa-chalkboard-user"></i> Workshops</button>
-            <button class="dashboard-tab" data-tab="cooperative" onclick="switchTab('cooperative')"><i class="fas fa-handshake"></i> Cooperative</button>
-            <button class="dashboard-tab" data-tab="subscriptions" onclick="switchTab('subscriptions')"><i class="fas fa-ticket-alt"></i> Subscriptions</button>
-            <button class="dashboard-tab" data-tab="wallet" onclick="switchTab('wallet')"><i class="fas fa-wallet"></i> Wallet</button>
-        </div>
-
-        <!-- OVERVIEW TAB -->
-        <div id="overviewTab" class="tab-content active">
-            <div class="stats-grid">
-                <div class="stat-card"><div class="stat-number">₱<span id="totalRevenue">18,200</span></div><div class="stat-label">Total Revenue</div></div>
-                <div class="stat-card"><div class="stat-number">₱<span id="totalExpenses">4,850</span></div><div class="stat-label">Total Expenses</div></div>
-                <div class="stat-card"><div class="stat-number">₱<span id="netProfit">13,350</span></div><div class="stat-label">Net Profit</div></div>
-                <div class="stat-card"><div class="stat-number">₱<span id="walletShort">5,200</span></div><div class="stat-label">Wallet Balance</div></div>
-            </div>
-            <div class="dashboard-card"><div class="card-header"><h3>Recent Orders</h3></div><div id="recentActivity"></div></div>
-            <div class="dashboard-card"><div class="card-header"><h3>My Subscription</h3></div><div id="overviewSubscriptionStatus">Checking subscription...</div></div>
-            <div class="dashboard-card"><div class="card-header"><h3>My Wallet Summary</h3></div><div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;"><div><span class="stat-number">₱<span id="overviewWalletBalance">5,200</span></span><div>Available Balance</div></div><div><button class="btn-action" onclick="switchTab('wallet')">View Wallet →</button></div></div></div>
-        </div>
-
-        <!-- ORDERS TAB -->
-        <div id="ordersTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Orders</h3><select id="orderFilter" onchange="renderOrders()" style="padding:0.3rem; border-radius:20px;"><option value="all">All</option><option value="pending">Pending</option><option value="processing">Processing</option><option value="shipped">Shipped</option><option value="delivered">Delivered</option></select></div><div id="buyerOrdersList"></div></div></div>
-
-        <!-- PRODUCTS TAB -->
-        <div id="productsTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Products</h3><button class="btn-action" style="background:#2d6a2d;color:white;" onclick="openAddProductModal()">+ Add Product</button></div><div id="sellerProductsList"></div></div></div>
-
-        <!-- MARKETPLACE TAB -->
-        <div id="marketplaceTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Fresh Produce</h3><button class="btn-action" style="background:#ff8c00;color:white;" id="sellProductBtnMarketplace" onclick="openSellProductModal()">+ Sell Product</button></div><div class="product-grid" id="marketplaceProducts" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;"></div></div></div>
-
-        <!-- WORKSHOPS TAB -->
-        <div id="workshopsTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Upcoming Workshops</h3><span>Member price: ₱299</span></div><div class="workshop-grid" id="workshopsList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;"></div></div><div class="dashboard-card"><div class="card-header"><h3>My Registered Workshops</h3></div><div id="registeredWorkshops"></div></div></div>
-
-        <!-- COOPERATIVE TAB -->
-        <div id="cooperativeTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>RA 9520 Cooperative Benefits</h3></div><div class="benefits-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;"><div class="benefit-card" style="background:white; padding:1rem; border-radius:16px; text-align:center;"><div class="benefit-icon">💰</div><h3>Patronage Refund</h3><p>Up to 15% back</p></div><div class="benefit-card" style="background:white; padding:1rem; border-radius:16px; text-align:center;"><div class="benefit-icon">📚</div><h3>Discounted Training</h3><p>Up to 50% off</p></div><div class="benefit-card" style="background:white; padding:1rem; border-radius:16px; text-align:center;"><div class="benefit-icon">🏦</div><h3>Access to Loans</h3><p>Low interest rates</p></div></div><div class="card-header"><h3>Cooperative Voting</h3></div><div class="voting-grid" id="votingSection" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;"></div></div>
-
-        <!-- SUBSCRIPTIONS TAB - WORKING -->
-        <div id="subscriptionsTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Subscriptions</h3><button class="btn-action" style="background:#ff8c00;color:white;" onclick="window.location.href='subscriptions.html'">+ Subscribe</button></div><div id="subscriptionsList"></div></div></div>
-
-        <!-- WALLET TAB - WORKING -->
-        <div id="walletTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Wallet</h3></div><div style="text-align:center;padding:1rem;"><span class="stat-number">₱<span id="walletBalanceMain">5,200</span></span><div>Available Balance</div></div><div style="display:flex; gap:0.5rem; flex-wrap:wrap;"><button class="wallet-btn" onclick="openTopUpModal()">Top Up</button><button class="wallet-btn" onclick="openWithdrawModal()" style="background:#ff8c00;">Withdraw</button></div><div class="card-header" style="margin-top:1rem;"><h3>Transaction History</h3></div><div id="walletHistory"></div></div></div>
+    <div class="dashboard-tabs">
+        <button class="dashboard-tab active" onclick="switchTab('overview')">Overview</button>
+        <button class="dashboard-tab" onclick="switchTab('orders')">My Orders</button>
+        <button class="dashboard-tab" id="productsTabBtn" onclick="switchTab('products')">My Products</button>
+        <button class="dashboard-tab" onclick="switchTab('marketplace')">Marketplace</button>
+        <button class="dashboard-tab" onclick="switchTab('workshops')">Workshops</button>
+        <button class="dashboard-tab" onclick="switchTab('cooperative')">Cooperative</button>
+        <button class="dashboard-tab" onclick="switchTab('subscriptions')">Subscriptions</button>
+        <button class="dashboard-tab" id="rentTabBtn" onclick="switchTab('rent')">Rent</button>
+        <button class="dashboard-tab" onclick="switchTab('wallet')">Wallet</button>
     </div>
-</main>
 
-<!-- MODALS -->
-<div id="detailModal" class="modal"><div class="modal-content" id="modalDynamicContent"></div></div>
-<div id="ratingModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Rate Product</h3><button class="close-modal-btn" onclick="closeRatingModal()">&times;</button></div><div class="modal-body"><div class="rating-stars" id="ratingStars"><span class="rating-star" data-value="1">★</span><span class="rating-star" data-value="2">★</span><span class="rating-star" data-value="3">★</span><span class="rating-star" data-value="4">★</span><span class="rating-star" data-value="5">★</span></div><textarea id="ratingReview" class="modal-input" rows="2" placeholder="Write your review..."></textarea></div><div class="modal-footer"><button class="btn-secondary" onclick="closeRatingModal()">Cancel</button><button class="btn-primary" onclick="submitRating()">Submit</button></div></div></div>
-<div id="buyProductModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Buy Product</h3><button class="close-modal-btn" onclick="closeBuyProductModal()">&times;</button></div><div class="modal-body"><div id="buyProductInfo"></div><label>Quantity</label><input type="number" id="buyQuantity" class="modal-input" min="1" value="1" onchange="updateBuyTotal()"><label>Total Amount</label><input type="text" id="buyTotal" class="modal-input" readonly><label>Apply Voucher</label><div style="display:flex; gap:0.5rem;"><input type="text" id="buyVoucherCode" class="modal-input" placeholder="Voucher code" style="flex:1;"><button class="btn-action" onclick="applyBuyVoucher()">Apply</button></div><div id="buyVoucherList" class="voucher-list" style="max-height:100px; overflow-y:auto;"></div><div id="feeBreakdown" class="info-box" style="background:#eef3ea; padding:0.5rem; border-radius:12px; margin:0.5rem 0;"></div><label>Payment Method</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectBuyPayment('gcash')">GCash</div><div class="payment-option" data-method="paymaya" onclick="selectBuyPayment('paymaya')">PayMaya</div><div class="payment-option" data-method="bank" onclick="selectBuyPayment('bank')">Bank Transfer</div></div><div id="buyPaymentDetails"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeBuyProductModal()">Cancel</button><button class="btn-primary" onclick="confirmBuyProduct()">Confirm Purchase</button></div></div></div>
-<div id="sellProductModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Sell New Product</h3><button class="close-modal-btn" onclick="closeSellProductModal()">&times;</button></div><div class="modal-body"><label>Product Name</label><input type="text" id="prodName" class="modal-input"><label>Price (₱)</label><input type="number" id="prodPrice" class="modal-input"><label>Unit</label><select id="prodUnit" class="modal-select"><option value="kg">kg</option><option value="pcs">pcs</option><option value="bottle">bottle</option></select><label>Emoji</label><input type="text" id="prodImage" class="modal-input" value="🌿"></div><div class="modal-footer"><button class="btn-secondary" onclick="closeSellProductModal()">Cancel</button><button class="btn-primary" onclick="addNewProduct()">List Product</button></div></div></div>
-<div id="enrollWorkshopModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Enroll in Workshop</h3><button class="close-modal-btn" onclick="closeEnrollModal()">&times;</button></div><div class="modal-body"><div id="workshopInfo"></div><label>Participants</label><select id="workshopParticipants" onchange="updateWorkshopTotal()"><option value="1">1 person</option><option value="2">2 people (+₱200)</option><option value="3">3 people (+₱400)</option><option value="4">4 people (+₱600)</option></select><label>Apply Voucher</label><div style="display:flex; gap:0.5rem;"><input type="text" id="workshopVoucherCode" class="modal-input" placeholder="Voucher code" style="flex:1;"><button class="btn-action" onclick="applyWorkshopVoucher()">Apply</button></div><div id="workshopVoucherList" class="voucher-list"></div><div id="workshopFeeBreakdown" class="info-box"></div><label>Payment Method</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectEnrollPayment('gcash')">GCash</div><div class="payment-option" data-method="paymaya" onclick="selectEnrollPayment('paymaya')">PayMaya</div><div class="payment-option" data-method="bank" onclick="selectEnrollPayment('bank')">Bank Transfer</div></div><div id="enrollPaymentDetails"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeEnrollModal()">Cancel</button><button class="btn-primary" onclick="confirmWorkshopEnrollment()">Confirm</button></div></div></div>
-<div id="editProfileModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Edit Profile</h3><button class="close-modal-btn" onclick="closeEditModal()">&times;</button></div><div class="modal-body"><label>Full Name</label><input type="text" id="editName" class="modal-input"><label>Address</label><input type="text" id="editAddress" class="modal-input"><label>Email</label><input type="email" id="editEmail" class="modal-input"><label>Contact</label><input type="text" id="editContact" class="modal-input"><hr><h4>Bank Account</h4><label>Bank Name</label><input type="text" id="editBankName" class="modal-input"><label>Account Number</label><input type="text" id="editBankAccount" class="modal-input"><hr><h4>E-Wallet</h4><select id="editWalletType" class="modal-select"><option value="gcash">GCash</option><option value="paymaya">PayMaya</option></select><label>Wallet Number</label><input type="text" id="editWalletNumber" class="modal-input"></div><div class="modal-footer"><button class="btn-secondary" onclick="closeEditModal()">Cancel</button><button class="btn-primary" onclick="saveProfile()">Save</button></div></div></div>
-<div id="topupModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Top Up Wallet</h3><button class="close-modal-btn" onclick="closeTopupModal()">&times;</button></div><div class="modal-body"><input type="number" id="topupAmount" class="modal-input" placeholder="Amount (₱)" min="100"><label>Payment Method</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectTopupPayment('gcash')">GCash</div><div class="payment-option" data-method="paymaya" onclick="selectTopupPayment('paymaya')">PayMaya</div><div class="payment-option" data-method="bank" onclick="selectTopupPayment('bank')">Bank Transfer</div></div><div id="topupPaymentDetails" style="background:#eef3ea; padding:0.5rem; border-radius:12px; margin-top:0.5rem;"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeTopupModal()">Cancel</button><button class="btn-primary" onclick="processTopup()">Add Funds</button></div></div></div>
-<div id="withdrawModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Withdraw Funds</h3><button class="close-modal-btn" onclick="closeWithdrawModal()">&times;</button></div><div class="modal-body"><input type="number" id="withdrawAmount" class="modal-input" placeholder="Amount (₱)" min="100"><label>Withdraw to</label><div class="payment-options"><div class="payment-option" data-method="bank" onclick="selectWithdrawPayment('bank')">Bank Account</div><div class="payment-option" data-method="gcash" onclick="selectWithdrawPayment('gcash')">GCash</div><div class="payment-option" data-method="paymaya" onclick="selectWithdrawPayment('paymaya')">PayMaya</div></div><div id="withdrawPaymentDetails" style="background:#eef3ea; padding:0.5rem; border-radius:12px; margin-top:0.5rem;"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeWithdrawModal()">Cancel</button><button class="btn-primary" onclick="processWithdraw()">Withdraw</button></div></div></div>
+    <div id="overviewTab" class="tab-content active">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-number">₱<span id="totalRevenue">18,200</span></div><div>Revenue</div></div>
+            <div class="stat-card"><div class="stat-number">₱<span id="totalExpenses">4,850</span></div><div>Expenses</div></div>
+            <div class="stat-card" id="netProfitCard"><div class="stat-number">₱<span id="netProfit">13,350</span></div><div>Net Profit</div></div>
+            <div class="stat-card"><div class="stat-number">₱<span id="walletShort">5,200</span></div><div>Wallet</div></div>
+        </div>
+    </div>
 
+    <div id="ordersTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Orders</h3><select id="orderFilter" onchange="renderOrders()"><option value="all">All</option><option value="pending">Pending</option><option value="shipped">Shipped</option><option value="delivered">Delivered</option></select></div><div id="ordersList"></div></div></div>
+
+    <div id="productsTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Products</h3><button class="btn-action" style="background:#2d6a2d;color:white;padding:0.3rem 1rem;" id="addProductBtn" onclick="openAddProductModal()">+ Add Product</button></div><div id="sellerProductsList"></div></div></div>
+
+    <!-- ORIGINAL MARKETPLACE DESIGN -->
+    <div id="marketplaceTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Fresh from Farm to Table</h3><p>Blockchain-verified products from local farmers</p><button class="btn-action" id="sellProductBtn" style="background:#ff8c00;color:white;display:none;" onclick="openAddProductModal()">+ Sell Product</button></div><div id="marketplaceGrid" class="products-grid-modern"></div></div></div>
+
+    <!-- ORIGINAL WORKSHOPS DESIGN -->
+    <div id="workshopsTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Upcoming Workshops</h3></div><div id="workshopsGrid" class="workshops-grid-premium"></div></div><div class="dashboard-card"><div class="card-header"><h3>My Registered Workshops</h3></div><div id="registeredWorkshopsList"></div></div></div>
+
+    <!-- ORIGINAL SUBSCRIPTIONS DESIGN -->
+    <div id="subscriptionsTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Membership Plans</h3></div><div id="subscriptionsPlans" class="plans-grid"></div></div></div>
+
+    <div id="cooperativeTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Cooperative Voting</h3><p>One member, one vote</p></div><div id="activeProposals"></div><div class="card-header" style="margin-top:1rem;"><h3>My Voting History</h3></div><div id="votedHistory"></div></div></div>
+
+    <div id="rentTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Farm Equipment Rentals</h3></div><div id="rentalsGrid" class="products-grid-modern"></div></div></div>
+
+    <div id="walletTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Wallet</h3></div><div style="text-align:center;"><span class="stat-number" style="font-size:2rem;">₱<span id="walletBalanceMain">5,200</span></span></div><div style="display:flex; gap:0.5rem;"><button class="btn-action" style="background:#2d6a2d;color:white;flex:1;" onclick="openTopUpModal()">Top Up</button><button class="btn-action" style="background:#ff8c00;color:white;flex:1;" onclick="openWithdrawModal()">Withdraw</button></div><div class="card-header"><h3>Transaction History</h3></div><div id="walletHistoryList"></div></div></div>
+</div></main>
+
+<!-- PROFILE SETUP MODAL - FOR NEW USERS -->
+<div id="profileSetupModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header"><h3><i class="fas fa-user-plus"></i> Complete Your Profile</h3></div>
+        <div class="modal-body">
+            <p style="margin-bottom:1rem; color:#666;">Please complete your profile to continue. This information will be used for deliveries and cooperative communications.</p>
+            <label>Full Name *</label>
+            <input type="text" id="setupFullName" class="modal-input" placeholder="Enter your full name">
+            <label>Address *</label>
+            <input type="text" id="setupAddress" class="modal-input" placeholder="Street, Barangay, City/Municipality">
+            <label>Contact Number *</label>
+            <input type="tel" id="setupContact" class="modal-input" placeholder="0912 345 6789">
+            <label>Email Address</label>
+            <input type="email" id="setupEmail" class="modal-input" placeholder="your@email.com" readonly style="background:#f5f5f5;">
+        </div>
+        <div class="modal-footer"><button class="btn-primary" onclick="saveProfileSetup()" style="width:100%;">Save Profile & Continue →</button></div>
+    </div>
+</div>
+
+<!-- OTHER MODALS -->
+<div id="buyModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Buy Product</h3><button class="close-modal-btn" onclick="closeBuyModal()">&times;</button></div><div class="modal-body"><div id="buyProductInfo"></div><label>Quantity</label><input type="number" id="buyQty" class="modal-input" min="1" value="1" onchange="updateBuyTotal()"><label>Voucher Code</label><input type="text" id="buyVoucherCode" class="modal-input" placeholder="Enter code"><button class="btn-action" onclick="applyBuyVoucher()" style="width:100%;">Apply Voucher</button><div id="buyVoucherList"></div><div id="buyDiscountDisplay"></div><label>Total</label><input type="text" id="buyTotal" class="modal-input" readonly><label>Payment</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectBuyMethod('gcash')">GCash</div><div class="payment-option" data-method="bank" onclick="selectBuyMethod('bank')">Bank</div></div><div id="buyPaymentDetails"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeBuyModal()">Cancel</button><button class="btn-primary" onclick="confirmBuy()">Pay Now</button></div></div></div>
+
+<div id="enrollModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Enroll Workshop</h3><button class="close-modal-btn" onclick="closeEnrollModal()">&times;</button></div><div class="modal-body"><div id="enrollWorkshopInfo"></div><label>Participants</label><select id="enrollParticipants" class="modal-input" onchange="updateEnrollTotal()"><option value="1">1 person</option><option value="2">2 people (+₱200)</option><option value="3">3 people (+₱400)</option></select><label>Voucher Code</label><input type="text" id="enrollVoucherCode" class="modal-input" placeholder="Enter code"><button class="btn-action" onclick="applyEnrollVoucher()" style="width:100%;">Apply Voucher</button><div id="enrollVoucherList"></div><div id="enrollDiscountDisplay"></div><div id="enrollTotalDisplay" class="stat-number" style="font-size:1rem;"></div><label>Payment</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectEnrollMethod('gcash')">GCash</div><div class="payment-option" data-method="bank" onclick="selectEnrollMethod('bank')">Bank</div></div><div id="enrollPaymentDetails"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeEnrollModal()">Cancel</button><button class="btn-primary" onclick="confirmEnroll()">Confirm Enrollment</button></div></div></div>
+
+<div id="subscribeModal" class="modal"><div class="modal-content"><div class="modal-header"><h3 id="subscribePlanName">Subscribe</h3><button class="close-modal-btn" onclick="closeSubscribeModal()">&times;</button></div><div class="modal-body"><div id="subscribeDetails"></div><label>Payment Method</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectSubscribeMethod('gcash')">GCash</div><div class="payment-option" data-method="bank" onclick="selectSubscribeMethod('bank')">Bank Transfer</div></div><div id="subscribePaymentDetails"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeSubscribeModal()">Cancel</button><button class="btn-primary" onclick="confirmSubscription()">Confirm Subscription</button></div></div></div>
+
+<div id="rentModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Rent Equipment</h3><button class="close-modal-btn" onclick="closeRentModal()">&times;</button></div><div class="modal-body"><div id="rentDetails"></div><label>Days</label><input type="number" id="rentDays" class="modal-input" min="1" value="1" onchange="updateRentTotal()"><div id="rentTotalDisplay"></div><label>Payment</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectRentMethod('gcash')">GCash</div><div class="payment-option" data-method="bank" onclick="selectRentMethod('bank')">Bank</div></div><div id="rentPaymentDetails"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeRentModal()">Cancel</button><button class="btn-primary" onclick="confirmRent()">Confirm Rental</button></div></div></div>
+
+<div id="refundModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Request Refund</h3><button class="close-modal-btn" onclick="closeRefundModal()">&times;</button></div><div class="modal-body"><label>Reason for refund</label><textarea id="refundReason" class="modal-input" rows="3" placeholder="Please explain..."></textarea></div><div class="modal-footer"><button class="btn-secondary" onclick="closeRefundModal()">Cancel</button><button class="btn-primary" onclick="submitRefund()">Submit</button></div></div></div>
+
+<div id="chatModal" class="modal"><div class="modal-content"><div class="modal-header"><h3 id="chatTitle">Chat</h3><button class="close-modal-btn" onclick="closeChatModal()">&times;</button></div><div class="modal-body"><div id="chatMessages" style="height:200px; overflow-y:auto; background:#f5f5f5; border-radius:12px; padding:0.5rem;"></div><div style="display:flex; gap:0.5rem; margin-top:0.5rem;"><input type="text" id="chatInput" class="modal-input" placeholder="Type message..."><button class="btn-primary" onclick="sendChatMessage()">Send</button></div></div></div></div>
+
+<div id="ratingModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Rate Product</h3><button class="close-modal-btn" onclick="closeRatingModal()">&times;</button></div><div class="modal-body"><div id="ratingStars" style="font-size:2rem; cursor:pointer;">⭐️⭐️⭐️⭐️⭐️</div><textarea id="ratingReview" class="modal-input" placeholder="Your review..."></textarea></div><div class="modal-footer"><button class="btn-secondary" onclick="closeRatingModal()">Cancel</button><button class="btn-primary" onclick="submitRating()">Submit</button></div></div></div>
+
+<div id="productModal" class="modal"><div class="modal-content"><div class="modal-header"><h3 id="productModalTitle">Add Product</h3><button class="close-modal-btn" onclick="closeProductModal()">&times;</button></div><div class="modal-body"><input type="hidden" id="editProductId"><label>Name</label><input type="text" id="productName" class="modal-input"><label>Price (₱)</label><input type="number" id="productPrice" class="modal-input"><label>Unit</label><select id="productUnit" class="modal-input"><option value="kg">kg</option><option value="pcs">pcs</option></select><label>Emoji</label><input type="text" id="productImage" class="modal-input" value="🌿"></div><div class="modal-footer"><button class="btn-secondary" onclick="closeProductModal()">Cancel</button><button class="btn-primary" onclick="saveProduct()">Save</button></div></div></div>
+
+<div id="editProfileModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Edit Profile</h3><button class="close-modal-btn" onclick="closeEditProfileModal()">&times;</button></div><div class="modal-body"><label>Full Name</label><input type="text" id="editFullName" class="modal-input"><label>Address</label><input type="text" id="editAddress" class="modal-input"><label>Contact</label><input type="text" id="editContact" class="modal-input"><label>Email</label><input type="email" id="editEmail" class="modal-input"></div><div class="modal-footer"><button class="btn-secondary" onclick="closeEditProfileModal()">Cancel</button><button class="btn-primary" onclick="saveEditProfile()">Save</button></div></div></div>
+
+<div id="changePasswordModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Change Password</h3><button class="close-modal-btn" onclick="closeChangePasswordModal()">&times;</button></div><div class="modal-body"><label>Current Password</label><input type="password" id="currentPassword" class="modal-input"><label>New Password</label><input type="password" id="newPassword" class="modal-input"><label>Confirm Password</label><input type="password" id="confirmPassword" class="modal-input"></div><div class="modal-footer"><button class="btn-secondary" onclick="closeChangePasswordModal()">Cancel</button><button class="btn-primary" onclick="changePassword()">Update</button></div></div></div>
+
+<div id="topupModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Top Up</h3><button class="close-modal-btn" onclick="closeTopupModal()">&times;</button></div><div class="modal-body"><input type="number" id="topupAmount" class="modal-input" placeholder="Amount" min="100"><div style="background:#eef3ea; padding:0.5rem; border-radius:12px;">Send to: 0912 345 6789 (GCash/RRJ FARM)</div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeTopupModal()">Cancel</button><button class="btn-primary" onclick="processTopup()">Add Funds</button></div></div></div>
+<div id="withdrawModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Withdraw</h3><button class="close-modal-btn" onclick="closeWithdrawModal()">&times;</button></div><div class="modal-body"><input type="number" id="withdrawAmount" class="modal-input" placeholder="Amount" min="100"><div style="background:#eef3ea; padding:0.5rem; border-radius:12px;">BPI: 1234-5678-90 (RRJ FARM)</div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeWithdrawModal()">Cancel</button><button class="btn-primary" onclick="processWithdraw()">Withdraw</button></div></div></div>
 <div id="successToast" class="success-toast"></div>
 
 <script>
-    // ========== DATA ==========
     let currentUser = null;
     let hasActiveSubscription = false;
+    let subscriptionPlan = null; // 'researcher', 'member', or null
     let walletBalance = 5200;
-    let confirmCallback = null;
-    let currentChatOrder = null;
-    let appliedBuyVoucher = null;
-    let appliedWorkshopVoucher = null;
-    let currentWorkshop = null;
-    let transactionHistory = [{ id:1, desc: "Initial wallet", amount: 5200, type: "credit", date: "2026-05-01" }];
+    let currentBuyProduct = null, currentEnrollWorkshop = null, currentRentItem = null, currentSubscribePlan = null;
+    let transactionHistory = [{ id:1, desc:"Initial wallet", amount:5200, type:"credit", date:"2026-05-01" }];
     let orders = [
-        { id: "ORD001", product: "Fresh Sitao", qty: 2, total: 90, farmerName: "Maria Santos", status: "delivered", rating: null, lat: 13.9409, lng: 121.1620, orderDate: "2026-05-01" },
-        { id: "ORD002", product: "Batangas Rice", qty: 5, total: 275, farmerName: "Anna Reyes", status: "shipped", rating: null, lat: 14.0636, lng: 121.1067, orderDate: "2026-05-05" },
-        { id: "ORD003", product: "Ampalaya", qty: 3, total: 180, farmerName: "Jose Dela Cruz", status: "processing", rating: null, lat: 13.8309, lng: 121.2598, orderDate: "2026-05-07" }
+        { id:"ORD001", product:"Fresh Sitao", qty:2, total:90, farmer:"Maria Santos", status:"delivered", rating:null, lat:13.9409, lng:121.1620 },
+        { id:"ORD002", product:"Batangas Rice", qty:5, total:275, farmer:"Anna Reyes", status:"shipped", lat:14.0636, lng:121.1067 }
     ];
-    let sellerProducts = [{ id: "P1", name: "Organic Tomatoes", price: 65, unit: "kg", sold: 48, quantity: 120 }, { id: "P2", name: "Fresh Eggplant", price: 50, unit: "kg", sold: 40, quantity: 85 }];
-    let marketplaceItems = [
-        { id: 1, name: "Organic Tomatoes", price: 65, unit: "kg", farmer: "Maria Santos", image: "🍅" },
-        { id: 2, name: "Batangas Rice", price: 55, unit: "kg", farmer: "Anna Reyes", image: "🍚" },
-        { id: 3, name: "Fresh Sitao", price: 45, unit: "kg", farmer: "Jose Cruz", image: "🌱" },
-        { id: 4, name: "Kalamansi", price: 80, unit: "kg", farmer: "Carlos M", image: "🍊" }
+    let sellerProducts = [{ id:"P1", name:"Organic Tomatoes", price:65, unit:"kg", quantity:120 }];
+    let marketplaceProducts = [
+        { id:1, name:"Fresh Sitao", price:45, unit:"kg", farmer:"Maria Santos", stock:47, image:"🌱" },
+        { id:2, name:"Ampalaya", price:60, unit:"kg", farmer:"Jose Dela Cruz", stock:50, image:"🥒" },
+        { id:3, name:"Batangas Brown Rice", price:55, unit:"kg", farmer:"Anna Reyes", stock:100, image:"🍚" },
+        { id:4, name:"Kalamansi", price:80, unit:"kg", farmer:"Carlos M", stock:65, image:"🍊" }
     ];
-    let workshops = [
-        { id: 1, name: "Organic Pest Control", date: "May 25, 2026", time: "10:00 AM", price: 299, image: "🐞", location: "Online via Zoom", remaining: 12, slots: 20 },
-        { id: 2, name: "Vermicomposting 101", date: "June 5, 2026", time: "2:00 PM", price: 299, image: "🪱", location: "RRJ Farm Batangas", remaining: 18, slots: 25 },
-        { id: 3, name: "Backyard Beekeeping", date: "June 15, 2026", time: "9:00 AM", price: 299, image: "🐝", location: "Online via Zoom", remaining: 10, slots: 12 }
+    let workshopsList = [
+        { id:1, name:"Organic Pest Control", date:"March 25, 2026", time:"9AM-4PM", price:500, image:"🐞", instructor:"Maria Santos", slots:20, remaining:12 },
+        { id:2, name:"Vermicomposting 101", date:"April 5, 2026", time:"1PM-5PM", price:300, image:"🪱", instructor:"Andrea Salazar", slots:25, remaining:18 },
+        { id:3, name:"Small-Scale Chicken Raising", date:"April 12, 2026", time:"8AM-3PM", price:700, image:"🐔", instructor:"Jose Dela Cruz", slots:15, remaining:8 }
     ];
     let registeredWorkshops = [];
-    let subscriptions = [];
-    let votes = { '001': { yes: 142, no: 14, title: "Hub Expansion Project", budget: "₱500,000", desc: "Establish an additional aggregation hub in Quezon province." }, '002': { yes: 138, no: 18, title: "Digital Literacy Training", budget: "₱150,000", desc: "Training for 50 farmer-members." }, '003': { yes: 98, no: 58, title: "Delivery Fleet Purchase", budget: "₱2,500,000", desc: "Purchase 2 refrigerated vans." } };
-    let chatMessages = {}; let activeMap = null; let currentOrderForRating = null; let currentEditProductId = null; let currentBuyProduct = null;
-    let selectedBuyPayment = 'gcash'; let selectedTopupPayment = 'gcash'; let selectedWithdrawPayment = 'bank'; let selectedEnrollPayment = 'gcash';
+    let activeProposals = [
+        { id:"001", title:"Hub Expansion Project", budget:"₱500,000", desc:"Establish additional aggregation hub in Quezon", yes:142, no:14 },
+        { id:"002", title:"Digital Literacy Training", budget:"₱150,000", desc:"Training for 50 farmer-members", yes:138, no:18 }
+    ];
+    let votedProposals = [];
+    let rentalItems = [
+        { id:1, name:"Farm Tractor", price:2500, deposit:5000, image:"🚜", category:"Heavy Equipment" },
+        { id:2, name:"Rice Harvester", price:3500, deposit:7000, image:"🌾", category:"Harvesting" },
+        { id:3, name:"Rotavator", price:1500, deposit:3000, image:"⚙️", category:"Tillage" }
+    ];
+    let availableVouchers = [{ code:"WELCOME20", discount:20, type:"percent", min:0, desc:"20% OFF" }];
+    let appliedBuyVoucher = null, appliedEnrollVoucher = null;
+    let currentOrderForRating = null, currentRefundOrder = null, currentChatOrder = null;
+
+    function showToast(m){let t=document.getElementById('successToast');t.innerHTML=m;t.style.display='block';setTimeout(()=>t.style.display='none',3000);}
     
-    const availableVouchers = [{ code: "WELCOME20", discount: 20, type: "percentage", minPurchase: 0, description: "20% OFF" }, { code: "FREESHIP", discount: 100, type: "fixed", minPurchase: 500, description: "₱100 OFF" }];
-    
-    function loadBuyVouchers() { document.getElementById('buyVoucherList').innerHTML = availableVouchers.map(v => `<div class="voucher-item" style="padding:0.3rem; background:white; border-radius:8px; margin-bottom:0.3rem; cursor:pointer;" onclick="applySpecificBuyVoucher('${v.code}')"><span style="font-weight:700;">${v.code}</span><span>${v.description}</span></div>`).join(''); }
-    function loadWorkshopVouchers() { document.getElementById('workshopVoucherList').innerHTML = availableVouchers.map(v => `<div class="voucher-item" style="padding:0.3rem; background:white; border-radius:8px; margin-bottom:0.3rem; cursor:pointer;" onclick="applySpecificWorkshopVoucher('${v.code}')"><span style="font-weight:700;">${v.code}</span><span>${v.description}</span></div>`).join(''); }
-    function applySpecificBuyVoucher(code) { document.getElementById('buyVoucherCode').value = code; applyBuyVoucher(); }
-    function applySpecificWorkshopVoucher(code) { document.getElementById('workshopVoucherCode').value = code; applyWorkshopVoucher(); }
-    function applyBuyVoucher() { let code = document.getElementById('buyVoucherCode').value.toUpperCase(); let voucher = availableVouchers.find(v => v.code === code); if (voucher) { appliedBuyVoucher = voucher; updateBuyTotal(); showToast(`Voucher ${code} applied!`); } else { appliedBuyVoucher = null; updateBuyTotal(); showToast('Invalid voucher'); } }
-    function applyWorkshopVoucher() { let code = document.getElementById('workshopVoucherCode').value.toUpperCase(); let voucher = availableVouchers.find(v => v.code === code); if (voucher) { appliedWorkshopVoucher = voucher; updateWorkshopTotal(); showToast(`Voucher ${code} applied!`); } else { appliedWorkshopVoucher = null; updateWorkshopTotal(); showToast('Invalid voucher'); } }
-    function calculateDiscount(amount, voucher) { if (!voucher) return 0; if (amount < voucher.minPurchase) return 0; if (voucher.type === 'percentage') return amount * (voucher.discount / 100); return Math.min(voucher.discount, amount); }
-    function calculateTransactionFee(amount) { if (amount >= 1000) return { fee: amount * 0.10, label: "10% Transaction Fee" }; if (amount >= 300) return { fee: amount * 0.05, label: "5% Transaction Fee" }; return { fee: 0, label: "No Transaction Fee" }; }
-    
-    function checkSession() { 
-        let userJson = localStorage.getItem('rrjfarm_current_user'); 
-        if (!userJson) { window.location.href = 'login.html'; return false; } 
-        currentUser = JSON.parse(userJson); 
-        if (!currentUser.isLoggedIn) { window.location.href = 'login.html'; return false; } 
-        checkSubscriptionStatus(); 
-        updateUIByAccessLevel(); 
-        updateProfileDropdown();
-        return true; 
+    function checkSession(){
+        let u=localStorage.getItem('rrjfarm_current_user');
+        if(!u){window.location.href='login.html';return false}
+        currentUser=JSON.parse(u);
+        
+        // Check if profile is complete (first time user)
+        if(!currentUser.profileCompleted){
+            document.getElementById('profileSetupModal').classList.add('active');
+            document.getElementById('setupEmail').value = currentUser.email || '';
+            return false;
+        }
+        
+        checkSubscriptionStatus();
+        updateUIByAccessLevel();
+        updateProfileDisplay();
+        return true;
     }
     
-    function updateProfileDropdown() {
+    function saveProfileSetup(){
+        let fullName = document.getElementById('setupFullName').value.trim();
+        let address = document.getElementById('setupAddress').value.trim();
+        let contact = document.getElementById('setupContact').value.trim();
+        
+        if(!fullName || !address || !contact){
+            alert('Please fill out all required fields');
+            return;
+        }
+        
+        let nameParts = fullName.split(' ');
+        currentUser.firstName = nameParts[0];
+        currentUser.lastName = nameParts.slice(1).join(' ') || '';
+        currentUser.address = address;
+        currentUser.contact = contact;
+        currentUser.profileCompleted = true;
+        currentUser.avatarInitials = (currentUser.firstName?.charAt(0)||'U') + (currentUser.lastName?.charAt(0)||'');
+        
+        localStorage.setItem('rrjfarm_current_user', JSON.stringify(currentUser));
+        
+        // Update in users array
+        let users = JSON.parse(localStorage.getItem('rrjfarm_users') || '[]');
+        let userIndex = users.findIndex(u => u.email === currentUser.email);
+        if(userIndex !== -1){
+            users[userIndex] = { ...users[userIndex], ...currentUser };
+            localStorage.setItem('rrjfarm_users', JSON.stringify(users));
+        }
+        
+        document.getElementById('profileSetupModal').classList.remove('active');
+        checkSubscriptionStatus();
+        updateUIByAccessLevel();
+        updateProfileDisplay();
+        showToast('Profile completed! Welcome to RRJ FARM!');
+    }
+    
+    function checkSubscriptionStatus(){
+        let subscriptions = JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions') || '[]');
+        let activeSub = subscriptions.find(s => s.status === 'Active' && s.subscriberEmail === currentUser?.email);
+        
+        hasActiveSubscription = !!activeSub;
+        subscriptionPlan = activeSub ? activeSub.plan : null;
+        
+        // Update session storage
+        sessionStorage.setItem('rrjfarm_has_active_subscription', hasActiveSubscription);
+        sessionStorage.setItem('rrjfarm_subscription_plan', subscriptionPlan || 'none');
+        
+        // Update profile dropdown with status
+        let profileSubStatus = document.querySelector('#profileDropdown .dropdown-item:first-child');
+        if(profileSubStatus){
+            let statusHtml = hasActiveSubscription ? 
+                `<span class="profile-sub-status" style="color:#2d6a2d;">✅ Active ${subscriptionPlan === 'member' ? 'Member' : 'Researcher'} Plan</span>` : 
+                `<span class="profile-sub-status" style="color:#856404;">📋 Basic Access (Non-Member)</span>`;
+            profileSubStatus.innerHTML = `<i class="fas fa-user-circle"></i> <span id="profileName">${currentUser.firstName || ''} ${currentUser.lastName || ''}</span>${statusHtml}`;
+        }
         document.getElementById('profileName').innerHTML = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || 'User';
-        document.getElementById('profileEmail').innerText = currentUser.email || '';
-        document.getElementById('userAvatar').innerText = currentUser.avatarInitials || (currentUser.firstName?.charAt(0) || 'U') + (currentUser.lastName?.charAt(0) || '');
-        let statusText = hasActiveSubscription ? 'Active Member' : 'Basic Access';
-        let statusClass = hasActiveSubscription ? 'badge-member' : 'badge-nonmember';
-        document.getElementById('profileSubStatus').innerHTML = `<span class="access-badge ${statusClass}">${statusText}</span>`;
-    }
-    
-    function checkSubscriptionStatus() { 
-        let userSubscriptions = JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions') || '[]'); 
-        let today = new Date(); 
-        let activeFound = false; 
-        subscriptions = [];
-        userSubscriptions.forEach(sub => { 
-            if (sub.status === 'Active') { 
-                let nextBilling = new Date(sub.nextBilling); 
-                if (nextBilling > today) { 
-                    activeFound = true; 
-                    subscriptions.push(sub);
-                } else { 
-                    sub.status = 'Expired'; 
-                } 
-            } 
-        }); 
-        hasActiveSubscription = activeFound; 
-        sessionStorage.setItem('rrjfarm_has_active_subscription', hasActiveSubscription ? 'true' : 'false'); 
-        loadRegisteredWorkshops(); 
-        updateOverviewSubscription(); 
-        renderSubscriptions();
-        document.getElementById('overviewWalletBalance').innerText = walletBalance;
-        document.getElementById('walletBalanceMain').innerText = walletBalance;
-        document.getElementById('walletShort').innerText = walletBalance;
-        renderWalletHistory();
-    }
-    
-    function updateOverviewSubscription() { 
-        let container = document.getElementById('overviewSubscriptionStatus'); 
-        if (hasActiveSubscription && subscriptions.length > 0) { 
-            let sub = subscriptions[0]; 
-            container.innerHTML = `<div style="background:#eef3ea;padding:0.8rem;border-radius:12px;"><strong>${sub.plan || 'Active Plan'}</strong><br>₱${sub.amount}/month<br>Next billing: ${sub.nextBilling}<br><span class="badge-member">Active</span></div>`; 
-        } else { 
-            container.innerHTML = `<div style="background:#fff3cd;padding:0.8rem;border-radius:12px;"><strong>No Active Subscription</strong><br>You have basic access.<br><a href="#" onclick="switchTab('subscriptions')" style="color:#2d6a2d;">Subscribe now</a> to unlock member benefits.</div>`; 
-        } 
-    }
-    
-    function renderSubscriptions() { 
-        let container = document.getElementById('subscriptionsList'); 
-        if(container) { 
-            if(subscriptions.length > 0) {
-                container.innerHTML = subscriptions.map(s => `<div class="subscription-card"><div><strong>${s.plan || s.name}</strong><br>₱${s.price || s.amount}/month<br>Next: ${s.nextBilling}<br>Status: <span class="badge-member">Active</span></div><div><button class="btn-action" style="background:#28a745;color:white;" onclick="renewSubscription('${s.id}')">Renew</button><button class="btn-action" onclick="cancelSubscription('${s.id}')">Cancel</button></div></div>`).join(''); 
+        
+        // Update banner
+        let banner = document.getElementById('reminderBanner');
+        if(banner) banner.style.display = hasActiveSubscription ? 'none' : 'flex';
+        
+        // Update net profit card visibility (member only)
+        let profitCard = document.getElementById('netProfitCard');
+        if(profitCard) profitCard.style.display = hasActiveSubscription ? 'block' : 'none';
+        
+        // Update Rent tab visibility (hidden for Researcher/Student)
+        let rentTab = document.getElementById('rentTabBtn');
+        if(rentTab){
+            if(subscriptionPlan === 'researcher' || (!hasActiveSubscription && currentUser?.accountType === 'student')){
+                rentTab.classList.add('hidden');
             } else {
-                container.innerHTML = '<div class="empty-state" style="text-align:center; padding:1rem;">No active subscriptions. <a href="subscriptions.html" style="color:#2d6a2d;">Subscribe now</a> to unlock member benefits!</div>';
+                rentTab.classList.remove('hidden');
             }
-        } 
-    }
-    
-    function renewSubscription(id) { showToast('Subscription renewed! Please visit Subscriptions page to complete payment.'); }
-    function cancelSubscription(id) { if(confirm('Cancel this subscription?')) { subscriptions = subscriptions.filter(s => s.id !== id); localStorage.setItem('rrjfarm_user_subscriptions', JSON.stringify(subscriptions)); checkSubscriptionStatus(); renderSubscriptions(); updateOverviewSubscription(); showToast('Subscription cancelled'); } }
-    
-    function renderWalletHistory() { 
-        let container = document.getElementById('walletHistory'); 
-        if(container) {
-            if(transactionHistory.length === 0) {
-                container.innerHTML = '<div class="empty-state" style="text-align:center; padding:1rem;">No transactions yet.</div>';
-                return;
-            }
-            container.innerHTML = transactionHistory.map(t => `<div class="order-item" style="cursor:default;"><b>${t.desc}</b> <span style="color:${t.type==='credit'?'green':'red'}">${t.type==='credit'?'+':'−'}₱${t.amount}</span><br><small>${t.date}</small></div>`).join(''); 
+        }
+        
+        // Update Sell button visibility (Member only)
+        let sellBtn = document.getElementById('sellProductBtn');
+        if(sellBtn){
+            sellBtn.style.display = (hasActiveSubscription && subscriptionPlan === 'member') ? 'block' : 'none';
+        }
+        
+        // Update My Products tab visibility (Member only, not for Researcher)
+        let productsTab = document.getElementById('productsTabBtn');
+        if(productsTab){
+            productsTab.classList.toggle('hidden', !hasActiveSubscription || subscriptionPlan !== 'member');
         }
     }
     
-    function updateUIByAccessLevel() { 
-        let overviewTab = document.querySelector('.dashboard-tab[data-tab="overview"]'); 
-        let productsTab = document.querySelector('.dashboard-tab[data-tab="products"]'); 
-        let cooperativeTab = document.querySelector('.dashboard-tab[data-tab="cooperative"]'); 
-        let sellBtn = document.getElementById('sellProductBtnMarketplace'); 
-        if (sellBtn) { sellBtn.style.display = hasActiveSubscription ? 'block' : 'none'; } 
-        if (!hasActiveSubscription) { 
-            if (overviewTab) overviewTab.classList.add('hidden'); 
-            if (productsTab) productsTab.classList.add('hidden'); 
-            if (cooperativeTab) cooperativeTab.classList.add('hidden'); 
-            document.getElementById('reminderBanner').style.display = 'flex'; 
-            let activeTab = document.querySelector('.tab-content.active'); 
-            if (activeTab && (activeTab.id === 'overviewTab' || activeTab.id === 'productsTab' || activeTab.id === 'cooperativeTab')) { switchTab('marketplace'); } 
-        } else { 
-            if (overviewTab) overviewTab.classList.remove('hidden'); 
-            if (productsTab) productsTab.classList.remove('hidden'); 
-            if (cooperativeTab) cooperativeTab.classList.remove('hidden'); 
-            document.getElementById('reminderBanner').style.display = 'none'; 
-        } 
+    function updateProfileDisplay(){
+        let first = currentUser?.firstName || 'U', last = currentUser?.lastName || '';
+        document.getElementById('userAvatar').innerText = (first.charAt(0)+last.charAt(0)).toUpperCase() || 'U';
+        document.getElementById('profileName').innerHTML = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || 'User';
     }
     
-    function showToast(msg) { let t = document.getElementById('successToast'); t.innerHTML = msg; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); }
-    function updateFinancialUI() { 
-        document.getElementById('totalRevenue').innerText = '18,200'; 
-        document.getElementById('totalExpenses').innerText = '4,850'; 
-        document.getElementById('netProfit').innerText = '13,350'; 
-        document.getElementById('walletShort').innerText = walletBalance; 
-        document.getElementById('walletBalanceMain').innerText = walletBalance; 
-        document.getElementById('overviewWalletBalance').innerText = walletBalance; 
+    function updateUIByAccessLevel(){
+        renderOrders(); 
+        if(hasActiveSubscription && subscriptionPlan === 'member') renderSellerProducts();
+        renderMarketplace(); 
+        renderWorkshops();
+        renderSubscriptions(); 
+        renderCooperative(); 
+        renderRentals(); 
+        renderWallet();
+        updateFinancials();
+    }
+    
+    function updateFinancials(){
+        document.getElementById('totalRevenue').innerText='18,200';
+        document.getElementById('totalExpenses').innerText='4,850';
+        document.getElementById('netProfit').innerText='13,350';
+        document.getElementById('walletShort').innerText=walletBalance;
+        document.getElementById('walletBalanceMain').innerText=walletBalance;
     }
     
     // ORDERS
-    function renderOrders() { 
-        let filter = document.getElementById('orderFilter').value; 
-        let filtered = orders.filter(o => filter === 'all' || o.status === filter); 
-        let container = document.getElementById('buyerOrdersList'); 
-        if(!container) return; 
-        if(filtered.length === 0) { container.innerHTML = '<div class="empty-state" style="text-align:center; padding:1rem;">No orders found</div>'; return; } 
-        container.innerHTML = filtered.map(o => `<div class="order-item" onclick="openOrderModal('${o.id}')"><div style="display:flex; justify-content:space-between;"><strong>${o.product}</strong><span class="order-status status-${o.status}">${o.status}</span></div><div>₱${o.total} | Farmer: ${o.farmerName}</div><div class="order-actions" onclick="event.stopPropagation()">${o.status === 'delivered' && !o.rating ? `<button class="btn-action btn-rate" onclick="openRatingModal('${o.id}')">Rate</button>` : ''}${o.rating ? `<span class="btn-action">⭐ ${o.rating}/5</span>` : ''}<button class="btn-action" onclick="cancelOrderWithConfirm('${o.id}')">Cancel</button><button class="btn-action" onclick="requestRefundWithConfirm('${o.id}')">Refund</button><button class="btn-action" onclick="openChatModal('${o.id}', '${o.farmerName}')">Chat</button></div></div>`).join(''); 
+    function renderOrders(){
+        let f=document.getElementById('orderFilter').value;
+        let filtered=orders.filter(o=>f==='all'||o.status===f);
+        document.getElementById('ordersList').innerHTML=filtered.map(o=>`<div class="order-item"><div><b>${o.product}</b> <span class="order-status status-${o.status}">${o.status}</span></div><div>₱${o.total} | Farmer: ${o.farmer}</div><div><button class="btn-action" onclick='openOrderMap("${o.id}")'>📍 Track</button>${o.status==='delivered'&&!o.rating?`<button class="btn-action" onclick='openRating("${o.id}")'>⭐ Rate</button>`:''}<button class="btn-action" onclick='openRefund("${o.id}")'>💰 Refund</button><button class="btn-action" onclick='openChat("${o.id}","${o.farmer}")'>💬 Chat</button></div></div>`).join('');
     }
+    function openOrderMap(id){let o=orders.find(o=>o.id===id);if(!o)return;let modalDiv=document.createElement('div');modalDiv.id='tempMapModal';modalDiv.className='modal';modalDiv.innerHTML=`<div class="modal-content"><div class="modal-header"><h3>Order Tracking</h3><button class="close-modal-btn" onclick="document.getElementById('tempMapModal').remove()">&times;</button></div><div class="modal-body"><div id="trackMap" class="map-container"></div></div></div>`;document.body.appendChild(modalDiv);modalDiv.classList.add('active');setTimeout(()=>{let mapDiv=document.getElementById('trackMap');if(mapDiv){let map=L.map(mapDiv).setView([o.lat,o.lng],13);L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);L.marker([o.lat,o.lng]).addTo(map).bindPopup(o.product).openPopup();}},100);}
+    function openRating(id){currentOrderForRating=orders.find(o=>o.id===id);document.getElementById('ratingModal').classList.add('active');}
+    function closeRatingModal(){document.getElementById('ratingModal').classList.remove('active');}
+    function submitRating(){if(currentOrderForRating){currentOrderForRating.rating=5;showToast('Rating submitted!');closeRatingModal();renderOrders();}}
+    function openRefund(id){currentRefundOrder=orders.find(o=>o.id===id);document.getElementById('refundModal').classList.add('active');}
+    function closeRefundModal(){document.getElementById('refundModal').classList.remove('active');}
+    function submitRefund(){let reason=document.getElementById('refundReason').value.trim();if(!reason){alert('Please provide a reason');return}if(currentRefundOrder){currentRefundOrder.status='cancelled';showToast(`Refund requested for ${currentRefundOrder.product}`);renderOrders();closeRefundModal();}}
+    function openChat(id,name){currentChatOrder=orders.find(o=>o.id===id);document.getElementById('chatTitle').innerHTML=`Chat with ${name}`;document.getElementById('chatMessages').innerHTML='<div style="margin:0.3rem;">Farmer: Hello! How can I help?</div>';document.getElementById('chatModal').classList.add('active');}
+    function closeChatModal(){document.getElementById('chatModal').classList.remove('active');}
+    function sendChatMessage(){let msg=document.getElementById('chatInput').value.trim();if(msg){document.getElementById('chatMessages').innerHTML+=`<div style="text-align:right;margin:0.3rem;">You: ${msg}</div><div style="margin:0.3rem;">Farmer: Thanks! I\'ll get back to you.</div>`;document.getElementById('chatInput').value='';}}
     
-    function cancelOrderWithConfirm(orderId) { let order = orders.find(o => o.id === orderId); if (!order) return; if (order.status === 'delivered') { showToast('Cannot cancel delivered orders'); return; } if (confirm(`Cancel ${order.product}?`)) { order.status = 'cancelled'; showToast(`Order ${order.id} cancelled`); renderOrders(); renderRecentActivity(); } }
-    function requestRefundWithConfirm(orderId) { let order = orders.find(o => o.id === orderId); if (confirm(`Request refund for ${order.product}?`)) { order.status = 'cancelled'; showToast(`Refund requested for ${order.product}`); renderOrders(); } }
-    function openRatingModal(orderId) { currentOrderForRating = orders.find(o => o.id === orderId); document.getElementById('ratingModal').classList.add('active'); setupRatingStars(); }
-    function closeRatingModal() { document.getElementById('ratingModal').classList.remove('active'); }
-    function setupRatingStars() { document.querySelectorAll('#ratingStars .rating-star').forEach(star => { star.onclick = function() { let val = this.getAttribute('data-value'); document.querySelectorAll('#ratingStars .rating-star').forEach(s => s.classList.remove('active')); for(let i=0; i<val; i++) document.querySelectorAll('#ratingStars .rating-star')[i].classList.add('active'); }; }); }
-    function submitRating() { let rating = document.querySelectorAll('#ratingStars .rating-star.active').length; if(rating === 0) { alert('Select rating'); return; } if(currentOrderForRating) { currentOrderForRating.rating = rating; showToast(`Rated ${currentOrderForRating.product} ${rating}⭐`); closeRatingModal(); renderOrders(); renderRecentActivity(); } }
-    
-    // SELLER PRODUCTS
-    function renderSellerProducts() { if (!hasActiveSubscription) return; let container = document.getElementById('sellerProductsList'); if(!container) return; container.innerHTML = sellerProducts.map(p => `<div class="product-item"><div><strong>${p.name}</strong> - ₱${p.price}/${p.unit} | Sold: ${p.sold} units | Stock: ${p.quantity}</div><div class="product-actions"><button class="btn-action" onclick="openEditProductModal('${p.id}')">Edit</button><button class="btn-action" onclick="deleteProduct('${p.id}')">Delete</button></div></div>`).join(''); }
-    function openAddProductModal() { if (!hasActiveSubscription) { alert('Membership required to sell products'); return; } document.getElementById('sellProductModal').classList.add('active'); }
-    function openEditProductModal(productId) { currentEditProductId = productId; let product = sellerProducts.find(p => p.id === productId); if(product) { document.getElementById('editProdName').value = product.name; document.getElementById('editProdPrice').value = product.price; document.getElementById('editProdUnit').value = product.unit; document.getElementById('editProductModal').classList.add('active'); } }
-    function closeEditProductModal() { document.getElementById('editProductModal').classList.remove('active'); }
-    function saveProductEdit() { let product = sellerProducts.find(p => p.id === currentEditProductId); if(product) { product.name = document.getElementById('editProdName').value; product.price = parseInt(document.getElementById('editProdPrice').value); product.unit = document.getElementById('editProdUnit').value; showToast('Product updated!'); renderSellerProducts(); closeEditProductModal(); } }
-    function deleteProduct(productId) { if(confirm('Delete this product?')) { sellerProducts = sellerProducts.filter(p => p.id !== productId); showToast('Product deleted'); renderSellerProducts(); } }
-    function closeSellProductModal() { document.getElementById('sellProductModal').classList.remove('active'); }
-    function addNewProduct() { let name = document.getElementById('prodName').value, price = document.getElementById('prodPrice').value, unit = document.getElementById('prodUnit').value, image = document.getElementById('prodImage').value || '🌿'; if(name && price && unit) { let newId = 'P' + (sellerProducts.length + 3); sellerProducts.push({ id: newId, name: name, price: parseInt(price), unit: unit, sold: 0, quantity: 100 }); marketplaceItems.push({ id: Date.now(), name: name, price: parseInt(price), unit: unit, farmer: currentUser.name, image: image }); showToast(`Product "${name}" added!`); renderSellerProducts(); renderMarketplace(); closeSellProductModal(); } else alert('Fill all fields'); }
+    // PRODUCTS (MEMBER ONLY)
+    function renderSellerProducts(){if(!hasActiveSubscription || subscriptionPlan !== 'member') return; document.getElementById('sellerProductsList').innerHTML=sellerProducts.map(p=>`<div class="order-item"><b>${p.name}</b> - ₱${p.price}/${p.unit}<div><button class="btn-action" onclick="openEditProduct('${p.id}')">Edit</button><button class="btn-action" onclick="deleteProduct('${p.id}')">Delete</button></div></div>`).join('');}
+    function openAddProductModal(){if(!hasActiveSubscription || subscriptionPlan !== 'member'){alert('Only Members can sell products. Subscribe to Member plan to sell.');return} document.getElementById('productModalTitle').innerText='Add Product';document.getElementById('editProductId').value='';document.getElementById('productName').value='';document.getElementById('productPrice').value='';document.getElementById('productUnit').value='kg';document.getElementById('productModal').classList.add('active');}
+    function openEditProduct(id){let p=sellerProducts.find(p=>p.id===id);if(p){document.getElementById('productModalTitle').innerText='Edit Product';document.getElementById('editProductId').value=p.id;document.getElementById('productName').value=p.name;document.getElementById('productPrice').value=p.price;document.getElementById('productUnit').value=p.unit;document.getElementById('productModal').classList.add('active');}}
+    function closeProductModal(){document.getElementById('productModal').classList.remove('active');}
+    function saveProduct(){let id=document.getElementById('editProductId').value;let name=document.getElementById('productName').value;let price=parseFloat(document.getElementById('productPrice').value);let unit=document.getElementById('productUnit').value;if(!name||!price){alert('Fill all fields');return}if(id){let idx=sellerProducts.findIndex(p=>p.id===id);if(idx!==-1)sellerProducts[idx]={...sellerProducts[idx],name,price,unit};showToast('Product updated');}else{sellerProducts.push({id:'P'+Date.now(),name,price,unit,quantity:100});marketplaceProducts.push({id:Date.now(),name,price,unit,farmer:currentUser?.name||'You',stock:100,image:'🌿'});renderMarketplace();showToast('Product added');}renderSellerProducts();closeProductModal();}
+    function deleteProduct(id){if(confirm('Delete this product?')){sellerProducts=sellerProducts.filter(p=>p.id!==id);renderSellerProducts();showToast('Deleted');}}
     
     // MARKETPLACE
-    function renderMarketplace() { let container = document.getElementById('marketplaceProducts'); if(!container) return; container.innerHTML = marketplaceItems.map(p => `<div class="product-card" style="background:white; border-radius:16px; overflow:hidden; cursor:pointer;" onclick="openBuyProductModal(${p.id})"><div style="height:100px; background:#e8f0e8; display:flex; align-items:center; justify-content:center; font-size:2.5rem;">${p.image}</div><div style="padding:0.8rem;"><h3 style="font-size:1rem;">${p.name}</h3><p style="font-size:0.75rem; color:#666;">Farmer: ${p.farmer}</p><div style="font-weight:700; color:#ff8c00;">₱${p.price}/${p.unit}</div><button class="btn-action" style="width:100%; margin-top:0.5rem;" onclick="event.stopPropagation(); openBuyProductModal(${p.id})">Buy Now</button></div></div>`).join(''); }
-    function openBuyProductModal(productId) { currentBuyProduct = marketplaceItems.find(p => p.id === productId); if(!currentBuyProduct) return; document.getElementById('buyProductInfo').innerHTML = `<h3>${currentBuyProduct.name}</h3><p>Farmer: ${currentBuyProduct.farmer}</p><p>Price: ₱${currentBuyProduct.price}/${currentBuyProduct.unit}</p>`; document.getElementById('buyQuantity').value = 1; appliedBuyVoucher = null; document.getElementById('buyVoucherCode').value = ''; updateBuyTotal(); loadBuyVouchers(); document.getElementById('buyProductModal').classList.add('active'); selectBuyPayment('gcash'); }
-    function closeBuyProductModal() { document.getElementById('buyProductModal').classList.remove('active'); currentBuyProduct = null; }
-    function updateBuyTotal() { let qty = parseInt(document.getElementById('buyQuantity').value) || 1; let subtotal = qty * currentBuyProduct.price; let discount = calculateDiscount(subtotal, appliedBuyVoucher); let afterDiscount = subtotal - discount; let fee = calculateTransactionFee(afterDiscount); let total = afterDiscount + fee.fee; document.getElementById('buyTotal').value = `₱${total}`; document.getElementById('feeBreakdown').innerHTML = `<div>Subtotal: ₱${subtotal}</div>${discount > 0 ? `<div style="color:#2d6a2d;">Discount: -₱${discount}</div>` : ''}<div>${fee.label}: ₱${fee.fee}</div><div style="font-weight:800;">Total: ₱${total}</div>`; }
-    function selectBuyPayment(method) { selectedBuyPayment = method; document.querySelectorAll('#buyProductModal .payment-option').forEach(opt => opt.classList.remove('selected')); document.querySelector(`#buyProductModal .payment-option[data-method="${method}"]`).classList.add('selected'); document.getElementById('buyPaymentDetails').innerHTML = method === 'gcash' ? 'GCash: 0912 345 6789' : method === 'paymaya' ? 'PayMaya: 0912 345 6789' : 'BPI: 1234-5678-90'; }
-    function confirmBuyProduct() { let qty = parseInt(document.getElementById('buyQuantity').value), subtotal = qty * currentBuyProduct.price, discount = calculateDiscount(subtotal, appliedBuyVoucher), afterDiscount = subtotal - discount, fee = calculateTransactionFee(afterDiscount), total = afterDiscount + fee.fee; if(walletBalance >= total) { walletBalance -= total; transactionHistory.unshift({ id: Date.now(), desc: `Bought ${qty}x ${currentBuyProduct.name}`, amount: total, type: "debit", date: new Date().toLocaleDateString() }); orders.unshift({ id: "ORD" + Date.now(), product: currentBuyProduct.name, qty: qty, total: total, farmerName: currentBuyProduct.farmer, status: "pending", rating: null, lat: 13.9409, lng: 121.1620, orderDate: new Date().toISOString().split('T')[0] }); updateFinancialUI(); renderWalletHistory(); renderOrders(); renderRecentActivity(); showToast(`Purchased ${currentBuyProduct.name}!`); closeBuyProductModal(); } else { alert('Insufficient balance!'); } }
-    function openSellProductModal() { document.getElementById('sellProductModal').classList.add('active'); }
+    function renderMarketplace(){
+        document.getElementById('marketplaceGrid').innerHTML=marketplaceProducts.map(p=>`
+            <div class="product-card-modern">
+                <div class="product-image-modern">${p.image}</div>
+                <div class="product-info-modern">
+                    <div class="product-title-modern">${p.name}</div>
+                    <div class="product-price-modern">₱${p.price}<small>/${p.unit}</small></div>
+                    <div class="product-meta"><span>👨‍🌾 ${p.farmer}</span><span>📦 ${p.stock} ${p.unit}</span></div>
+                    <button class="btn-buy-modern" onclick="openBuyModal(${p.id})">Buy Now</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    function openBuyModal(id){currentBuyProduct=marketplaceProducts.find(p=>p.id===id);document.getElementById('buyProductInfo').innerHTML=`<h3>${currentBuyProduct.name}</h3><p>Farmer: ${currentBuyProduct.farmer}<br>Price: ₱${currentBuyProduct.price}/${currentBuyProduct.unit}<br>Available: ${currentBuyProduct.stock} ${currentBuyProduct.unit}</p>`;document.getElementById('buyQty').value=1;appliedBuyVoucher=null;document.getElementById('buyVoucherCode').value='';document.getElementById('buyVoucherList').innerHTML=availableVouchers.map(v=>`<div class="voucher-item" onclick="document.getElementById('buyVoucherCode').value='${v.code}';applyBuyVoucher()">${v.code} - ${v.desc}</div>`).join('');updateBuyTotal();document.getElementById('buyModal').classList.add('active');selectBuyMethod('gcash');}
+    function closeBuyModal(){document.getElementById('buyModal').classList.remove('active');}
+    function applyBuyVoucher(){let code=document.getElementById('buyVoucherCode').value.toUpperCase();let v=availableVouchers.find(v=>v.code===code);appliedBuyVoucher=v||null;showToast(v?'Voucher applied':'Invalid code');updateBuyTotal();}
+    function updateBuyTotal(){let qty=parseInt(document.getElementById('buyQty').value)||1;let subtotal=qty*currentBuyProduct.price;let discount=appliedBuyVoucher?(appliedBuyVoucher.type==='percent'?subtotal*appliedBuyVoucher.discount/100:appliedBuyVoucher.discount):0;let total=subtotal-discount;document.getElementById('buyTotal').value=`₱${total}`;document.getElementById('buyDiscountDisplay').innerHTML=discount>0?`<div style="color:green;">Discount: -₱${discount}</div>`:'';}
+    function selectBuyMethod(m){document.querySelectorAll('#buyModal .payment-option').forEach(opt=>opt.classList.remove('selected'));document.querySelector(`#buyModal .payment-option[data-method="${m}"]`).classList.add('selected');document.getElementById('buyPaymentDetails').innerHTML=m==='gcash'?'GCash: 0912 345 6789':'BPI: 1234-5678-90';}
+    function confirmBuy(){let qty=parseInt(document.getElementById('buyQty').value);let subtotal=qty*currentBuyProduct.price;let discount=appliedBuyVoucher?(appliedBuyVoucher.type==='percent'?subtotal*appliedBuyVoucher.discount/100:appliedBuyVoucher.discount):0;let total=subtotal-discount;if(walletBalance>=total){walletBalance-=total;transactionHistory.unshift({id:Date.now(),desc:`Bought ${qty}x ${currentBuyProduct.name}`,amount:total,type:'debit',date:new Date().toLocaleDateString()});orders.unshift({id:'ORD'+Date.now(),product:currentBuyProduct.name,qty,total,farmer:currentBuyProduct.farmer,status:'pending',lat:13.9409,lng:121.1620});updateFinancials();renderWallet();renderOrders();showToast('Purchase successful!');closeBuyModal();}else alert('Insufficient balance');}
     
     // WORKSHOPS
-    function renderWorkshops() { let container = document.getElementById('workshopsList'); if(!container) return; container.innerHTML = workshops.map(w => `<div class="workshop-card" style="background:white; border-radius:16px; overflow:hidden; cursor:pointer;" onclick="openWorkshopEnrollModal(${w.id})"><div style="height:80px; background:#ffe0b3; display:flex; align-items:center; justify-content:center; font-size:2rem;">${w.image}</div><div style="padding:0.8rem;"><h3 style="font-size:1rem;">${w.name}</h3><p style="font-size:0.7rem; color:#666;">${w.date} | ${w.time}</p><p style="font-size:0.7rem;">📍 ${w.location}</p><p style="font-weight:700; color:#ff8c00;">₱${w.price}</p><button class="btn-action" style="width:100%; margin-top:0.5rem;" onclick="event.stopPropagation(); openWorkshopEnrollModal(${w.id})">Enroll Now</button></div></div>`).join(''); }
-    function openWorkshopEnrollModal(workshopId) { currentWorkshop = workshops.find(w => w.id === workshopId); if(!currentWorkshop) return; document.getElementById('workshopInfo').innerHTML = `<h3>${currentWorkshop.name}</h3><p>📅 ${currentWorkshop.date} at ${currentWorkshop.time}</p><p>📍 ${currentWorkshop.location}</p><p><strong>Base Price: ₱${currentWorkshop.price}</strong></p>`; document.getElementById('workshopParticipants').value = '1'; appliedWorkshopVoucher = null; document.getElementById('workshopVoucherCode').value = ''; updateWorkshopTotal(); loadWorkshopVouchers(); document.getElementById('enrollWorkshopModal').classList.add('active'); selectEnrollPayment('gcash'); }
-    function closeEnrollModal() { document.getElementById('enrollWorkshopModal').classList.remove('active'); currentWorkshop = null; }
-    function updateWorkshopTotal() { let participants = parseInt(document.getElementById('workshopParticipants').value) || 1; let subtotal = participants === 1 ? currentWorkshop.price : currentWorkshop.price + (participants - 1) * 200; let discount = calculateDiscount(subtotal, appliedWorkshopVoucher); let afterDiscount = subtotal - discount; let fee = calculateTransactionFee(afterDiscount); let total = afterDiscount + fee.fee; document.getElementById('workshopFeeBreakdown').innerHTML = `<div>Base: ₱${currentWorkshop.price}</div>${participants > 1 ? `<div>Additional ${participants-1} pax: ₱${(participants-1)*200}</div>` : ''}${discount > 0 ? `<div style="color:#2d6a2d;">Voucher: -₱${discount}</div>` : ''}<div>${fee.label}: ₱${fee.fee}</div><div style="font-weight:800;">Total: ₱${total}</div>`; }
-    function selectEnrollPayment(method) { selectedEnrollPayment = method; document.querySelectorAll('#enrollWorkshopModal .payment-option').forEach(opt => opt.classList.remove('selected')); document.querySelector(`#enrollWorkshopModal .payment-option[data-method="${method}"]`).classList.add('selected'); document.getElementById('enrollPaymentDetails').innerHTML = method === 'gcash' ? 'GCash: 0912 345 6789' : method === 'paymaya' ? 'PayMaya: 0912 345 6789' : 'BPI: 1234-5678-90'; }
-    function confirmWorkshopEnrollment() { let participants = parseInt(document.getElementById('workshopParticipants').value) || 1; let subtotal = participants === 1 ? currentWorkshop.price : currentWorkshop.price + (participants - 1) * 200; let discount = calculateDiscount(subtotal, appliedWorkshopVoucher); let afterDiscount = subtotal - discount; let fee = calculateTransactionFee(afterDiscount); let total = afterDiscount + fee.fee; if(walletBalance >= total) { walletBalance -= total; transactionHistory.unshift({ id: Date.now(), desc: `Enrolled in ${currentWorkshop.name}${participants > 1 ? ` + ${participants-1} guests` : ''}`, amount: total, type: "debit", date: new Date().toLocaleDateString() }); let registration = { id: Date.now(), workshopId: currentWorkshop.id, workshopTitle: currentWorkshop.name, workshopDate: currentWorkshop.date, participantName: currentUser.name, participantEmail: currentUser.email, participants: participants, totalPrice: total, status: 'Confirmed' }; registeredWorkshops.push(registration); localStorage.setItem('rrjfarm_registered_workshops', JSON.stringify(registeredWorkshops)); updateFinancialUI(); renderWalletHistory(); renderRegisteredWorkshops(); showToast(`Enrolled in ${currentWorkshop.name}!`); closeEnrollModal(); } else { alert('Insufficient balance!'); } }
-    function loadRegisteredWorkshops() { let saved = localStorage.getItem('rrjfarm_registered_workshops'); if (saved) registeredWorkshops = JSON.parse(saved); renderRegisteredWorkshops(); }
-    function renderRegisteredWorkshops() { let container = document.getElementById('registeredWorkshops'); if(!container) return; if(registeredWorkshops.length === 0) { container.innerHTML = '<div class="empty-state" style="text-align:center; padding:1rem;">No workshops registered yet.</div>'; return; } container.innerHTML = registeredWorkshops.map(reg => `<div class="order-item" style="cursor:default;"><strong>${reg.workshopTitle}</strong><br><small>${reg.workshopDate} | ${reg.participantName}${reg.participants > 1 ? ` + ${reg.participants-1} guests` : ''}</small><br><small>Total: ₱${reg.totalPrice} | Status: Confirmed</small></div>`).join(''); }
+    function renderWorkshops(){
+        document.getElementById('workshopsGrid').innerHTML=workshopsList.map(w=>`
+            <div class="workshop-card-premium">
+                <div class="workshop-image">${w.image}</div>
+                <div class="workshop-content-premium">
+                    <div class="workshop-title-premium">${w.name}</div>
+                    <div class="workshop-meta-premium"><span>📅 ${w.date}</span><span>⏰ ${w.time}</span></div>
+                    <div class="workshop-meta-premium"><span>👩‍🏫 ${w.instructor}</span><span class="slots-left">🎟️ ${w.remaining}/${w.slots} slots</span></div>
+                    <div class="workshop-price-premium">₱${w.price}</div>
+                    <button class="btn-register-premium" onclick="openEnrollModal(${w.id})">Register →</button>
+                </div>
+            </div>
+        `).join('');
+        let saved=localStorage.getItem('rrjfarm_registered_workshops');
+        if(saved)registeredWorkshops=JSON.parse(saved);
+        document.getElementById('registeredWorkshopsList').innerHTML=registeredWorkshops.length?registeredWorkshops.map(w=>`<div class="order-item"><b>${w.name}</b><br>📅 ${w.date}<br>✅ Confirmed</div>`).join(''):'<div style="text-align:center;padding:1rem;">No workshops registered yet.</div>';
+    }
+    function openEnrollModal(id){currentEnrollWorkshop=workshopsList.find(w=>w.id===id);document.getElementById('enrollWorkshopInfo').innerHTML=`<h3>${currentEnrollWorkshop.name}</h3><p>📅 ${currentEnrollWorkshop.date}<br>👩‍🏫 ${currentEnrollWorkshop.instructor}<br>💰 Base: ₱${currentEnrollWorkshop.price}</p>`;document.getElementById('enrollParticipants').value='1';appliedEnrollVoucher=null;document.getElementById('enrollVoucherCode').value='';document.getElementById('enrollVoucherList').innerHTML=availableVouchers.map(v=>`<div class="voucher-item" onclick="document.getElementById('enrollVoucherCode').value='${v.code}';applyEnrollVoucher()">${v.code} - ${v.desc}</div>`).join('');updateEnrollTotal();document.getElementById('enrollModal').classList.add('active');selectEnrollMethod('gcash');}
+    function closeEnrollModal(){document.getElementById('enrollModal').classList.remove('active');}
+    function applyEnrollVoucher(){let code=document.getElementById('enrollVoucherCode').value.toUpperCase();let v=availableVouchers.find(v=>v.code===code);appliedEnrollVoucher=v||null;showToast(v?'Voucher applied':'Invalid code');updateEnrollTotal();}
+    function updateEnrollTotal(){let participants=parseInt(document.getElementById('enrollParticipants').value);let subtotal=participants===1?currentEnrollWorkshop.price:currentEnrollWorkshop.price+(participants-1)*200;let discount=appliedEnrollVoucher?(appliedEnrollVoucher.type==='percent'?subtotal*appliedEnrollVoucher.discount/100:appliedEnrollVoucher.discount):0;let total=subtotal-discount;document.getElementById('enrollTotalDisplay').innerHTML=`Total: ₱${total}`;document.getElementById('enrollDiscountDisplay').innerHTML=discount>0?`<div style="color:green;">Discount: -₱${discount}</div>`:'';return total;}
+    function selectEnrollMethod(m){document.querySelectorAll('#enrollModal .payment-option').forEach(opt=>opt.classList.remove('selected'));document.querySelector(`#enrollModal .payment-option[data-method="${m}"]`).classList.add('selected');document.getElementById('enrollPaymentDetails').innerHTML=m==='gcash'?'GCash: 0912 345 6789':'BPI: 1234-5678-90';}
+    function confirmEnroll(){let participants=parseInt(document.getElementById('enrollParticipants').value);let subtotal=participants===1?currentEnrollWorkshop.price:currentEnrollWorkshop.price+(participants-1)*200;let discount=appliedEnrollVoucher?(appliedEnrollVoucher.type==='percent'?subtotal*appliedEnrollVoucher.discount/100:appliedEnrollVoucher.discount):0;let total=subtotal-discount;if(walletBalance>=total){walletBalance-=total;transactionHistory.unshift({id:Date.now(),desc:`Enrolled in ${currentEnrollWorkshop.name} (${participants}pax)`,amount:total,type:'debit',date:new Date().toLocaleDateString()});registeredWorkshops.push({name:currentEnrollWorkshop.name,date:currentEnrollWorkshop.date});localStorage.setItem('rrjfarm_registered_workshops',JSON.stringify(registeredWorkshops));updateFinancials();renderWallet();renderWorkshops();showToast('Enrolled successfully!');closeEnrollModal();}else alert('Insufficient balance');}
+    
+    // SUBSCRIPTIONS
+    function renderSubscriptions(){
+        document.getElementById('subscriptionsPlans').innerHTML=`
+            <div class="plan-card">
+                <div class="plan-header researcher">
+                    <div class="plan-price">₱1,000 <small>/ month</small></div>
+                    <div>Cancel anytime • Monthly billing</div>
+                </div>
+                <div class="plan-body">
+                    <ul class="benefit-list">
+                        <li><i class="fas fa-check-circle"></i> Access to all Workshops</li>
+                        <li><i class="fas fa-microchip"></i> AI Integration Tools</li>
+                        <li><i class="fas fa-ticket-alt"></i> +2 Vouchers <span style="background:#ffd700;padding:0.1rem 0.4rem;border-radius:20px;font-size:0.7rem;">Every Month</span></li>
+                        <li><i class="fas fa-tag"></i> 50% OFF 1st Training</li>
+                        <li><i class="fas fa-tag"></i> 20% OFF 2nd Training</li>
+                        <li><i class="fas fa-truck"></i> 10% OFF Delivery</li>
+                        <li><i class="fas fa-store"></i> Marketplace Discount</li>
+                    </ul>
+                    <button class="btn-subscribe-plan" onclick="openSubscribeModal('researcher',1000)">Subscribe Now</button>
+                </div>
+            </div>
+            <div class="plan-card">
+                <div class="plan-header member">
+                    <div class="plan-price">₱1,500 <small>/ month</small></div>
+                    <div>Full access • Best value</div>
+                </div>
+                <div class="plan-body">
+                    <ul class="benefit-list">
+                        <li><i class="fas fa-check-circle"></i> Full Workshop Access</li>
+                        <li><i class="fas fa-microchip"></i> AI Tools <span style="background:#ffd700;padding:0.1rem 0.4rem;border-radius:20px;font-size:0.7rem;">Included</span></li>
+                        <li><i class="fas fa-ticket-alt"></i> +3 Vouchers <span style="background:#ffd700;padding:0.1rem 0.4rem;border-radius:20px;font-size:0.7rem;">Every Month</span></li>
+                        <li><i class="fas fa-tag"></i> 50% OFF 1st Training</li>
+                        <li><i class="fas fa-tag"></i> 20% OFF 2nd Training</li>
+                        <li><i class="fas fa-truck"></i> Free Delivery <span style="background:#eef3ea;padding:0.1rem 0.4rem;border-radius:20px;font-size:0.65rem;">3x per month</span></li>
+                        <li><i class="fas fa-store"></i> Marketplace Discount</li>
+                        <li><i class="fas fa-handshake"></i> Cooperative Voting Rights</li>
+                    </ul>
+                    <button class="btn-subscribe-plan" onclick="openSubscribeModal('member',1500)">Become a Member</button>
+                </div>
+            </div>
+        `;
+    }
+    function openSubscribeModal(plan,price){currentSubscribePlan={plan,price};document.getElementById('subscribePlanName').innerHTML=`Subscribe to ${plan==='researcher'?'Researcher & Student':'Members'} Plan`;document.getElementById('subscribeDetails').innerHTML=`<p><strong>${plan==='researcher'?'Researcher & Student':'Members'} Plan</strong><br>Price: ₱${price}/month</p>`;document.getElementById('subscribeModal').classList.add('active');selectSubscribeMethod('gcash');}
+    function closeSubscribeModal(){document.getElementById('subscribeModal').classList.remove('active');}
+    function selectSubscribeMethod(m){document.querySelectorAll('#subscribeModal .payment-option').forEach(opt=>opt.classList.remove('selected'));document.querySelector(`#subscribeModal .payment-option[data-method="${m}"]`).classList.add('selected');document.getElementById('subscribePaymentDetails').innerHTML=m==='gcash'?'GCash: 0912 345 6789':'BPI: 1234-5678-90';}
+    function confirmSubscription(){if(walletBalance>=currentSubscribePlan.price){walletBalance-=currentSubscribePlan.price;transactionHistory.unshift({id:Date.now(),desc:`Subscribed to ${currentSubscribePlan.plan} plan`,amount:currentSubscribePlan.price,type:'debit',date:new Date().toLocaleDateString()});let subs=JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions')||'[]');subs.push({id:'SUB'+Date.now(),plan:currentSubscribePlan.plan,status:'Active',amount:currentSubscribePlan.price,subscriberEmail:currentUser?.email,startDate:new Date().toISOString().split('T')[0],nextBilling:new Date(Date.now()+30*24*60*60*1000).toISOString().split('T')[0]});localStorage.setItem('rrjfarm_user_subscriptions',JSON.stringify(subs));hasActiveSubscription=true;subscriptionPlan=currentSubscribePlan.plan;checkSubscriptionStatus();updateFinancials();renderWallet();showToast(`Subscription activated! You are now a ${currentSubscribePlan.plan==='member'?'Member':'Researcher'}.`);closeSubscribeModal();}else alert('Insufficient balance');}
     
     // COOPERATIVE
-    function renderCooperative() { let container = document.getElementById('votingSection'); if(!container) return; container.innerHTML = Object.keys(votes).map(id => `<div class="proposal-card" style="background:white; border-radius:16px; padding:1rem;"><div style="display:flex; justify-content:space-between;"><span style="background:#ff8c00; color:white; padding:0.2rem 0.6rem; border-radius:20px; font-size:0.7rem;">PROPOSAL #${id}</span></div><h3 style="font-size:1rem; margin:0.5rem 0;">${votes[id].title}</h3><p style="font-size:0.8rem; color:#666;">${votes[id].desc}</p><p style="font-weight:600; color:#ff8c00; margin:0.5rem 0;">Budget: ${votes[id].budget}</p><div class="vote-progress"><div class="progress-bar" style="background:#e8f0e8; border-radius:10px; height:6px;"><div class="progress-fill" style="background:#2d6a2d; width: ${(votes[id].yes/(votes[id].yes+votes[id].no))*100}%; height:6px; border-radius:10px;"></div></div><div style="display:flex; justify-content:space-between; font-size:0.7rem; margin-top:0.3rem;"><span>Yes: ${votes[id].yes}</span><span>No: ${votes[id].no}</span></div></div><div style="display:flex; gap:0.5rem; margin-top:1rem;"><button class="vote-yes" style="flex:1; background:#2d6a2d; color:white; border:none; padding:0.4rem; border-radius:40px; cursor:pointer;" onclick="castVote('${id}', 'yes')">Vote Yes</button><button class="vote-no" style="flex:1; background:#dc3545; color:white; border:none; padding:0.4rem; border-radius:40px; cursor:pointer;" onclick="castVote('${id}', 'no')">Vote No</button></div></div>`).join(''); }
-    function castVote(proposalId, choice) { if (!hasActiveSubscription) { alert('Only active members can vote'); return; } if (choice === 'yes') votes[proposalId].yes++; else votes[proposalId].no++; renderCooperative(); showToast(`Vote recorded! You voted ${choice.toUpperCase()}`); }
+    function renderCooperative(){
+        let active=activeProposals.filter(p=>!votedProposals.includes(p.id));
+        let voted=activeProposals.filter(p=>votedProposals.includes(p.id));
+        document.getElementById('activeProposals').innerHTML=active.map(p=>`<div class="order-item"><div><b>${p.title}</b> | Budget: ${p.budget}</div><p style="font-size:0.8rem;">${p.desc}</p><div>✅ Yes: ${p.yes} | ❌ No: ${p.no}</div><div style="display:flex;gap:0.5rem;margin-top:0.5rem;"><button class="btn-action" style="background:#2d6a2d;color:white;" onclick="castVote('${p.id}','yes')">Vote Yes</button><button class="btn-action" style="background:#dc3545;color:white;" onclick="castVote('${p.id}','no')">Vote No</button></div></div>`).join('')||'<div>No active proposals</div>';
+        document.getElementById('votedHistory').innerHTML=voted.map(p=>`<div class="order-item">✓ Voted on <b>${p.title}</b></div>`).join('')||'<div style="padding:1rem;text-align:center;">No votes yet</div>';
+    }
+    function castVote(id,choice){if(!hasActiveSubscription){alert('Only active members can vote');return}if(votedProposals.includes(id)){alert('You have already voted on this proposal');return}let p=activeProposals.find(p=>p.id===id);if(p){if(choice==='yes')p.yes++;else p.no++;votedProposals.push(id);renderCooperative();showToast(`Vote recorded: ${choice.toUpperCase()}`);}}
     
-    function renderRecentActivity() { let container = document.getElementById('recentActivity'); if(container) container.innerHTML = orders.slice(0,3).map(o=>`<div class="order-item" style="cursor:default;"><b>${o.product}</b> - ${o.status} - ₱${o.total}</div>`).join(''); }
+    // RENT
+    function renderRentals(){
+        document.getElementById('rentalsGrid').innerHTML=rentalItems.map(r=>`
+            <div class="product-card-modern">
+                <div class="product-image-modern">${r.image}</div>
+                <div class="product-info-modern">
+                    <div class="product-title-modern">${r.name}</div>
+                    <div class="product-meta">${r.category}</div>
+                    <div class="product-price-modern">₱${r.price.toLocaleString()} <small>/day</small></div>
+                    <div class="product-meta">Deposit: ₱${r.deposit.toLocaleString()}</div>
+                    <button class="btn-buy-modern" onclick="openRentModal(${r.id})">Rent Now →</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    function openRentModal(id){currentRentItem=rentalItems.find(r=>r.id===id);document.getElementById('rentDetails').innerHTML=`<h3>${currentRentItem.name}</h3><p>Daily: ₱${currentRentItem.price}<br>Deposit: ₱${currentRentItem.deposit}</p>`;document.getElementById('rentDays').value=1;updateRentTotal();document.getElementById('rentModal').classList.add('active');selectRentMethod('gcash');}
+    function closeRentModal(){document.getElementById('rentModal').classList.remove('active');}
+    function updateRentTotal(){let days=parseInt(document.getElementById('rentDays').value);let total=days*currentRentItem.price+currentRentItem.deposit;document.getElementById('rentTotalDisplay').innerHTML=`<strong>Total: ₱${total}</strong>`;return total;}
+    function selectRentMethod(m){document.querySelectorAll('#rentModal .payment-option').forEach(opt=>opt.classList.remove('selected'));document.querySelector(`#rentModal .payment-option[data-method="${m}"]`).classList.add('selected');document.getElementById('rentPaymentDetails').innerHTML=m==='gcash'?'GCash: 0912 345 6789':'BPI: 1234-5678-90';}
+    function confirmRent(){let days=parseInt(document.getElementById('rentDays').value);let total=days*currentRentItem.price+currentRentItem.deposit;if(walletBalance>=total){walletBalance-=total;transactionHistory.unshift({id:Date.now(),desc:`Rented ${currentRentItem.name} for ${days} days`,amount:total,type:'debit',date:new Date().toLocaleDateString()});updateFinancials();renderWallet();showToast(`${currentRentItem.name} rented!`);closeRentModal();}else alert('Insufficient balance');}
     
-    // WALLET FUNCTIONS - WORKING
-    function openTopUpModal() { document.getElementById('topupModal').classList.add('active'); selectTopupPayment('gcash'); }
-    function closeTopupModal() { document.getElementById('topupModal').classList.remove('active'); }
-    function selectTopupPayment(method) { selectedTopupPayment = method; document.querySelectorAll('#topupModal .payment-option').forEach(opt => opt.classList.remove('selected')); document.querySelector(`#topupModal .payment-option[data-method="${method}"]`).classList.add('selected'); document.getElementById('topupPaymentDetails').innerHTML = method === 'gcash' ? '<strong>GCash</strong><br>Send to: 0912 345 6789 (RRJ FARM)' : method === 'paymaya' ? '<strong>PayMaya</strong><br>Send to: 0912 345 6789' : '<strong>Bank Transfer</strong><br>BPI: 1234-5678-90<br>RRJ FARM Cooperative'; }
-    function processTopup() { let amt = parseInt(document.getElementById('topupAmount').value); if(amt>0 && amt<=50000) { walletBalance += amt; transactionHistory.unshift({ id: Date.now(), desc: `Top-up via ${selectedTopupPayment.toUpperCase()}`, amount: amt, type: "credit", date: new Date().toLocaleDateString() }); updateFinancialUI(); renderWalletHistory(); showToast(`₱${amt} added to wallet!`); closeTopupModal(); document.getElementById('topupAmount').value = ''; } else alert('Enter valid amount (min ₱100)'); }
-    function openWithdrawModal() { document.getElementById('withdrawModal').classList.add('active'); selectWithdrawPayment('bank'); }
-    function closeWithdrawModal() { document.getElementById('withdrawModal').classList.remove('active'); }
-    function selectWithdrawPayment(method) { selectedWithdrawPayment = method; document.querySelectorAll('#withdrawModal .payment-option').forEach(opt => opt.classList.remove('selected')); document.querySelector(`#withdrawModal .payment-option[data-method="${method}"]`).classList.add('selected'); document.getElementById('withdrawPaymentDetails').innerHTML = method === 'gcash' ? `<strong>GCash Withdrawal</strong><br>Will be sent to: ${currentUser.walletNumber || '09123456789'}` : method === 'paymaya' ? `<strong>PayMaya Withdrawal</strong><br>Will be sent to: ${currentUser.walletNumber || '09123456789'}` : `<strong>Bank Transfer</strong><br>Bank: ${currentUser.bankName || 'BPI'}<br>Account: ${currentUser.bankAccount || '1234-5678-90'}`; }
-    function processWithdraw() { let amt = parseInt(document.getElementById('withdrawAmount').value); if(amt>0 && amt<=walletBalance) { walletBalance -= amt; transactionHistory.unshift({ id: Date.now(), desc: `Withdraw to ${selectedWithdrawPayment.toUpperCase()}`, amount: amt, type: "debit", date: new Date().toLocaleDateString() }); updateFinancialUI(); renderWalletHistory(); showToast(`₱${amt} withdrawal requested!`); closeWithdrawModal(); document.getElementById('withdrawAmount').value = ''; } else alert('Insufficient balance or invalid amount'); }
-    
-    // ORDER MODAL
-    function openOrderModal(orderId) { let order = orders.find(o=>o.id===orderId); let modalDiv = document.getElementById('modalDynamicContent'); modalDiv.innerHTML = `<div class="modal-header"><h3><i class="fas fa-box"></i> ${order.product}</h3><button class="close-modal-btn" onclick="closeModal()">&times;</button></div><div class="modal-body"><div><strong>Status:</strong> <span class="order-status status-${order.status}">${order.status}</span></div><div><strong>Farmer:</strong> ${order.farmerName}</div><div><strong>Total:</strong> ₱${order.total} | <strong>Qty:</strong> ${order.qty}kg</div><div id="trackMap" class="map-container" style="height:150px; border-radius:12px; margin:0.5rem 0; background:#e9ecef;"></div><button class="btn-action" onclick="openChatModal('${order.id}', '${order.farmerName}')">Chat with Farmer</button></div><div class="modal-footer"><button class="btn-secondary" onclick="closeModal()">Close</button></div></div>`; document.getElementById('detailModal').classList.add('active'); setTimeout(()=>{ let mapDiv = document.getElementById('trackMap'); if(mapDiv && !activeMap){ let map = L.map(mapDiv).setView([order.lat, order.lng], 13); L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map); L.marker([order.lat, order.lng]).addTo(map).bindPopup(order.product).openPopup(); activeMap = map; } }, 100); }
-    function closeModal() { document.getElementById('detailModal').classList.remove('active'); if(activeMap) { activeMap.remove(); activeMap=null; } }
-    
-    // CHAT MODAL
-    function openChatModal(orderId, farmerName) { currentChatOrder = orders.find(o => o.id === orderId); if (!currentChatOrder) return; document.getElementById('chatFarmerName').innerHTML = `<i class="fas fa-user-farmer"></i> Chat with ${farmerName}`; let container = document.getElementById('chatMessagesContainer'); let chatKey = `order_${orderId}`; let existingChat = chatMessages[chatKey] || [{ sender: 'farmer', text: 'Hello! How can I help you?', time: new Date().toLocaleTimeString() }]; container.innerHTML = existingChat.map(msg => `<div class="chat-bubble ${msg.sender === 'user' ? 'user' : 'farmer'}"><div class="message" style="display:inline-block; padding:0.4rem 0.8rem; border-radius:16px; background:${msg.sender === 'user' ? '#2d6a2d' : '#e8f0e8'}; color:${msg.sender === 'user' ? 'white' : '#1a2e1a'};">${msg.text}</div><div class="chat-time" style="font-size:0.65rem; color:#888; margin-top:0.2rem;">${msg.time || 'Just now'}</div></div>`).join(''); document.getElementById('chatModal').classList.add('active'); container.scrollTop = container.scrollHeight; }
-    function closeChatModal() { document.getElementById('chatModal').classList.remove('active'); currentChatOrder = null; }
-    function sendChatMessage() { let input = document.getElementById('chatMessageInput'); let message = input.value.trim(); if (!message || !currentChatOrder) return; let chatKey = `order_${currentChatOrder.id}`; if (!chatMessages[chatKey]) chatMessages[chatKey] = []; chatMessages[chatKey].push({ sender: 'user', text: message, time: new Date().toLocaleTimeString() }); setTimeout(() => { chatMessages[chatKey].push({ sender: 'farmer', text: 'Thanks! I will get back to you shortly.', time: new Date().toLocaleTimeString() }); openChatModal(currentChatOrder.id, currentChatOrder.farmerName); }, 1000); input.value = ''; openChatModal(currentChatOrder.id, currentChatOrder.farmerName); }
+    // WALLET
+    function renderWallet(){document.getElementById('walletHistoryList').innerHTML=transactionHistory.map(t=>`<div class="order-item"><b>${t.desc}</b> <span style="color:${t.type==='credit'?'green':'red'}">${t.type==='credit'?'+':'−'}₱${t.amount}</span><br><small>${t.date}</small></div>`).join('');}
+    function openTopUpModal(){document.getElementById('topupModal').classList.add('active');}
+    function closeTopupModal(){document.getElementById('topupModal').classList.remove('active');}
+    function processTopup(){let amt=parseInt(document.getElementById('topupAmount').value);if(amt>0){walletBalance+=amt;transactionHistory.unshift({id:Date.now(),desc:`Top-up`,amount:amt,type:'credit',date:new Date().toLocaleDateString()});updateFinancials();renderWallet();showToast(`₱${amt} added!`);closeTopupModal();}else alert('Enter valid amount');}
+    function openWithdrawModal(){document.getElementById('withdrawModal').classList.add('active');}
+    function closeWithdrawModal(){document.getElementById('withdrawModal').classList.remove('active');}
+    function processWithdraw(){let amt=parseInt(document.getElementById('withdrawAmount').value);if(amt>0&&amt<=walletBalance){walletBalance-=amt;transactionHistory.unshift({id:Date.now(),desc:`Withdrawal`,amount:amt,type:'debit',date:new Date().toLocaleDateString()});updateFinancials();renderWallet();showToast(`₱${amt} withdrawn`);closeWithdrawModal();}else alert('Insufficient balance');}
     
     // PROFILE
-    function toggleProfileDropdown() { 
-        document.getElementById('profileDropdown').classList.toggle('show'); 
-    }
-    document.getElementById('userAvatar').addEventListener('click', (e) => { 
-        e.stopPropagation(); 
-        toggleProfileDropdown(); 
-    });
-    document.addEventListener('click', function(e) { 
-        let drop = document.getElementById('profileDropdown'); 
-        if(drop && !drop.contains(e.target) && e.target !== document.getElementById('userAvatar')) 
-            drop.classList.remove('show'); 
-    });
-    document.getElementById('editProfileBtn').onclick = () => { document.getElementById('editProfileModal').classList.add('active'); document.getElementById('editName').value = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim(); document.getElementById('editAddress').value = currentUser.address || ''; document.getElementById('editEmail').value = currentUser.email || ''; document.getElementById('editContact').value = currentUser.contact || ''; document.getElementById('editBankName').value = currentUser.bankName || ''; document.getElementById('editBankAccount').value = currentUser.bankAccount || ''; document.getElementById('editWalletType').value = currentUser.walletType || 'gcash'; document.getElementById('editWalletNumber').value = currentUser.walletNumber || ''; };
-    document.getElementById('mySubscriptionsBtn').onclick = () => { switchTab('subscriptions'); };
-    document.getElementById('changePasswordBtn').onclick = () => { showToast('Password reset email sent'); };
-    document.getElementById('logoutBtn').onclick = () => { localStorage.removeItem('rrjfarm_current_user'); sessionStorage.clear(); window.location.href = 'index.html'; };
-    function saveProfile() { let fullName = document.getElementById('editName').value.trim(); let nameParts = fullName.split(' '); currentUser.firstName = nameParts[0]; currentUser.lastName = nameParts.slice(1).join(' ') || ''; currentUser.address = document.getElementById('editAddress').value; currentUser.email = document.getElementById('editEmail').value; currentUser.contact = document.getElementById('editContact').value; currentUser.bankName = document.getElementById('editBankName').value; currentUser.bankAccount = document.getElementById('editBankAccount').value; currentUser.walletType = document.getElementById('editWalletType').value; currentUser.walletNumber = document.getElementById('editWalletNumber').value; currentUser.avatarInitials = (currentUser.firstName?.charAt(0) || 'U') + (currentUser.lastName?.charAt(0) || ''); localStorage.setItem('rrjfarm_current_user', JSON.stringify(currentUser)); showToast('Profile updated!'); closeEditModal(); updateProfileDropdown(); updateUIByAccessLevel(); }
-    function closeEditModal() { document.getElementById('editProfileModal').classList.remove('active'); }
+    function openEditProfileModal(){document.getElementById('editProfileModal').classList.add('active');document.getElementById('editFullName').value=`${currentUser.firstName||''} ${currentUser.lastName||''}`.trim();document.getElementById('editAddress').value=currentUser.address||'';document.getElementById('editContact').value=currentUser.contact||'';document.getElementById('editEmail').value=currentUser.email||'';}
+    function closeEditProfileModal(){document.getElementById('editProfileModal').classList.remove('active');}
+    function saveEditProfile(){let name=document.getElementById('editFullName').value.trim().split(' ');currentUser.firstName=name[0]||'';currentUser.lastName=name.slice(1).join(' ')||'';currentUser.address=document.getElementById('editAddress').value;currentUser.contact=document.getElementById('editContact').value;currentUser.email=document.getElementById('editEmail').value;localStorage.setItem('rrjfarm_current_user',JSON.stringify(currentUser));updateProfileDisplay();showToast('Profile updated!');closeEditProfileModal();}
+    function openChangePasswordModal(){document.getElementById('changePasswordModal').classList.add('active');}
+    function closeChangePasswordModal(){document.getElementById('changePasswordModal').classList.remove('active');}
+    function changePassword(){let newPwd=document.getElementById('newPassword').value;let confirmPwd=document.getElementById('confirmPassword').value;if(newPwd!==confirmPwd){alert('Passwords do not match');return}if(newPwd.length<6){alert('Password must be at least 6 characters');return}showToast('Password changed successfully!');closeChangePasswordModal();}
     
-    // TAB SWITCHING
-    function switchTab(tab) { 
-        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active')); 
-        document.getElementById(`${tab}Tab`).classList.add('active'); 
-        document.querySelectorAll('.dashboard-tab').forEach(btn => btn.classList.remove('active')); 
-        if(event && event.target) event.target.classList.add('active'); 
-        if(tab === 'orders') renderOrders(); 
-        if(tab === 'products') renderSellerProducts(); 
-        if(tab === 'marketplace') renderMarketplace(); 
-        if(tab === 'workshops') { renderWorkshops(); renderRegisteredWorkshops(); } 
-        if(tab === 'cooperative') renderCooperative(); 
-        if(tab === 'wallet') renderWalletHistory(); 
-        if(tab === 'subscriptions') renderSubscriptions(); 
-        if(tab === 'overview') { renderRecentActivity(); updateFinancialUI(); updateOverviewSubscription(); } 
-    }
+    function switchTab(tab){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.getElementById(`${tab}Tab`).classList.add('active');if(tab==='orders')renderOrders();if(tab==='products'&&hasActiveSubscription&&subscriptionPlan==='member')renderSellerProducts();if(tab==='marketplace')renderMarketplace();if(tab==='workshops')renderWorkshops();if(tab==='subscriptions')renderSubscriptions();if(tab==='cooperative')renderCooperative();if(tab==='rent')renderRentals();if(tab==='wallet')renderWallet();if(tab==='overview')updateFinancials();}
     
-    // INITIALIZE
-    if (checkSession()) { 
-        renderOrders(); 
-        renderSellerProducts(); 
-        renderMarketplace(); 
-        renderWorkshops(); 
-        renderCooperative(); 
-        renderWalletHistory(); 
-        renderRecentActivity(); 
-        renderRegisteredWorkshops(); 
-        renderSubscriptions(); 
-        updateFinancialUI(); 
-        updateOverviewSubscription(); 
-    }
+    document.getElementById('userAvatar').addEventListener('click',()=>document.getElementById('profileDropdown').classList.toggle('show'));
+    document.addEventListener('click',(e)=>{let d=document.getElementById('profileDropdown');if(d&&!d.contains(e.target)&&e.target!==document.getElementById('userAvatar'))d.classList.remove('show');});
+    document.getElementById('editProfileBtn').onclick=openEditProfileModal;
+    document.getElementById('changePasswordBtn').onclick=openChangePasswordModal;
+    document.getElementById('logoutBtn').onclick=()=>{localStorage.removeItem('rrjfarm_current_user');window.location.href='index.html';};
+    document.getElementById('subscribeNowBannerBtn').onclick=()=>switchTab('subscriptions');
     
-    window.switchTab = switchTab; window.openOrderModal = openOrderModal; window.closeModal = closeModal; window.openRatingModal = openRatingModal; window.closeRatingModal = closeRatingModal; window.submitRating = submitRating;
-    window.openAddProductModal = openAddProductModal; window.closeSellProductModal = closeSellProductModal; window.addNewProduct = addNewProduct; window.openEditProductModal = openEditProductModal; window.closeEditProductModal = closeEditProductModal; window.saveProductEdit = saveProductEdit; window.deleteProduct = deleteProduct;
-    window.openSellProductModal = openSellProductModal; window.openBuyProductModal = openBuyProductModal; window.closeBuyProductModal = closeBuyProductModal; window.updateBuyTotal = updateBuyTotal; window.selectBuyPayment = selectBuyPayment; window.confirmBuyProduct = confirmBuyProduct; window.applyBuyVoucher = applyBuyVoucher;
-    window.openWorkshopEnrollModal = openWorkshopEnrollModal; window.closeEnrollModal = closeEnrollModal; window.selectEnrollPayment = selectEnrollPayment; window.confirmWorkshopEnrollment = confirmWorkshopEnrollment; window.updateWorkshopTotal = updateWorkshopTotal; window.applyWorkshopVoucher = applyWorkshopVoucher;
-    window.openTopUpModal = openTopUpModal; window.closeTopupModal = closeTopupModal; window.selectTopupPayment = selectTopupPayment; window.processTopup = processTopup;
-    window.openWithdrawModal = openWithdrawModal; window.closeWithdrawModal = closeWithdrawModal; window.selectWithdrawPayment = selectWithdrawPayment; window.processWithdraw = processWithdraw;
-    window.saveProfile = saveProfile; window.closeEditModal = closeEditModal; window.renewSubscription = renewSubscription; window.cancelSubscription = cancelSubscription;
-    window.cancelOrderWithConfirm = cancelOrderWithConfirm; window.requestRefundWithConfirm = requestRefundWithConfirm;
-    window.openChatModal = openChatModal; window.closeChatModal = closeChatModal; window.sendChatMessage = sendChatMessage; window.castVote = castVote;
+    checkSession();
+    window.switchTab=switchTab; window.openBuyModal=openBuyModal; window.closeBuyModal=closeBuyModal; window.applyBuyVoucher=applyBuyVoucher; window.updateBuyTotal=updateBuyTotal; window.selectBuyMethod=selectBuyMethod; window.confirmBuy=confirmBuy;
+    window.openEnrollModal=openEnrollModal; window.closeEnrollModal=closeEnrollModal; window.applyEnrollVoucher=applyEnrollVoucher; window.updateEnrollTotal=updateEnrollTotal; window.selectEnrollMethod=selectEnrollMethod; window.confirmEnroll=confirmEnroll;
+    window.openSubscribeModal=openSubscribeModal; window.closeSubscribeModal=closeSubscribeModal; window.selectSubscribeMethod=selectSubscribeMethod; window.confirmSubscription=confirmSubscription;
+    window.openAddProductModal=openAddProductModal; window.openEditProduct=openEditProduct; window.closeProductModal=closeProductModal; window.saveProduct=saveProduct; window.deleteProduct=deleteProduct;
+    window.openOrderMap=openOrderMap; window.openRating=openRating; window.closeRatingModal=closeRatingModal; window.submitRating=submitRating;
+    window.openRefund=openRefund; window.closeRefundModal=closeRefundModal; window.submitRefund=submitRefund;
+    window.openChat=openChat; window.closeChatModal=closeChatModal; window.sendChatMessage=sendChatMessage;
+    window.castVote=castVote; window.openRentModal=openRentModal; window.closeRentModal=closeRentModal; window.updateRentTotal=updateRentTotal; window.selectRentMethod=selectRentMethod; window.confirmRent=confirmRent;
+    window.openTopUpModal=openTopUpModal; window.closeTopupModal=closeTopupModal; window.processTopup=processTopup;
+    window.openWithdrawModal=openWithdrawModal; window.closeWithdrawModal=closeWithdrawModal; window.processWithdraw=processWithdraw;
+    window.openEditProfileModal=openEditProfileModal; window.closeEditProfileModal=closeEditProfileModal; window.saveEditProfile=saveEditProfile;
+    window.openChangePasswordModal=openChangePasswordModal; window.closeChangePasswordModal=closeChangePasswordModal; window.changePassword=changePassword;
 </script>
 </body>
 </html>
