@@ -16,111 +16,120 @@
         .logo h1 { font-size: 1.5rem; background: linear-gradient(135deg, #ffffff, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .logo p { font-size: 0.7rem; color: #a8c8a8; }
         .nav-menu ul { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
-        .nav-menu a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; padding: 0.5rem 0; }
+        .nav-menu a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; padding: 0.5rem 0; font-size: 0.9rem; }
         .nav-menu a:hover, .nav-menu a.active { color: #ffd700; border-bottom: 2px solid #ffd700; }
         
-        /* REMINDER MODAL */
-        .reminder-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+        /* REMINDER MODAL - FIXED: properly visible on mobile */
+        .reminder-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 9999; justify-content: center; align-items: center; }
         .reminder-modal.active { display: flex; }
-        .reminder-content { background: white; border-radius: 32px; max-width: 450px; width: 90%; padding: 2rem; text-align: center; animation: fadeUp 0.3s ease; }
-        .reminder-icon { font-size: 4rem; margin-bottom: 1rem; }
-        .reminder-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #1a2e1a; }
-        .reminder-message { color: #4a5b4a; margin-bottom: 1.5rem; line-height: 1.5; }
-        .reminder-buttons { display: flex; gap: 1rem; margin-top: 0.5rem; }
-        .btn-login-reminder { flex: 1; background: #2d6a2d; color: white; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
-        .btn-cancel-reminder { flex: 1; background: #eef2e8; color: #1a2e1a; border: none; padding: 0.8rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .reminder-content { background: white; border-radius: 32px; max-width: 340px; width: 85%; padding: 1.5rem; text-align: center; animation: fadeUp 0.3s ease; margin: 1rem; }
+        .reminder-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+        .reminder-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; color: #1a2e1a; }
+        .reminder-message { color: #4a5b4a; margin-bottom: 1rem; line-height: 1.4; font-size: 0.85rem; }
+        .reminder-buttons { display: flex; gap: 0.8rem; margin-top: 0.5rem; }
+        .btn-login-reminder { flex: 1; background: #2d6a2d; color: white; border: none; padding: 0.7rem; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+        .btn-cancel-reminder { flex: 1; background: #eef2e8; color: #1a2e1a; border: none; padding: 0.7rem; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
         
         @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
-        .blockchain-status { background: linear-gradient(135deg, #0f172a, #1e293b); border-radius: 20px; padding: 1rem 2rem; margin: 2rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .blockchain-status { background: linear-gradient(135deg, #0f172a, #1e293b); border-radius: 20px; padding: 1rem 2rem; margin: 2rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; color: white; }
         .ledger-status { display: flex; align-items: center; gap: 1rem; }
         .ledger-dot { width: 12px; height: 12px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.1); } }
         
         .workshops-hero-premium { background: white; border-radius: 30px; margin: 2rem 0; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1); overflow: hidden; }
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem; }
-        .hero-content h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: #1a2e1a; }
-        .hero-content p { font-size: 1.1rem; color: #4a5b4a; margin-bottom: 1.5rem; }
-        .hero-stats { display: flex; gap: 2rem; justify-content: center; align-items: center; background: #f0f4e8; border-radius: 20px; padding: 1.5rem; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2.5rem; }
+        .hero-content h1 { font-size: 2rem; font-weight: 800; margin-bottom: 1rem; color: #1a2e1a; }
+        .hero-content p { font-size: 1rem; color: #4a5b4a; margin-bottom: 1.5rem; }
+        .hero-stats { display: flex; gap: 2rem; justify-content: center; align-items: center; background: #f0f4e8; border-radius: 20px; padding: 1.2rem; }
         .hero-stat { text-align: center; }
-        .hero-stat .number { font-size: 2rem; font-weight: 800; color: #2d6a2d; }
+        .hero-stat .number { font-size: 1.8rem; font-weight: 800; color: #2d6a2d; }
         .hero-stat .label { font-size: 0.7rem; color: #4a5b4a; }
         
         .filter-section { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin: 2rem 0; }
-        .filter-chips { display: flex; gap: 0.8rem; flex-wrap: wrap; }
-        .filter-chip-premium { padding: 0.6rem 1.5rem; background: white; border: 2px solid #e0e0e0; border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s; }
+        .filter-chips { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+        .filter-chip-premium { padding: 0.5rem 1.2rem; background: white; border: 2px solid #e0e0e0; border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s; font-size: 0.8rem; }
         .filter-chip-premium:hover, .filter-chip-premium.active { background: #2d6a2d; color: white; border-color: #2d6a2d; }
         .search-wrapper { position: relative; }
         .search-wrapper i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #aaa; }
-        .search-wrapper input { padding: 0.7rem 1rem 0.7rem 2.5rem; border: 2px solid #e0e0e0; border-radius: 50px; width: 250px; background: white; }
+        .search-wrapper input { padding: 0.6rem 1rem 0.6rem 2.5rem; border: 2px solid #e0e0e0; border-radius: 50px; width: 250px; background: white; font-size: 0.85rem; }
         
-        .workshops-grid-premium { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .workshops-grid-premium { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.8rem; margin: 2rem 0; }
         .workshop-card-premium { background: white; border-radius: 24px; overflow: hidden; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; }
         .workshop-card-premium:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15); }
-        .workshop-badge-premium { position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, #ff8c00, #e67e00); color: white; padding: 0.3rem 1rem; border-radius: 50px; font-size: 0.7rem; font-weight: 600; z-index: 10; }
-        .workshop-image { height: 160px; background: linear-gradient(135deg, #e8f0e8, #d4e4d4); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
-        .workshop-content-premium { padding: 1.5rem; }
-        .workshop-title-premium { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .workshop-meta-premium { display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: #4a5b4a; margin: 0.8rem 0; }
+        .workshop-badge-premium { position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, #ff8c00, #e67e00); color: white; padding: 0.2rem 0.8rem; border-radius: 50px; font-size: 0.65rem; font-weight: 600; z-index: 10; }
+        .workshop-image { height: 140px; background: linear-gradient(135deg, #e8f0e8, #d4e4d4); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; }
+        .workshop-content-premium { padding: 1.2rem; }
+        .workshop-title-premium { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .workshop-meta-premium { display: flex; flex-wrap: wrap; gap: 0.8rem; font-size: 0.7rem; color: #4a5b4a; margin: 0.6rem 0; }
         .workshop-meta-premium span { display: flex; align-items: center; gap: 0.3rem; }
-        .workshop-description-premium { color: #4a5b4a; line-height: 1.5; font-size: 0.9rem; margin: 1rem 0; }
-        .workshop-footer-premium { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e8f0e8; }
-        .workshop-price-premium { font-size: 1.5rem; font-weight: 800; color: #ff8c00; }
-        .slots-left { font-size: 0.7rem; color: #2d6a2d; background: #e8f0e8; padding: 0.2rem 0.6rem; border-radius: 20px; }
-        .btn-register-premium { background: linear-gradient(135deg, #2d6a2d, #1a4d1a); color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 30px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .workshop-description-premium { color: #4a5b4a; line-height: 1.4; font-size: 0.8rem; margin: 0.8rem 0; }
+        .workshop-footer-premium { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid #e8f0e8; }
+        .workshop-price-premium { font-size: 1.3rem; font-weight: 800; color: #ff8c00; }
+        .slots-left { font-size: 0.65rem; color: #2d6a2d; background: #e8f0e8; padding: 0.2rem 0.5rem; border-radius: 20px; }
+        .btn-register-premium { background: linear-gradient(135deg, #2d6a2d, #1a4d1a); color: white; border: none; padding: 0.5rem 1.2rem; border-radius: 30px; cursor: pointer; font-weight: 600; font-size: 0.8rem; transition: all 0.3s; }
         .btn-register-premium:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(45,106,45,0.3); }
         
-        .my-workshops-premium { background: white; border-radius: 24px; padding: 2rem; margin: 3rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
-        .registered-workshop-premium { background: #f0f4e8; padding: 1rem; border-radius: 16px; margin-bottom: 0.8rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; transition: all 0.3s; }
-        .registered-workshop-premium:hover { background: #e8f0e8; transform: translateX(5px); }
-        .empty-message-premium { text-align: center; padding: 2rem; color: #888; }
+        .my-workshops-premium { background: white; border-radius: 24px; padding: 1.5rem; margin: 2rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.8rem; }
+        .section-header h3 { font-size: 1.2rem; }
+        .registered-workshop-premium { background: #f0f4e8; padding: 0.8rem; border-radius: 16px; margin-bottom: 0.7rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; }
+        .empty-message-premium { text-align: center; padding: 2rem; color: #888; font-size: 0.85rem; }
         
-        /* MODAL STYLES */
+        /* MODAL STYLES - Mobile Optimized */
         .modal-premium { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
         .modal-premium.active { display: flex; }
-        .modal-content-premium { background: white; border-radius: 32px; max-width: 900px; width: 90%; padding: 1.5rem; animation: slideUp 0.3s ease; max-height: 85vh; overflow-y: auto; }
+        .modal-content-premium { background: white; border-radius: 28px; max-width: 900px; width: 92%; padding: 1rem; animation: slideUp 0.3s ease; max-height: 90vh; overflow-y: auto; margin: 1rem; }
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .modal-two-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .modal-left { border-right: 1px solid #e8f0e8; padding-right: 1.5rem; }
+        .modal-two-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .modal-left { border-right: 1px solid #e8f0e8; padding-right: 1rem; }
         .modal-right { padding-left: 0.5rem; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid #e8f0e8; }
-        .modal-header h3 { font-size: 1.3rem; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 2px solid #e8f0e8; }
+        .modal-header h3 { font-size: 1.1rem; }
         .modal-close-premium { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; }
-        .modal-close-premium:hover { color: #dc3545; }
-        .workshop-summary { background: #f0f4e8; border-radius: 20px; padding: 1rem; margin-bottom: 1rem; }
-        .workshop-summary-item { display: flex; justify-content: space-between; margin-bottom: 0.6rem; font-size: 0.85rem; }
-        .workshop-summary-item .label { font-weight: 600; color: #4a5b4a; }
-        .workshop-summary-item .value { color: #1a2e1a; font-weight: 500; }
-        .form-group-premium { margin-bottom: 1rem; }
-        .form-group-premium label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.85rem; }
-        .form-group-premium input, .form-group-premium select { width: 100%; padding: 0.7rem 0.8rem; border: 2px solid #e0e0e0; border-radius: 14px; font-family: inherit; font-size: 0.85rem; }
-        .price-breakdown { background: #e8f0e8; border-radius: 16px; padding: 0.8rem; margin: 0.8rem 0; }
-        .price-breakdown .total-price { font-size: 1.1rem; font-weight: 800; color: #ff8c00; }
-        .payment-options-premium { display: flex; gap: 0.5rem; margin: 0.8rem 0; }
-        .payment-option-premium { flex: 1; padding: 0.6rem; border: 2px solid #e0e0e0; border-radius: 14px; text-align: center; cursor: pointer; font-size: 0.8rem; transition: all 0.3s; }
+        .workshop-summary { background: #f0f4e8; border-radius: 18px; padding: 0.8rem; margin-bottom: 1rem; }
+        .workshop-summary-item { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.75rem; }
+        .form-group-premium { margin-bottom: 0.8rem; }
+        .form-group-premium label { display: block; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.75rem; }
+        .form-group-premium input, .form-group-premium select { width: 100%; padding: 0.6rem; border: 2px solid #e0e0e0; border-radius: 12px; font-family: inherit; font-size: 0.8rem; }
+        .price-breakdown { background: #e8f0e8; border-radius: 14px; padding: 0.6rem; margin: 0.6rem 0; font-size: 0.75rem; }
+        .price-breakdown .total-price { font-size: 1rem; font-weight: 800; color: #ff8c00; }
+        .payment-options-premium { display: flex; gap: 0.4rem; margin: 0.5rem 0; flex-wrap: wrap; }
+        .payment-option-premium { flex: 1; padding: 0.5rem; border: 2px solid #e0e0e0; border-radius: 12px; text-align: center; cursor: pointer; font-size: 0.7rem; min-width: 70px; }
         .payment-option-premium.selected { border-color: #2d6a2d; background: #e8f0e8; }
-        .btn-pay-premium { width: 100%; padding: 0.8rem; background: linear-gradient(135deg, #2d6a2d, #1a4d1a); color: white; border: none; border-radius: 40px; font-weight: 700; cursor: pointer; margin-top: 1rem; }
-        .btn-pay-premium:hover { transform: translateY(-2px); }
-        .payment-details { background: #f0f4e8; padding: 0.8rem; border-radius: 14px; margin: 0.8rem 0; font-size: 0.75rem; }
+        .btn-pay-premium { width: 100%; padding: 0.7rem; background: linear-gradient(135deg, #2d6a2d, #1a4d1a); color: white; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; margin-top: 0.8rem; font-size: 0.85rem; }
+        .payment-details { background: #f0f4e8; padding: 0.6rem; border-radius: 12px; margin: 0.5rem 0; font-size: 0.7rem; }
         
-        .modern-footer { background: #0d2b0d; color: #a8c8a8; padding: 3rem 0 1rem; margin-top: 3rem; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
-        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #2a4a2a; }
-        
-        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 1rem 2rem; border-radius: 50px; display: none; z-index: 1500; animation: slideInRight 0.3s ease; }
+        .modern-footer { background: #0d2b0d; color: #a8c8a8; padding: 2rem 0 1rem; margin-top: 3rem; }
+        .footer-bottom { text-align: center; padding-top: 1rem; border-top: 1px solid #2a4a2a; font-size: 0.7rem; }
+        .success-toast { position: fixed; bottom: 20px; left: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem; border-radius: 50px; display: none; z-index: 1500; animation: slideInRight 0.3s ease; text-align: center; font-size: 0.8rem; }
         @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         
-        @media (max-width: 900px) {
-            .hero-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-stats { justify-content: center; }
-            .workshops-grid-premium { grid-template-columns: 1fr; }
-            .filter-section { flex-direction: column; }
-            .search-wrapper input { width: 100%; }
+        @media (max-width: 850px) {
             .container { padding: 0 1rem; }
-            .nav-menu ul { gap: 0.8rem; }
+            .hero-grid { grid-template-columns: 1fr; text-align: center; padding: 1.5rem; gap: 1rem; }
+            .hero-stats { justify-content: center; }
+            .hero-content h1 { font-size: 1.5rem; }
+            .workshops-grid-premium { grid-template-columns: 1fr; gap: 1rem; }
+            .filter-section { flex-direction: column; align-items: stretch; }
+            .search-wrapper input { width: 100%; }
+            .nav-menu ul { gap: 0.5rem; }
+            .nav-menu a { font-size: 0.7rem; padding: 0.3rem 0; }
+            .logo h1 { font-size: 1.1rem; }
+            .logo p { font-size: 0.5rem; }
             .modal-two-columns { grid-template-columns: 1fr; }
             .modal-left { border-right: none; padding-right: 0; }
+            .modal-right { padding-left: 0; }
+            .modal-content-premium { width: 95%; padding: 0.8rem; }
+            .workshop-summary-item { font-size: 0.7rem; }
+            .blockchain-status { font-size: 0.7rem; padding: 0.8rem 1rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .filter-chip-premium { padding: 0.4rem 0.8rem; font-size: 0.7rem; }
+            .workshop-title-premium { font-size: 1rem; }
+            .workshop-price-premium { font-size: 1.1rem; }
+            .btn-register-premium { padding: 0.4rem 1rem; font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -128,17 +137,17 @@
     <header class="modern-header">
         <div class="container">
             <div class="header-content">
-                <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Regenerative Living • Community Land Trust • Batangas, Laguna & Quezon</p></div>
+                <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Regenerative Living • Community Land Trust</p></div>
                 <nav class="nav-menu">
                     <ul>
-                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="marketplace.html"><i class="fas fa-store"></i> Marketplace</a></li>
-                        <li><a href="workshops.html" class="active"><i class="fas fa-chalkboard-user"></i> Workshops</a></li>
-                        <li><a href="cooperative.html"><i class="fas fa-handshake"></i> Cooperative</a></li>
+                        <li><a href="marketplace.html">Marketplace</a></li>
+                        <li><a href="workshops.html" class="active">Workshops</a></li>
+                        <li><a href="cooperative.html">Cooperative</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="subscriptions.html"><i class="fas fa-ticket-alt"></i> Subscriptions</a></li>
-                        <li><a href="login.html"><i class="fas fa-user"></i> Login/Register</a></li>
+                        <li><a href="subscriptions.html">Subscriptions</a></li>
+                        <li><a href="login.html" id="loginNavBtn">Login</a></li>
                     </ul>
                 </nav>
             </div>
@@ -149,7 +158,7 @@
         <div class="container">
             <div class="blockchain-status">
                 <div class="ledger-status"><div class="ledger-dot"></div><span><i class="fas fa-link"></i> Hyperledger Fabric Active</span></div>
-                <div style="display: flex; gap: 2rem;"><div><span style="color:#ffd700;">6</span><span style="color:#94a3b8;"> Active Workshops</span></div><div><span style="color:#ffd700;">68</span><span style="color:#94a3b8;"> Slots Available</span></div></div>
+                <div style="display: flex; gap: 1rem;"><div><span style="color:#ffd700;">6</span> Workshops</div><div><span style="color:#ffd700;">68</span> Slots Open</div></div>
             </div>
 
             <div class="workshops-hero-premium">
@@ -157,11 +166,7 @@
                     <div class="hero-content">
                         <h1>📚 Learn & Grow with RRJ FARM</h1>
                         <p>Hands-on workshops taught by experienced homesteaders. Gain practical skills for regenerative living.</p>
-                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                            <span style="background:#f0f4e8; padding:0.3rem 1rem; border-radius:50px; font-size:0.8rem;">✓ Certificate of Completion</span>
-                            <span style="background:#f0f4e8; padding:0.3rem 1rem; border-radius:50px; font-size:0.8rem;">✓ Hands-on Training</span>
-                            <span style="background:#f0f4e8; padding:0.3rem 1rem; border-radius:50px; font-size:0.8rem;">✓ Blockchain Verified</span>
-                        </div>
+                        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center;"><span style="background:#f0f4e8; padding:0.2rem 0.8rem; border-radius:50px; font-size:0.7rem;">✓ Certificate</span><span style="background:#f0f4e8; padding:0.2rem 0.8rem; border-radius:50px; font-size:0.7rem;">✓ Hands-on</span><span style="background:#f0f4e8; padding:0.2rem 0.8rem; border-radius:50px; font-size:0.7rem;">✓ Blockchain Verified</span></div>
                     </div>
                     <div class="hero-stats">
                         <div class="hero-stat"><div class="number">8</div><div class="label">Graduates</div></div>
@@ -173,32 +178,32 @@
 
             <div class="filter-section">
                 <div class="filter-chips">
-                    <button class="filter-chip-premium active" data-category="all" onclick="filterWorkshops('all')">All Workshops</button>
+                    <button class="filter-chip-premium active" data-category="all" onclick="filterWorkshops('all')">All</button>
                     <button class="filter-chip-premium" data-category="farming" onclick="filterWorkshops('farming')">🌾 Farming</button>
                     <button class="filter-chip-premium" data-category="livestock" onclick="filterWorkshops('livestock')">🐔 Livestock</button>
                     <button class="filter-chip-premium" data-category="sustainable" onclick="filterWorkshops('sustainable')">♻️ Sustainable</button>
                     <button class="filter-chip-premium" data-category="processing" onclick="filterWorkshops('processing')">🥫 Processing</button>
                 </div>
-                <div class="search-wrapper"><i class="fas fa-search"></i><input type="text" id="searchWorkshops" placeholder="Search workshops..." onkeyup="filterWorkshopsBySearch()"></div>
+                <div class="search-wrapper"><i class="fas fa-search"></i><input type="text" id="searchWorkshops" placeholder="Search..." onkeyup="filterWorkshopsBySearch()"></div>
             </div>
 
             <div id="workshopsGrid" class="workshops-grid-premium"></div>
 
             <div class="my-workshops-premium">
-                <div class="section-header"><h3><i class="fas fa-calendar-check"></i> My Registered Workshops</h3><span style="font-size: 0.8rem; color: #666;">Blockchain-verified registrations</span></div>
+                <div class="section-header"><h3><i class="fas fa-calendar-check"></i> My Registered Workshops</h3><span style="font-size: 0.7rem;">Blockchain-verified</span></div>
                 <div id="registeredWorkshops"></div>
             </div>
         </div>
     </main>
 
-    <!-- REMINDER MODAL -->
+    <!-- LOGIN REMINDER MODAL - FIXED for mobile -->
     <div id="reminderModal" class="reminder-modal">
         <div class="reminder-content">
             <div class="reminder-icon"><i class="fas fa-exclamation-triangle" style="color: #ff8c00;"></i></div>
             <div class="reminder-title">Login Required</div>
             <div class="reminder-message" id="reminderMessage">Please login or register to register for workshops.</div>
             <div class="reminder-buttons">
-                <button class="btn-login-reminder" onclick="redirectToLogin()"><i class="fas fa-sign-in-alt"></i> Login / Register</button>
+                <button class="btn-login-reminder" onclick="redirectToLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
                 <button class="btn-cancel-reminder" onclick="closeReminderModal()">Cancel</button>
             </div>
         </div>
@@ -215,45 +220,38 @@
                 <div class="modal-two-columns">
                     <div class="modal-left">
                         <div id="workshopSummary" class="workshop-summary"></div>
-                        <div class="form-group-premium"><label><i class="fas fa-user"></i> Full Name *</label><input type="text" id="regName" placeholder="Enter your full name" required></div>
-                        <div class="form-group-premium"><label><i class="fas fa-envelope"></i> Email *</label><input type="email" id="regEmail" placeholder="youremail@example.com" required></div>
-                        <div class="form-group-premium"><label><i class="fas fa-phone"></i> Phone Number</label><input type="tel" id="regPhone" placeholder="0912 345 6789"></div>
+                        <div class="form-group-premium"><label><i class="fas fa-user"></i> Full Name *</label><input type="text" id="regName" placeholder="Full name" required></div>
+                        <div class="form-group-premium"><label><i class="fas fa-envelope"></i> Email *</label><input type="email" id="regEmail" placeholder="email@example.com" required></div>
+                        <div class="form-group-premium"><label><i class="fas fa-phone"></i> Phone</label><input type="tel" id="regPhone" placeholder="0912 345 6789"></div>
                     </div>
                     <div class="modal-right">
-                        <div class="form-group-premium"><label><i class="fas fa-users"></i> Number of Participants</label><select id="regParticipants" onchange="updatePriceDisplay()"><option value="1">1 person</option><option value="2">2 people (+₱200 each)</option><option value="3">3 people (+₱200 each)</option><option value="4">4 people (+₱200 each)</option></select></div>
+                        <div class="form-group-premium"><label><i class="fas fa-users"></i> Participants</label><select id="regParticipants" onchange="updatePriceDisplay()"><option value="1">1 person</option><option value="2">2 people (+₱200)</option><option value="3">3 people (+₱400)</option><option value="4">4 people (+₱600)</option></select></div>
                         <div id="priceBreakdown" class="price-breakdown"></div>
-                        <div class="form-group-premium"><label><i class="fas fa-credit-card"></i> Payment Method</label><div class="payment-options-premium"><div class="payment-option-premium" data-method="gcash" onclick="selectPayment('gcash')">📱 GCash</div><div class="payment-option-premium" data-method="bank" onclick="selectPayment('bank')">🏦 Bank</div><div class="payment-option-premium" data-method="cash" onclick="selectPayment('cash')">💵 Cash</div></div><input type="hidden" id="selectedPayment" value="gcash"></div>
+                        <div class="form-group-premium"><label>Payment Method</label><div class="payment-options-premium"><div class="payment-option-premium" data-method="gcash" onclick="selectPayment('gcash')">📱 GCash</div><div class="payment-option-premium" data-method="bank" onclick="selectPayment('bank')">🏦 Bank</div><div class="payment-option-premium" data-method="cash" onclick="selectPayment('cash')">💵 Cash</div></div><input type="hidden" id="selectedPayment" value="gcash"></div>
                         <div id="paymentDetails" class="payment-details"></div>
                     </div>
                 </div>
-                <button type="submit" class="btn-pay-premium"><i class="fas fa-check-circle"></i> Confirm Registration & Pay</button>
+                <button type="submit" class="btn-pay-premium"><i class="fas fa-check-circle"></i> Confirm Registration</button>
             </form>
-            <div id="modalSuccess" style="display: none;"></div>
         </div>
     </div>
 
     <footer class="modern-footer">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-info"><h3><i class="fas fa-leaf"></i> RRJ FARM</h3><p>📍 Batangas, Laguna & Quezon, Philippines</p></div>
-                <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="marketplace.html">Marketplace</a></li><li><a href="workshops.html">Workshops</a></li><li><a href="cooperative.html">Cooperative</a></li></ul></div>
-                <div class="footer-legal"><h4>Legal Framework</h4><ul><li>RA 9520 (Cooperative Code)</li><li>RA 10068 (Organic Agriculture)</li><li>RA 11321 (Sagip Saka Act)</li></ul></div>
-            </div>
-            <div class="footer-bottom"><p>&copy; 2026 RRJ FARM - Digital Cooperative - All Rights Reserved</p></div>
+            <div class="footer-bottom"><p>&copy; 2026 RRJ FARM - Digital Cooperative - RA 9520 Compliant</p></div>
         </div>
     </footer>
-
     <div id="successToast" class="success-toast"></div>
 
     <script>
         // WORKSHOP DATA
         const workshops = [
-            { id: 1, title: "Organic Pest Control Workshop", icon: "🌿", description: "Learn natural methods to protect your crops without harmful chemicals.", category: "farming", price: 500, date: "March 25, 2026", time: "9:00 AM - 4:00 PM", location: "RRJ FARM Learning Center, Los Baños, Laguna", instructor: "Maria Santos", slots: 20, remaining: 12 },
-            { id: 2, title: "Vermicomposting 101", icon: "🪱", description: "Turn kitchen waste into black gold for your garden.", category: "sustainable", price: 300, date: "April 5, 2026", time: "1:00 PM - 5:00 PM", location: "RRJ FARM Composting Hub, Silang, Cavite", instructor: "Andrea Salazar", slots: 25, remaining: 18 },
-            { id: 3, title: "Small-Scale Chicken Raising", icon: "🐔", description: "Raise healthy backyard chickens for eggs and meat.", category: "livestock", price: 700, date: "April 12, 2026", time: "8:00 AM - 3:00 PM", location: "RRJ FARM Poultry Demo Farm, Cavite", instructor: "Jose Dela Cruz", slots: 15, remaining: 8 },
-            { id: 4, title: "Backyard Beekeeping", icon: "🐝", description: "Learn how to start your own bee colony for honey production.", category: "livestock", price: 800, date: "April 19, 2026", time: "9:00 AM - 2:00 PM", location: "RRJ FARM Apiary, Laguna", instructor: "Olivia Manalo", slots: 12, remaining: 10 },
-            { id: 5, title: "Hydroponic Vegetable Growing", icon: "🥬", description: "Grow vegetables without soil using NFT and DWC systems.", category: "farming", price: 1200, date: "April 26-27, 2026", time: "9:00 AM - 4:00 PM", location: "RRJ FARM Hydroponics Lab, Cavite", instructor: "Ricardo Torres", slots: 10, remaining: 6 },
-            { id: 6, title: "Food Preservation & Fermentation", icon: "🥫", description: "Learn how to preserve your harvest through canning and fermentation.", category: "processing", price: 600, date: "May 3, 2026", time: "10:00 AM - 3:00 PM", location: "RRJ FARM Kitchen Lab", instructor: "Isabella Cruz", slots: 15, remaining: 14 }
+            { id: 1, title: "Organic Pest Control", icon: "🌿", description: "Learn natural methods to protect crops without chemicals.", category: "farming", price: 500, date: "March 25, 2026", time: "9AM-4PM", location: "RRJ FARM, Los Baños", instructor: "Maria Santos", slots: 20, remaining: 12 },
+            { id: 2, title: "Vermicomposting 101", icon: "🪱", description: "Turn kitchen waste into black gold for your garden.", category: "sustainable", price: 300, date: "April 5, 2026", time: "1PM-5PM", location: "RRJ FARM Composting Hub", instructor: "Andrea Salazar", slots: 25, remaining: 18 },
+            { id: 3, title: "Small-Scale Chicken Raising", icon: "🐔", description: "Raise healthy backyard chickens for eggs and meat.", category: "livestock", price: 700, date: "April 12, 2026", time: "8AM-3PM", location: "RRJ FARM Poultry Farm", instructor: "Jose Dela Cruz", slots: 15, remaining: 8 },
+            { id: 4, title: "Backyard Beekeeping", icon: "🐝", description: "Start your own bee colony for honey production.", category: "livestock", price: 800, date: "April 19, 2026", time: "9AM-2PM", location: "RRJ FARM Apiary", instructor: "Olivia Manalo", slots: 12, remaining: 10 },
+            { id: 5, title: "Hydroponic Vegetable Growing", icon: "🥬", description: "Grow vegetables without soil using NFT systems.", category: "farming", price: 1200, date: "April 26-27, 2026", time: "9AM-4PM", location: "RRJ FARM Hydroponics Lab", instructor: "Ricardo Torres", slots: 10, remaining: 6 },
+            { id: 6, title: "Food Preservation & Fermentation", icon: "🥫", description: "Preserve harvest through canning and fermentation.", category: "processing", price: 600, date: "May 3, 2026", time: "10AM-3PM", location: "RRJ FARM Kitchen Lab", instructor: "Isabella Cruz", slots: 15, remaining: 14 }
         ];
 
         let currentCategory = 'all';
@@ -261,14 +259,16 @@
         let registeredWorkshops = [];
         let searchTerm = '';
 
-        // ========== LOGIN CHECK FUNCTIONS ==========
+        // ========== LOGIN CHECK FUNCTIONS - FIXED for mobile ==========
         function isUserLoggedIn() {
             return localStorage.getItem('rrjfarm_current_user') !== null;
         }
 
         function showReminderModal(message) {
-            document.getElementById('reminderMessage').innerHTML = message;
-            document.getElementById('reminderModal').classList.add('active');
+            const modal = document.getElementById('reminderModal');
+            const msgDiv = document.getElementById('reminderMessage');
+            if (msgDiv) msgDiv.innerHTML = message;
+            modal.classList.add('active');
         }
 
         function closeReminderModal() {
@@ -279,12 +279,14 @@
             window.location.href = 'login.html';
         }
 
+        // CHECK LOGIN BEFORE REGISTER - main fix for mobile
         function checkLoginAndRegister(workshopId) {
             if (!isUserLoggedIn()) {
                 showReminderModal('Please login or register to enroll in workshops.');
-                return;
+                return false;
             }
             openRegisterModal(workshopId);
+            return true;
         }
 
         function loadRegisteredWorkshops() {
@@ -301,17 +303,17 @@
             const grid = document.getElementById('workshopsGrid');
             let filtered = workshops.filter(w => currentCategory === 'all' || w.category === currentCategory);
             if (searchTerm) filtered = filtered.filter(w => w.title.toLowerCase().includes(searchTerm) || w.description.toLowerCase().includes(searchTerm));
-            if (filtered.length === 0) { grid.innerHTML = '<div style="text-align:center; padding:3rem; color:#888;">No workshops found.</div>'; return; }
+            if (filtered.length === 0) { grid.innerHTML = '<div style="text-align:center; padding:2rem; color:#888;">No workshops found.</div>'; return; }
             grid.innerHTML = filtered.map(workshop => `
                 <div class="workshop-card-premium">
                     <span class="workshop-badge-premium">${workshop.category === 'farming' ? '🌾 Farming' : workshop.category === 'livestock' ? '🐔 Livestock' : workshop.category === 'sustainable' ? '♻️ Sustainable' : '🥫 Processing'}</span>
                     <div class="workshop-image">${workshop.icon}</div>
                     <div class="workshop-content-premium">
                         <h3 class="workshop-title-premium">${workshop.icon} ${workshop.title}</h3>
-                        <div class="workshop-meta-premium"><span><i class="fas fa-calendar"></i> ${workshop.date}</span><span><i class="fas fa-clock"></i> ${workshop.time}</span><span><i class="fas fa-map-marker-alt"></i> ${workshop.location.split(',')[0]}</span></div>
+                        <div class="workshop-meta-premium"><span><i class="fas fa-calendar"></i> ${workshop.date}</span><span><i class="fas fa-clock"></i> ${workshop.time}</span></div>
                         <p class="workshop-description-premium">${workshop.description}</p>
-                        <div class="workshop-meta-premium"><span><i class="fas fa-user"></i> ${workshop.instructor}</span><span class="slots-left"><i class="fas fa-ticket-alt"></i> ${workshop.remaining}/${workshop.slots} slots</span></div>
-                        <div class="workshop-footer-premium"><div class="workshop-price-premium">₱${workshop.price} <small>/person</small></div><button class="btn-register-premium" onclick="checkLoginAndRegister(${workshop.id})">Register Now <i class="fas fa-arrow-right"></i></button></div>
+                        <div class="workshop-meta-premium"><span><i class="fas fa-user"></i> ${workshop.instructor}</span><span class="slots-left"><i class="fas fa-ticket-alt"></i> ${workshop.remaining}/${workshop.slots} left</span></div>
+                        <div class="workshop-footer-premium"><div class="workshop-price-premium">₱${workshop.price}</div><button class="btn-register-premium" onclick="checkLoginAndRegister(${workshop.id})">Register <i class="fas fa-arrow-right"></i></button></div>
                     </div>
                 </div>
             `).join('');
@@ -339,9 +341,9 @@
             if (participants > 1) totalPrice = basePrice + (participants - 1) * 200;
             const priceDiv = document.getElementById('priceBreakdown');
             if (participants === 1) {
-                priceDiv.innerHTML = `<div style="display:flex; justify-content:space-between;"><span>Workshop Fee (1 person)</span><span>₱${basePrice}</span></div><div style="display:flex; justify-content:space-between; font-weight:800; border-top:1px solid #ccc; padding-top:0.5rem; margin-top:0.3rem;"><span>TOTAL</span><span class="total-price">₱${totalPrice}</span></div>`;
+                priceDiv.innerHTML = `<div style="display:flex; justify-content:space-between;"><span>Workshop Fee</span><span>₱${basePrice}</span></div><div style="display:flex; justify-content:space-between; font-weight:800; padding-top:0.3rem;"><span>TOTAL</span><span class="total-price">₱${totalPrice}</span></div>`;
             } else {
-                priceDiv.innerHTML = `<div style="display:flex; justify-content:space-between;"><span>Workshop Fee (1 person)</span><span>₱${basePrice}</span></div><div style="display:flex; justify-content:space-between;"><span>Additional ${participants-1} person(s) (₱200 each)</span><span>₱${(participants-1)*200}</span></div><div style="display:flex; justify-content:space-between; font-weight:800; border-top:1px solid #ccc; padding-top:0.5rem; margin-top:0.3rem;"><span>TOTAL</span><span class="total-price">₱${totalPrice}</span></div>`;
+                priceDiv.innerHTML = `<div style="display:flex; justify-content:space-between;"><span>Base Fee (1 person)</span><span>₱${basePrice}</span></div><div style="display:flex; justify-content:space-between;"><span>Extra ${participants-1} pax (+₱200 each)</span><span>₱${(participants-1)*200}</span></div><div style="display:flex; justify-content:space-between; font-weight:800; border-top:1px solid #ccc; margin-top:0.3rem; padding-top:0.3rem;"><span>TOTAL</span><span class="total-price">₱${totalPrice}</span></div>`;
             }
         }
 
@@ -352,24 +354,23 @@
                 <div class="workshop-summary-item"><span class="label">Workshop:</span><span class="value">${currentWorkshop.icon} ${currentWorkshop.title}</span></div>
                 <div class="workshop-summary-item"><span class="label">Date:</span><span class="value">${currentWorkshop.date}</span></div>
                 <div class="workshop-summary-item"><span class="label">Time:</span><span class="value">${currentWorkshop.time}</span></div>
-                <div class="workshop-summary-item"><span class="label">Location:</span><span class="value">${currentWorkshop.location.split(',')[0]}</span></div>
                 <div class="workshop-summary-item"><span class="label">Instructor:</span><span class="value">${currentWorkshop.instructor}</span></div>
-                <div class="workshop-summary-item"><span class="label">Base Price:</span><span class="value">₱${currentWorkshop.price} / person</span></div>
+                <div class="workshop-summary-item"><span class="label">Base Price:</span><span class="value">₱${currentWorkshop.price}</span></div>
             `;
             document.getElementById('regParticipants').value = '1';
             updatePriceDisplay();
             document.getElementById('modalWorkshopTitle').innerHTML = `${currentWorkshop.icon} ${currentWorkshop.title}`;
             document.getElementById('registerModal').classList.add('active');
-            document.getElementById('modalSuccess').style.display = 'none';
             document.getElementById('registrationForm').reset();
             selectPayment('gcash');
             
-            // Pre-fill user data if logged in
             const currentUser = localStorage.getItem('rrjfarm_current_user');
             if (currentUser) {
-                const user = JSON.parse(currentUser);
-                document.getElementById('regName').value = `${user.firstName || ''} ${user.lastName || ''}`.trim();
-                document.getElementById('regEmail').value = user.email || '';
+                try {
+                    const user = JSON.parse(currentUser);
+                    document.getElementById('regName').value = user.name || user.firstName ? `${user.firstName || ''} ${user.lastName || ''}`.trim() : '';
+                    document.getElementById('regEmail').value = user.email || '';
+                } catch(e) {}
             }
         }
 
@@ -381,11 +382,12 @@
         function selectPayment(method) {
             document.getElementById('selectedPayment').value = method;
             document.querySelectorAll('.payment-option-premium').forEach(opt => opt.classList.remove('selected'));
-            document.querySelector(`.payment-option-premium[data-method="${method}"]`).classList.add('selected');
+            const selectedElem = document.querySelector(`.payment-option-premium[data-method="${method}"]`);
+            if (selectedElem) selectedElem.classList.add('selected');
             const paymentDetails = document.getElementById('paymentDetails');
-            if (method === 'gcash') paymentDetails.innerHTML = '<strong>📱 GCash Details:</strong><br>Account: 0912 345 6789 (RRJ FARM)<br>Reference: WS-[Your Name]';
-            else if (method === 'bank') paymentDetails.innerHTML = '<strong>🏦 Bank Transfer Details:</strong><br>BPI Account: 1234-5678-90<br>Account Name: RRJ FARM Cooperative';
-            else paymentDetails.innerHTML = '<strong>💵 Cash Payment:</strong><br>Pay on the day of the workshop at the registration desk.';
+            if (method === 'gcash') paymentDetails.innerHTML = '<strong>📱 GCash:</strong> 0912 345 6789 (RRJ FARM)';
+            else if (method === 'bank') paymentDetails.innerHTML = '<strong>🏦 Bank Transfer:</strong> BPI 1234-5678-90 | RRJ FARM';
+            else paymentDetails.innerHTML = '<strong>💵 Cash:</strong> Pay on workshop day.';
         }
 
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
@@ -413,7 +415,6 @@
                 participantEmail: email,
                 participants: participants,
                 totalPrice: totalPrice,
-                basePrice: currentWorkshop.price,
                 paymentMethod: paymentMethod,
                 registrationDate: new Date().toLocaleString(),
                 status: 'Confirmed',
@@ -422,7 +423,7 @@
             
             registeredWorkshops.push(registration);
             saveRegisteredWorkshops();
-            currentWorkshop.remaining -= 1;
+            currentWorkshop.remaining = Math.max(0, currentWorkshop.remaining - 1);
             displayWorkshops();
             displayRegisteredWorkshops();
             
@@ -431,29 +432,22 @@
             toast.style.display = 'block';
             setTimeout(() => toast.style.display = 'none', 3000);
             
-            const successDiv = document.getElementById('modalSuccess');
-            successDiv.innerHTML = `✅ Registration Successful!<br><br><strong>Workshop:</strong> ${currentWorkshop.title}<br><strong>Participant:</strong> ${name}<br><strong>Participants:</strong> ${participants} person(s)<br><strong>Total:</strong> ₱${totalPrice}<br><strong>TXID:</strong> ${registration.txId}`;
-            successDiv.style.display = 'block';
-            setTimeout(() => closeModal(), 3000);
+            closeModal();
+            setTimeout(() => {
+                alert(`✅ Registration Successful!\nWorkshop: ${currentWorkshop.title}\nParticipant: ${name}\nTotal: ₱${totalPrice}\nTXID: ${registration.txId}`);
+            }, 100);
         });
 
         function displayRegisteredWorkshops() {
             const container = document.getElementById('registeredWorkshops');
             if (registeredWorkshops.length === 0) {
-                container.innerHTML = '<div class="empty-message-premium"><i class="fas fa-calendar-alt"></i> No workshops registered yet.</div>';
+                container.innerHTML = '<div class="empty-message-premium"><i class="fas fa-calendar-alt"></i> No workshops registered yet. Login to enroll!</div>';
                 return;
             }
-            container.innerHTML = registeredWorkshops.map(reg => `
+            container.innerHTML = registeredWorkshops.slice().reverse().map(reg => `
                 <div class="registered-workshop-premium">
-                    <div>
-                        <strong>${reg.workshopTitle}</strong><br>
-                        <small><i class="fas fa-calendar"></i> ${reg.workshopDate} | <i class="fas fa-user"></i> ${reg.participantName} | ${reg.participants} pax</small><br>
-                        <small><i class="fas fa-link"></i> TXID: ${reg.txId}</small>
-                    </div>
-                    <div style="text-align:right;">
-                        <span style="color:#2d6a2d; font-weight:bold;">✅ ${reg.status}</span><br>
-                        <small><strong>₱${reg.totalPrice}</strong></small>
-                    </div>
+                    <div><strong>${reg.workshopTitle}</strong><br><small>📅 ${reg.workshopDate} | 👤 ${reg.participantName} | ${reg.participants} pax<br>🔗 TX: ${reg.txId}</small></div>
+                    <div style="text-align:right;"><span style="color:#2d6a2d; font-weight:bold;">✅ ${reg.status}</span><br><small>₱${reg.totalPrice}</small></div>
                 </div>
             `).join('');
         }
@@ -462,13 +456,13 @@
         loadRegisteredWorkshops();
         displayWorkshops();
         
-        // Close modal when clicking outside
         window.onclick = function(event) {
             const modal = document.getElementById('registerModal');
             if (event.target === modal) closeModal();
+            const reminderModal = document.getElementById('reminderModal');
+            if (event.target === reminderModal) closeReminderModal();
         }
         
-        // Expose functions globally
         window.filterWorkshops = filterWorkshops;
         window.filterWorkshopsBySearch = filterWorkshopsBySearch;
         window.checkLoginAndRegister = checkLoginAndRegister;
