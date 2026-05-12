@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>RRJ FARM | Rent Farm Equipment & Vehicles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f7f2; color: #1a2e1a; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        
+        .modern-header { background: linear-gradient(135deg, #0d2b0d, #1a4d1a); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo h1 { font-size: 1.5rem; background: linear-gradient(135deg, #ffffff, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo p { font-size: 0.7rem; color: #a8c8a8; }
+        .nav-menu ul { display: flex; gap: 1rem; list-style: none; flex-wrap: wrap; justify-content: center; }
+        .nav-menu a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; padding: 0.5rem 0; font-size: 0.85rem; }
+        .nav-menu a:hover, .nav-menu a.active { color: #ffd700; border-bottom: 2px solid #ffd700; }
+        
+        .user-menu { position: relative; display: flex; align-items: center; gap: 0.8rem; }
+        .user-avatar { background: #ffd700; color: #1a2e1a; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
+        .profile-dropdown { position: absolute; top: 50px; right: 0; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); width: 200px; display: none; z-index: 1100; overflow: hidden; }
+        .profile-dropdown.show { display: block; }
+        .dropdown-item { padding: 0.7rem 1rem; display: flex; align-items: center; gap: 0.7rem; cursor: pointer; transition: 0.2s; border-bottom: 1px solid #f0f0f0; font-size: 0.8rem; }
+        .dropdown-item:hover { background: #eef3ea; }
+        .dropdown-item i { width: 20px; color: #2d6a2d; }
+        .logout-item { color: #dc3545; }
+        .logout-item i { color: #dc3545; }
+        
+        /* Hero Section */
+        .rent-hero { background: linear-gradient(135deg, #1a4d1a, #2d6a2d); border-radius: 28px; padding: 2rem; margin: 1.5rem 0; color: white; text-align: center; }
+        .rent-hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .rent-hero p { font-size: 1rem; opacity: 0.9; }
+        
+        /* Equipment Grid */
+        .equipment-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .equipment-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s; cursor: pointer; }
+        .equipment-card:hover { transform: translateY(-5px); }
+        .equipment-img { height: 160px; background: linear-gradient(135deg, #c8e6c8, #a5d6a5); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .equipment-info { padding: 1.2rem; }
+        .equipment-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .equipment-price { font-size: 1.1rem; font-weight: 700; color: #ff8c00; margin: 0.5rem 0; }
+        .equipment-meta { display: flex; gap: 1rem; font-size: 0.75rem; color: #666; margin: 0.5rem 0; flex-wrap: wrap; }
+        .btn-rent { background: #2d6a2d; color: white; border: none; padding: 0.6rem; border-radius: 30px; cursor: pointer; width: 100%; font-weight: 600; margin-top: 0.5rem; transition: 0.3s; }
+        .btn-rent:hover { background: #1a4d1a; }
+        
+        /* Login Reminder Modal */
+        .reminder-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+        .reminder-modal.active { display: flex; }
+        .reminder-content { background: white; border-radius: 28px; max-width: 380px; width: 90%; padding: 1.5rem; text-align: center; animation: fadeUp 0.3s ease; }
+        .reminder-icon { font-size: 3rem; margin-bottom: 0.8rem; }
+        .reminder-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .reminder-message { color: #4a5b4a; margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.4; }
+        .reminder-buttons { display: flex; gap: 0.8rem; margin-top: 1rem; }
+        .btn-login-reminder { flex: 1; background: #2d6a2d; color: white; border: none; padding: 0.7rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .btn-cancel-reminder { flex: 1; background: #eef2e8; color: #1a2e1a; border: none; padding: 0.7rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        
+        /* Rent Modal - Responsive */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
+        .modal.active { display: flex; }
+        .modal-content { background: white; border-radius: 28px; max-width: 550px; width: 90%; padding: 0; animation: fadeUp 0.3s ease; max-height: 85vh; overflow-y: auto; }
+        .modal-header { padding: 1rem 1.2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eef3ea; position: sticky; top: 0; background: white; z-index: 10; }
+        .modal-header h3 { font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
+        .modal-body { padding: 1.2rem; }
+        .modal-footer { padding: 0.8rem 1.2rem; display: flex; gap: 0.8rem; justify-content: flex-end; border-top: 1px solid #eef3ea; }
+        .close-modal { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; transition: 0.2s; }
+        .close-modal:hover { color: #dc3545; }
+        .btn-primary { background: #2d6a2d; color: white; padding: 0.6rem 1.2rem; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
+        .btn-secondary { background: #eef2e8; color: #1a2e1a; padding: 0.6rem 1.2rem; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
+        .modal-input { width: 100%; padding: 0.7rem; border: 2px solid #e0e0e0; border-radius: 14px; margin: 0.5rem 0; font-family: inherit; font-size: 0.85rem; }
+        .modal-select { width: 100%; padding: 0.7rem; border: 2px solid #e0e0e0; border-radius: 14px; margin: 0.5rem 0; font-family: inherit; background: white; cursor: pointer; font-size: 0.85rem; }
+        .payment-options { display: flex; gap: 0.8rem; margin: 0.8rem 0; flex-wrap: wrap; }
+        .payment-option { flex: 1; text-align: center; padding: 0.6rem; border: 2px solid #e0e0e0; border-radius: 14px; cursor: pointer; transition: all 0.3s; background: white; font-size: 0.8rem; }
+        .payment-option.selected { border-color: #2d6a2d; background: #e8f0e8; }
+        .payment-option i { font-size: 1.2rem; display: block; margin-bottom: 0.2rem; }
+        .info-box { background: #eef3ea; padding: 0.8rem; border-radius: 14px; margin: 0.8rem 0; font-size: 0.8rem; }
+        .free-badge { background: #28a745; color: white; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.65rem; display: inline-block; margin-left: 0.5rem; }
+        
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .container { padding: 0 1rem; }
+            .rent-hero { padding: 1.2rem; }
+            .rent-hero h1 { font-size: 1.4rem; }
+            .equipment-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .equipment-img { height: 130px; font-size: 3rem; }
+            .equipment-info { padding: 1rem; }
+            .equipment-title { font-size: 1rem; }
+            
+            .modal-content { max-width: 95%; width: 95%; border-radius: 20px; }
+            .modal-header { padding: 0.8rem 1rem; }
+            .modal-header h3 { font-size: 1rem; }
+            .modal-body { padding: 1rem; }
+            .modal-footer { flex-direction: column; gap: 0.5rem; }
+            .modal-footer button { width: 100%; }
+            .payment-options { flex-direction: column; gap: 0.5rem; }
+            .payment-option { width: 100%; }
+            .close-modal { font-size: 1.3rem; }
+            
+            .nav-menu ul { gap: 0.3rem; }
+            .nav-menu a { font-size: 0.7rem; padding: 0.3rem 0; }
+            .logo h1 { font-size: 1.1rem; }
+            .logo p { font-size: 0.55rem; }
+            .reminder-content { padding: 1rem; }
+            .reminder-title { font-size: 1.1rem; }
+            .btn-login-reminder, .btn-cancel-reminder { padding: 0.5rem; font-size: 0.8rem; }
+        }
+        
+        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem 1.2rem; border-radius: 50px; display: none; z-index: 2100; animation: slideInRight 0.3s ease; font-size: 0.8rem; }
+        .modern-footer { background: #0d2b0d; color: #a8c8a8; padding: 2rem 0 1rem; margin-top: 2rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
+        .footer-bottom { text-align: center; padding-top: 1.5rem; border-top: 1px solid #2a4a2a; font-size: 0.7rem; }
+        
+        @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    </style>
+</head>
+<body>
+    <header class="modern-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Regenerative Living • Community Land Trust • Batangas, Laguna & Quezon</p></div>
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="marketplace.html">Marketplace</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="cooperative.html">Cooperative</a></li>
+                        <li><a href="rent.html" class="active">Rent Equipment</a></li>
+                        <li><a href="subscriptions.html">Subscriptions</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </nav>
+                <div class="user-menu">
+                    <div class="user-avatar" id="userAvatar">JD</div>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div class="dropdown-item" id="editProfileBtn"><i class="fas fa-user-edit"></i> Edit Profile</div>
+                        <div class="dropdown-item" id="changePasswordBtn"><i class="fas fa-lock"></i> Change Password</div>
+                        <div class="dropdown-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="rent-hero">
+                <h1><i class="fas fa-tractor"></i> Farm Equipment & Vehicle Rentals</h1>
+                <p>Rent heavy equipment, tractors, harvesters, and more for your farm needs</p>
+            </div>
+
+            <div class="equipment-grid" id="equipmentGrid"></div>
+        </div>
+    </main>
+
+    <!-- LOGIN REMINDER MODAL -->
+    <div id="reminderModal" class="reminder-modal">
+        <div class="reminder-content">
+            <div class="reminder-icon">⚠️</div>
+            <div class="reminder-title">Login Required</div>
+            <div class="reminder-message" id="reminderMessage">Please login or register to rent equipment.</div>
+            <div class="reminder-buttons">
+                <button class="btn-login-reminder" onclick="redirectToLogin()">Login / Register</button>
+                <button class="btn-cancel-reminder" onclick="closeReminderModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RENT MODAL -->
+    <div id="rentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="rentModalTitle">Rent Equipment</h3>
+                <button class="close-modal" onclick="closeRentModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="equipmentDetails" class="info-box"></div>
+                
+                <div class="form-group">
+                    <label>Rental Duration (days)</label>
+                    <input type="number" id="rentDays" class="modal-input" min="1" value="1" onchange="calculateTotal()">
+                </div>
+                
+                <div class="form-group">
+                    <label>Delivery Address</label>
+                    <input type="text" id="deliveryAddress" class="modal-input" placeholder="Enter complete address">
+                </div>
+                
+                <div class="form-group">
+                    <label>Contact Number</label>
+                    <input type="tel" id="contactNumber" class="modal-input" placeholder="0912 345 6789">
+                </div>
+                
+                <div id="priceBreakdown" class="info-box"></div>
+                
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="payment-options" id="paymentOptions">
+                        <div class="payment-option" data-method="gcash" onclick="selectPaymentMethod('gcash')"><i class="fab fa-gcash"></i> GCash</div>
+                        <div class="payment-option" data-method="paymaya" onclick="selectPaymentMethod('paymaya')"><i class="fas fa-mobile-alt"></i> PayMaya</div>
+                        <div class="payment-option" data-method="bank" onclick="selectPaymentMethod('bank')"><i class="fas fa-university"></i> Bank Transfer</div>
+                    </div>
+                </div>
+                <div id="paymentDetails" style="background:#eef3ea; padding:0.8rem; border-radius:14px; font-size:0.8rem;"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeRentModal()">Cancel</button>
+                <button class="btn-primary" id="confirmRentBtn" onclick="confirmRental()">Confirm Rental</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="modern-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info"><h3>RRJ FARM</h3><p>CDA Registered Cooperative</p><p>Batangas, Laguna & Quezon</p></div>
+                <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="marketplace.html">Marketplace</a></li><li><a href="workshops.html">Workshops</a></li><li><a href="rent.html">Rent Equipment</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 RRJ FARM - Digital Cooperative - All Rights Reserved</p></div>
+        </div>
+    </footer>
+
+    <div id="successToast" class="success-toast"></div>
+
+    <script>
+        // ========== EQUIPMENT DATA ==========
+        const equipmentList = [
+            { id: 1, name: "Farm Tractor", category: "Heavy Equipment", price: 2500, unit: "day", image: "🚜", description: "75HP Diesel Tractor with implements", deposit: 5000 },
+            { id: 2, name: "Rice Harvester", category: "Harvesting", price: 3500, unit: "day", image: "🌾", description: "Combine harvester for rice and wheat", deposit: 7000 },
+            { id: 3, name: "Rotavator", category: "Tillage", price: 1500, unit: "day", image: "🔄", description: "Soil preparation and tilling", deposit: 3000 },
+            { id: 4, name: "Water Pump", category: "Irrigation", price: 500, unit: "day", image: "💧", description: "High-pressure water pump for irrigation", deposit: 1500 },
+            { id: 5, name: "Dump Truck", category: "Vehicle", price: 4000, unit: "day", image: "🚛", description: "6-wheeler dump truck for hauling", deposit: 10000 },
+            { id: 6, name: "Grass Cutter", category: "Maintenance", price: 300, unit: "day", image: "✂️", description: "Heavy-duty grass cutter/brush mower", deposit: 1000 },
+            { id: 7, name: "Sprayer (Knapsack)", category: "Spraying", price: 200, unit: "day", image: "💨", description: "Manual knapsack sprayer for pesticides", deposit: 500 },
+            { id: 8, name: "Fertilizer Spreader", category: "Spreading", price: 800, unit: "day", image: "🌱", description: "Broadcast spreader for fertilizers", deposit: 2000 }
+        ];
+
+        let currentUser = null;
+        let selectedEquipment = null;
+        let selectedPaymentMethod = 'gcash';
+        let currentRentTotal = 0;
+
+        // ========== CHECK LOGIN ==========
+        function isUserLoggedIn() {
+            const userJson = localStorage.getItem('rrjfarm_current_user');
+            if (userJson) {
+                currentUser = JSON.parse(userJson);
+                document.getElementById('userAvatar').innerText = currentUser.avatarInitials || (currentUser.name?.charAt(0) || 'U');
+                return true;
+            }
+            return false;
+        }
+
+        // Check subscription status (is member?)
+        function hasActiveSubscription() {
+            const subscriptions = JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions') || '[]');
+            return subscriptions.some(s => s.status === 'Active');
+        }
+
+        // Check if user is Land Steward
+        function isLandSteward() {
+            return currentUser && currentUser.accountType === 'stewardship';
+        }
+
+        function showReminderModal(message) {
+            document.getElementById('reminderMessage').innerHTML = message;
+            document.getElementById('reminderModal').classList.add('active');
+        }
+
+        function closeReminderModal() {
+            document.getElementById('reminderModal').classList.remove('active');
+        }
+
+        function redirectToLogin() {
+            window.location.href = 'login.html';
+        }
+
+        function showToast(msg) {
+            let t = document.getElementById('successToast');
+            t.innerHTML = msg;
+            t.style.display = 'block';
+            setTimeout(() => t.style.display = 'none', 3000);
+        }
+
+        // ========== CALCULATE TRANSACTION FEE ==========
+        function calculateTransactionFee(amount, userIsMember, userIsLandSteward, rentalDays) {
+            // Land Steward: FREE if returned within 3-5 days
+            if (userIsLandSteward && rentalDays <= 5) {
+                return { fee: 0, percentage: 0, message: "Land Steward Benefit: Free rental (return within 5 days)" };
+            }
+            // Members: 5% transaction fee
+            if (userIsMember) {
+                let fee = amount * 0.05;
+                return { fee: fee, percentage: 5, message: "Member 5% transaction fee" };
+            }
+            // Non-members: 10% transaction fee
+            let fee = amount * 0.10;
+            return { fee: fee, percentage: 10, message: "Non-Member 10% transaction fee" };
+        }
+
+        // ========== RENDER EQUIPMENT GRID ==========
+        function renderEquipment() {
+            const container = document.getElementById('equipmentGrid');
+            container.innerHTML = equipmentList.map(eq => `
+                <div class="equipment-card" onclick="openRentModal(${eq.id})">
+                    <div class="equipment-img">${eq.image}</div>
+                    <div class="equipment-info">
+                        <div class="equipment-title">${eq.name}</div>
+                        <div class="equipment-meta"><span>${eq.category}</span></div>
+                        <div class="equipment-price">₱${eq.price.toLocaleString()} / ${eq.unit}</div>
+                        <div class="equipment-meta">Deposit: ₱${eq.deposit.toLocaleString()}</div>
+                        <button class="btn-rent" onclick="event.stopPropagation(); openRentModal(${eq.id})">Rent Now</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========== OPEN RENT MODAL ==========
+        function openRentModal(equipmentId) {
+            if (!isUserLoggedIn()) {
+                showReminderModal('Please login or register to rent equipment.');
+                return;
+            }
+            
+            selectedEquipment = equipmentList.find(e => e.id === equipmentId);
+            if (!selectedEquipment) return;
+            
+            // Reset form
+            document.getElementById('rentDays').value = 1;
+            document.getElementById('deliveryAddress').value = '';
+            document.getElementById('contactNumber').value = '';
+            
+            document.getElementById('equipmentDetails').innerHTML = `
+                <strong>${selectedEquipment.image} ${selectedEquipment.name}</strong><br>
+                Price: ₱${selectedEquipment.price.toLocaleString()}/${selectedEquipment.unit}<br>
+                Deposit: ₱${selectedEquipment.deposit.toLocaleString()}<br>
+                ${selectedEquipment.description}
+            `;
+            
+            calculateTotal();
+            selectPaymentMethod('gcash');
+            document.getElementById('rentModal').classList.add('active');
+        }
+
+        function closeRentModal() {
+            document.getElementById('rentModal').classList.remove('active');
+            selectedEquipment = null;
+        }
+
+        function calculateTotal() {
+            const days = parseInt(document.getElementById('rentDays').value) || 1;
+            const subtotal = selectedEquipment.price * days;
+            const deposit = selectedEquipment.deposit;
+            
+            const isMember = hasActiveSubscription();
+            const isLandStewardUser = isLandSteward();
+            const feeInfo = calculateTransactionFee(subtotal, isMember, isLandStewardUser, days);
+            
+            currentRentTotal = subtotal + feeInfo.fee + deposit;
+            
+            let breakdownHtml = `
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                    <span>Rental (${days} day${days > 1 ? 's' : ''})</span><span>₱${subtotal.toLocaleString()}</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                    <span>Security Deposit</span><span>₱${deposit.toLocaleString()}</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; color:#ff8c00;">
+                    <span>${feeInfo.message}</span><span>₱${feeInfo.fee.toLocaleString()}</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:0.5rem; padding-top:0.5rem; border-top:1px solid #ccc; font-weight:800;">
+                    <span>TOTAL</span><span>₱${currentRentTotal.toLocaleString()}</span>
+                </div>
+                <div style="font-size:0.7rem; color:#666; margin-top:0.5rem;">
+                    <i class="fas fa-info-circle"></i> Deposit is refundable upon equipment return in good condition.
+                </div>
+            `;
+            
+            if (isLandSteward() && days <= 5) {
+                breakdownHtml += `<div style="color:#28a745; font-size:0.7rem; margin-top:0.3rem;">
+                    <i class="fas fa-gift"></i> Land Steward Benefit: Free rental for 3-5 days!
+                </div>`;
+            }
+            
+            document.getElementById('priceBreakdown').innerHTML = breakdownHtml;
+        }
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll('#paymentOptions .payment-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector(`#paymentOptions .payment-option[data-method="${method}"]`).classList.add('selected');
+            
+            const detailsDiv = document.getElementById('paymentDetails');
+            if (method === 'gcash') {
+                detailsDiv.innerHTML = '<strong>GCash Payment</strong><br>Account: 0912 345 6789 (RRJ FARM)<br>Reference: RENT-' + Date.now();
+            } else if (method === 'paymaya') {
+                detailsDiv.innerHTML = '<strong>PayMaya Payment</strong><br>Account: 0912 345 6789 (RRJ FARM)<br>Reference: RENT-' + Date.now();
+            } else {
+                detailsDiv.innerHTML = '<strong>Bank Transfer</strong><br>BPI Account: 1234-5678-90<br>Account Name: RRJ FARM Cooperative<br>Reference: RENT-' + Date.now();
+            }
+        }
+
+        function confirmRental() {
+            const days = parseInt(document.getElementById('rentDays').value) || 1;
+            const address = document.getElementById('deliveryAddress').value.trim();
+            const contact = document.getElementById('contactNumber').value.trim();
+            
+            if (!address) {
+                alert('Please enter delivery address.');
+                return;
+            }
+            if (!contact) {
+                alert('Please enter contact number.');
+                return;
+            }
+            
+            const isMember = hasActiveSubscription();
+            const isLandStewardUser = isLandSteward();
+            const subtotal = selectedEquipment.price * days;
+            const feeInfo = calculateTransactionFee(subtotal, isMember, isLandStewardUser, days);
+            const total = subtotal + feeInfo.fee + selectedEquipment.deposit;
+            
+            // Create rental record
+            const rental = {
+                id: 'RENT' + Date.now(),
+                equipment: selectedEquipment.name,
+                equipmentId: selectedEquipment.id,
+                days: days,
+                subtotal: subtotal,
+                transactionFee: feeInfo.fee,
+                deposit: selectedEquipment.deposit,
+                total: total,
+                deliveryAddress: address,
+                contactNumber: contact,
+                paymentMethod: selectedPaymentMethod,
+                rentalDate: new Date().toISOString(),
+                returnDate: new Date(Date.now() + days * 24 * 60 * 60 * 1000).toISOString(),
+                status: 'Confirmed',
+                userType: isLandStewardUser ? 'Land Steward' : (isMember ? 'Member' : 'Non-Member')
+            };
+            
+            // Save to localStorage
+            let rentals = JSON.parse(localStorage.getItem('rrjfarm_rentals') || '[]');
+            rentals.push(rental);
+            localStorage.setItem('rrjfarm_rentals', JSON.stringify(rentals));
+            
+            // Deduct from wallet if using wallet payment
+            let walletBalance = parseInt(localStorage.getItem('rrjfarm_wallet_balance')) || 0;
+            if (walletBalance >= total) {
+                walletBalance -= total;
+                localStorage.setItem('rrjfarm_wallet_balance', walletBalance);
+                showToast(`Rental confirmed! ₱${total.toLocaleString()} deducted from wallet.`);
+            } else {
+                showToast(`Rental request submitted! Please send ₱${total.toLocaleString()} via ${selectedPaymentMethod.toUpperCase()} to confirm.`);
+            }
+            
+            closeRentModal();
+            
+            setTimeout(() => {
+                window.location.href = 'memberdashboard.html';
+            }, 2000);
+        }
+
+        // ========== PROFILE DROPDOWN ==========
+        function toggleProfileDropdown() {
+            document.getElementById('profileDropdown').classList.toggle('show');
+        }
+        
+        document.getElementById('userAvatar').addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleProfileDropdown();
+        });
+        
+        document.addEventListener('click', function(e) {
+            let drop = document.getElementById('profileDropdown');
+            if (drop && !drop.contains(e.target) && e.target !== document.getElementById('userAvatar')) {
+                drop.classList.remove('show');
+            }
+        });
+        
+        document.getElementById('editProfileBtn').onclick = () => {
+            if (currentUser) {
+                const newName = prompt('Enter your full name:', currentUser.name);
+                if (newName && newName.trim()) {
+                    currentUser.name = newName.trim();
+                    currentUser.avatarInitials = newName.trim().split(' ').map(n => n[0]).join('').toUpperCase();
+                    localStorage.setItem('rrjfarm_current_user', JSON.stringify(currentUser));
+                    document.getElementById('userAvatar').innerText = currentUser.avatarInitials;
+                    showToast('Profile updated!');
+                }
+            }
+        };
+        
+        document.getElementById('changePasswordBtn').onclick = () => {
+            alert('Password reset link has been sent to your email.');
+        };
+        
+        document.getElementById('logoutBtn').onclick = () => {
+            localStorage.removeItem('rrjfarm_current_user');
+            sessionStorage.clear();
+            window.location.href = 'index.html';
+        };
+        
+        // ========== INITIALIZE ==========
+        isUserLoggedIn();
+        renderEquipment();
+        
+        window.openRentModal = openRentModal;
+        window.closeRentModal = closeRentModal;
+        window.calculateTotal = calculateTotal;
+        window.selectPaymentMethod = selectPaymentMethod;
+        window.confirmRental = confirmRental;
+        window.redirectToLogin = redirectToLogin;
+        window.closeReminderModal = closeReminderModal;
+        window.toggleProfileDropdown = toggleProfileDropdown;
+    </script>
+</body>
+</html>
