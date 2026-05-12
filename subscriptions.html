@@ -31,10 +31,10 @@
         .logout-item { color: #dc3545; }
         .logout-item i { color: #dc3545; }
         
-        /* Login Reminder Modal */
-        .reminder-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+        /* Login Reminder Modal - FIXED: properly visible on mobile */
+        .reminder-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 9999; justify-content: center; align-items: center; }
         .reminder-modal.active { display: flex; }
-        .reminder-content { background: white; border-radius: 28px; max-width: 380px; width: 90%; padding: 1.5rem; text-align: center; animation: fadeUp 0.3s ease; }
+        .reminder-content { background: white; border-radius: 28px; max-width: 340px; width: 85%; padding: 1.5rem; text-align: center; animation: fadeUp 0.3s ease; margin: 1rem; }
         .reminder-icon { font-size: 3rem; margin-bottom: 0.8rem; }
         .reminder-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
         .reminder-message { color: #4a5b4a; margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.4; }
@@ -70,36 +70,38 @@
         .btn-subscribe { width: 100%; padding: 0.8rem; border: none; border-radius: 50px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.3s; background: #2d6a2d; color: white; }
         .btn-subscribe:hover { background: #1a4d1a; transform: translateY(-2px); }
         
-        /* Comparison Table */
-        .comparison-section { background: white; border-radius: 28px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); overflow-x: auto; }
+        /* Comparison Section */
+        .comparison-section { background: white; border-radius: 28px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .comparison-section h2 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.3rem; }
-        .comparison-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        .comparison-cards { display: none; }
+        .comparison-table { width: 100%; border-collapse: collapse; }
         .comparison-table th, .comparison-table td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #e8f0e8; font-size: 0.8rem; }
         .comparison-table th { background: #f0f4e8; font-weight: 600; }
         
-        /* RESPONSIVE MODAL - SMALLER ON MOBILE */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
+        /* MODAL - FIXED: smaller, better mobile sizing */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 9998; justify-content: center; align-items: center; }
         .modal.active { display: flex; }
-        .modal-content { background: white; border-radius: 28px; max-width: 500px; width: 90%; padding: 0; animation: fadeUp 0.3s ease; }
-        .modal-header { padding: 1rem 1.2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eef3ea; }
+        .modal-content { background: white; border-radius: 28px; max-width: 460px; width: 92%; padding: 0; animation: fadeUp 0.3s ease; max-height: 90vh; overflow-y: auto; margin: 1rem; }
+        .modal-header { padding: 1rem 1.2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eef3ea; position: sticky; top: 0; background: white; border-radius: 28px 28px 0 0; }
         .modal-header h3 { font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
-        .modal-body { padding: 1.2rem; }
-        .modal-footer { padding: 0.8rem 1.2rem; display: flex; gap: 0.8rem; justify-content: flex-end; border-top: 1px solid #eef3ea; }
+        .modal-body { padding: 1rem 1.2rem; }
+        .modal-footer { padding: 0.8rem 1rem; display: flex; gap: 0.8rem; justify-content: flex-end; border-top: 1px solid #eef3ea; background: white; border-radius: 0 0 28px 28px; }
         .close-modal { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; transition: 0.2s; }
         .close-modal:hover { color: #dc3545; }
         .btn-primary { background: #2d6a2d; color: white; padding: 0.6rem 1.2rem; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
         .btn-secondary { background: #eef2e8; color: #1a2e1a; padding: 0.6rem 1.2rem; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
         .modal-input { width: 100%; padding: 0.7rem; border: 2px solid #e0e0e0; border-radius: 14px; margin: 0.5rem 0; font-family: inherit; font-size: 0.85rem; }
-        .payment-options { display: flex; gap: 0.8rem; margin: 0.8rem 0; flex-wrap: wrap; }
-        .payment-option { flex: 1; text-align: center; padding: 0.6rem; border: 2px solid #e0e0e0; border-radius: 14px; cursor: pointer; transition: all 0.3s; background: white; font-size: 0.8rem; }
+        .payment-options { display: flex; gap: 0.6rem; margin: 0.8rem 0; flex-wrap: wrap; }
+        .payment-option { flex: 1; text-align: center; padding: 0.6rem 0.3rem; border: 2px solid #e0e0e0; border-radius: 14px; cursor: pointer; transition: all 0.3s; background: white; font-size: 0.75rem; min-width: 70px; }
+        .payment-option i { font-size: 1rem; display: block; margin-bottom: 0.2rem; }
         .payment-option.selected { border-color: #2d6a2d; background: #e8f0e8; }
-        .payment-option i { font-size: 1.2rem; display: block; margin-bottom: 0.2rem; }
+        .payment-details-box { background: #eef3ea; padding: 0.7rem; border-radius: 14px; font-size: 0.75rem; margin-top: 0.5rem; word-break: break-word; }
         
         /* Mobile Responsive */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .container { padding: 0 1rem; }
-            .hero-subscription { padding: 1.2rem; }
-            .hero-subscription h1 { font-size: 1.4rem; }
+            .hero-subscription { padding: 1.2rem; margin: 1rem 0 1.5rem; }
+            .hero-subscription h1 { font-size: 1.5rem; }
             .plans-grid { grid-template-columns: 1fr; gap: 1rem; }
             .plan-header { padding: 1rem; }
             .plan-title { font-size: 1.2rem; }
@@ -107,25 +109,42 @@
             .plan-body { padding: 1rem; }
             .benefit-list li { font-size: 0.75rem; padding: 0.4rem 0; }
             
-            .modal-content { max-width: 95%; width: 95%; border-radius: 20px; }
+            .comparison-table { display: none; }
+            .comparison-cards { display: block; }
+            .comparison-card { background: #f8f9fa; border-radius: 16px; padding: 1rem; margin-bottom: 1rem; }
+            .comparison-card h4 { font-weight: 700; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 2px solid #2d6a2d; }
+            .comparison-card-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px dashed #ddd; font-size: 0.8rem; }
+            .comparison-card-row .feature { font-weight: 600; color: #1a2e1a; }
+            .comparison-card-row .value { color: #2d6a2d; }
+            .comparison-card-row .check { color: #2d6a2d; }
+            .comparison-card-row .times { color: #dc3545; }
+            
+            .modal-content { max-width: 95%; width: 95%; border-radius: 24px; margin: 0.8rem; }
             .modal-header { padding: 0.8rem 1rem; }
             .modal-header h3 { font-size: 1rem; }
-            .modal-body { padding: 1rem; }
-            .modal-footer { flex-direction: column; gap: 0.5rem; }
-            .modal-footer button { width: 100%; }
-            .payment-options { flex-direction: column; gap: 0.5rem; }
-            .payment-option { width: 100%; }
-            .close-modal { font-size: 1.3rem; }
+            .modal-body { padding: 0.8rem 1rem; }
+            .modal-footer { flex-direction: row; gap: 0.6rem; padding: 0.8rem 1rem; flex-wrap: wrap; }
+            .modal-footer button { flex: 1; padding: 0.6rem; font-size: 0.8rem; }
+            .payment-options { flex-direction: row; gap: 0.5rem; }
+            .payment-option { font-size: 0.7rem; padding: 0.5rem 0; }
             
-            .comparison-section { padding: 1rem; }
-            .comparison-section h2 { font-size: 1.1rem; }
-            .nav-menu ul { gap: 0.3rem; justify-content: center; }
+            .nav-menu ul { gap: 0.3rem; }
             .nav-menu a { font-size: 0.7rem; padding: 0.3rem 0.6rem; }
-            .logo h1 { font-size: 1.1rem; }
+            .logo h1 { font-size: 1.2rem; }
             .logo p { font-size: 0.55rem; }
+            
+            .reminder-content { width: 90%; max-width: 300px; padding: 1.2rem; }
+            .reminder-title { font-size: 1.1rem; }
+            .btn-login-reminder, .btn-cancel-reminder { padding: 0.6rem; font-size: 0.8rem; }
         }
         
-        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem 1.2rem; border-radius: 50px; display: none; z-index: 2100; animation: slideInRight 0.3s ease; font-size: 0.8rem; }
+        @media (max-width: 480px) {
+            .hero-subscription h1 { font-size: 1.3rem; }
+            .plan-price { font-size: 1.2rem; }
+            .payment-option i { font-size: 0.9rem; }
+        }
+        
+        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem 1.2rem; border-radius: 50px; display: none; z-index: 9997; animation: slideInRight 0.3s ease; font-size: 0.8rem; left: auto; right: 20px; }
         
         @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
@@ -148,13 +167,6 @@
                         <li><a href="login.html">Login</a></li>
                     </ul>
                 </nav>
-                <div class="user-menu">
-                    <div class="user-avatar" id="userAvatar">JD</div>
-                    <div class="profile-dropdown" id="profileDropdown">
-                        <div class="dropdown-item" id="editProfileBtn">Edit Profile</div>
-                        <div class="dropdown-item" id="changePasswordBtn">Change Password</div>
-                        <div class="dropdown-item logout-item" id="logoutBtn">Logout</div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -214,6 +226,7 @@
                 </div>
             </div>
 
+            <!-- Comparison Section -->
             <div class="comparison-section">
                 <h2>Plan Comparison</h2>
                 <div class="table-responsive">
@@ -226,10 +239,14 @@
                             <tr><td>Monthly Vouchers</td><td><i class="fas fa-check"></i> +2</td><td><i class="fas fa-check"></i> +3</td></tr>
                             <tr><td>1st Training Discount</td><td><i class="fas fa-check"></i> 50% OFF</td><td><i class="fas fa-check"></i> 50% OFF</td></tr>
                             <tr><td>2nd Training Discount</td><td><i class="fas fa-check"></i> 20% OFF</td><td><i class="fas fa-check"></i> 20% OFF</td></tr>
-                            <tr><td>Free Delivery</td><td>10% OFF</td><td>3x per month</td></tr>
+                            <tr><td>Free Delivery</td><td>10% OFF</td><td><i class="fas fa-check"></i> 3x per month</td></tr>
                             <tr><td>Cooperative Benefits</td><td>Not Included</td><td><i class="fas fa-check"></i> Voting Rights</td></tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="comparison-cards">
+                    <div class="comparison-card"><h4>Researcher & Student</h4><div class="comparison-card-row"><span class="feature">Price</span><span class="value">₱1,000/month</span></div><div class="comparison-card-row"><span class="feature">Workshop Access</span><span class="check"><i class="fas fa-check"></i> Full</span></div><div class="comparison-card-row"><span class="feature">AI Tools</span><span class="check"><i class="fas fa-check"></i> Included</span></div><div class="comparison-card-row"><span class="feature">Monthly Vouchers</span><span class="check"><i class="fas fa-check"></i> +2</span></div><div class="comparison-card-row"><span class="feature">1st Training</span><span class="check"><i class="fas fa-check"></i> 50% OFF</span></div><div class="comparison-card-row"><span class="feature">2nd Training</span><span class="check"><i class="fas fa-check"></i> 20% OFF</span></div><div class="comparison-card-row"><span class="feature">Free Delivery</span><span>10% OFF</span></div><div class="comparison-card-row"><span class="feature">Cooperative Benefits</span><span class="times"><i class="fas fa-times"></i> Not Included</span></div></div>
+                    <div class="comparison-card"><h4>Members</h4><div class="comparison-card-row"><span class="feature">Price</span><span class="value">₱1,500/month</span></div><div class="comparison-card-row"><span class="feature">Workshop Access</span><span class="check"><i class="fas fa-check"></i> Full</span></div><div class="comparison-card-row"><span class="feature">AI Tools</span><span class="check"><i class="fas fa-check"></i> Included</span></div><div class="comparison-card-row"><span class="feature">Monthly Vouchers</span><span class="check"><i class="fas fa-check"></i> +3</span></div><div class="comparison-card-row"><span class="feature">1st Training</span><span class="check"><i class="fas fa-check"></i> 50% OFF</span></div><div class="comparison-card-row"><span class="feature">2nd Training</span><span class="check"><i class="fas fa-check"></i> 20% OFF</span></div><div class="comparison-card-row"><span class="feature">Free Delivery</span><span class="check"><i class="fas fa-check"></i> 3x per month</span></div><div class="comparison-card-row"><span class="feature">Cooperative Benefits</span><span class="check"><i class="fas fa-check"></i> Voting Rights</span></div></div>
                 </div>
             </div>
         </div>
@@ -240,7 +257,7 @@
         <div class="reminder-content">
             <div class="reminder-icon">⚠️</div>
             <div class="reminder-title">Login Required</div>
-            <div class="reminder-message" id="reminderMessage">Please login or register to subscribe.</div>
+            <div class="reminder-message" id="reminderMessage">Please login or register to subscribe to a membership plan.</div>
             <div class="reminder-buttons">
                 <button class="btn-login-reminder" onclick="redirectToLogin()">Login / Register</button>
                 <button class="btn-cancel-reminder" onclick="closeReminderModal()">Cancel</button>
@@ -248,7 +265,7 @@
         </div>
     </div>
 
-    <!-- SUBSCRIPTION MODAL -->
+    <!-- SUBSCRIPTION MODAL (SMALLER, BETTER ON MOBILE) -->
     <div id="subscribeModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -256,7 +273,7 @@
                 <button class="close-modal" onclick="closeSubscribeModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <div id="planDetails" style="background:#e8f0e8; padding:0.8rem; border-radius:14px; margin-bottom:1rem;"></div>
+                <div id="planDetails" style="background:#e8f0e8; padding:0.7rem; border-radius:14px; margin-bottom:1rem; font-size:0.8rem;"></div>
                 <div class="form-group">
                     <label>Full Name</label>
                     <input type="text" id="subscriberName" class="modal-input" placeholder="Enter your full name">
@@ -270,10 +287,10 @@
                     <div class="payment-options" id="paymentOptions">
                         <div class="payment-option" data-method="gcash" onclick="selectPaymentMethod('gcash')"><i class="fab fa-gcash"></i> GCash</div>
                         <div class="payment-option" data-method="paymaya" onclick="selectPaymentMethod('paymaya')"><i class="fas fa-mobile-alt"></i> PayMaya</div>
-                        <div class="payment-option" data-method="bank" onclick="selectPaymentMethod('bank')"><i class="fas fa-university"></i> Bank Transfer</div>
+                        <div class="payment-option" data-method="bank" onclick="selectPaymentMethod('bank')"><i class="fas fa-university"></i> Bank</div>
                     </div>
                 </div>
-                <div id="paymentDetails" style="background:#eef3ea; padding:0.8rem; border-radius:14px; font-size:0.8rem;"></div>
+                <div id="paymentDetails" class="payment-details-box"></div>
             </div>
             <div class="modal-footer">
                 <button class="btn-secondary" onclick="closeSubscribeModal()">Cancel</button>
@@ -285,7 +302,6 @@
     <div id="successToast" class="success-toast"></div>
 
     <script>
-        // ========== CHECK LOGIN FIRST ==========
         let selectedPlan = null;
         let selectedPaymentMethod = 'gcash';
         let currentUser = null;
@@ -297,6 +313,18 @@
                 return true;
             }
             return false;
+        }
+
+        function updateAvatarVisibility() {
+            const userMenu = document.getElementById('userMenuContainer');
+            if (isUserLoggedIn() && currentUser) {
+                userMenu.style.display = 'flex';
+                let name = currentUser.name || 'User';
+                let initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+                document.getElementById('userAvatar').innerText = initials || 'U';
+            } else {
+                userMenu.style.display = 'none';
+            }
         }
 
         function showReminderModal(message) {
@@ -326,30 +354,17 @@
             const planDetails = document.getElementById('planDetails');
             
             if (planType === 'researcher') {
-                modalTitle.innerHTML = '<i class="fas fa-graduation-cap"></i> Subscribe to Researcher & Student Plan';
-                planDetails.innerHTML = `
-                    <strong>Researcher & Student Plan - ₱1,000/month</strong><br>
-                    <small>✓ Full Workshop Access<br>✓ AI Tools<br>✓ +2 Vouchers/month<br>
-                    ✓ 50% OFF 1st Training<br>✓ 20% OFF 2nd Training<br>
-                    ✓ 10% OFF Delivery<br>✓ Marketplace Discount</small>
-                `;
-                document.getElementById('confirmSubscribeBtn').innerHTML = 'Pay ₱1,000 & Subscribe';
+                modalTitle.innerHTML = '<i class="fas fa-graduation-cap"></i> Researcher & Student';
+                planDetails.innerHTML = `<strong>Researcher & Student Plan - ₱1,000/month</strong><br>✓ Workshops + AI Tools<br>✓ +2 Vouchers/month<br>✓ 50% OFF 1st Training<br>✓ 20% OFF 2nd Training<br>✓ 10% OFF Delivery<br>✓ Marketplace Discount`;
+                document.getElementById('confirmSubscribeBtn').innerHTML = 'Pay ₱1,000';
             } else {
-                modalTitle.innerHTML = '<i class="fas fa-users"></i> Become a Member';
-                planDetails.innerHTML = `
-                    <strong>Members Plan - ₱1,500/month</strong><br>
-                    <small>✓ Full Workshop Access<br>✓ AI Tools<br>✓ +3 Vouchers/month<br>
-                    ✓ 50% OFF 1st Training<br>✓ 20% OFF 2nd Training<br>
-                    ✓ Free Delivery (3x/month)<br>✓ Marketplace Discount<br>
-                    ✓ Priority Support<br>✓ Cooperative Voting Rights</small>
-                `;
-                document.getElementById('confirmSubscribeBtn').innerHTML = 'Pay ₱1,500 & Become Member';
+                modalTitle.innerHTML = '<i class="fas fa-users"></i> Member Plan';
+                planDetails.innerHTML = `<strong>Members Plan - ₱1,500/month</strong><br>✓ Full Workshop Access + AI<br>✓ +3 Vouchers/month<br>✓ 50% OFF 1st Training<br>✓ 20% OFF 2nd Training<br>✓ Free Delivery (3x/month)<br>✓ Marketplace Discount<br>✓ Cooperative Voting Rights`;
+                document.getElementById('confirmSubscribeBtn').innerHTML = 'Pay ₱1,500';
             }
             
-            // Pre-fill with current user data
-            document.getElementById('subscriberName').value = currentUser.name || '';
-            document.getElementById('subscriberEmail').value = currentUser.email || '';
-            
+            document.getElementById('subscriberName').value = currentUser?.name || '';
+            document.getElementById('subscriberEmail').value = currentUser?.email || '';
             selectPaymentMethod('gcash');
             document.getElementById('subscribeModal').classList.add('active');
         }
@@ -362,15 +377,17 @@
         function selectPaymentMethod(method) {
             selectedPaymentMethod = method;
             document.querySelectorAll('#paymentOptions .payment-option').forEach(opt => opt.classList.remove('selected'));
-            document.querySelector(`#paymentOptions .payment-option[data-method="${method}"]`).classList.add('selected');
+            const selectedElem = document.querySelector(`#paymentOptions .payment-option[data-method="${method}"]`);
+            if(selectedElem) selectedElem.classList.add('selected');
             
             const detailsDiv = document.getElementById('paymentDetails');
+            const ref = 'SUB-' + Date.now();
             if (method === 'gcash') {
-                detailsDiv.innerHTML = '<strong>GCash Payment</strong><br>Account: 0912 345 6789 (RRJ FARM)<br>Reference: SUB-' + Date.now();
+                detailsDiv.innerHTML = '<strong>📱 GCash Payment</strong><br>Account: 0912 345 6789 (RRJ FARM)<br>Reference: ' + ref;
             } else if (method === 'paymaya') {
-                detailsDiv.innerHTML = '<strong>PayMaya Payment</strong><br>Account: 0912 345 6789 (RRJ FARM)<br>Reference: SUB-' + Date.now();
+                detailsDiv.innerHTML = '<strong>💳 PayMaya Payment</strong><br>Account: 0912 345 6789 (RRJ FARM)<br>Reference: ' + ref;
             } else {
-                detailsDiv.innerHTML = '<strong>Bank Transfer</strong><br>BPI Account: 1234-5678-90<br>Account Name: RRJ FARM Cooperative<br>Reference: SUB-' + Date.now();
+                detailsDiv.innerHTML = '<strong>🏦 Bank Transfer</strong><br>BPI: 1234-5678-90 | RRJ FARM Coop<br>Reference: ' + ref;
             }
         }
 
@@ -393,18 +410,14 @@
             const price = selectedPlan === 'researcher' ? 1000 : 1500;
             const planName = selectedPlan === 'researcher' ? 'Researcher & Student' : 'Members';
             
-            // Get current wallet balance
             let walletBalance = parseInt(localStorage.getItem('rrjfarm_wallet_balance')) || 0;
             
-            // Check if user has enough balance
             if (walletBalance >= price) {
-                // Deduct from wallet
                 walletBalance -= price;
                 localStorage.setItem('rrjfarm_wallet_balance', walletBalance);
                 processSubscription(name, email, price, planName);
             } else {
-                // Show payment instructions
-                alert(`Please send ₱${price} via ${selectedPaymentMethod.toUpperCase()} to complete your subscription.\n\nReference: SUB-${Date.now()}\nWe will activate your subscription upon payment confirmation.`);
+                alert(`Please send ₱${price} via ${selectedPaymentMethod.toUpperCase()} to complete your subscription.\nReference: SUB-${Date.now()}\nWe will activate your subscription upon payment confirmation.`);
                 processSubscription(name, email, price, planName);
             }
         }
@@ -424,17 +437,14 @@
                 paymentMethod: selectedPaymentMethod
             };
             
-            // Save to localStorage
             let userSubscriptions = JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions') || '[]');
             userSubscriptions.push(subscription);
             localStorage.setItem('rrjfarm_user_subscriptions', JSON.stringify(userSubscriptions));
             
-            // Save to session for dashboard
             sessionStorage.setItem('rrjfarm_subscription_active', 'true');
             sessionStorage.setItem('rrjfarm_subscription_plan', subscription.plan);
             
-            // Generate vouchers based on plan
-            let vouchers = JSON.parse(localStorage.getItem('rrjfarm_vouchers') || []);
+            let vouchers = JSON.parse(localStorage.getItem('rrjfarm_vouchers') || '[]');
             
             if (selectedPlan === 'researcher') {
                 vouchers.push(
@@ -464,11 +474,13 @@
             }, 2000);
         }
 
-        // Profile Dropdown
         function toggleProfileDropdown() { 
-            document.getElementById('profileDropdown').classList.toggle('show'); 
+            const dropdown = document.getElementById('profileDropdown');
+            if(dropdown) dropdown.classList.toggle('show'); 
         }
-        document.getElementById('userAvatar').addEventListener('click', (e) => { 
+        
+        // Event Listeners
+        document.getElementById('userAvatar')?.addEventListener('click', (e) => { 
             e.stopPropagation(); 
             toggleProfileDropdown(); 
         });
@@ -478,38 +490,39 @@
                 drop.classList.remove('show'); 
         });
         
-        document.getElementById('editProfileBtn').onclick = () => { 
-            const newName = prompt('Enter your full name:', currentUser?.name || 'User');
-            if (newName && newName.trim()) {
-                if (currentUser) currentUser.name = newName.trim();
-                document.getElementById('userAvatar').innerText = newName.trim().split(' ').map(n => n[0]).join('').toUpperCase();
-                showToast('Profile updated!');
-            }
-        };
+        document.getElementById('editProfileBtn')?.addEventListener('click', () => { 
+            if(currentUser) {
+                const newName = prompt('Enter your full name:', currentUser.name || 'User');
+                if (newName && newName.trim()) {
+                    currentUser.name = newName.trim();
+                    localStorage.setItem('rrjfarm_current_user', JSON.stringify(currentUser));
+                    let initials = newName.trim().split(' ').map(n => n[0]).join('').toUpperCase();
+                    document.getElementById('userAvatar').innerText = initials;
+                    showToast('Profile updated!');
+                }
+            } else { alert('Please login first.'); }
+        });
         
-        document.getElementById('changePasswordBtn').onclick = () => { 
+        document.getElementById('changePasswordBtn')?.addEventListener('click', () => { 
             alert('Password reset link has been sent to your email.'); 
-        };
+        });
         
-        document.getElementById('logoutBtn').onclick = () => { 
+        document.getElementById('logoutBtn')?.addEventListener('click', () => { 
             localStorage.removeItem('rrjfarm_current_user');
             sessionStorage.clear();
             window.location.href = 'index.html'; 
-        };
+        });
         
-        // Initialize user avatar if logged in
-        if (isUserLoggedIn()) {
-            document.getElementById('userAvatar').innerText = (currentUser.avatarInitials || (currentUser.name?.split(' ').map(n => n[0]).join('') || 'U')).toUpperCase();
-        }
+        // Initialize
+        updateAvatarVisibility();
         
+        window.checkLoginAndSubscribe = checkLoginAndSubscribe;
+        window.closeReminderModal = closeReminderModal;
+        window.redirectToLogin = redirectToLogin;
         window.openSubscribeModal = openSubscribeModal;
         window.closeSubscribeModal = closeSubscribeModal;
         window.selectPaymentMethod = selectPaymentMethod;
         window.confirmSubscription = confirmSubscription;
-        window.toggleProfileDropdown = toggleProfileDropdown;
-        window.checkLoginAndSubscribe = checkLoginAndSubscribe;
-        window.closeReminderModal = closeReminderModal;
-        window.redirectToLogin = redirectToLogin;
     </script>
 </body>
 </html>
