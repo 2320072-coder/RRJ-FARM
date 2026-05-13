@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="members.xsl"?>
 <rrj_farm>
     <members>
         <!-- ============================================ -->
-        <!-- BATANGAS MEMBERS (Lipa City Area)             -->
+        <!-- BATANGAS MEMBERS (15 members)                 -->
         <!-- ============================================ -->
         <member id="M001">
             <name>Maria Santos</name>
             <location>Lipa City, Batangas</location>
             <lot_size unit="hectares">0.5</lot_size>
-            <farm_type>Vegetable &amp; Herb Production</farm_type>
+            <farm_type>Vegetable and Herb Production</farm_type>
             <join_date>2024-01-15</join_date>
             <status>Active</status>
             <monthly_fee currency="PHP">3000</monthly_fee>
@@ -23,7 +22,7 @@
             <name>Jose Dela Cruz</name>
             <location>Tanauan City, Batangas</location>
             <lot_size unit="hectares">1</lot_size>
-            <farm_type>Backyard Poultry &amp; Vegetables</farm_type>
+            <farm_type>Backyard Poultry and Vegetables</farm_type>
             <join_date>2024-01-20</join_date>
             <status>Active</status>
             <monthly_fee currency="PHP">5000</monthly_fee>
@@ -37,13 +36,13 @@
             <name>Anna Reyes</name>
             <location>Malvar, Batangas</location>
             <lot_size unit="hectares">2</lot_size>
-            <farm_type>Rice &amp; Integrated Farming</farm_type>
+            <farm_type>Rice and Integrated Farming</farm_type>
             <join_date>2024-02-01</join_date>
             <status>Active</status>
             <monthly_fee currency="PHP">9000</monthly_fee>
             <email>anna.reyes@rrjfarm.com</email>
             <phone>0918 234 5678</phone>
-            <bio>Agricultural engineer promoting sustainable rice production. Ask me about palayamanan and rice-fish integration!</bio>
+            <bio>Agricultural engineer promoting sustainable rice production. Ask me about palayamanan and rice-fish integration.</bio>
             <avatar>👩‍🔬</avatar>
         </member>
         
@@ -51,7 +50,7 @@
             <name>Carlos Mendoza</name>
             <location>Sto. Tomas, Batangas</location>
             <lot_size unit="hectares">1.5</lot_size>
-            <farm_type>Organic Vegetables &amp; Herbs</farm_type>
+            <farm_type>Organic Vegetables and Herbs</farm_type>
             <join_date>2024-02-10</join_date>
             <status>Active</status>
             <monthly_fee currency="PHP">7000</monthly_fee>
@@ -65,13 +64,13 @@
             <name>Luzviminda Fernandez</name>
             <location>Batangas City, Batangas</location>
             <lot_size unit="hectares">0.5</lot_size>
-            <farm_type>Container Gardening &amp; Microgreens</farm_type>
+            <farm_type>Container Gardening and Microgreens</farm_type>
             <join_date>2024-02-15</join_date>
             <status>Active</status>
             <monthly_fee currency="PHP">3000</monthly_fee>
             <email>luz.fernandez@rrjfarm.com</email>
             <phone>0920 456 7890</phone>
-            <bio>Urban homesteader proving you can grow food anywhere. Container gardening and microgreens specialist!</bio>
+            <bio>Urban homesteader proving you can grow food anywhere. Container gardening and microgreens specialist.</bio>
             <avatar>👩‍🌾</avatar>
         </member>
         
@@ -79,7 +78,7 @@
             <name>Ramon Garcia</name>
             <location>San Jose, Batangas</location>
             <lot_size unit="hectares">1</lot_size>
-            <farm_type>Fruit Trees &amp; Native Pigs</farm_type>
+            <farm_type>Fruit Trees and Native Pigs</farm_type>
             <join_date>2024-03-01</join_date>
             <status>Active</status>
             <monthly_fee currency="PHP">5000</monthly_fee>
@@ -93,7 +92,7 @@
             <name>Patricia Lim</name>
             <location>Rosario, Batangas</location>
             <lot_size unit="hectares">0.5</lot_size>
-            <farm_type>Medicinal Plants &amp; Herbs</farm_type>
+            <farm_type>Medicinal Plants and Herbs</farm_type>
             <join_date>2024-03-05</join_date>
             <status>Active</status>
             <monthly_fee currency="PHP">3000</monthly_fee>
@@ -107,13 +106,13 @@
             <name>Fernando Aquino</name>
             <location>Ibaan, Batangas</location>
             <lot_size unit="hectares">2</lot_size>
-            <farm_type>Coffee &amp; Cacao Production</farm_type>
+            <farm_type>Coffee and Cacao Production</farm_type>
             <join_date>2024-03-12</join_date>
             <status>Active</status>
             <monthly_fee currency="PHP">9000</monthly_fee>
             <email>fernando.aquino@rrjfarm.com</email>
             <phone>0923 789 0123</phone>
-            <bio>Specialty coffee grower. Ask me about Kapeng Barako, Liberica coffee, and tablea making from cacao!</bio>
+            <bio>Specialty coffee grower. Ask me about Kapeng Barako, Liberica coffee, and tablea making from cacao.</bio>
             <avatar>☕</avatar>
         </member>
         
@@ -121,7 +120,7 @@
             <name>Isabella Cruz</name>
             <location>San Juan, Batangas</location>
             <lot_size unit="hectares">1</lot_size>
-            <farm_type>Duck Raising &amp; Egg Production</farm_type>
+            <farm_type>Duck Raising and Egg Production</farm_type>
             <join_date>2024-03-20</join_date>
             <status>Active</status>
             <monthly_fee currency="PHP">5000</monthly_fee>
@@ -141,8 +140,294 @@
             <monthly_fee currency="PHP">3000</monthly_fee>
             <email>gregory.v@rrjfarm.com</email>
             <phone>0925 901 2345</phone>
-            <bio>Oyster mushroom grower. Ask me about mushroom spawn production, fruiting, and value-added mushroom products!</bio>
+            <bio>Oyster mushroom grower. Ask me about mushroom spawn production, fruiting, and value-added mushroom products.</bio>
             <avatar>🍄</avatar>
+        </member>
+        
+        <member id="M011">
+            <name>Fe Rodriguez</name>
+            <location>Nasugbu, Batangas</location>
+            <lot_size unit="hectares">1.5</lot_size>
+            <farm_type>Pineapple and Coconut Integration</farm_type>
+            <join_date>2024-04-10</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">7000</monthly_fee>
+            <email>fe.rodriguez@rrjfarm.com</email>
+            <phone>0926 012 3456</phone>
+            <bio>Pineapple farmer practicing intercropping with coconuts. Produces organic pineapple and coconut products.</bio>
+            <avatar>🍍</avatar>
+        </member>
+        
+        <member id="M012">
+            <name>Rogelio Manalo</name>
+            <location>Calatagan, Batangas</location>
+            <lot_size unit="hectares">3</lot_size>
+            <farm_type>Saltwater Fishpond</farm_type>
+            <join_date>2024-04-15</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">12000</monthly_fee>
+            <email>rogelio.manalo@rrjfarm.com</email>
+            <phone>0927 123 4567</phone>
+            <bio>Bangus and tilapia grower. Ask me about brackish water aquaculture and sustainable fish farming.</bio>
+            <avatar>🐟</avatar>
+        </member>
+        
+        <member id="M013">
+            <name>Leticia Gomez</name>
+            <location>Balayan, Batangas</location>
+            <lot_size unit="hectares">1</lot_size>
+            <farm_type>Dragon Fruit Plantation</farm_type>
+            <join_date>2024-04-20</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">5000</monthly_fee>
+            <email>leticia.gomez@rrjfarm.com</email>
+            <phone>0928 234 5678</phone>
+            <bio>Dragon fruit specialist. Growing red and white varieties using organic methods.</bio>
+            <avatar>🐉</avatar>
+        </member>
+        
+        <member id="M014">
+            <name>Emilio Santiago</name>
+            <location>Taal, Batangas</location>
+            <lot_size unit="hectares">0.8</lot_size>
+            <farm_type>Permaculture Farming</farm_type>
+            <join_date>2024-05-01</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">4000</monthly_fee>
+            <email>emilio.santiago@rrjfarm.com</email>
+            <phone>0929 345 6789</phone>
+            <bio>Urban farmer practicing permaculture and food forest design.</bio>
+            <avatar>🌳</avatar>
+        </member>
+        
+        <member id="M015">
+            <name>Carmela Villar</name>
+            <location>Laurel, Batangas</location>
+            <lot_size unit="hectares">1.2</lot_size>
+            <farm_type>Cut Flowers and Ornamentals</farm_type>
+            <join_date>2024-05-05</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">6000</monthly_fee>
+            <email>carmela.villar@rrjfarm.com</email>
+            <phone>0930 456 7890</phone>
+            <bio>Flower farmer growing anthuriums, roses, and orchids for local markets.</bio>
+            <avatar>🌸</avatar>
+        </member>
+        
+        <!-- ============================================ -->
+        <!-- LAGUNA MEMBERS (8 members)                   -->
+        <!-- ============================================ -->
+        <member id="M016">
+            <name>Rolando Mercado</name>
+            <location>Los Banos, Laguna</location>
+            <lot_size unit="hectares">1</lot_size>
+            <farm_type>Dairy Goat Farm</farm_type>
+            <join_date>2024-05-10</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">5000</monthly_fee>
+            <email>rolando.mercado@rrjfarm.com</email>
+            <phone>0931 567 8901</phone>
+            <bio>Goat dairy producer. Fresh goat milk, kesong puti, and pastillas de leche made from organic goat milk.</bio>
+            <avatar>🐐</avatar>
+        </member>
+        
+        <member id="M017">
+            <name>Belen Cruz</name>
+            <location>Calamba City, Laguna</location>
+            <lot_size unit="hectares">0.5</lot_size>
+            <farm_type>Backyard Vermicomposting</farm_type>
+            <join_date>2024-05-15</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">3000</monthly_fee>
+            <email>belen.cruz@rrjfarm.com</email>
+            <phone>0932 678 9012</phone>
+            <bio>Vermicomposting advocate. Producing premium organic fertilizer from kitchen waste and livestock manure.</bio>
+            <avatar>🪱</avatar>
+        </member>
+        
+        <member id="M018">
+            <name>Danilo Reyes</name>
+            <location>Santa Cruz, Laguna</location>
+            <lot_size unit="hectares">2</lot_size>
+            <farm_type>Coconut Plantation</farm_type>
+            <join_date>2024-05-20</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">9000</monthly_fee>
+            <email>danilo.reyes@rrjfarm.com</email>
+            <phone>0933 789 0123</phone>
+            <bio>Third-generation coconut farmer. Producing copra, coconut oil, tuba, and coco sugar.</bio>
+            <avatar>🥥</avatar>
+        </member>
+        
+        <member id="M019">
+            <name>Gloria Ramos</name>
+            <location>Pagsanjan, Laguna</location>
+            <lot_size unit="hectares">0.8</lot_size>
+            <farm_type>Native Vegetable Seeds</farm_type>
+            <join_date>2024-06-01</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">4000</monthly_fee>
+            <email>gloria.ramos@rrjfarm.com</email>
+            <phone>0934 890 1234</phone>
+            <bio>Seed saver preserving traditional Filipino vegetable varieties. Ask me about native seeds.</bio>
+            <avatar>🌱</avatar>
+        </member>
+        
+        <member id="M020">
+            <name>Ricardo Torres</name>
+            <location>Bay, Laguna</location>
+            <lot_size unit="hectares">1.5</lot_size>
+            <farm_type>Hydroponic Lettuce</farm_type>
+            <join_date>2024-06-05</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">7000</monthly_fee>
+            <email>ricardo.torres@rrjfarm.com</email>
+            <phone>0935 901 2345</phone>
+            <bio>Soilless farming specialist. Growing premium lettuce and leafy greens using NFT hydroponic systems.</bio>
+            <avatar>🥬</avatar>
+        </member>
+        
+        <member id="M021">
+            <name>Marilyn Santiago</name>
+            <location>San Pablo City, Laguna</location>
+            <lot_size unit="hectares">1</lot_size>
+            <farm_type>Organic Strawberry</farm_type>
+            <join_date>2024-06-10</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">5000</monthly_fee>
+            <email>marilyn.santiago@rrjfarm.com</email>
+            <phone>0936 012 3456</phone>
+            <bio>Strawberry grower in the highlands of Laguna. Producing sweet organic strawberries using raised beds.</bio>
+            <avatar>🍓</avatar>
+        </member>
+        
+        <member id="M022">
+            <name>Ramon Dimagiba</name>
+            <location>Liliw, Laguna</location>
+            <lot_size unit="hectares">2.5</lot_size>
+            <farm_type>Integrated Rice-Duck</farm_type>
+            <join_date>2024-06-15</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">11000</monthly_fee>
+            <email>ramon.dimagiba@rrjfarm.com</email>
+            <phone>0937 123 4567</phone>
+            <bio>Rice-duck integrated farming practitioner. Ask me about duckweeds, pest control, and organic rice.</bio>
+            <avatar>🦆</avatar>
+        </member>
+        
+        <member id="M023">
+            <name>Lorna Austria</name>
+            <location>Nagcarlan, Laguna</location>
+            <lot_size unit="hectares">0.6</lot_size>
+            <farm_type>Organic Ginger and Turmeric</farm_type>
+            <join_date>2024-06-20</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">3000</monthly_fee>
+            <email>lorna.austria@rrjfarm.com</email>
+            <phone>0938 234 5678</phone>
+            <bio>Medicinal root crop grower. Producing organic ginger, turmeric, and galangal for wellness products.</bio>
+            <avatar>🫚</avatar>
+        </member>
+        
+        <!-- ============================================ -->
+        <!-- QUEZON MEMBERS (7 members)                   -->
+        <!-- ============================================ -->
+        <member id="M024">
+            <name>Amor Perez</name>
+            <location>Lucena City, Quezon</location>
+            <lot_size unit="hectares">1.2</lot_size>
+            <farm_type>Organic Ube and Rootcrops</farm_type>
+            <join_date>2024-07-01</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">6000</monthly_fee>
+            <email>amor.perez@rrjfarm.com</email>
+            <phone>0939 345 6789</phone>
+            <bio>Ube specialist. Growing purple yam and other native root crops using traditional methods.</bio>
+            <avatar>🍠</avatar>
+        </member>
+        
+        <member id="M025">
+            <name>Ernesto Bernardo</name>
+            <location>Sariaya, Quezon</location>
+            <lot_size unit="hectares">3</lot_size>
+            <farm_type>Coconut and Nipa Plantation</farm_type>
+            <join_date>2024-07-05</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">13000</monthly_fee>
+            <email>ernesto.bernardo@rrjfarm.com</email>
+            <phone>0940 456 7890</phone>
+            <bio>Coconut and nipa farmer. Producing vinegar, tuba, lambanog, and nipa shingles for roofing.</bio>
+            <avatar>🌴</avatar>
+        </member>
+        
+        <member id="M026">
+            <name>Susan Flores</name>
+            <location>Tayabas City, Quezon</location>
+            <lot_size unit="hectares">1</lot_size>
+            <farm_type>Organic Rice Terraces</farm_type>
+            <join_date>2024-07-10</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">5000</monthly_fee>
+            <email>susan.flores@rrjfarm.com</email>
+            <phone>0941 567 8901</phone>
+            <bio>Heirloom rice grower cultivating traditional rice varieties with minimal water and no chemicals.</bio>
+            <avatar>🌾</avatar>
+        </member>
+        
+        <member id="M027">
+            <name>Bernard Jimenez</name>
+            <location>Candelaria, Quezon</location>
+            <lot_size unit="hectares">0.8</lot_size>
+            <farm_type>Free-Range Chicken</farm_type>
+            <join_date>2024-07-15</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">4000</monthly_fee>
+            <email>bernard.jimenez@rrjfarm.com</email>
+            <phone>0942 678 9012</phone>
+            <bio>Pasture-raised chicken farmer. Producing organic eggs and meat from native chickens.</bio>
+            <avatar>🐔</avatar>
+        </member>
+        
+        <member id="M028">
+            <name>Victoria Llamas</name>
+            <location>Lucban, Quezon</location>
+            <lot_size unit="hectares">1.5</lot_size>
+            <farm_type>Organic Cacao and Tablea</farm_type>
+            <join_date>2024-07-20</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">7000</monthly_fee>
+            <email>victoria.llamas@rrjfarm.com</email>
+            <phone>0943 789 0123</phone>
+            <bio>Cacao grower and tablea maker. Producing single-origin dark chocolate and cacao nibs.</bio>
+            <avatar>🍫</avatar>
+        </member>
+        
+        <member id="M029">
+            <name>Leonardo Cruz</name>
+            <location>Infanta, Quezon</location>
+            <lot_size unit="hectares">2</lot_size>
+            <farm_type>Mangrove and Aquasilviculture</farm_type>
+            <join_date>2024-08-01</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">9000</monthly_fee>
+            <email>leonardo.cruz@rrjfarm.com</email>
+            <phone>0944 890 1234</phone>
+            <bio>Aquasilviculture practitioner. Integrating fish, crabs, and mangroves for coastal restoration.</bio>
+            <avatar>🦀</avatar>
+        </member>
+        
+        <member id="M030">
+            <name>Helena Mercado</name>
+            <location>Gumaca, Quezon</location>
+            <lot_size unit="hectares">1</lot_size>
+            <farm_type>Organic Pineapple Fiber</farm_type>
+            <join_date>2024-08-05</join_date>
+            <status>Active</status>
+            <monthly_fee currency="PHP">5000</monthly_fee>
+            <email>helena.mercado@rrjfarm.com</email>
+            <phone>0945 901 2345</phone>
+            <bio>Pineapple fiber advocate. Producing pina cloth, eco-bags, and sustainable textiles from pineapple leaves.</bio>
+            <avatar>🧵</avatar>
         </member>
     </members>
     
@@ -202,6 +487,20 @@
             <price currency="PHP">150</price>
             <unit>kg</unit>
             <supplier>Gregory Villanueva</supplier>
+        </product>
+        <product id="P009">
+            <name>Coco Sugar</name>
+            <category>Processed Goods</category>
+            <price currency="PHP">200</price>
+            <unit>250g</unit>
+            <supplier>Danilo Reyes</supplier>
+        </product>
+        <product id="P010">
+            <name>Fresh Goat Milk</name>
+            <category>Dairy</category>
+            <price currency="PHP">120</price>
+            <unit>liter</unit>
+            <supplier>Rolando Mercado</supplier>
         </product>
     </products>
 </rrj_farm>
