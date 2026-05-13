@@ -49,6 +49,20 @@
         .stat-card { background: #fafefa; padding: 0.8rem; border-radius: 16px; text-align: center; border: 1px solid #e0ebdd; }
         .stat-number { font-size: 1.3rem; font-weight: 800; color: #2d6a2d; }
         
+        /* Application Form Styles */
+        .contact-white { background: white; border-radius: 24px; padding: 1.5rem; margin: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .form-group-white { margin-bottom: 0.8rem; }
+        .form-group-white label { display: block; font-weight: 600; margin-bottom: 0.3rem; color: #1a2e1a; font-size: 0.85rem; }
+        .form-group-white input, .form-group-white select, .form-group-white textarea { width: 100%; padding: 0.7rem; border: 2px solid #e0e0e0; border-radius: 12px; font-family: inherit; font-size: 0.9rem; }
+        .full-width { grid-column: span 2; }
+        .btn-submit-white { background: #2d6a2d; color: white; padding: 0.8rem; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; width: 100%; font-size: 1rem; margin-top: 0.5rem; }
+        .location-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .price-note { font-size: 0.7rem; color: #2d6a2d; margin-top: 0.2rem; }
+        .form-message { margin-top: 1rem; text-align: center; padding: 0.8rem; border-radius: 12px; display: none; }
+        .form-message.success { background: #d4edda; color: #155724; display: block; }
+        .form-message.error { background: #f8d7da; color: #721c24; display: block; }
+        
         /* Original Marketplace/Workshops/Subscriptions Design */
         .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
         .plan-card { background: white; border-radius: 28px; overflow: hidden; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1); }
@@ -111,6 +125,9 @@
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .profile-dropdown { position: fixed; top: auto; bottom: 0; left: 0; right: 0; width: 100%; border-radius: 20px 20px 0 0; }
             .plans-grid, .products-grid-modern, .workshops-grid-premium { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .location-row { grid-template-columns: 1fr; gap: 0.5rem; }
         }
         .success-toast { position: fixed; bottom: 20px; left: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem; border-radius: 50px; display: none; z-index: 2100; text-align: center; font-size: 0.8rem; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -140,6 +157,7 @@
         <button class="dashboard-tab" onclick="switchTab('subscriptions')">Subscriptions</button>
         <button class="dashboard-tab" id="rentTabBtn" onclick="switchTab('rent')">Rent</button>
         <button class="dashboard-tab" onclick="switchTab('wallet')">Wallet</button>
+        <button class="dashboard-tab" onclick="switchTab('landapp')"><i class="fas fa-file-signature"></i> Apply Land Stewardship</button>
     </div>
 
     <div id="overviewTab" class="tab-content active">
@@ -169,6 +187,73 @@
     <div id="rentTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Farm Equipment Rentals</h3></div><div id="rentalsGrid" class="products-grid-modern"></div></div></div>
 
     <div id="walletTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Wallet</h3></div><div style="text-align:center;"><span class="stat-number" style="font-size:2rem;">₱<span id="walletBalanceMain">5,200</span></span></div><div style="display:flex; gap:0.5rem;"><button class="btn-action" style="background:#2d6a2d;color:white;flex:1;" onclick="openTopUpModal()">Top Up</button><button class="btn-action" style="background:#ff8c00;color:white;flex:1;" onclick="openWithdrawModal()">Withdraw</button></div><div class="card-header"><h3>Transaction History</h3></div><div id="walletHistoryList"></div></div></div>
+
+    <!-- LAND STEWARDSHIP APPLICATION TAB -->
+    <div id="landappTab" class="tab-content">
+        <div class="dashboard-card">
+            <div class="card-header"><h3><i class="fas fa-file-signature"></i> Apply for Land Stewardship</h3><p>Become a land steward and start your farming journey with RRJ FARM</p></div>
+            <div class="contact-white">
+                <form id="applicationForm">
+                    <div class="form-grid">
+                        <div class="form-group-white"><label>Full Name *</label><input type="text" id="appName" required></div>
+                        <div class="form-group-white"><label>Email Address *</label><input type="email" id="appEmail" required></div>
+                        <div class="form-group-white"><label>Phone Number</label><input type="tel" id="appPhone"></div>
+                        <div class="form-group-white"><label>Address</label><input type="text" id="appAddress"></div>
+                        
+                        <div class="form-group-white">
+                            <label>Farm Size (hectares) *</label>
+                            <select id="appLotSize" required>
+                                <option value="">Select farm size</option>
+                                <option value="0.5">0.5 hectare (Starter) - ₱3,000/month</option>
+                                <option value="1">1 hectare (Family) - ₱5,000/month</option>
+                                <option value="1.5">1.5 hectares (Growing) - ₱7,000/month</option>
+                                <option value="2">2 hectares (Production) - ₱9,000/month</option>
+                            </select>
+                            <div class="price-note">Monthly Community Land Trust fee based on farm size</div>
+                        </div>
+                        
+                        <div class="full-width">
+                            <div class="location-row">
+                                <div class="form-group-white">
+                                    <label>Province *</label>
+                                    <select id="appProvince" required onchange="updateMunicipalitiesApp()">
+                                        <option value="">Select Province</option>
+                                        <option value="Batangas">Batangas</option>
+                                        <option value="Laguna">Laguna</option>
+                                        <option value="Quezon">Quezon</option>
+                                    </select>
+                                </div>
+                                <div class="form-group-white" id="municipalityContainerApp" style="display: none;">
+                                    <label>Municipality / City *</label>
+                                    <select id="appMunicipality" required>
+                                        <option value="">Select Municipality</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group-white">
+                            <label>Role / Purpose *</label>
+                            <select id="appPurpose" required>
+                                <option value="">Select your role/purpose</option>
+                                <option value="Farmer">Farmer - I want to grow and sell produce</option>
+                                <option value="Homesteader">Homesteader - I want to live sustainably</option>
+                                <option value="Researcher">Researcher - I want to study regenerative agriculture</option>
+                                <option value="Student">Student - I want to learn farming and sustainability</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group-white full-width">
+                            <label>Farming Experience & Crops Intended</label>
+                            <textarea id="appExperience" rows="3" placeholder="Tell us about your farming experience and what crops you plan to grow..."></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit-white">Submit Application</button>
+                </form>
+                <div id="formMessage" class="form-message"></div>
+            </div>
+        </div>
+    </div>
 </div></main>
 
 <!-- PROFILE SETUP MODAL - FOR NEW USERS -->
@@ -216,9 +301,16 @@
 <div id="successToast" class="success-toast"></div>
 
 <script>
+    // Municipality Data
+    const municipalitiesData = {
+        Batangas: ["Lipa City", "Tanauan City", "Batangas City", "Santo Tomas", "Malvar", "Balete", "Mataasnakahoy", "Cuenca", "Alitagtag", "Bauan", "San Pascual", "Ibaan", "Taysan", "Rosario", "San Juan", "Lobo", "Nasugbu", "Calatagan", "Balayan", "Calaca", "Lemery", "Taal", "Laurel", "Agoncillo", "San Nicolas", "San Luis", "San Jose", "Ibaan", "Taysan", "Padre Garcia", "Mabini", "Tingloy", "Lian"],
+        Laguna: ["Los Baños", "Calamba City", "Santa Cruz", "Pagsanjan", "Liliw", "Nagcarlan", "San Pablo City", "Bay", "Calauan", "Victoria", "Pila", "Santa Maria", "Siniloan", "Famy", "Mabitac", "Paete", "Pakil", "Lumban", "Kalayaan", "Cavinti", "Luisiana", "Majayjay", "Magdalena", "Rizal", "Nagcarlan", "Alaminos", "Binan City", "Santa Rosa City", "Cabuyao City", "San Pedro City"],
+        Quezon: ["Lucena City", "Tayabas City", "Sariaya", "Candelaria", "Tiaong", "San Antonio", "San Francisco", "Pagbilao", "Atimonan", "Unisan", "Gumaca", "Lopez", "Calauag", "Tagkawayan", "Guinayangan", "Buenavista", "Mulanay", "San Narciso", "San Andres", "San Francisco", "Catanauan", "General Luna", "Macalelon", "Pitogo", "Padre Burgos", "Agdangan", "Alabat", "Perez", "Quezon", "Real", "Infanta", "General Nakar"]
+    };
+
     let currentUser = null;
     let hasActiveSubscription = false;
-    let subscriptionPlan = null; // 'researcher', 'member', or null
+    let subscriptionPlan = null;
     let walletBalance = 5200;
     let currentBuyProduct = null, currentEnrollWorkshop = null, currentRentItem = null, currentSubscribePlan = null;
     let transactionHistory = [{ id:1, desc:"Initial wallet", amount:5200, type:"credit", date:"2026-05-01" }];
@@ -253,6 +345,17 @@
     let appliedBuyVoucher = null, appliedEnrollVoucher = null;
     let currentOrderForRating = null, currentRefundOrder = null, currentChatOrder = null;
 
+    // Application Form Municipality Function
+    function updateMunicipalitiesApp() {
+        const province = document.getElementById('appProvince').value;
+        const container = document.getElementById('municipalityContainerApp');
+        const select = document.getElementById('appMunicipality');
+        if (!province) { container.style.display = "none"; return; }
+        container.style.display = "block";
+        const municipalities = municipalitiesData[province] || [];
+        select.innerHTML = '<option value="">Select Municipality / City</option>' + municipalities.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+
     function showToast(m){let t=document.getElementById('successToast');t.innerHTML=m;t.style.display='block';setTimeout(()=>t.style.display='none',3000);}
     
     function checkSession(){
@@ -260,7 +363,6 @@
         if(!u){window.location.href='login.html';return false}
         currentUser=JSON.parse(u);
         
-        // Check if profile is complete (first time user)
         if(!currentUser.profileCompleted){
             document.getElementById('profileSetupModal').classList.add('active');
             document.getElementById('setupEmail').value = currentUser.email || '';
@@ -293,7 +395,6 @@
         
         localStorage.setItem('rrjfarm_current_user', JSON.stringify(currentUser));
         
-        // Update in users array
         let users = JSON.parse(localStorage.getItem('rrjfarm_users') || '[]');
         let userIndex = users.findIndex(u => u.email === currentUser.email);
         if(userIndex !== -1){
@@ -315,11 +416,9 @@
         hasActiveSubscription = !!activeSub;
         subscriptionPlan = activeSub ? activeSub.plan : null;
         
-        // Update session storage
         sessionStorage.setItem('rrjfarm_has_active_subscription', hasActiveSubscription);
         sessionStorage.setItem('rrjfarm_subscription_plan', subscriptionPlan || 'none');
         
-        // Update profile dropdown with status
         let profileSubStatus = document.querySelector('#profileDropdown .dropdown-item:first-child');
         if(profileSubStatus){
             let statusHtml = hasActiveSubscription ? 
@@ -329,15 +428,12 @@
         }
         document.getElementById('profileName').innerHTML = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || 'User';
         
-        // Update banner
         let banner = document.getElementById('reminderBanner');
         if(banner) banner.style.display = hasActiveSubscription ? 'none' : 'flex';
         
-        // Update net profit card visibility (member only)
         let profitCard = document.getElementById('netProfitCard');
         if(profitCard) profitCard.style.display = hasActiveSubscription ? 'block' : 'none';
         
-        // Update Rent tab visibility (hidden for Researcher/Student)
         let rentTab = document.getElementById('rentTabBtn');
         if(rentTab){
             if(subscriptionPlan === 'researcher' || (!hasActiveSubscription && currentUser?.accountType === 'student')){
@@ -347,13 +443,11 @@
             }
         }
         
-        // Update Sell button visibility (Member only)
         let sellBtn = document.getElementById('sellProductBtn');
         if(sellBtn){
             sellBtn.style.display = (hasActiveSubscription && subscriptionPlan === 'member') ? 'block' : 'none';
         }
         
-        // Update My Products tab visibility (Member only, not for Researcher)
         let productsTab = document.getElementById('productsTabBtn');
         if(productsTab){
             productsTab.classList.toggle('hidden', !hasActiveSubscription || subscriptionPlan !== 'member');
@@ -551,7 +645,78 @@
     function closeChangePasswordModal(){document.getElementById('changePasswordModal').classList.remove('active');}
     function changePassword(){let newPwd=document.getElementById('newPassword').value;let confirmPwd=document.getElementById('confirmPassword').value;if(newPwd!==confirmPwd){alert('Passwords do not match');return}if(newPwd.length<6){alert('Password must be at least 6 characters');return}showToast('Password changed successfully!');closeChangePasswordModal();}
     
-    function switchTab(tab){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.getElementById(`${tab}Tab`).classList.add('active');if(tab==='orders')renderOrders();if(tab==='products'&&hasActiveSubscription&&subscriptionPlan==='member')renderSellerProducts();if(tab==='marketplace')renderMarketplace();if(tab==='workshops')renderWorkshops();if(tab==='subscriptions')renderSubscriptions();if(tab==='cooperative')renderCooperative();if(tab==='rent')renderRentals();if(tab==='wallet')renderWallet();if(tab==='overview')updateFinancials();}
+    // LAND STEWARDSHIP APPLICATION SUBMIT
+    function submitApplication(event) {
+        event.preventDefault();
+        const name = document.getElementById('appName').value.trim();
+        const email = document.getElementById('appEmail').value.trim();
+        const phone = document.getElementById('appPhone').value.trim();
+        const address = document.getElementById('appAddress').value.trim();
+        const lotSize = document.getElementById('appLotSize').value;
+        const province = document.getElementById('appProvince').value;
+        const municipality = document.getElementById('appMunicipality').value;
+        const purpose = document.getElementById('appPurpose').value;
+        const experience = document.getElementById('appExperience').value.trim();
+        
+        if (!name || !email || !province || !municipality || !purpose || !lotSize) {
+            showFormMessage('Please fill out all required fields', 'error');
+            return;
+        }
+        
+        const applicationData = {
+            id: Date.now(),
+            name: name,
+            email: email,
+            phone: phone,
+            address: address,
+            lotSize: lotSize,
+            province: province,
+            municipality: municipality,
+            purpose: purpose,
+            experience: experience,
+            status: 'Pending',
+            appliedAt: new Date().toISOString(),
+            userId: currentUser?.id
+        };
+        
+        let applications = JSON.parse(localStorage.getItem('rrjfarm_land_applications') || '[]');
+        applications.push(applicationData);
+        localStorage.setItem('rrjfarm_land_applications', JSON.stringify(applications));
+        
+        showFormMessage(`Thank you ${name}! Your application as ${purpose} from ${municipality}, ${province} has been submitted. We will contact you within 3-5 business days.`, 'success');
+        
+        document.getElementById('applicationForm').reset();
+        document.getElementById('municipalityContainerApp').style.display = 'none';
+        
+        setTimeout(() => {
+            document.getElementById('formMessage').className = 'form-message';
+            document.getElementById('formMessage').innerHTML = '';
+        }, 5000);
+    }
+    
+    function showFormMessage(msg, type) {
+        const msgDiv = document.getElementById('formMessage');
+        msgDiv.innerHTML = msg;
+        msgDiv.className = 'form-message ' + type;
+    }
+    
+    function switchTab(tab){
+        document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+        document.getElementById(`${tab}Tab`).classList.add('active');
+        if(tab==='orders')renderOrders();
+        if(tab==='products'&&hasActiveSubscription&&subscriptionPlan==='member')renderSellerProducts();
+        if(tab==='marketplace')renderMarketplace();
+        if(tab==='workshops')renderWorkshops();
+        if(tab==='subscriptions')renderSubscriptions();
+        if(tab==='cooperative')renderCooperative();
+        if(tab==='rent')renderRentals();
+        if(tab==='wallet')renderWallet();
+        if(tab==='overview')updateFinancials();
+        if(tab==='landapp'){
+            document.getElementById('appName').value = `${currentUser?.firstName || ''} ${currentUser?.lastName || ''}`.trim();
+            document.getElementById('appEmail').value = currentUser?.email || '';
+        }
+    }
     
     document.getElementById('userAvatar').addEventListener('click',()=>document.getElementById('profileDropdown').classList.toggle('show'));
     document.addEventListener('click',(e)=>{let d=document.getElementById('profileDropdown');if(d&&!d.contains(e.target)&&e.target!==document.getElementById('userAvatar'))d.classList.remove('show');});
@@ -559,6 +724,7 @@
     document.getElementById('changePasswordBtn').onclick=openChangePasswordModal;
     document.getElementById('logoutBtn').onclick=()=>{localStorage.removeItem('rrjfarm_current_user');window.location.href='index.html';};
     document.getElementById('subscribeNowBannerBtn').onclick=()=>switchTab('subscriptions');
+    document.getElementById('applicationForm').addEventListener('submit', submitApplication);
     
     checkSession();
     window.switchTab=switchTab; window.openBuyModal=openBuyModal; window.closeBuyModal=closeBuyModal; window.applyBuyVoucher=applyBuyVoucher; window.updateBuyTotal=updateBuyTotal; window.selectBuyMethod=selectBuyMethod; window.confirmBuy=confirmBuy;
@@ -573,6 +739,7 @@
     window.openWithdrawModal=openWithdrawModal; window.closeWithdrawModal=closeWithdrawModal; window.processWithdraw=processWithdraw;
     window.openEditProfileModal=openEditProfileModal; window.closeEditProfileModal=closeEditProfileModal; window.saveEditProfile=saveEditProfile;
     window.openChangePasswordModal=openChangePasswordModal; window.closeChangePasswordModal=closeChangePasswordModal; window.changePassword=changePassword;
+    window.updateMunicipalitiesApp = updateMunicipalitiesApp;
 </script>
 </body>
 </html>
