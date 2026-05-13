@@ -127,6 +127,7 @@
                     <ul>
                         <li><a href="index.html" class="active">Home</a></li>
                         <li><a href="about.html">About</a></li>
+                        <li><a href="index.html#members">Members</a></li>
                         <li><a href="marketplace.html">Marketplace</a></li>
                         <li><a href="workshops.html">Workshops</a></li>
                         <li><a href="cooperative.html">Cooperative</a></li>
@@ -315,10 +316,37 @@
             }
         }
 
-        const members = [
-            { name: "Maria Santos", location: "Lipa City, Batangas", farmType: "Organic Vegetables", role: "land_steward" },
-            { name: "Jose Dela Cruz", location: "Tanauan, Batangas", farmType: "Rice Production", role: "farmer" },
-            { name: "Anna Reyes", location: "Los Banos, Laguna", farmType: "Dairy Goats", role: "coop_member" }
+                const members = [
+            { name: "Maria Santos", location: "Lipa City, Batangas", farmType: "Vegetable & Herb Production", role: "land_steward" },
+            { name: "Jose Dela Cruz", location: "Tanauan City, Batangas", farmType: "Backyard Poultry & Vegetables", role: "farmer" },
+            { name: "Anna Reyes", location: "Malvar, Batangas", farmType: "Rice & Integrated Farming", role: "coop_member" },
+            { name: "Carlos Mendoza", location: "Sto. Tomas, Batangas", farmType: "Organic Vegetables & Herbs", role: "land_steward" },
+            { name: "Luzviminda Fernandez", location: "Batangas City, Batangas", farmType: "Container Gardening & Microgreens", role: "land_steward" },
+            { name: "Ramon Garcia", location: "San Jose, Batangas", farmType: "Fruit Trees & Native Pigs", role: "farmer" },
+            { name: "Patricia Lim", location: "Rosario, Batangas", farmType: "Medicinal Plants & Herbs", role: "land_steward" },
+            { name: "Fernando Aquino", location: "Ibaan, Batangas", farmType: "Coffee & Cacao Production", role: "coop_member" },
+            { name: "Isabella Cruz", location: "San Juan, Batangas", farmType: "Duck Raising & Egg Production", role: "land_steward" },
+            { name: "Gregory Villanueva", location: "Lobo, Batangas", farmType: "Mushroom Cultivation", role: "land_steward" },
+            { name: "Fe Rodriguez", location: "Nasugbu, Batangas", farmType: "Pineapple & Coconut Integration", role: "farmer" },
+            { name: "Rogelio Manalo", location: "Calatagan, Batangas", farmType: "Saltwater Fishpond", role: "coop_member" },
+            { name: "Leticia Gomez", location: "Balayan, Batangas", farmType: "Dragon Fruit Plantation", role: "land_steward" },
+            { name: "Emilio Santiago", location: "Taal, Batangas", farmType: "Permaculture Farming", role: "land_steward" },
+            { name: "Carmela Villar", location: "Laurel, Batangas", farmType: "Cut Flowers & Ornamentals", role: "land_steward" },
+            { name: "Rolando Mercado", location: "Los Banos, Laguna", farmType: "Dairy Goat Farm", role: "coop_member" },
+            { name: "Belen Cruz", location: "Calamba City, Laguna", farmType: "Backyard Vermicomposting", role: "land_steward" },
+            { name: "Danilo Reyes", location: "Santa Cruz, Laguna", farmType: "Coconut Plantation", role: "farmer" },
+            { name: "Gloria Ramos", location: "Pagsanjan, Laguna", farmType: "Native Vegetable Seeds", role: "land_steward" },
+            { name: "Ricardo Torres", location: "Bay, Laguna", farmType: "Hydroponic Lettuce", role: "coop_member" },
+            { name: "Marilyn Santiago", location: "San Pablo City, Laguna", farmType: "Organic Strawberry", role: "land_steward" },
+            { name: "Ramon Dimagiba", location: "Liliw, Laguna", farmType: "Integrated Rice-Duck", role: "farmer" },
+            { name: "Lorna Austria", location: "Nagcarlan, Laguna", farmType: "Organic Ginger & Turmeric", role: "land_steward" },
+            { name: "Amor Perez", location: "Lucena City, Quezon", farmType: "Organic Ube & Rootcrops", role: "land_steward" },
+            { name: "Ernesto Bernardo", location: "Sariaya, Quezon", farmType: "Coconut & Nipa Plantation", role: "coop_member" },
+            { name: "Susan Flores", location: "Tayabas City, Quezon", farmType: "Organic Rice Terraces", role: "land_steward" },
+            { name: "Bernard Jimenez", location: "Candelaria, Quezon", farmType: "Free-Range Chicken", role: "farmer" },
+            { name: "Victoria Llamas", location: "Lucban, Quezon", farmType: "Organic Cacao & Tablea", role: "land_steward" },
+            { name: "Leonardo Cruz", location: "Infanta, Quezon", farmType: "Mangrove & Aquasilviculture", role: "coop_member" },
+            { name: "Helena Mercado", location: "Gumaca, Quezon", farmType: "Organic Pineapple Fiber", role: "land_steward" }
         ];
         
         const workshopsList = [
@@ -343,13 +371,17 @@
             setTimeout(() => t.style.display = 'none', 3000); 
         }
         
-        function loadMembers() {
-            document.getElementById('memberGrid').innerHTML = members.map(m => `
+                function loadMembers() {
+            const memberGrid = document.getElementById('memberGrid');
+            if (!memberGrid) return;
+            
+            memberGrid.innerHTML = members.map(m => `
                 <div class="member-card">
                     <i class="fas fa-user-circle"></i>
                     <h3>${m.name}</h3>
-                    <p>${m.location}</p>
-                    <p>${m.farmType}</p>
+                    <p><i class="fas fa-map-marker-alt"></i> ${m.location}</p>
+                    <p><i class="fas fa-seedling"></i> ${m.farmType}</p>
+                    <span class="member-role">${m.role === 'land_steward' ? '🌾 Land Steward' : m.role === 'farmer' ? '👨‍🌾 Farmer' : '🤝 Coop Member'}</span>
                     <button class="btn-contact" onclick="handleContactMember('${m.name}')">Contact Member</button>
                 </div>
             `).join('');
