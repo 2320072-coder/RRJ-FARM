@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RRJ FARM | Admin Dashboard</title>
+    <title>RRJ FARM | Admin Dashboard - Central Data</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -47,57 +47,44 @@
         .status-active { background: #d4edda; color: #155724; }
         .status-pending { background: #fff3cd; color: #856404; }
         .status-completed { background: #cce5ff; color: #004085; }
-        .status-subscribed { background: #d4edda; color: #155724; }
-        .status-expense { background: #f8d7da; color: #721c24; }
         .status-approved { background: #d4edda; color: #155724; }
         .status-rejected { background: #f8d7da; color: #721c24; }
         
         .btn-primary { background: #2d6a2d; color: white; border: none; padding: 0.5rem 1rem; border-radius: 30px; cursor: pointer; font-weight: 500; transition: all 0.3s; }
-        .btn-primary:hover { background: #1a4d1a; transform: translateY(-2px); }
+        .btn-primary:hover { background: #1a4d1a; }
         .btn-danger { background: #dc3545; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
         .btn-info { background: #17a2b8; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.7rem; margin-right: 0.3rem; }
-        .btn-success { background: #28a745; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.7rem; margin-right: 0.3rem; }
+        .btn-success { background: #28a745; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
         
         .filter-group { display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
-        .filter-btn { padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; transition: all 0.3s; font-size: 0.8rem; }
+        .filter-btn { padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; font-size: 0.8rem; }
         .filter-btn.active { background: #2d6a2d; color: white; border-color: #2d6a2d; }
         .filter-select { padding: 0.3rem 0.8rem; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; font-size: 0.8rem; }
         
-        .revenue-chart { display: flex; align-items: flex-end; gap: 1rem; padding: 1rem 0; overflow-x: auto; }
-        .chart-bar { flex: 1; min-width: 60px; text-align: center; }
-        .bar { background: #2d6a2d; height: 0; border-radius: 8px 8px 0 0; transition: height 0.5s; min-height: 5px; }
-        .bar-label { margin-top: 0.5rem; font-size: 0.7rem; color: #666; }
-        
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 2000; justify-content: center; align-items: center; }
-        .modal.active { display: flex; }
-        .modal-content { background: white; border-radius: 28px; max-width: 900px; width: 90%; padding: 1.5rem; max-height: 85vh; overflow-y: auto; animation: fadeUp 0.3s ease; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 2px solid #eef3ea; }
-        .close-modal { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #999; }
-        .close-modal:hover { color: #dc3545; }
-        .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 0.3rem; color: #1a2e1a; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 12px; font-family: inherit; }
-        
-        .promo-card, .voucher-card { background: linear-gradient(135deg, #1a4d1a, #2d6a2d); color: white; padding: 1rem; border-radius: 16px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         .participant-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; border-bottom: 1px solid #e8f0e8; flex-wrap: wrap; gap: 0.5rem; }
-        .review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .review-field { margin-bottom: 0.8rem; }
         .review-field label { font-weight: 600; color: #2d6a2d; display: block; margin-bottom: 0.2rem; font-size: 0.8rem; }
         .review-field .value { background: #f5f7f2; padding: 0.5rem; border-radius: 12px; font-size: 0.9rem; }
         
-        .empty-state { text-align: center; padding: 2rem; color: #888; }
-        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 1rem 2rem; border-radius: 50px; display: none; z-index: 1500; animation: slideInRight 0.3s ease; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 2000; justify-content: center; align-items: center; }
+        .modal.active { display: flex; }
+        .modal-content { background: white; border-radius: 28px; max-width: 600px; width: 90%; padding: 1.5rem; max-height: 85vh; overflow-y: auto; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 2px solid #eef3ea; }
+        .close-modal { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #999; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.3rem; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 12px; font-family: inherit; }
         
-        @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @media (max-width: 900px) { .admin-nav { flex-direction: column; border-radius: 20px; } .admin-nav-item { text-align: center; } .container { padding: 0 1rem; } .review-grid { grid-template-columns: 1fr; } }
+        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 1rem 2rem; border-radius: 50px; display: none; z-index: 1500; }
+        @media (max-width: 900px) { .admin-nav { flex-direction: column; border-radius: 20px; } .container { padding: 0 1rem; } .review-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <header class="modern-header">
         <div class="container">
             <div class="header-content">
-                <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Admin Control Panel | Batangas, Laguna & Quezon</p></div>
+                <div class="logo"><h1><i class="fas fa-leaf"></i> RRJ FARM</h1><p>Admin Control Panel | Central Data Sync</p></div>
                 <div><button class="btn-logout" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button></div>
             </div>
         </div>
@@ -107,460 +94,519 @@
         <div class="container">
             <div class="dashboard-card" style="background: linear-gradient(135deg, #1a4d1a, #2d6a2d); color: white;">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                    <div><h2><i class="fas fa-user-shield"></i> Welcome, Admin!</h2><p>Manage RRJ FARM platform, members, workshops, and more.</p></div>
-                    <div><i class="fas fa-chart-line" style="font-size: 3rem; opacity: 0.5;"></i></div>
+                    <div><h2><i class="fas fa-user-shield"></i> Admin Dashboard</h2><p>Real-time data from Member Dashboard</p></div>
+                    <div><button class="btn-primary" style="background:#ffd700; color:#1a2e1a;" onclick="refreshAllData()"><i class="fas fa-sync-alt"></i> Refresh Data</button></div>
                 </div>
             </div>
 
             <div class="admin-nav">
-                <button class="admin-nav-item active" onclick="switchTab('analytics')"><i class="fas fa-chart-line"></i> Live Analytics</button>
+                <button class="admin-nav-item active" onclick="switchTab('analytics')"><i class="fas fa-chart-line"></i> Analytics</button>
                 <button class="admin-nav-item" onclick="switchTab('members')"><i class="fas fa-users"></i> Members</button>
-                <button class="admin-nav-item" onclick="switchTab('workshops')"><i class="fas fa-chalkboard-user"></i> Workshops</button>
                 <button class="admin-nav-item" onclick="switchTab('transactions')"><i class="fas fa-exchange-alt"></i> Transactions</button>
-                <button class="admin-nav-item" onclick="switchTab('applicants')"><i class="fas fa-file-signature"></i> Applicants</button>
-                <button class="admin-nav-item" onclick="switchTab('inquiries')"><i class="fas fa-envelope"></i> Inquiries</button>
+                <button class="admin-nav-item" onclick="switchTab('applicants')"><i class="fas fa-file-signature"></i> Land Applicants</button>
+                <button class="admin-nav-item" onclick="switchTab('workshops')"><i class="fas fa-chalkboard-user"></i> Workshops</button>
+                <button class="admin-nav-item" onclick="switchTab('subscriptions')"><i class="fas fa-ticket-alt"></i> Subscriptions</button>
             </div>
 
             <!-- ANALYTICS TAB -->
             <div id="analyticsTab" class="tab-content active">
                 <div class="stats-grid">
-                    <div class="stat-card"><div class="stat-number" id="totalMembers">0</div><div class="stat-label">Total Members</div></div>
+                    <div class="stat-card"><div class="stat-number" id="totalMembers">0</div><div class="stat-label">Total Registered Users</div></div>
+                    <div class="stat-card"><div class="stat-number" id="activeMembers">0</div><div class="stat-label">Active Members</div></div>
+                    <div class="stat-card"><div class="stat-number" id="farmerMembers">0</div><div class="stat-label">Farmer Members</div></div>
                     <div class="stat-card"><div class="stat-number" id="totalOrders">0</div><div class="stat-label">Total Orders</div></div>
-                    <div class="stat-card"><div class="stat-number" id="totalSubscriptions">0</div><div class="stat-label">Active Subscriptions</div></div>
-                    <div class="stat-card"><div class="stat-number" id="totalRevenue">₱0</div><div class="stat-label">Total Revenue</div></div>
-                    <div class="stat-card"><div class="stat-number" id="totalExpenses">₱0</div><div class="stat-label">Total Expenses</div></div>
-                    <div class="stat-card"><div class="stat-number" id="netProfit">₱0</div><div class="stat-label">Net Profit</div></div>
-                    <div class="stat-card"><div class="stat-number" id="monthlyRevenue">₱0</div><div class="stat-label">This Month Revenue</div></div>
-                    <div class="stat-card"><div class="stat-number" id="pendingApplicants">0</div><div class="stat-label">Pending Applicants</div></div>
+                    <div class="stat-card"><div class="stat-number" id="totalSales">₱0</div><div class="stat-label">Total Sales</div></div>
+                    <div class="stat-card"><div class="stat-number" id="pendingApplicants">0</div><div class="stat-label">Pending Land Applicants</div></div>
+                    <div class="stat-card"><div class="stat-number" id="activeSubscriptions">0</div><div class="stat-label">Active Subscriptions</div></div>
+                    <div class="stat-card"><div class="stat-number" id="workshopEnrollees">0</div><div class="stat-label">Workshop Enrollees</div></div>
                 </div>
-                <div class="dashboard-card"><div class="card-header"><h3><i class="fas fa-chart-line"></i> Revenue Overview</h3><select id="revenueYear" onchange="loadRevenueChart()"><option value="2025">2025</option><option value="2026" selected>2026</option></select></div><div id="revenueChart" class="revenue-chart"></div></div>
-                <div class="dashboard-card"><div class="card-header"><h3><i class="fas fa-tags"></i> Active Promos</h3><button class="btn-primary" onclick="openPromoModal()"><i class="fas fa-plus"></i> Add Promo</button></div><div id="promosList"></div></div>
-                <div class="dashboard-card"><div class="card-header"><h3><i class="fas fa-ticket-alt"></i> Active Vouchers</h3><button class="btn-primary" onclick="openVoucherModal()"><i class="fas fa-plus"></i> Add Voucher</button></div><div id="vouchersList"></div></div>
-                <div class="dashboard-card"><div class="card-header"><h3><i class="fas fa-receipt"></i> Expense Management</h3><button class="btn-primary" onclick="openExpenseModal()"><i class="fas fa-plus"></i> Record Expense</button></div><div id="expensesList"></div></div>
-                <div class="dashboard-card"><div class="card-header"><h3><i class="fas fa-history"></i> Recent Activity</h3></div><div id="recentActivity"></div></div>
             </div>
 
-            <!-- MEMBERS TAB -->
+            <!-- MEMBERS TAB - Reads from Member Dashboard -->
             <div id="membersTab" class="tab-content">
                 <div class="dashboard-card">
-                    <div class="card-header"><h3><i class="fas fa-users"></i> All Members</h3><input type="text" id="memberSearch" placeholder="Search members..." style="padding:0.5rem; border-radius:30px; border:1px solid #ddd; width:250px;" onkeyup="filterMembers()"></div>
+                    <div class="card-header"><h3><i class="fas fa-users"></i> All Members (from Member Dashboard)</h3><input type="text" id="memberSearch" placeholder="Search..." style="padding:0.5rem; border-radius:30px; border:1px solid #ddd; width:250px;" onkeyup="filterMembers()"></div>
+                    <div class="table-responsive"><table class="data-table"><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Subscription</th><th>Status</th><th>Join Date</th><th>Action</th></tr></thead><tbody id="membersList"></tbody></table></div>
+                </div>
+            </div>
+
+            <!-- TRANSACTIONS TAB - Reads from Member Dashboard -->
+            <div id="transactionsTab" class="tab-content">
+                <div class="dashboard-card">
+                    <div class="card-header"><h3><i class="fas fa-exchange-alt"></i> All Transactions (Orders + Workshops + Rent + Subscriptions)</h3></div>
                     <div class="filter-group">
-                        <span>Sort by:</span>
-                        <button class="filter-btn" onclick="sortMembers('name')">Name (A-Z)</button>
-                        <button class="filter-btn" onclick="sortMembers('id')">ID</button>
-                        <button class="filter-btn" onclick="sortMembers('location')">Location</button>
-                        <select id="roleFilter" class="filter-select" onchange="filterMembers()"><option value="all">All Roles</option><option value="buyer">Buyer</option><option value="seller">Seller</option><option value="coop_member">Coop Member</option><option value="land_steward">Land Steward</option></select>
-                        <select id="purposeFilter" class="filter-select" onchange="filterMembers()"><option value="all">All Purpose</option><option value="farming">Farming</option><option value="homestead">Homestead</option><option value="business">Business</option><option value="education">Education</option></select>
-                        <select id="locationFilter" class="filter-select" onchange="filterMembers()"><option value="all">All Locations</option><option value="Batangas">Batangas</option><option value="Laguna">Laguna</option><option value="Quezon">Quezon</option></select>
+                        <button class="filter-btn active" data-type="all" onclick="filterTransactionsByType('all', this)">All</button>
+                        <button class="filter-btn" data-type="order" onclick="filterTransactionsByType('order', this)">Orders</button>
+                        <button class="filter-btn" data-type="workshop" onclick="filterTransactionsByType('workshop', this)">Workshops</button>
+                        <button class="filter-btn" data-type="rent" onclick="filterTransactionsByType('rent', this)">Rent</button>
+                        <button class="filter-btn" data-type="subscription" onclick="filterTransactionsByType('subscription', this)">Subscriptions</button>
                     </div>
-                    <div class="table-responsive"><table class="data-table"><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Purpose</th><th>Location</th><th>Address</th><th>Join Date</th><th>Status</th><th>Action</th></tr></thead><tbody id="membersList"></tbody></table></div>
+                    <div class="table-responsive"><table class="data-table"><thead><tr><th>ID</th><th>Type</th><th>User</th><th>Item</th><th>Amount</th><th>Date</th></tr></thead><tbody id="transactionsList"></tbody></table></div>
+                </div>
+            </div>
+
+            <!-- LAND STEWARDSHIP APPLICANTS -->
+            <div id="applicantsTab" class="tab-content">
+                <div class="dashboard-card">
+                    <div class="card-header"><h3><i class="fas fa-file-signature"></i> Land Stewardship Applicants</h3></div>
+                    <div id="applicantsList"></div>
                 </div>
             </div>
 
             <!-- WORKSHOPS TAB -->
             <div id="workshopsTab" class="tab-content">
-                <div class="dashboard-card"><div class="card-header"><h3><i class="fas fa-chalkboard-user"></i> Manage Workshops</h3><button class="btn-primary" onclick="openWorkshopModal()"><i class="fas fa-plus"></i> Add Workshop</button></div><div id="workshopsList"></div></div>
-                <div class="dashboard-card"><div class="card-header"><h3><i class="fas fa-bullhorn"></i> Announcements</h3><button class="btn-primary" onclick="openAnnouncementModal()"><i class="fas fa-plus"></i> Add Announcement</button></div><div id="announcementsList"></div></div>
-                <div class="dashboard-card"><div class="card-header"><h3><i class="fas fa-users"></i> Workshop Participants</h3><select id="selectWorkshop" class="filter-select" onchange="loadParticipants()"><option value="">Select Workshop</option></select></div><div id="participantsList"></div></div>
-            </div>
-
-            <!-- TRANSACTIONS TAB with CSV Import/Export -->
-            <div id="transactionsTab" class="tab-content">
                 <div class="dashboard-card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-exchange-alt"></i> All Transactions</h3>
-                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                            <button class="btn-primary" onclick="exportToCSV()"><i class="fas fa-file-export"></i> Export CSV</button>
-                            <button class="btn-primary" onclick="openImportModal()"><i class="fas fa-file-import"></i> Import CSV</button>
-                            <button class="btn-info" onclick="downloadTemplate()"><i class="fas fa-download"></i> Template</button>
-                        </div>
-                    </div>
-                    <div class="filter-group">
-                        <span>Filter by Type:</span>
-                        <button class="filter-btn active" data-type="all" onclick="filterTransactionType('all', this)">📋 All</button>
-                        <button class="filter-btn" data-type="order" onclick="filterTransactionType('order', this)">📦 Orders</button>
-                        <button class="filter-btn" data-type="subscription" onclick="filterTransactionType('subscription', this)">🔄 Subscriptions</button>
-                        <button class="filter-btn" data-type="workshop" onclick="filterTransactionType('workshop', this)">🎓 Workshops</button>
-                        <button class="filter-btn" data-type="expense" onclick="filterTransactionType('expense', this)">💰 Expenses</button>
-                        <button class="filter-btn" data-type="rent" onclick="filterTransactionType('rent', this)">🚜 Rent</button>
-                    </div>
-                    <input type="text" id="transactionSearch" placeholder="Search by ID or user..." style="padding:0.5rem; border-radius:30px; border:1px solid #ddd; width:100%; margin-bottom:1rem;" onkeyup="filterTransactions()">
-                    <div class="table-responsive"><table class="data-table"><thead><tr><th>ID</th><th>Type</th><th>User/Memo</th><th>Item/Description</th><th>Amount</th><th>Status</th><th>Date</th><th>Action</th></tr></thead><tbody id="transactionsList"></tbody></table></div>
+                    <div class="card-header"><h3><i class="fas fa-chalkboard-user"></i> Workshops</h3><button class="btn-primary" onclick="openWorkshopModal()">+ Add Workshop</button></div>
+                    <div id="workshopsListAdmin"></div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header"><h3><i class="fas fa-users"></i> Workshop Registrations</h3></div>
+                    <div id="workshopRegistrationsList"></div>
                 </div>
             </div>
 
-            <!-- APPLICANTS TAB -->
-            <div id="applicantsTab" class="tab-content">
+            <!-- SUBSCRIPTIONS TAB -->
+            <div id="subscriptionsTab" class="tab-content">
                 <div class="dashboard-card">
-                    <div class="card-header"><h3><i class="fas fa-file-signature"></i> Land Stewardship Applicants</h3></div>
-                    <div class="filter-group">
-                        <select id="applicantRoleFilter" class="filter-select" onchange="filterApplicants()"><option value="all">All Roles</option><option value="land_steward">Land Steward</option><option value="coop_member">Coop Member</option><option value="farmer">Farmer</option></select>
-                        <select id="applicantPurposeFilter" class="filter-select" onchange="filterApplicants()"><option value="all">All Purpose</option><option value="farming">Farming</option><option value="homestead">Homestead</option><option value="business">Business</option></select>
-                        <select id="applicantStatusFilter" class="filter-select" onchange="filterApplicants()"><option value="all">All Status</option><option value="Pending">Pending</option><option value="Approved">Approved</option><option value="Rejected">Rejected</option></select>
-                    </div>
-                    <div id="applicantsList"></div>
-                </div>
-            </div>
-
-            <!-- INQUIRIES TAB -->
-            <div id="inquiriesTab" class="tab-content">
-                <div class="dashboard-card">
-                    <div class="card-header"><h3><i class="fas fa-envelope"></i> Contact Inquiries</h3></div>
-                    <div class="filter-group">
-                        <select id="inquiryTypeFilter" class="filter-select" onchange="filterInquiries()"><option value="all">All Types</option><option value="Membership">Membership</option><option value="Workshop">Workshop</option><option value="Product">Product</option><option value="Cooperative">Cooperative</option></select>
-                        <select id="inquiryStatusFilter" class="filter-select" onchange="filterInquiries()"><option value="all">All Status</option><option value="Unread">Unread</option><option value="Read">Read</option><option value="Replied">Replied</option></select>
-                        <input type="text" id="inquirySearch" placeholder="Search by name/email..." style="padding:0.3rem 0.8rem; border-radius:20px; border:1px solid #ddd;" onkeyup="filterInquiries()">
-                    </div>
-                    <div id="inquiriesList"></div>
+                    <div class="card-header"><h3><i class="fas fa-ticket-alt"></i> Active Subscriptions</h3></div>
+                    <div id="subscriptionsList"></div>
                 </div>
             </div>
         </div>
     </main>
 
     <!-- MODALS -->
-    <div id="promoModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Add New Promo</h3><button class="close-modal" onclick="closePromoModal()">&times;</button></div><form id="promoForm"><div class="form-group"><label>Promo Title</label><input type="text" id="promoTitle" required></div><div class="form-group"><label>Description</label><textarea id="promoDesc" rows="2"></textarea></div><div class="form-group"><label>Discount</label><input type="text" id="promoDiscount" required></div><div class="form-group"><label>Valid Until</label><input type="date" id="promoValidUntil" required></div><button type="submit" class="btn-primary">Create Promo</button></form></div></div>
-    <div id="voucherModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Add New Voucher</h3><button class="close-modal" onclick="closeVoucherModal()">&times;</button></div><form id="voucherForm"><div class="form-group"><label>Voucher Code</label><input type="text" id="voucherCode" required></div><div class="form-group"><label>Discount Type</label><select id="voucherType"><option value="percentage">Percentage (%)</option><option value="fixed">Fixed Amount (₱)</option></select></div><div class="form-group"><label>Discount Value</label><input type="number" id="voucherValue" required></div><div class="form-group"><label>Min Purchase</label><input type="number" id="voucherMinPurchase" value="0"></div><div class="form-group"><label>Valid Until</label><input type="date" id="voucherValidUntil" required></div><button type="submit" class="btn-primary">Create Voucher</button></form></div></div>
-    <div id="expenseModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Record Expense</h3><button class="close-modal" onclick="closeExpenseModal()">&times;</button></div><form id="expenseForm"><div class="form-group"><label>Expense Title</label><input type="text" id="expenseTitle" required></div><div class="form-group"><label>Category</label><select id="expenseCategory"><option>Operations</option><option>Labor</option><option>Materials</option><option>Marketing</option></select></div><div class="form-group"><label>Amount (₱)</label><input type="number" id="expenseAmount" required></div><div class="form-group"><label>Date</label><input type="date" id="expenseDate" required></div><div class="form-group"><label>Description</label><textarea id="expenseDesc" rows="2"></textarea></div><button type="submit" class="btn-primary">Record Expense</button></form></div></div>
-    <div id="workshopModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Add/Edit Workshop</h3><button class="close-modal" onclick="closeWorkshopModal()">&times;</button></div><form id="workshopForm"><input type="hidden" id="editWorkshopId"><div class="form-group"><label>Workshop Title</label><input type="text" id="workshopTitle" required></div><div class="form-group"><label>Description</label><textarea id="workshopDesc" rows="2"></textarea></div><div class="form-group"><label>Date</label><input type="date" id="workshopDate" required></div><div class="form-group"><label>Time</label><input type="text" id="workshopTime"></div><div class="form-group"><label>Location</label><input type="text" id="workshopLocation"></div><div class="form-group"><label>Price (₱)</label><input type="number" id="workshopPrice" required></div><div class="form-group"><label>Max Slots</label><input type="number" id="workshopSlots" value="20"></div><button type="submit" class="btn-primary">Save Workshop</button></form></div></div>
-    <div id="announcementModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Add Announcement</h3><button class="close-modal" onclick="closeAnnouncementModal()">&times;</button></div><form id="announcementForm"><div class="form-group"><label>Title</label><input type="text" id="announcementTitle" required></div><div class="form-group"><label>Message</label><textarea id="announcementMessage" rows="3" required></textarea></div><button type="submit" class="btn-primary">Post Announcement</button></form></div></div>
-    <div id="reviewModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Review Application</h3><button class="close-modal" onclick="closeReviewModal()">&times;</button></div><div id="reviewContent" class="review-grid"></div><div class="form-group"><label>Admin Notes</label><textarea id="reviewNotes" rows="2" placeholder="Internal notes..."></textarea></div><div class="form-group"><label>Decision</label><select id="reviewDecision" class="filter-select"><option value="Approve">✓ Approve</option><option value="Reject">✗ Reject</option></select></div><div style="display:flex; gap:1rem; justify-content:flex-end; margin-top:1rem;"><button class="btn-primary" onclick="submitReview()">Submit Decision</button><button class="btn-danger" onclick="closeReviewModal()">Cancel</button></div></div></div>
-    
-    <!-- REMOVE MEMBER MODAL -->
-    <div id="removeMemberModal" class="modal"><div class="modal-content"><div class="modal-header"><h3><i class="fas fa-user-minus"></i> Remove Member</h3><button class="close-modal" onclick="closeRemoveMemberModal()">&times;</button></div><div class="modal-body"><div class="form-group"><label>Member</label><input type="text" id="removeMemberName" readonly style="background:#f5f7f2;"></div><div class="form-group"><label>Reason for Removal</label><textarea id="removeReason" rows="3" placeholder="Please provide reason for removing this member..."></textarea></div><div class="form-group"><label>Date & Time</label><input type="text" id="removeDateTime" readonly style="background:#f5f7f2;"></div></div><div class="modal-footer" style="display:flex; gap:1rem; justify-content:flex-end; padding-top:1rem;"><button class="btn-danger" onclick="confirmRemoveMember()">Remove Member</button><button class="btn-secondary" onclick="closeRemoveMemberModal()">Cancel</button></div></div></div>
-    
-    <!-- TRANSACTION VIEW MODAL -->
-    <div id="transactionViewModal" class="modal"><div class="modal-content"><div class="modal-header"><h3><i class="fas fa-receipt"></i> Transaction Details</h3><button class="close-modal" onclick="closeTransactionViewModal()">&times;</button></div><div id="transactionViewContent" class="modal-body"></div><div class="modal-footer"><button class="btn-primary" onclick="closeTransactionViewModal()">Close</button></div></div></div>
-    
-    <!-- REPLY INQUIRY MODAL -->
-    <div id="replyInquiryModal" class="modal"><div class="modal-content"><div class="modal-header"><h3><i class="fas fa-reply"></i> Reply to Inquiry</h3><button class="close-modal" onclick="closeReplyInquiryModal()">&times;</button></div><div class="modal-body"><div class="form-group"><label>From:</label><input type="text" id="replyInquiryFrom" readonly style="background:#f5f7f2;"></div><div class="form-group"><label>Original Message:</label><textarea id="replyOriginalMessage" rows="3" readonly style="background:#f5f7f2;"></textarea></div><div class="form-group"><label>Your Reply:</label><textarea id="replyMessageText" rows="4" placeholder="Type your reply here..."></textarea></div></div><div class="modal-footer" style="display:flex; gap:1rem; justify-content:flex-end;"><button class="btn-primary" onclick="sendReply()">Send Reply</button><button class="btn-danger" onclick="closeReplyInquiryModal()">Cancel</button></div></div></div>
+    <div id="workshopModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Add Workshop</h3><button class="close-modal" onclick="closeWorkshopModal()">&times;</button></div><form id="workshopForm"><div class="form-group"><label>Title</label><input type="text" id="workshopTitle" required></div><div class="form-group"><label>Date</label><input type="date" id="workshopDate" required></div><div class="form-group"><label>Price (₱)</label><input type="number" id="workshopPrice" required></div><div class="form-group"><label>Slots</label><input type="number" id="workshopSlots" value="20"></div><button type="submit" class="btn-primary">Save</button></form></div></div>
 
-    <!-- IMPORT CSV MODAL -->
-    <div id="importModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fas fa-file-import"></i> Import Transactions from CSV</h3>
-                <button class="close-modal" onclick="closeImportModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>Select CSV File</label>
-                    <input type="file" id="csvFileInput" accept=".csv" class="modal-input">
-                    <small style="color: #666;">Format: Transaction ID,Type,User/Memo,Item/Description,Amount,Status,Date</small>
-                </div>
-                <div id="importPreview" style="max-height: 300px; overflow-y: auto; margin-top: 1rem;"></div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" onclick="closeImportModal()">Cancel</button>
-                <button class="btn-primary" onclick="processImport()">Import Transactions</button>
-            </div>
-        </div>
-    </div>
+    <div id="reviewModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Review Application</h3><button class="close-modal" onclick="closeReviewModal()">&times;</button></div><div id="reviewContent"></div><div class="form-group"><label>Decision</label><select id="reviewDecision"><option value="Approve">Approve</option><option value="Reject">Reject</option></select></div><div style="display:flex; gap:1rem; justify-content:flex-end;"><button class="btn-primary" onclick="submitReview()">Submit</button><button class="btn-danger" onclick="closeReviewModal()">Cancel</button></div></div></div>
 
     <div id="successToast" class="success-toast"></div>
 
     <script>
-        // ========== LOAD APPLICANTS FROM LOCALSTORAGE ==========
-        function loadApplicantsFromStorage() {
-            const saved = localStorage.getItem('rrjfarm_land_applications');
-            if (saved) {
-                return JSON.parse(saved);
-            }
-            return [
-                { id: 1, name: 'Ramon Garcia', email: 'ramon@email.com', phone: '09123456789', role: 'land_steward', purpose: 'farming', lotSize: '1', location: 'Lipa City', province: 'Batangas', municipality: 'Lipa City', experience: '2 years gardening', status: 'Pending', date: '2026-05-01' }
-            ];
-        }
+        // ============ CENTRAL DATA LOADER - READS FROM MEMBER DASHBOARD ============
         
-        let members = [
-            { id: 'M001', name: 'Maria Santos', email: 'maria@rrjfarm.com', role: 'coop_member', purpose: 'farming', location: 'Batangas', address: 'Brgy. San Jose, Lipa City', joinDate: '2024-01-15', status: 'Active' },
-            { id: 'M002', name: 'Jose Dela Cruz', email: 'jose@rrjfarm.com', role: 'seller', purpose: 'business', location: 'Batangas', address: 'Brgy. Balete, Tanauan', joinDate: '2024-01-20', status: 'Active' },
-            { id: 'M003', name: 'Anna Reyes', email: 'anna@rrjfarm.com', role: 'land_steward', purpose: 'homestead', location: 'Laguna', address: 'Brgy. Pila, Laguna', joinDate: '2024-02-01', status: 'Active' },
-            { id: 'M004', name: 'Carlos Mendoza', email: 'carlos@rrjfarm.com', role: 'buyer', purpose: 'homestead', location: 'Batangas', address: 'Brgy. San Vicente', joinDate: '2024-02-10', status: 'Active' }
-        ];
+        let allUsers = [];
+        let allOrders = [];
+        let allWorkshops = [];
+        let workshopRegistrations = [];
+        let allSubscriptions = [];
+        let landApplications = [];
+        let rentalTransactions = [];
         
-        let applicants = loadApplicantsFromStorage();
-        
-        let orderTransactions = [
-            { id: 'ORD001', userName: 'Maria Santos', item: 'Fresh Sitao', amount: 225, status: 'Completed', date: '2026-05-01', type: 'order' },
-            { id: 'ORD002', userName: 'Jose Dela Cruz', item: 'Batangas Rice', amount: 550, status: 'Completed', date: '2026-05-02', type: 'order' }
-        ];
-        let subscriptionTransactions = [
-            { id: 'SUB001', userName: 'Maria Santos', item: '1 hectare - Family Plan', amount: 5000, status: 'Active', date: '2026-05-01', type: 'subscription' },
-            { id: 'SUB002', userName: 'Jose Dela Cruz', item: '0.5 hectare - Starter Plan', amount: 3000, status: 'Active', date: '2026-05-01', type: 'subscription' }
-        ];
-        let workshopTransactions = [
-            { id: 'WKS001', userName: 'Maria Santos', item: 'Organic Pest Control', amount: 500, status: 'Completed', date: '2026-03-20', type: 'workshop' }
-        ];
-        let expenseTransactions = [
-            { id: 'EXP001', memo: 'Farm Operations', description: 'Farm Equipment', amount: 15000, status: 'Paid', date: '2026-05-01', type: 'expense' }
-        ];
-        let rentTransactions = [
-            { id: 'RENT001', userName: 'Carlos Mendoza', item: 'Farm Tractor', amount: 2500, status: 'Completed', date: '2026-05-10', type: 'rent' }
-        ];
-        let promos = [{ id: 1, title: 'Summer Sale', description: '20% off', discount: '20% OFF', validUntil: '2026-06-30' }];
-        let vouchers = [{ code: 'WELCOME20', type: 'percentage', value: 20, minPurchase: 0, validUntil: '2026-06-30' }];
-        let workshopsList = [
-            { id: 1, title: 'Organic Pest Control', description: 'Learn natural pest management', date: '2026-03-25', time: '9AM-4PM', location: 'Lipa City', price: 500, slots: 20, remaining: 12 },
-            { id: 2, title: 'Vermicomposting 101', description: 'Turn waste into fertilizer', date: '2026-04-05', time: '1PM-5PM', location: 'Tanauan', price: 300, slots: 25, remaining: 18 }
-        ];
-        let announcements = [{ id: 1, title: 'New Workshop Added!', message: 'Hydroponic workshop now available.', date: '2026-05-01' }];
-        let workshopRegistrations = [{ id: 1, workshopId: 1, workshopTitle: 'Organic Pest Control', participantName: 'Maria Santos', email: 'maria@email.com', date: '2026-03-20', status: 'Confirmed' }];
-        let inquiries = [
-            { id: 1, name: 'John Santos', email: 'john@email.com', type: 'Membership', subject: 'How to apply?', message: 'I want to apply for land stewardship.', status: 'Unread', date: '2026-05-04' }
-        ];
-        let recentActivities = [{ action: 'New member registered', date: '2026-05-01' }];
-        let monthlyRevenue = { 2025: [15000,18000,22000,25000,28000,30000,32000,35000,38000,40000,42000,45000], 2026: [45000,48000,52000,55000,60000,65000,0,0,0,0,0,0] };
-        
-        let currentTransactionType = 'all';
-        let currentSort = 'name';
+        let currentTransactionFilter = 'all';
         let currentReviewApplicant = null;
-        let currentRemoveMemberId = null;
-        let currentTransactionView = null;
-        let currentReplyInquiry = null;
         
-        function showToast(msg) { let t = document.getElementById('successToast'); t.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); }
+        function showToast(msg) { let t = document.getElementById('successToast'); t.innerHTML = msg; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); }
         function handleLogout() { window.location.href = 'index.html'; }
         
+        // ============ LOAD ALL DATA FROM MEMBER DASHBOARD STORAGE ============
+        function loadAllData() {
+            // 1. Load Users from Member Dashboard (rrjfarm_users)
+            const storedUsers = localStorage.getItem('rrjfarm_users');
+            if (storedUsers) {
+                allUsers = JSON.parse(storedUsers);
+            } else {
+                allUsers = [
+                    { id: 'admin1', name: 'Admin User', email: 'admin@rrjfarm.com', role: 'admin', subscription: 'premium', status: 'approved', profileCompleted: true, createdAt: Date.now() },
+                    { id: 'user1', name: 'Juan Dela Cruz', email: 'juan@example.com', role: 'regular', subscription: 'none', status: 'approved', profileCompleted: true, createdAt: Date.now() - 86400000 },
+                    { id: 'user2', name: 'Maria Santos', email: 'maria@example.com', role: 'regular', subscription: 'basic', status: 'approved', profileCompleted: true, createdAt: Date.now() - 172800000 },
+                    { id: 'user3', name: 'Pedro Penduko', email: 'pedro@example.com', role: 'farmer', subscription: 'premium', status: 'approved', profileCompleted: true, createdAt: Date.now() - 259200000 }
+                ];
+            }
+            
+            // 2. Load Orders from Member Dashboard
+            const storedOrders = localStorage.getItem('rrjfarm_orders');
+            if (storedOrders) {
+                allOrders = JSON.parse(storedOrders);
+            } else {
+                allOrders = [
+                    { id: 'ORD001', product: 'Fresh Sitao', qty: 2, total: 90, farmer: 'Maria Santos', status: 'delivered', date: new Date().toISOString().split('T')[0], userId: 'user1' },
+                    { id: 'ORD002', product: 'Batangas Rice', qty: 5, total: 275, farmer: 'Anna Reyes', status: 'shipped', date: new Date().toISOString().split('T')[0], userId: 'user2' }
+                ];
+            }
+            
+            // 3. Load Workshops
+            const storedWorkshops = localStorage.getItem('rrjfarm_workshops');
+            if (storedWorkshops) {
+                allWorkshops = JSON.parse(storedWorkshops);
+            } else {
+                allWorkshops = [
+                    { id: 1, title: 'Organic Pest Control', date: '2026-03-25', price: 500, slots: 20, remaining: 12 },
+                    { id: 2, title: 'Vermicomposting 101', date: '2026-04-05', price: 300, slots: 25, remaining: 18 },
+                    { id: 3, title: 'Small-Scale Chicken Raising', date: '2026-04-12', price: 700, slots: 15, remaining: 8 }
+                ];
+            }
+            
+            // 4. Load Workshop Registrations
+            const storedRegistrations = localStorage.getItem('rrjfarm_registered_workshops');
+            if (storedRegistrations) {
+                workshopRegistrations = JSON.parse(storedRegistrations);
+            } else {
+                workshopRegistrations = [];
+            }
+            
+            // 5. Load Subscriptions
+            const storedSubscriptions = localStorage.getItem('rrjfarm_user_subscriptions');
+            if (storedSubscriptions) {
+                allSubscriptions = JSON.parse(storedSubscriptions);
+            } else {
+                allSubscriptions = [];
+            }
+            
+            // 6. Load Land Applications
+            const storedApplications = localStorage.getItem('rrjfarm_land_applications');
+            if (storedApplications) {
+                landApplications = JSON.parse(storedApplications);
+            } else {
+                landApplications = [];
+            }
+            
+            // 7. Load Rent Transactions
+            const storedRentals = localStorage.getItem('rrjfarm_rent_transactions');
+            if (storedRentals) {
+                rentalTransactions = JSON.parse(storedRentals);
+            } else {
+                rentalTransactions = [];
+            }
+            
+            updateAnalytics();
+        }
+        
+        // ============ UPDATE ANALYTICS ============
+        function updateAnalytics() {
+            // Active Members: approved users na may subscription (basic/premium) OR land_stewardship na approved
+            const activeMembers = allUsers.filter(u => {
+                if (u.status !== 'approved') return false;
+                if (u.subscription === 'land_stewardship') return true;
+                return u.subscription === 'basic' || u.subscription === 'premium';
+            });
+            
+            const farmerMembers = allUsers.filter(u => u.status === 'approved' && u.role === 'farmer');
+            const totalSales = allOrders.reduce((sum, o) => sum + o.total, 0) + 
+                               workshopRegistrations.reduce((sum, w) => sum + (w.price || 0), 0) +
+                               rentalTransactions.reduce((sum, r) => sum + r.amount, 0) +
+                               allSubscriptions.reduce((sum, s) => sum + s.amount, 0);
+            const pendingApplicants = landApplications.filter(a => a.status === 'Pending');
+            const activeSubscriptions = allSubscriptions.filter(s => s.status === 'Active');
+            const workshopEnrollees = workshopRegistrations.length;
+            
+            document.getElementById('totalMembers').innerText = allUsers.length;
+            document.getElementById('activeMembers').innerText = activeMembers.length;
+            document.getElementById('farmerMembers').innerText = farmerMembers.length;
+            document.getElementById('totalOrders').innerText = allOrders.length;
+            document.getElementById('totalSales').innerHTML = `₱${totalSales.toLocaleString()}`;
+            document.getElementById('pendingApplicants').innerText = pendingApplicants.length;
+            document.getElementById('activeSubscriptions').innerText = activeSubscriptions.length;
+            document.getElementById('workshopEnrollees').innerText = workshopEnrollees;
+            
+            loadMembersList();
+            loadTransactionsList();
+            loadApplicantsList();
+            loadWorkshopsList();
+            loadWorkshopRegistrations();
+            loadSubscriptionsList();
+        }
+        
+        function refreshAllData() {
+            loadAllData();
+            showToast('Data refreshed from Member Dashboard!');
+        }
+        
+        // ============ MEMBERS LIST ============
+        function loadMembersList() {
+            const search = document.getElementById('memberSearch')?.value.toLowerCase() || '';
+            let filtered = allUsers.filter(u => u.role !== 'admin');
+            if (search) filtered = filtered.filter(m => m.name?.toLowerCase().includes(search) || m.email?.toLowerCase().includes(search));
+            
+            document.getElementById('membersList').innerHTML = filtered.map(m => {
+                const statusClass = m.status === 'approved' ? 'status-active' : 'status-pending';
+                const statusText = m.status === 'approved' ? 'Active' : 'Pending';
+                const subscriptionText = m.subscription === 'none' ? 'None' : m.subscription;
+                return `<tr>
+                    <td>${m.id || 'N/A'}</td>
+                    <td>${m.name || 'N/A'}</td>
+                    <td>${m.email || 'N/A'}</td>
+                    <td>${m.role === 'farmer' ? '🌾 Farmer' : (m.role === 'admin' ? 'Admin' : 'Regular')}</td>
+                    <td>${subscriptionText}</td>
+                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                    <td>${m.createdAt ? new Date(m.createdAt).toLocaleDateString() : 'N/A'}</td>
+                    <td><button class="btn-danger" onclick="removeMember('${m.id}')">Remove</button></td>
+                </tr>`;
+            }).join('');
+        }
+        
+        function removeMember(userId) {
+            if (confirm('Remove this member?')) {
+                allUsers = allUsers.filter(u => u.id !== userId);
+                localStorage.setItem('rrjfarm_users', JSON.stringify(allUsers));
+                showToast('Member removed');
+                loadMembersList();
+                updateAnalytics();
+            }
+        }
+        
+        function filterMembers() { loadMembersList(); }
+        
+        // ============ TRANSACTIONS LIST ============
+        function loadTransactionsList() {
+            let allTransactions = [];
+            
+            // Orders
+            allOrders.forEach(o => allTransactions.push({
+                id: o.id,
+                type: 'order',
+                user: o.userId || 'Customer',
+                item: o.product,
+                amount: o.total,
+                date: o.date
+            }));
+            
+            // Workshop Registrations
+            workshopRegistrations.forEach(w => allTransactions.push({
+                id: 'WKS_' + w.id,
+                type: 'workshop',
+                user: w.participantName || w.name,
+                item: w.workshopTitle,
+                amount: w.price || 0,
+                date: w.date
+            }));
+            
+            // Rent Transactions
+            rentalTransactions.forEach(r => allTransactions.push({
+                id: r.id,
+                type: 'rent',
+                user: r.userName,
+                item: r.item,
+                amount: r.amount,
+                date: r.date
+            }));
+            
+            // Subscriptions
+            allSubscriptions.forEach(s => allTransactions.push({
+                id: s.id,
+                type: 'subscription',
+                user: s.subscriberEmail,
+                item: `${s.plan} Plan`,
+                amount: s.amount,
+                date: s.startDate
+            }));
+            
+            if (currentTransactionFilter !== 'all') {
+                allTransactions = allTransactions.filter(t => t.type === currentTransactionFilter);
+            }
+            
+            allTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            const typeIcons = { order: '📦', workshop: '🎓', rent: '🚜', subscription: '🔄' };
+            
+            document.getElementById('transactionsList').innerHTML = allTransactions.map(t => `
+                <tr>
+                    <td style="font-family: monospace;">${t.id}</td>
+                    <td>${typeIcons[t.type]} ${t.type}</td>
+                    <td>${t.user}</td>
+                    <td>${t.item}</td>
+                    <td>₱${t.amount.toLocaleString()}</td>
+                    <td>${t.date}</td>
+                </tr>
+            `).join('');
+        }
+        
+        function filterTransactionsByType(type, btn) {
+            currentTransactionFilter = type;
+            document.querySelectorAll('#transactionsTab .filter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            loadTransactionsList();
+        }
+        
+        // ============ LAND APPLICANTS ============
+        function loadApplicantsList() {
+            const pendingApplicants = landApplications.filter(a => a.status === 'Pending');
+            const approvedApplicants = landApplications.filter(a => a.status === 'Approved');
+            const rejectedApplicants = landApplications.filter(a => a.status === 'Rejected');
+            
+            let html = '';
+            
+            if (pendingApplicants.length > 0) {
+                html += `<h4 style="margin: 1rem 0 0.5rem; color:#ff8c00;">⏳ Pending (${pendingApplicants.length})</h4>`;
+                html += pendingApplicants.map(a => `
+                    <div class="participant-item" style="background:#fff8e1;">
+                        <div><strong>${a.name}</strong><br><small>${a.email}</small><br><small>Purpose: ${a.purpose} | Lot: ${a.lotSize}ha</small></div>
+                        <div><button class="btn-info" onclick="reviewApplicant(${a.id})">Review</button><button class="btn-success" onclick="approveApplicant(${a.id})">Approve</button><button class="btn-danger" onclick="rejectApplicant(${a.id})">Reject</button></div>
+                    </div>
+                `).join('');
+            }
+            
+            if (approvedApplicants.length > 0) {
+                html += `<h4 style="margin: 1rem 0 0.5rem; color:#28a745;">✅ Approved (${approvedApplicants.length})</h4>`;
+                html += approvedApplicants.map(a => `
+                    <div class="participant-item">
+                        <div><strong>${a.name}</strong><br><small>${a.email}</small><br><small>Approved: ${a.appliedAt ? new Date(a.appliedAt).toLocaleDateString() : 'N/A'}</small></div>
+                    </div>
+                `).join('');
+            }
+            
+            if (rejectedApplicants.length > 0) {
+                html += `<h4 style="margin: 1rem 0 0.5rem; color:#dc3545;">❌ Rejected (${rejectedApplicants.length})</h4>`;
+                html += rejectedApplicants.map(a => `
+                    <div class="participant-item">
+                        <div><strong>${a.name}</strong><br><small>${a.email}</small></div>
+                    </div>
+                `).join('');
+            }
+            
+            if (landApplications.length === 0) {
+                html = '<div class="empty-state">No land stewardship applications yet.</div>';
+            }
+            
+            document.getElementById('applicantsList').innerHTML = html;
+        }
+        
+        function reviewApplicant(id) {
+            currentReviewApplicant = landApplications.find(a => a.id === id);
+            document.getElementById('reviewContent').innerHTML = `
+                <div class="review-field"><label>Name</label><div class="value">${currentReviewApplicant.name}</div></div>
+                <div class="review-field"><label>Email</label><div class="value">${currentReviewApplicant.email}</div></div>
+                <div class="review-field"><label>Phone</label><div class="value">${currentReviewApplicant.phone || 'N/A'}</div></div>
+                <div class="review-field"><label>Purpose/Role</label><div class="value">${currentReviewApplicant.purpose || 'Land Steward'}</div></div>
+                <div class="review-field"><label>Farm Size</label><div class="value">${currentReviewApplicant.lotSize || 'N/A'} hectares</div></div>
+                <div class="review-field"><label>Location</label><div class="value">${currentReviewApplicant.municipality || currentReviewApplicant.location || 'N/A'}, ${currentReviewApplicant.province || ''}</div></div>
+                <div class="review-field"><label>Experience</label><div class="value">${currentReviewApplicant.experience || 'Not provided'}</div></div>
+            `;
+            document.getElementById('reviewModal').classList.add('active');
+        }
+        
+        function approveApplicant(id) {
+            const applicant = landApplications.find(a => a.id === id);
+            if (applicant) {
+                applicant.status = 'Approved';
+                localStorage.setItem('rrjfarm_land_applications', JSON.stringify(landApplications));
+                
+                // Add as new member
+                const newMember = {
+                    id: 'M' + Date.now(),
+                    name: applicant.name,
+                    email: applicant.email,
+                    role: applicant.purpose === 'Farmer' ? 'farmer' : 'regular',
+                    subscription: 'land_stewardship',
+                    status: 'approved',
+                    profileCompleted: true,
+                    createdAt: Date.now()
+                };
+                allUsers.push(newMember);
+                localStorage.setItem('rrjfarm_users', JSON.stringify(allUsers));
+                
+                showToast(`${applicant.name} approved and added as member!`);
+                loadAllData();
+            }
+        }
+        
+        function rejectApplicant(id) {
+            const applicant = landApplications.find(a => a.id === id);
+            if (applicant) {
+                applicant.status = 'Rejected';
+                localStorage.setItem('rrjfarm_land_applications', JSON.stringify(landApplications));
+                showToast(`${applicant.name} rejected`);
+                loadAllData();
+            }
+        }
+        
+        function submitReview() {
+            const decision = document.getElementById('reviewDecision').value;
+            if (decision === 'Approve') {
+                approveApplicant(currentReviewApplicant.id);
+            } else {
+                rejectApplicant(currentReviewApplicant.id);
+            }
+            closeReviewModal();
+        }
+        
+        function closeReviewModal() { document.getElementById('reviewModal').classList.remove('active'); }
+        
+        // ============ WORKSHOPS ============
+        function loadWorkshopsList() {
+            document.getElementById('workshopsListAdmin').innerHTML = allWorkshops.map(w => `
+                <div class="participant-item">
+                    <div><strong>${w.title}</strong><br><small>${w.date} | ₱${w.price} | Slots: ${w.remaining}/${w.slots}</small></div>
+                    <div><button class="btn-danger" onclick="deleteWorkshop(${w.id})">Delete</button></div>
+                </div>
+            `).join('');
+        }
+        
+        function loadWorkshopRegistrations() {
+            document.getElementById('workshopRegistrationsList').innerHTML = workshopRegistrations.map(r => `
+                <div class="participant-item">
+                    <div><strong>${r.participantName || r.name}</strong><br><small>${r.workshopTitle} | ${r.date}</small></div>
+                    <span class="status-badge status-active">Confirmed</span>
+                </div>
+            `).join('') || '<div class="empty-state">No workshop registrations yet.</div>';
+        }
+        
+        function openWorkshopModal() { document.getElementById('workshopModal').classList.add('active'); }
+        function closeWorkshopModal() { document.getElementById('workshopModal').classList.remove('active'); }
+        
+        document.getElementById('workshopForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newWorkshop = {
+                id: Date.now(),
+                title: document.getElementById('workshopTitle').value,
+                date: document.getElementById('workshopDate').value,
+                price: parseInt(document.getElementById('workshopPrice').value),
+                slots: parseInt(document.getElementById('workshopSlots').value),
+                remaining: parseInt(document.getElementById('workshopSlots').value)
+            };
+            allWorkshops.push(newWorkshop);
+            localStorage.setItem('rrjfarm_workshops', JSON.stringify(allWorkshops));
+            showToast('Workshop added!');
+            closeWorkshopModal();
+            loadAllData();
+            this.reset();
+        });
+        
+        function deleteWorkshop(id) {
+            if (confirm('Delete this workshop?')) {
+                allWorkshops = allWorkshops.filter(w => w.id !== id);
+                localStorage.setItem('rrjfarm_workshops', JSON.stringify(allWorkshops));
+                showToast('Workshop deleted');
+                loadAllData();
+            }
+        }
+        
+        // ============ SUBSCRIPTIONS ============
+        function loadSubscriptionsList() {
+            const activeSubs = allSubscriptions.filter(s => s.status === 'Active');
+            document.getElementById('subscriptionsList').innerHTML = activeSubs.map(s => `
+                <div class="participant-item">
+                    <div><strong>${s.subscriberEmail || s.userName}</strong><br><small>${s.plan} Plan | ₱${s.amount}/month</small><br><small>Started: ${s.startDate} | Next: ${s.nextBilling}</small></div>
+                    <span class="status-badge status-active">Active</span>
+                </div>
+            `).join('') || '<div class="empty-state">No active subscriptions.</div>';
+        }
+        
+        // ============ TAB SWITCHING ============
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.admin-nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById(`${tabName}Tab`).classList.add('active');
             event.target.classList.add('active');
-            if (tabName === 'analytics') loadAnalytics();
-            if (tabName === 'members') loadMembers();
-            if (tabName === 'workshops') { loadWorkshops(); loadAnnouncements(); loadWorkshopSelect(); }
-            if (tabName === 'transactions') loadTransactions();
-            if (tabName === 'applicants') loadApplicants();
-            if (tabName === 'inquiries') loadInquiries();
         }
-        
-        function loadAnalytics() {
-            document.getElementById('totalMembers').innerText = members.length;
-            document.getElementById('totalOrders').innerText = orderTransactions.length;
-            document.getElementById('totalSubscriptions').innerText = subscriptionTransactions.length;
-            let totalRevenue = orderTransactions.reduce((s,o) => s + o.amount, 0) + subscriptionTransactions.reduce((s,o) => s + o.amount, 0) + workshopTransactions.reduce((s,w) => s + w.amount, 0) + rentTransactions.reduce((s,r) => s + r.amount, 0);
-            let totalExpensesAmt = expenseTransactions.reduce((s,e) => s + e.amount, 0);
-            document.getElementById('totalRevenue').innerHTML = `₱${totalRevenue.toLocaleString()}`;
-            document.getElementById('totalExpenses').innerHTML = `₱${totalExpensesAmt.toLocaleString()}`;
-            document.getElementById('netProfit').innerHTML = `₱${(totalRevenue - totalExpensesAmt).toLocaleString()}`;
-            document.getElementById('monthlyRevenue').innerHTML = `₱${totalRevenue.toLocaleString()}`;
-            document.getElementById('pendingApplicants').innerText = applicants.filter(a => a.status === 'Pending').length;
-            document.getElementById('promosList').innerHTML = promos.map(p => `<div class="promo-card"><div><strong>${p.title}</strong><br><small>${p.description}</small></div><button class="btn-danger" onclick="deletePromo(${p.id})">Delete</button></div>`).join('');
-            document.getElementById('vouchersList').innerHTML = vouchers.map(v => `<div class="voucher-card"><div><strong>${v.code}</strong><br><small>${v.value}% OFF</small></div><button class="btn-danger" onclick="deleteVoucher('${v.code}')">Delete</button></div>`).join('');
-            document.getElementById('expensesList').innerHTML = expenseTransactions.map(e => `<div class="participant-item"><div><strong>${e.memo}</strong><br><small>₱${e.amount} | ${e.date}</small></div><button class="btn-danger" onclick="deleteExpense('${e.id}')">Delete</button></div>`).join('');
-            document.getElementById('recentActivity').innerHTML = recentActivities.map(a => `<div class="participant-item"><span>${a.action}</span><small>${a.date}</small></div>`).join('');
-            loadRevenueChart();
-        }
-        function loadRevenueChart() { const year = document.getElementById('revenueYear').value; const data = monthlyRevenue[year]; const maxRevenue = Math.max(...data, 1); document.getElementById('revenueChart').innerHTML = data.map((rev, i) => `<div class="chart-bar"><div class="bar" style="height: ${(rev / maxRevenue) * 150}px;"></div><div class="bar-label">${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i]}</div><div class="bar-label">₱${rev.toLocaleString()}</div></div>`).join(''); }
-        
-        // MEMBERS
-        function loadMembers() { 
-            let filtered = [...members];
-            const search = document.getElementById('memberSearch').value.toLowerCase();
-            if (search) filtered = filtered.filter(m => m.name.toLowerCase().includes(search));
-            const role = document.getElementById('roleFilter').value;
-            if (role !== 'all') filtered = filtered.filter(m => m.role === role);
-            const purpose = document.getElementById('purposeFilter').value;
-            if (purpose !== 'all') filtered = filtered.filter(m => m.purpose === purpose);
-            const location = document.getElementById('locationFilter').value;
-            if (location !== 'all') filtered = filtered.filter(m => m.location === location);
-            if (currentSort === 'name') filtered.sort((a,b) => a.name.localeCompare(b.name));
-            document.getElementById('membersList').innerHTML = filtered.map(m => `<tr><td>${m.id}</td><td>${m.name}</td><td>${m.email}</td><td>${m.role}</td><td>${m.purpose}</td><td>${m.location}</td><td>${m.address}</td><td>${m.joinDate}</td><td><span class="status-badge status-active">${m.status}</span></td><td><button class="btn-danger" onclick="openRemoveMemberModal('${m.id}','${m.name}')">Remove</button></td>`).join('');
-        }
-        function openRemoveMemberModal(id, name) { currentRemoveMemberId = id; document.getElementById('removeMemberName').value = name; document.getElementById('removeDateTime').value = new Date().toLocaleString(); document.getElementById('removeMemberModal').classList.add('active'); }
-        function closeRemoveMemberModal() { document.getElementById('removeMemberModal').classList.remove('active'); currentRemoveMemberId = null; document.getElementById('removeReason').value = ''; }
-        function confirmRemoveMember() { const reason = document.getElementById('removeReason').value; if(!reason) { alert('Please provide a reason'); return; } members = members.filter(m => m.id !== currentRemoveMemberId); recentActivities.unshift({ action: `Member removed: ${document.getElementById('removeMemberName').value} - Reason: ${reason}`, date: new Date().toLocaleString() }); showToast('Member removed'); closeRemoveMemberModal(); loadMembers(); loadAnalytics(); }
-        function sortMembers(type) { currentSort = type; loadMembers(); }
-        function filterMembers() { loadMembers(); }
-        
-        // WORKSHOPS
-        function loadWorkshops() { document.getElementById('workshopsList').innerHTML = workshopsList.map(w => `<div class="participant-item"><div><strong>${w.title}</strong><br><small>${w.date} | ${w.location} | ₱${w.price}</small></div><div><button class="btn-info" onclick="editWorkshop(${w.id})">Edit</button><button class="btn-danger" onclick="deleteWorkshop(${w.id})">Delete</button></div></div>`).join(''); }
-        function editWorkshop(id) { const w = workshopsList.find(w => w.id === id); if(w) { document.getElementById('editWorkshopId').value = w.id; document.getElementById('workshopTitle').value = w.title; document.getElementById('workshopDesc').value = w.description; document.getElementById('workshopDate').value = w.date; document.getElementById('workshopTime').value = w.time; document.getElementById('workshopLocation').value = w.location; document.getElementById('workshopPrice').value = w.price; document.getElementById('workshopSlots').value = w.slots; document.getElementById('workshopModal').classList.add('active'); } }
-        function deleteWorkshop(id) { workshopsList = workshopsList.filter(w => w.id !== id); loadWorkshops(); loadWorkshopSelect(); showToast('Workshop deleted'); }
-        function loadAnnouncements() { document.getElementById('announcementsList').innerHTML = announcements.map(a => `<div class="participant-item"><div><strong>${a.title}</strong><br><small>${a.message}</small></div><button class="btn-danger" onclick="deleteAnnouncement(${a.id})">Delete</button></div>`).join(''); }
-        function deleteAnnouncement(id) { announcements = announcements.filter(a => a.id !== id); loadAnnouncements(); showToast('Announcement deleted'); }
-        function loadWorkshopSelect() { const select = document.getElementById('selectWorkshop'); select.innerHTML = '<option value="">Select Workshop</option>' + workshopsList.map(w => `<option value="${w.id}">${w.title}</option>`).join(''); }
-        function loadParticipants() { const workshopId = document.getElementById('selectWorkshop').value; if(!workshopId) return; const participants = workshopRegistrations.filter(r => r.workshopId == workshopId); document.getElementById('participantsList').innerHTML = participants.map(p => `<div class="participant-item"><div><strong>${p.participantName}</strong><br><small>${p.email}</small></div><span class="status-badge status-active">${p.status}</span></div>`).join('') || '<div class="empty-state">No participants</div>'; }
-        
-        // TRANSACTIONS
-        function loadTransactions() {
-            let all = [...orderTransactions.map(t=>({...t,typeDisplay:'📦 Order',userOrMemo:t.userName})), ...subscriptionTransactions.map(t=>({...t,typeDisplay:'🔄 Subscription',userOrMemo:t.userName})), ...workshopTransactions.map(t=>({...t,typeDisplay:'🎓 Workshop',userOrMemo:t.userName})), ...expenseTransactions.map(t=>({...t,typeDisplay:'💰 Expense',userOrMemo:t.memo})), ...rentTransactions.map(t=>({...t,typeDisplay:'🚜 Rent',userOrMemo:t.userName}))];
-            if(currentTransactionType !== 'all') all = all.filter(t => t.type === currentTransactionType);
-            const search = document.getElementById('transactionSearch').value.toLowerCase();
-            if(search) all = all.filter(t => t.id.toLowerCase().includes(search) || t.userOrMemo.toLowerCase().includes(search));
-            all.sort((a,b) => new Date(b.date) - new Date(a.date));
-            document.getElementById('transactionsList').innerHTML = all.map(t => `<tr><td style="font-family: monospace;">${t.id}</td><td><span class="status-badge">${t.typeDisplay}</span></td><td>${t.userOrMemo}</td><td>${t.item || t.description}</td><td>₱${t.amount.toLocaleString()}</td><td>${t.status}</td><td>${t.date}</td><td><button class="btn-info" onclick="viewTransaction('${t.id}')">View</button></td>`).join('');
-        }
-        function viewTransaction(id) {
-            let tx = [...orderTransactions, ...subscriptionTransactions, ...workshopTransactions, ...expenseTransactions, ...rentTransactions].find(t => t.id === id);
-            if(tx) { document.getElementById('transactionViewContent').innerHTML = `<div class="review-field"><label>Transaction ID</label><div class="value">${tx.id}</div></div><div class="review-field"><label>Type</label><div class="value">${tx.type || 'transaction'}</div></div><div class="review-field"><label>User/Memo</label><div class="value">${tx.userName || tx.memo || '-'}</div></div><div class="review-field"><label>Item/Description</label><div class="value">${tx.item || tx.description || '-'}</div></div><div class="review-field"><label>Amount</label><div class="value">₱${tx.amount.toLocaleString()}</div></div><div class="review-field"><label>Status</label><div class="value">${tx.status}</div></div><div class="review-field"><label>Date</label><div class="value">${tx.date}</div></div>`; document.getElementById('transactionViewModal').classList.add('active'); }
-        }
-        function closeTransactionViewModal() { document.getElementById('transactionViewModal').classList.remove('active'); }
-        function filterTransactionType(type, btn) { currentTransactionType = type; document.querySelectorAll('#transactionsTab .filter-btn').forEach(b => b.classList.remove('active')); if(btn) btn.classList.add('active'); loadTransactions(); }
-        function filterTransactions() { loadTransactions(); }
-        
-        // ========== CSV FUNCTIONS ==========
-        function exportToCSV() {
-            let allTransactions = [
-                ...orderTransactions.map(t => ({ id: t.id, type: 'Order', userOrMemo: t.userName, item: t.item, amount: t.amount, status: t.status, date: t.date })),
-                ...subscriptionTransactions.map(t => ({ id: t.id, type: 'Subscription', userOrMemo: t.userName, item: t.item, amount: t.amount, status: t.status, date: t.date })),
-                ...workshopTransactions.map(t => ({ id: t.id, type: 'Workshop', userOrMemo: t.userName, item: t.item, amount: t.amount, status: t.status, date: t.date })),
-                ...expenseTransactions.map(t => ({ id: t.id, type: 'Expense', userOrMemo: t.memo, item: t.description, amount: t.amount, status: t.status, date: t.date })),
-                ...rentTransactions.map(t => ({ id: t.id, type: 'Rent', userOrMemo: t.userName, item: t.item, amount: t.amount, status: t.status, date: t.date }))
-            ];
-            allTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
-            const headers = ['Transaction ID', 'Type', 'User/Memo', 'Item/Description', 'Amount (₱)', 'Status', 'Date'];
-            const rows = allTransactions.map(t => [t.id, t.type, t.userOrMemo, t.item, t.amount, t.status, t.date]);
-            const csvContent = [headers, ...rows].map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n');
-            const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            link.href = url;
-            link.setAttribute('download', `rrjfarm_transactions_${new Date().toISOString().split('T')[0]}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-            showToast('Transactions exported successfully!');
-        }
-        
-        function downloadTemplate() {
-            const headers = ['Transaction ID', 'Type', 'User/Memo', 'Item/Description', 'Amount (₱)', 'Status', 'Date'];
-            const sampleRows = [
-                ['ORD999', 'Order', 'John Doe', 'Fresh Tomatoes', '500', 'Completed', '2026-05-13'],
-                ['SUB999', 'Subscription', 'Jane Smith', 'Member Plan', '1500', 'Active', '2026-05-13'],
-                ['WKS999', 'Workshop', 'Mike Lee', 'Organic Pest Control', '299', 'Completed', '2026-05-13'],
-                ['EXP999', 'Expense', 'Farm Operations', 'Fertilizer Purchase', '2000', 'Paid', '2026-05-13'],
-                ['RENT999', 'Rent', 'Carlos Mendoza', 'Farm Tractor', '2500', 'Completed', '2026-05-13']
-            ];
-            const csvContent = [headers, ...sampleRows].map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n');
-            const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            link.href = url;
-            link.setAttribute('download', 'rrjfarm_transactions_template.csv');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-            showToast('Template downloaded!');
-        }
-        
-        function parseCSVLine(line) {
-            const result = [];
-            let inQuote = false;
-            let currentField = '';
-            for (let i = 0; i < line.length; i++) {
-                const char = line[i];
-                if (char === '"') { inQuote = !inQuote; }
-                else if (char === ',' && !inQuote) { result.push(currentField); currentField = ''; }
-                else { currentField += char; }
-            }
-            result.push(currentField);
-            return result.map(f => f.replace(/^"|"$/g, '').replace(/""/g, '"'));
-        }
-        
-        function openImportModal() { document.getElementById('importModal').classList.add('active'); document.getElementById('csvFileInput').value = ''; document.getElementById('importPreview').innerHTML = ''; }
-        function closeImportModal() { document.getElementById('importModal').classList.remove('active'); }
-        
-        function processImport() {
-            const fileInput = document.getElementById('csvFileInput');
-            if (!fileInput.files || fileInput.files.length === 0) { alert('Please select a CSV file to import'); return; }
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const content = e.target.result;
-                const lines = content.split('\n').filter(line => line.trim());
-                if (lines.length < 2) { alert('CSV file must contain at least a header row and one data row'); return; }
-                let importedCount = 0, errorCount = 0;
-                for (let i = 1; i < lines.length; i++) {
-                    const values = parseCSVLine(lines[i]);
-                    if (values.length < 7) { errorCount++; continue; }
-                    const id = values[0].trim();
-                    const type = values[1].trim().toLowerCase();
-                    const userOrMemo = values[2].trim();
-                    const item = values[3].trim();
-                    const amount = parseFloat(values[4]);
-                    const status = values[5].trim();
-                    const date = values[6].trim();
-                    if (isNaN(amount)) { errorCount++; continue; }
-                    const newTransaction = { id, item, amount, status, date, type: type };
-                    if (type === 'order') { newTransaction.userName = userOrMemo; if (!orderTransactions.find(t => t.id === id)) orderTransactions.push(newTransaction); importedCount++; }
-                    else if (type === 'subscription') { newTransaction.userName = userOrMemo; if (!subscriptionTransactions.find(t => t.id === id)) subscriptionTransactions.push(newTransaction); importedCount++; }
-                    else if (type === 'workshop') { newTransaction.userName = userOrMemo; if (!workshopTransactions.find(t => t.id === id)) workshopTransactions.push(newTransaction); importedCount++; }
-                    else if (type === 'expense') { newTransaction.memo = userOrMemo; newTransaction.description = item; if (!expenseTransactions.find(t => t.id === id)) expenseTransactions.push(newTransaction); importedCount++; }
-                    else if (type === 'rent') { newTransaction.userName = userOrMemo; if (!rentTransactions.find(t => t.id === id)) rentTransactions.push(newTransaction); importedCount++; }
-                    else { errorCount++; }
-                }
-                loadTransactions(); loadAnalytics();
-                showToast(`Import completed! ${importedCount} transactions imported, ${errorCount} errors.`);
-                closeImportModal();
-            };
-            reader.readAsText(file, 'UTF-8');
-        }
-        
-        // APPLICANTS
-        function loadApplicants() {
-            applicants = loadApplicantsFromStorage();
-            let filtered = [...applicants];
-            const role = document.getElementById('applicantRoleFilter').value;
-            if(role !== 'all') filtered = filtered.filter(a => a.role === role);
-            const purpose = document.getElementById('applicantPurposeFilter').value;
-            if(purpose !== 'all') filtered = filtered.filter(a => a.purpose === purpose);
-            const status = document.getElementById('applicantStatusFilter').value;
-            if(status !== 'all') filtered = filtered.filter(a => a.status === status);
-            document.getElementById('applicantsList').innerHTML = filtered.map(a => `<div class="participant-item"><div><strong>${a.name}</strong><br><small>${a.email} | ${a.phone || 'N/A'}</small><br><small>Role: ${a.role || 'Land Steward'} | Purpose: ${a.purpose}</small><br><small>Lot: ${a.lotSize}ha | Location: ${a.municipality || a.location}, ${a.province || ''}</small><br><small>Applied: ${a.appliedAt ? new Date(a.appliedAt).toLocaleDateString() : a.date || 'N/A'}</small></div><div><button class="btn-info" onclick="reviewApplicant(${a.id})">Review</button><button class="btn-success" onclick="acceptApplicant(${a.id})">Accept</button><button class="btn-danger" onclick="rejectApplicant(${a.id})">Reject</button></div></div>`).join('');
-        }
-        function acceptApplicant(id) { let applicantsList = loadApplicantsFromStorage(); const applicant = applicantsList.find(a => a.id === id); if(applicant) { applicant.status = 'Approved'; localStorage.setItem('rrjfarm_land_applications', JSON.stringify(applicantsList)); const newMember = { id: 'M' + (members.length+5).toString().padStart(3,'0'), name: applicant.name, email: applicant.email, role: 'land_steward', purpose: applicant.purpose || 'farming', location: applicant.province || 'Batangas', address: applicant.municipality ? `${applicant.municipality}, ${applicant.province}` : applicant.location, joinDate: new Date().toISOString().split('T')[0], status: 'Active' }; members.push(newMember); recentActivities.unshift({ action: `Land Stewardship application approved: ${applicant.name}`, date: new Date().toLocaleDateString() }); showToast(`${applicant.name} has been accepted as a member!`); loadApplicants(); loadMembers(); loadAnalytics(); } }
-        function rejectApplicant(id) { let applicantsList = loadApplicantsFromStorage(); const applicant = applicantsList.find(a => a.id === id); if(applicant) { applicant.status = 'Rejected'; localStorage.setItem('rrjfarm_land_applications', JSON.stringify(applicantsList)); showToast('Applicant rejected'); loadApplicants(); } }
-        function reviewApplicant(id) { currentReviewApplicant = applicants.find(a => a.id === id); document.getElementById('reviewContent').innerHTML = `<div class="review-field"><label>Name</label><div class="value">${currentReviewApplicant.name}</div></div><div class="review-field"><label>Email</label><div class="value">${currentReviewApplicant.email}</div></div><div class="review-field"><label>Phone</label><div class="value">${currentReviewApplicant.phone || 'N/A'}</div></div><div class="review-field"><label>Role/Purpose</label><div class="value">${currentReviewApplicant.purpose || 'Land Steward'}</div></div><div class="review-field"><label>Farm Size</label><div class="value">${currentReviewApplicant.lotSize} hectares</div></div><div class="review-field"><label>Location</label><div class="value">${currentReviewApplicant.municipality || currentReviewApplicant.location}, ${currentReviewApplicant.province || ''}</div></div><div class="review-field"><label>Experience</label><div class="value">${currentReviewApplicant.experience || 'Not provided'}</div></div>`; document.getElementById('reviewModal').classList.add('active'); }
-        function closeReviewModal() { document.getElementById('reviewModal').classList.remove('active'); }
-        function submitReview() { const decision = document.getElementById('reviewDecision').value; if(decision === 'Approve') acceptApplicant(currentReviewApplicant.id); else rejectApplicant(currentReviewApplicant.id); closeReviewModal(); }
-        function filterApplicants() { loadApplicants(); }
-        
-        // INQUIRIES
-        function loadInquiries() {
-            let filtered = [...inquiries];
-            const type = document.getElementById('inquiryTypeFilter').value;
-            if(type !== 'all') filtered = filtered.filter(i => i.type === type);
-            const status = document.getElementById('inquiryStatusFilter').value;
-            if(status !== 'all') filtered = filtered.filter(i => i.status === status);
-            const search = document.getElementById('inquirySearch').value.toLowerCase();
-            if(search) filtered = filtered.filter(i => i.name.toLowerCase().includes(search));
-            document.getElementById('inquiriesList').innerHTML = filtered.map(i => `<div class="participant-item" style="${i.status === 'Unread' ? 'background:#fff8e1;' : ''}"><div><strong>${i.name}</strong> (${i.type})<br><small>${i.message}</small><br><small>${i.date}</small></div><div><button class="btn-primary" onclick="openReplyInquiryModal(${i.id})">Reply</button><button class="btn-primary" onclick="markAsRead(${i.id})">Mark Read</button></div></div>`).join('');
-        }
-        function openReplyInquiryModal(id) { currentReplyInquiry = inquiries.find(i => i.id === id); document.getElementById('replyInquiryFrom').value = currentReplyInquiry.email; document.getElementById('replyOriginalMessage').value = currentReplyInquiry.message; document.getElementById('replyMessageText').value = ''; document.getElementById('replyInquiryModal').classList.add('active'); }
-        function closeReplyInquiryModal() { document.getElementById('replyInquiryModal').classList.remove('active'); currentReplyInquiry = null; }
-        function sendReply() { const reply = document.getElementById('replyMessageText').value; if(!reply) { alert('Please enter a reply'); return; } if(currentReplyInquiry) { currentReplyInquiry.status = 'Replied'; showToast(`Reply sent to ${currentReplyInquiry.name}`); loadInquiries(); closeReplyInquiryModal(); } }
-        function markAsRead(id) { const i = inquiries.find(i => i.id === id); i.status = 'Read'; loadInquiries(); showToast('Marked as read'); }
-        function filterInquiries() { loadInquiries(); }
-        
-        // CRUD
-        function openPromoModal() { document.getElementById('promoModal').classList.add('active'); }
-        function closePromoModal() { document.getElementById('promoModal').classList.remove('active'); }
-        function openVoucherModal() { document.getElementById('voucherModal').classList.add('active'); }
-        function closeVoucherModal() { document.getElementById('voucherModal').classList.remove('active'); }
-        function openExpenseModal() { document.getElementById('expenseModal').classList.add('active'); }
-        function closeExpenseModal() { document.getElementById('expenseModal').classList.remove('active'); }
-        function openWorkshopModal() { document.getElementById('editWorkshopId').value = ''; document.getElementById('workshopTitle').value = ''; document.getElementById('workshopDesc').value = ''; document.getElementById('workshopDate').value = ''; document.getElementById('workshopTime').value = ''; document.getElementById('workshopLocation').value = ''; document.getElementById('workshopPrice').value = ''; document.getElementById('workshopSlots').value = '20'; document.getElementById('workshopModal').classList.add('active'); }
-        function closeWorkshopModal() { document.getElementById('workshopModal').classList.remove('active'); }
-        function openAnnouncementModal() { document.getElementById('announcementModal').classList.add('active'); }
-        function closeAnnouncementModal() { document.getElementById('announcementModal').classList.remove('active'); }
-        
-        document.getElementById('promoForm')?.addEventListener('submit', function(e) { e.preventDefault(); promos.push({ id: Date.now(), title: document.getElementById('promoTitle').value, description: document.getElementById('promoDesc').value, discount: document.getElementById('promoDiscount').value, validUntil: document.getElementById('promoValidUntil').value }); loadAnalytics(); showToast('Promo added'); closePromoModal(); this.reset(); });
-        document.getElementById('voucherForm')?.addEventListener('submit', function(e) { e.preventDefault(); vouchers.push({ code: document.getElementById('voucherCode').value.toUpperCase(), type: document.getElementById('voucherType').value, value: parseInt(document.getElementById('voucherValue').value), minPurchase: parseInt(document.getElementById('voucherMinPurchase').value), validUntil: document.getElementById('voucherValidUntil').value }); loadAnalytics(); showToast('Voucher created'); closeVoucherModal(); this.reset(); });
-        document.getElementById('expenseForm')?.addEventListener('submit', function(e) { e.preventDefault(); expenseTransactions.push({ id: 'EXP' + (expenseTransactions.length+2), memo: document.getElementById('expenseTitle').value, category: document.getElementById('expenseCategory').value, amount: parseInt(document.getElementById('expenseAmount').value), date: document.getElementById('expenseDate').value, description: document.getElementById('expenseDesc').value, type: 'expense', status: 'Paid' }); loadAnalytics(); loadTransactions(); showToast('Expense recorded'); closeExpenseModal(); this.reset(); });
-        document.getElementById('workshopForm')?.addEventListener('submit', function(e) { e.preventDefault(); const id = document.getElementById('editWorkshopId').value; const workshop = { id: id ? parseInt(id) : Date.now(), title: document.getElementById('workshopTitle').value, description: document.getElementById('workshopDesc').value, date: document.getElementById('workshopDate').value, time: document.getElementById('workshopTime').value, location: document.getElementById('workshopLocation').value, price: parseInt(document.getElementById('workshopPrice').value), slots: parseInt(document.getElementById('workshopSlots').value), remaining: parseInt(document.getElementById('workshopSlots').value) }; if(id) { const index = workshopsList.findIndex(w => w.id == id); if(index !== -1) workshopsList[index] = workshop; } else { workshopsList.push(workshop); } loadWorkshops(); loadWorkshopSelect(); showToast(id ? 'Workshop updated' : 'Workshop added'); closeWorkshopModal(); this.reset(); });
-        document.getElementById('announcementForm')?.addEventListener('submit', function(e) { e.preventDefault(); announcements.push({ id: Date.now(), title: document.getElementById('announcementTitle').value, message: document.getElementById('announcementMessage').value, date: new Date().toISOString().split('T')[0] }); loadAnnouncements(); showToast('Announcement posted'); closeAnnouncementModal(); this.reset(); });
-        
-        function deletePromo(id) { promos = promos.filter(p => p.id !== id); loadAnalytics(); showToast('Promo deleted'); }
-        function deleteVoucher(code) { vouchers = vouchers.filter(v => v.code !== code); loadAnalytics(); showToast('Voucher deleted'); }
-        function deleteExpense(id) { expenseTransactions = expenseTransactions.filter(e => e.id !== id); loadAnalytics(); loadTransactions(); showToast('Expense deleted'); }
         
         // Initialize
-        window.switchTab = switchTab; window.filterMembers = filterMembers; window.sortMembers = sortMembers; window.filterTransactions = filterTransactions; window.filterTransactionType = filterTransactionType; window.loadRevenueChart = loadRevenueChart; window.deletePromo = deletePromo; window.deleteVoucher = deleteVoucher; window.deleteWorkshop = deleteWorkshop; window.deleteAnnouncement = deleteAnnouncement; window.markAsRead = markAsRead; window.editWorkshop = editWorkshop; window.loadParticipants = loadParticipants; window.openPromoModal = openPromoModal; window.closePromoModal = closePromoModal; window.openVoucherModal = openVoucherModal; window.closeVoucherModal = closeVoucherModal; window.openWorkshopModal = openWorkshopModal; window.closeWorkshopModal = closeWorkshopModal; window.openAnnouncementModal = openAnnouncementModal; window.closeAnnouncementModal = closeAnnouncementModal; window.openExpenseModal = openExpenseModal; window.closeExpenseModal = closeExpenseModal; window.deleteExpense = deleteExpense; window.reviewApplicant = reviewApplicant; window.closeReviewModal = closeReviewModal; window.submitReview = submitReview; window.filterApplicants = filterApplicants; window.filterInquiries = filterInquiries; window.handleLogout = handleLogout; window.viewTransaction = viewTransaction; window.closeTransactionViewModal = closeTransactionViewModal; window.openReplyInquiryModal = openReplyInquiryModal; window.closeReplyInquiryModal = closeReplyInquiryModal; window.sendReply = sendReply; window.openRemoveMemberModal = openRemoveMemberModal; window.closeRemoveMemberModal = closeRemoveMemberModal; window.confirmRemoveMember = confirmRemoveMember; window.acceptApplicant = acceptApplicant; window.rejectApplicant = rejectApplicant; window.exportToCSV = exportToCSV; window.downloadTemplate = downloadTemplate; window.openImportModal = openImportModal; window.closeImportModal = closeImportModal; window.processImport = processImport;
+        window.switchTab = switchTab;
+        window.filterMembers = filterMembers;
+        window.filterTransactionsByType = filterTransactionsByType;
+        window.openWorkshopModal = openWorkshopModal;
+        window.closeWorkshopModal = closeWorkshopModal;
+        window.reviewApplicant = reviewApplicant;
+        window.closeReviewModal = closeReviewModal;
+        window.submitReview = submitReview;
+        window.approveApplicant = approveApplicant;
+        window.rejectApplicant = rejectApplicant;
+        window.deleteWorkshop = deleteWorkshop;
+        window.removeMember = removeMember;
+        window.refreshAllData = refreshAllData;
+        window.handleLogout = handleLogout;
         
-        loadAnalytics();
-        loadTransactions();
+        loadAllData();
     </script>
 </body>
 </html>
