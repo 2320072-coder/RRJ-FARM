@@ -279,7 +279,7 @@
                     .filter(u => u.role !== 'admin')
                     .map(u => ({
                         id: u.id || 'M' + Date.now() + Math.random(),
-                        name: u.name || 'Unknown',
+                        name: u.name || '',
                         email: u.email || '',
                         role: u.role === 'farmer' ? 'coop_member' : (u.role === 'regular' ? 'buyer' : u.role),
                         purpose: u.role === 'farmer' ? 'farming' : 'homestead',
@@ -495,30 +495,25 @@
         }
         
         let members = [
-            { id: 'M001', name: 'Maria Santos', email: 'maria@rrjfarm.com', role: 'coop_member', purpose: 'farming', location: 'Batangas', address: 'Brgy. San Jose, Lipa City', joinDate: '2024-01-15', status: 'Active' },
-            { id: 'M002', name: 'Jose Dela Cruz', email: 'jose@rrjfarm.com', role: 'seller', purpose: 'business', location: 'Batangas', address: 'Brgy. Balete, Tanauan', joinDate: '2024-01-20', status: 'Active' },
-            { id: 'M003', name: 'Anna Reyes', email: 'anna@rrjfarm.com', role: 'land_steward', purpose: 'homestead', location: 'Laguna', address: 'Brgy. Pila, Laguna', joinDate: '2024-02-01', status: 'Active' },
-            { id: 'M004', name: 'Carlos Mendoza', email: 'carlos@rrjfarm.com', role: 'buyer', purpose: 'homestead', location: 'Batangas', address: 'Brgy. San Vicente', joinDate: '2024-02-10', status: 'Active' }
+            
         ];
         
         let applicants = loadApplicantsFromStorage();
         
         let orderTransactions = [
-            { id: 'ORD001', userName: 'Maria Santos', item: 'Fresh Sitao', amount: 225, status: 'Completed', date: '2026-05-01', type: 'order' },
-            { id: 'ORD002', userName: 'Jose Dela Cruz', item: 'Batangas Rice', amount: 550, status: 'Completed', date: '2026-05-02', type: 'order' }
+            
         ];
         let subscriptionTransactions = [
-            { id: 'SUB001', userName: 'Maria Santos', item: '1 hectare - Family Plan', amount: 5000, status: 'Active', date: '2026-05-01', type: 'subscription' },
-            { id: 'SUB002', userName: 'Jose Dela Cruz', item: '0.5 hectare - Starter Plan', amount: 3000, status: 'Active', date: '2026-05-01', type: 'subscription' }
+            
         ];
         let workshopTransactions = [
-            { id: 'WKS001', userName: 'Maria Santos', item: 'Organic Pest Control', amount: 500, status: 'Completed', date: '2026-03-20', type: 'workshop' }
+            
         ];
         let expenseTransactions = [
             { id: 'EXP001', memo: 'Farm Operations', description: 'Farm Equipment', amount: 15000, status: 'Paid', date: '2026-05-01', type: 'expense' }
         ];
         let rentTransactions = [
-            { id: 'RENT001', userName: 'Carlos Mendoza', item: 'Farm Tractor', amount: 2500, status: 'Completed', date: '2026-05-10', type: 'rent' }
+            
         ];
         let promos = [{ id: 1, title: 'Summer Sale', description: '20% off', discount: '20% OFF', validUntil: '2026-06-30' }];
         let vouchers = [{ code: 'WELCOME20', type: 'percentage', value: 20, minPurchase: 0, validUntil: '2026-06-30' }];
