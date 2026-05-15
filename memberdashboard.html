@@ -49,7 +49,6 @@
         .stat-card { background: #fafefa; padding: 0.8rem; border-radius: 16px; text-align: center; border: 1px solid #e0ebdd; }
         .stat-number { font-size: 1.3rem; font-weight: 800; color: #2d6a2d; }
         
-        /* Application Form Styles */
         .contact-white { background: white; border-radius: 24px; padding: 1.5rem; margin: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         .form-group-white { margin-bottom: 0.8rem; }
@@ -63,7 +62,6 @@
         .form-message.success { background: #d4edda; color: #155724; display: block; }
         .form-message.error { background: #f8d7da; color: #721c24; display: block; }
         
-        /* Original Marketplace/Workshops/Subscriptions Design */
         .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
         .plan-card { background: white; border-radius: 28px; overflow: hidden; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1); }
         .plan-header { padding: 1.5rem; text-align: center; color: white; }
@@ -173,13 +171,10 @@
 
     <div id="productsTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Products</h3><button class="btn-action" style="background:#2d6a2d;color:white;padding:0.3rem 1rem;" id="addProductBtn" onclick="openAddProductModal()">+ Add Product</button></div><div id="sellerProductsList"></div></div></div>
 
-    <!-- ORIGINAL MARKETPLACE DESIGN -->
     <div id="marketplaceTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Fresh from Farm to Table</h3><p>Blockchain-verified products from local farmers</p><button class="btn-action" id="sellProductBtn" style="background:#ff8c00;color:white;display:none;" onclick="openAddProductModal()">+ Sell Product</button></div><div id="marketplaceGrid" class="products-grid-modern"></div></div></div>
 
-    <!-- ORIGINAL WORKSHOPS DESIGN -->
     <div id="workshopsTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Upcoming Workshops</h3></div><div id="workshopsGrid" class="workshops-grid-premium"></div></div><div class="dashboard-card"><div class="card-header"><h3>My Registered Workshops</h3></div><div id="registeredWorkshopsList"></div></div></div>
 
-    <!-- ORIGINAL SUBSCRIPTIONS DESIGN -->
     <div id="subscriptionsTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Membership Plans</h3></div><div id="subscriptionsPlans" class="plans-grid"></div></div></div>
 
     <div id="cooperativeTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>Cooperative Voting</h3><p>One member, one vote</p></div><div id="activeProposals"></div><div class="card-header" style="margin-top:1rem;"><h3>My Voting History</h3></div><div id="votedHistory"></div></div></div>
@@ -188,7 +183,6 @@
 
     <div id="walletTab" class="tab-content"><div class="dashboard-card"><div class="card-header"><h3>My Wallet</h3></div><div style="text-align:center;"><span class="stat-number" style="font-size:2rem;">₱<span id="walletBalanceMain">5,200</span></span></div><div style="display:flex; gap:0.5rem;"><button class="btn-action" style="background:#2d6a2d;color:white;flex:1;" onclick="openTopUpModal()">Top Up</button><button class="btn-action" style="background:#ff8c00;color:white;flex:1;" onclick="openWithdrawModal()">Withdraw</button></div><div class="card-header"><h3>Transaction History</h3></div><div id="walletHistoryList"></div></div></div>
 
-    <!-- LAND STEWARDSHIP APPLICATION TAB -->
     <div id="landappTab" class="tab-content">
         <div class="dashboard-card">
             <div class="card-header"><h3><i class="fas fa-file-signature"></i> Apply for Land Stewardship</h3><p>Become a land steward and start your farming journey with RRJ FARM</p></div>
@@ -256,12 +250,12 @@
     </div>
 </div></main>
 
-<!-- PROFILE SETUP MODAL - FOR NEW USERS -->
+<!-- PROFILE SETUP MODAL - FOR NEW USERS (ONLY SHOWS ONCE) -->
 <div id="profileSetupModal" class="modal">
     <div class="modal-content">
         <div class="modal-header"><h3><i class="fas fa-user-plus"></i> Complete Your Profile</h3></div>
         <div class="modal-body">
-            <p style="margin-bottom:1rem; color:#666;">Please complete your profile to continue. This information will be used for deliveries and cooperative communications.</p>
+            <p style="margin-bottom:1rem; color:#666;">This will only appear once. Please complete your profile to continue.</p>
             <label>Full Name *</label>
             <input type="text" id="setupFullName" class="modal-input" placeholder="Enter your full name">
             <label>Address *</label>
@@ -275,7 +269,7 @@
     </div>
 </div>
 
-<!-- OTHER MODALS -->
+<!-- OTHER MODALS (same as before) -->
 <div id="buyModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Buy Product</h3><button class="close-modal-btn" onclick="closeBuyModal()">&times;</button></div><div class="modal-body"><div id="buyProductInfo"></div><label>Quantity</label><input type="number" id="buyQty" class="modal-input" min="1" value="1" onchange="updateBuyTotal()"><label>Voucher Code</label><input type="text" id="buyVoucherCode" class="modal-input" placeholder="Enter code"><button class="btn-action" onclick="applyBuyVoucher()" style="width:100%;">Apply Voucher</button><div id="buyVoucherList"></div><div id="buyDiscountDisplay"></div><label>Total</label><input type="text" id="buyTotal" class="modal-input" readonly><label>Payment</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectBuyMethod('gcash')">GCash</div><div class="payment-option" data-method="bank" onclick="selectBuyMethod('bank')">Bank</div></div><div id="buyPaymentDetails"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeBuyModal()">Cancel</button><button class="btn-primary" onclick="confirmBuy()">Pay Now</button></div></div></div>
 
 <div id="enrollModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Enroll Workshop</h3><button class="close-modal-btn" onclick="closeEnrollModal()">&times;</button></div><div class="modal-body"><div id="enrollWorkshopInfo"></div><label>Participants</label><select id="enrollParticipants" class="modal-input" onchange="updateEnrollTotal()"><option value="1">1 person</option><option value="2">2 people (+₱200)</option><option value="3">3 people (+₱400)</option></select><label>Voucher Code</label><input type="text" id="enrollVoucherCode" class="modal-input" placeholder="Enter code"><button class="btn-action" onclick="applyEnrollVoucher()" style="width:100%;">Apply Voucher</button><div id="enrollVoucherList"></div><div id="enrollDiscountDisplay"></div><div id="enrollTotalDisplay" class="stat-number" style="font-size:1rem;"></div><label>Payment</label><div class="payment-options"><div class="payment-option" data-method="gcash" onclick="selectEnrollMethod('gcash')">GCash</div><div class="payment-option" data-method="bank" onclick="selectEnrollMethod('bank')">Bank</div></div><div id="enrollPaymentDetails"></div></div><div class="modal-footer"><button class="btn-secondary" onclick="closeEnrollModal()">Cancel</button><button class="btn-primary" onclick="confirmEnroll()">Confirm Enrollment</button></div></div></div>
@@ -345,7 +339,6 @@
     let appliedBuyVoucher = null, appliedEnrollVoucher = null;
     let currentOrderForRating = null, currentRefundOrder = null, currentChatOrder = null;
 
-    // Application Form Municipality Function
     function updateMunicipalitiesApp() {
         const province = document.getElementById('appProvince').value;
         const container = document.getElementById('municipalityContainerApp');
@@ -358,11 +351,17 @@
 
     function showToast(m){let t=document.getElementById('successToast');t.innerHTML=m;t.style.display='block';setTimeout(()=>t.style.display='none',3000);}
     
+    // ============ FIXED: Profile setup modal only shows when profileCompleted is false ============
     function checkSession(){
-        let u=localStorage.getItem('rrjfarm_current_user');
-        if(!u){window.location.href='login.html';return false}
-        currentUser=JSON.parse(u);
+        let u = localStorage.getItem('rrjfarm_current_user');
+        if(!u){
+            window.location.href = 'login.html';
+            return false;
+        }
+        currentUser = JSON.parse(u);
         
+        // ✅ Fixed: Check if profileCompleted is NOT true
+        // Only show modal if user hasn't completed profile yet
         if(!currentUser.profileCompleted){
             document.getElementById('profileSetupModal').classList.add('active');
             document.getElementById('setupEmail').value = currentUser.email || '';
@@ -390,7 +389,7 @@
         currentUser.lastName = nameParts.slice(1).join(' ') || '';
         currentUser.address = address;
         currentUser.contact = contact;
-        currentUser.profileCompleted = true;
+        currentUser.profileCompleted = true;  // Mark as completed
         currentUser.avatarInitials = (currentUser.firstName?.charAt(0)||'U') + (currentUser.lastName?.charAt(0)||'');
         
         localStorage.setItem('rrjfarm_current_user', JSON.stringify(currentUser));
@@ -426,7 +425,6 @@
                 `<span class="profile-sub-status" style="color:#856404;">📋 Basic Access (Non-Member)</span>`;
             profileSubStatus.innerHTML = `<i class="fas fa-user-circle"></i> <span id="profileName">${currentUser.firstName || ''} ${currentUser.lastName || ''}</span>${statusHtml}`;
         }
-        document.getElementById('profileName').innerHTML = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || 'User';
         
         let banner = document.getElementById('reminderBanner');
         if(banner) banner.style.display = hasActiveSubscription ? 'none' : 'flex';
@@ -457,7 +455,8 @@
     function updateProfileDisplay(){
         let first = currentUser?.firstName || 'U', last = currentUser?.lastName || '';
         document.getElementById('userAvatar').innerText = (first.charAt(0)+last.charAt(0)).toUpperCase() || 'U';
-        document.getElementById('profileName').innerHTML = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || 'User';
+        let profileNameSpan = document.getElementById('profileName');
+        if(profileNameSpan) profileNameSpan.innerHTML = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || 'User';
     }
     
     function updateUIByAccessLevel(){
@@ -497,7 +496,7 @@
     function closeChatModal(){document.getElementById('chatModal').classList.remove('active');}
     function sendChatMessage(){let msg=document.getElementById('chatInput').value.trim();if(msg){document.getElementById('chatMessages').innerHTML+=`<div style="text-align:right;margin:0.3rem;">You: ${msg}</div><div style="margin:0.3rem;">Farmer: Thanks! I\'ll get back to you.</div>`;document.getElementById('chatInput').value='';}}
     
-    // PRODUCTS (MEMBER ONLY)
+    // PRODUCTS 
     function renderSellerProducts(){if(!hasActiveSubscription || subscriptionPlan !== 'member') return; document.getElementById('sellerProductsList').innerHTML=sellerProducts.map(p=>`<div class="order-item"><b>${p.name}</b> - ₱${p.price}/${p.unit}<div><button class="btn-action" onclick="openEditProduct('${p.id}')">Edit</button><button class="btn-action" onclick="deleteProduct('${p.id}')">Delete</button></div></div>`).join('');}
     function openAddProductModal(){if(!hasActiveSubscription || subscriptionPlan !== 'member'){alert('Only Members can sell products. Subscribe to Member plan to sell.');return} document.getElementById('productModalTitle').innerText='Add Product';document.getElementById('editProductId').value='';document.getElementById('productName').value='';document.getElementById('productPrice').value='';document.getElementById('productUnit').value='kg';document.getElementById('productModal').classList.add('active');}
     function openEditProduct(id){let p=sellerProducts.find(p=>p.id===id);if(p){document.getElementById('productModalTitle').innerText='Edit Product';document.getElementById('editProductId').value=p.id;document.getElementById('productName').value=p.name;document.getElementById('productPrice').value=p.price;document.getElementById('productUnit').value=p.unit;document.getElementById('productModal').classList.add('active');}}
@@ -718,6 +717,7 @@
         }
     }
     
+    // Event Listeners
     document.getElementById('userAvatar').addEventListener('click',()=>document.getElementById('profileDropdown').classList.toggle('show'));
     document.addEventListener('click',(e)=>{let d=document.getElementById('profileDropdown');if(d&&!d.contains(e.target)&&e.target!==document.getElementById('userAvatar'))d.classList.remove('show');});
     document.getElementById('editProfileBtn').onclick=openEditProfileModal;
@@ -726,7 +726,7 @@
     document.getElementById('subscribeNowBannerBtn').onclick=()=>switchTab('subscriptions');
     document.getElementById('applicationForm').addEventListener('submit', submitApplication);
     
-    checkSession();
+    // Expose global functions
     window.switchTab=switchTab; window.openBuyModal=openBuyModal; window.closeBuyModal=closeBuyModal; window.applyBuyVoucher=applyBuyVoucher; window.updateBuyTotal=updateBuyTotal; window.selectBuyMethod=selectBuyMethod; window.confirmBuy=confirmBuy;
     window.openEnrollModal=openEnrollModal; window.closeEnrollModal=closeEnrollModal; window.applyEnrollVoucher=applyEnrollVoucher; window.updateEnrollTotal=updateEnrollTotal; window.selectEnrollMethod=selectEnrollMethod; window.confirmEnroll=confirmEnroll;
     window.openSubscribeModal=openSubscribeModal; window.closeSubscribeModal=closeSubscribeModal; window.selectSubscribeMethod=selectSubscribeMethod; window.confirmSubscription=confirmSubscription;
@@ -740,6 +740,8 @@
     window.openEditProfileModal=openEditProfileModal; window.closeEditProfileModal=closeEditProfileModal; window.saveEditProfile=saveEditProfile;
     window.openChangePasswordModal=openChangePasswordModal; window.closeChangePasswordModal=closeChangePasswordModal; window.changePassword=changePassword;
     window.updateMunicipalitiesApp = updateMunicipalitiesApp;
+    
+    checkSession();
 </script>
 </body>
 </html>
