@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RRJ FARM | Admin Dashboard - Central Data</title>
+    <title>RRJ FARM | Admin Dashboard - Complete with CSV</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -15,11 +15,11 @@
         .header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
         .logo h1 { font-size: 1.5rem; background: linear-gradient(135deg, #ffffff, #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .logo p { font-size: 0.7rem; color: #a8c8a8; }
-        .btn-logout { background: rgba(255,255,255,0.2); border: none; padding: 0.5rem 1rem; border-radius: 30px; color: white; cursor: pointer; transition: all 0.3s; }
+        .btn-logout { background: rgba(255,255,255,0.2); border: none; padding: 0.5rem 1rem; border-radius: 30px; color: white; cursor: pointer; }
         .btn-logout:hover { background: rgba(255,255,255,0.3); }
         
-        .admin-nav { display: flex; gap: 0.5rem; margin: 2rem 0; background: white; padding: 0.5rem; border-radius: 60px; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .admin-nav-item { padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; transition: all 0.3s; font-weight: 600; color: #4a5b4a; background: none; border: none; }
+        .admin-nav { display: flex; gap: 0.5rem; margin: 2rem 0; background: white; padding: 0.5rem; border-radius: 60px; flex-wrap: wrap; }
+        .admin-nav-item { padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600; color: #4a5b4a; background: none; border: none; }
         .admin-nav-item i { margin-right: 0.5rem; }
         .admin-nav-item:hover { background: #e8f0e8; }
         .admin-nav-item.active { background: #2d6a2d; color: white; }
@@ -35,31 +35,27 @@
         .dashboard-card { background: white; border-radius: 20px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 2px solid #e8f0e8; flex-wrap: wrap; gap: 0.5rem; }
         .card-header h3 { color: #1a2e1a; font-size: 1.2rem; }
-        .card-header h3 i { margin-right: 0.5rem; color: #2d6a2d; }
         
         .data-table { width: 100%; border-collapse: collapse; }
         .data-table th, .data-table td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #e8f0e8; }
-        .data-table th { background: #f0f4e8; font-weight: 600; color: #1a2e1a; }
-        .data-table tr:hover { background: #f9faf8; }
+        .data-table th { background: #f0f4e8; font-weight: 600; }
         .table-responsive { overflow-x: auto; }
         
         .status-badge { padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; display: inline-block; }
         .status-active { background: #d4edda; color: #155724; }
         .status-pending { background: #fff3cd; color: #856404; }
         .status-completed { background: #cce5ff; color: #004085; }
-        .status-approved { background: #d4edda; color: #155724; }
-        .status-rejected { background: #f8d7da; color: #721c24; }
         
-        .btn-primary { background: #2d6a2d; color: white; border: none; padding: 0.5rem 1rem; border-radius: 30px; cursor: pointer; font-weight: 500; transition: all 0.3s; }
+        .btn-primary { background: #2d6a2d; color: white; border: none; padding: 0.5rem 1rem; border-radius: 30px; cursor: pointer; font-weight: 500; }
         .btn-primary:hover { background: #1a4d1a; }
         .btn-danger { background: #dc3545; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
-        .btn-info { background: #17a2b8; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.7rem; margin-right: 0.3rem; }
+        .btn-info { background: #17a2b8; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
         .btn-success { background: #28a745; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
         
         .filter-group { display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
         .filter-btn { padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; font-size: 0.8rem; }
         .filter-btn.active { background: #2d6a2d; color: white; border-color: #2d6a2d; }
-        .filter-select { padding: 0.3rem 0.8rem; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; font-size: 0.8rem; }
+        .filter-select { padding: 0.3rem 0.8rem; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; }
         
         .participant-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; border-bottom: 1px solid #e8f0e8; flex-wrap: wrap; gap: 0.5rem; }
         .review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -69,14 +65,16 @@
         
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 2000; justify-content: center; align-items: center; }
         .modal.active { display: flex; }
-        .modal-content { background: white; border-radius: 28px; max-width: 600px; width: 90%; padding: 1.5rem; max-height: 85vh; overflow-y: auto; }
+        .modal-content { background: white; border-radius: 28px; max-width: 700px; width: 90%; padding: 1.5rem; max-height: 85vh; overflow-y: auto; }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 2px solid #eef3ea; }
-        .close-modal { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #999; }
+        .close-modal { background: none; border: none; font-size: 1.8rem; cursor: pointer; }
         .form-group { margin-bottom: 1rem; }
         .form-group label { display: block; font-weight: 600; margin-bottom: 0.3rem; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 12px; font-family: inherit; }
         
         .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 1rem 2rem; border-radius: 50px; display: none; z-index: 1500; }
+        .empty-state { text-align: center; padding: 2rem; color: #888; }
+        
         @media (max-width: 900px) { .admin-nav { flex-direction: column; border-radius: 20px; } .container { padding: 0 1rem; } .review-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -122,18 +120,25 @@
                 </div>
             </div>
 
-            <!-- MEMBERS TAB - Reads from Member Dashboard -->
+            <!-- MEMBERS TAB -->
             <div id="membersTab" class="tab-content">
                 <div class="dashboard-card">
-                    <div class="card-header"><h3><i class="fas fa-users"></i> All Members (from Member Dashboard)</h3><input type="text" id="memberSearch" placeholder="Search..." style="padding:0.5rem; border-radius:30px; border:1px solid #ddd; width:250px;" onkeyup="filterMembers()"></div>
+                    <div class="card-header"><h3><i class="fas fa-users"></i> All Members</h3><input type="text" id="memberSearch" placeholder="Search..." style="padding:0.5rem; border-radius:30px; border:1px solid #ddd; width:250px;" onkeyup="filterMembers()"></div>
                     <div class="table-responsive"><table class="data-table"><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Subscription</th><th>Status</th><th>Join Date</th><th>Action</th></tr></thead><tbody id="membersList"></tbody></table></div>
                 </div>
             </div>
 
-            <!-- TRANSACTIONS TAB - Reads from Member Dashboard -->
+            <!-- TRANSACTIONS TAB with CSV IMPORT/EXPORT -->
             <div id="transactionsTab" class="tab-content">
                 <div class="dashboard-card">
-                    <div class="card-header"><h3><i class="fas fa-exchange-alt"></i> All Transactions (Orders + Workshops + Rent + Subscriptions)</h3></div>
+                    <div class="card-header">
+                        <h3><i class="fas fa-exchange-alt"></i> All Transactions</h3>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <button class="btn-primary" onclick="exportToCSV()"><i class="fas fa-file-export"></i> Export CSV</button>
+                            <button class="btn-primary" onclick="openImportModal()"><i class="fas fa-file-import"></i> Import CSV</button>
+                            <button class="btn-info" onclick="downloadTemplate()"><i class="fas fa-download"></i> Template</button>
+                        </div>
+                    </div>
                     <div class="filter-group">
                         <button class="filter-btn active" data-type="all" onclick="filterTransactionsByType('all', this)">All</button>
                         <button class="filter-btn" data-type="order" onclick="filterTransactionsByType('order', this)">Orders</button>
@@ -141,6 +146,7 @@
                         <button class="filter-btn" data-type="rent" onclick="filterTransactionsByType('rent', this)">Rent</button>
                         <button class="filter-btn" data-type="subscription" onclick="filterTransactionsByType('subscription', this)">Subscriptions</button>
                     </div>
+                    <input type="text" id="transactionSearch" placeholder="Search by ID or user..." style="padding:0.5rem; border-radius:30px; border:1px solid #ddd; width:100%; margin-bottom:1rem;" onkeyup="filterTransactionsList()">
                     <div class="table-responsive"><table class="data-table"><thead><tr><th>ID</th><th>Type</th><th>User</th><th>Item</th><th>Amount</th><th>Date</th></tr></thead><tbody id="transactionsList"></tbody></table></div>
                 </div>
             </div>
@@ -180,11 +186,13 @@
 
     <div id="reviewModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Review Application</h3><button class="close-modal" onclick="closeReviewModal()">&times;</button></div><div id="reviewContent"></div><div class="form-group"><label>Decision</label><select id="reviewDecision"><option value="Approve">Approve</option><option value="Reject">Reject</option></select></div><div style="display:flex; gap:1rem; justify-content:flex-end;"><button class="btn-primary" onclick="submitReview()">Submit</button><button class="btn-danger" onclick="closeReviewModal()">Cancel</button></div></div></div>
 
+    <!-- IMPORT CSV MODAL -->
+    <div id="importModal" class="modal"><div class="modal-content"><div class="modal-header"><h3><i class="fas fa-file-import"></i> Import Transactions from CSV</h3><button class="close-modal" onclick="closeImportModal()">&times;</button></div><div class="modal-body"><div class="form-group"><label>Select CSV File</label><input type="file" id="csvFileInput" accept=".csv"></div><div id="importPreview" style="max-height: 200px; overflow-y: auto; margin-top: 1rem;"></div></div><div class="modal-footer" style="display:flex; gap:1rem; justify-content:flex-end; margin-top:1rem;"><button class="btn-danger" onclick="closeImportModal()">Cancel</button><button class="btn-primary" onclick="processImport()">Import</button></div></div></div>
+
     <div id="successToast" class="success-toast"></div>
 
     <script>
-        // ============ CENTRAL DATA LOADER - READS FROM MEMBER DASHBOARD ============
-        
+        // ============ DATA STORAGE KEYS (Sync with Member Dashboard) ============
         let allUsers = [];
         let allOrders = [];
         let allWorkshops = [];
@@ -201,94 +209,54 @@
         
         // ============ LOAD ALL DATA FROM MEMBER DASHBOARD STORAGE ============
         function loadAllData() {
-            // 1. Load Users from Member Dashboard (rrjfarm_users)
+            // Users
             const storedUsers = localStorage.getItem('rrjfarm_users');
-            if (storedUsers) {
-                allUsers = JSON.parse(storedUsers);
-            } else {
-                allUsers = [
-                    { id: 'admin1', name: 'Admin User', email: 'admin@rrjfarm.com', role: 'admin', subscription: 'premium', status: 'approved', profileCompleted: true, createdAt: Date.now() },
-                    { id: 'user1', name: 'Juan Dela Cruz', email: 'juan@example.com', role: 'regular', subscription: 'none', status: 'approved', profileCompleted: true, createdAt: Date.now() - 86400000 },
-                    { id: 'user2', name: 'Maria Santos', email: 'maria@example.com', role: 'regular', subscription: 'basic', status: 'approved', profileCompleted: true, createdAt: Date.now() - 172800000 },
-                    { id: 'user3', name: 'Pedro Penduko', email: 'pedro@example.com', role: 'farmer', subscription: 'premium', status: 'approved', profileCompleted: true, createdAt: Date.now() - 259200000 }
-                ];
-            }
+            allUsers = storedUsers ? JSON.parse(storedUsers) : [
+                { id: 'admin1', name: 'Admin User', email: 'admin@rrjfarm.com', role: 'admin', subscription: 'premium', status: 'approved', profileCompleted: true, createdAt: Date.now() },
+                { id: 'user1', name: 'Juan Dela Cruz', email: 'juan@example.com', role: 'regular', subscription: 'none', status: 'approved', profileCompleted: true, createdAt: Date.now() - 86400000 },
+                { id: 'user2', name: 'Maria Santos', email: 'maria@example.com', role: 'regular', subscription: 'basic', status: 'approved', profileCompleted: true, createdAt: Date.now() - 172800000 },
+                { id: 'user3', name: 'Pedro Penduko', email: 'pedro@example.com', role: 'farmer', subscription: 'premium', status: 'approved', profileCompleted: true, createdAt: Date.now() - 259200000 }
+            ];
             
-            // 2. Load Orders from Member Dashboard
+            // Orders
             const storedOrders = localStorage.getItem('rrjfarm_orders');
-            if (storedOrders) {
-                allOrders = JSON.parse(storedOrders);
-            } else {
-                allOrders = [
-                    { id: 'ORD001', product: 'Fresh Sitao', qty: 2, total: 90, farmer: 'Maria Santos', status: 'delivered', date: new Date().toISOString().split('T')[0], userId: 'user1' },
-                    { id: 'ORD002', product: 'Batangas Rice', qty: 5, total: 275, farmer: 'Anna Reyes', status: 'shipped', date: new Date().toISOString().split('T')[0], userId: 'user2' }
-                ];
-            }
+            allOrders = storedOrders ? JSON.parse(storedOrders) : [
+                { id: 'ORD001', product: 'Fresh Sitao', qty: 2, total: 90, farmer: 'Maria Santos', status: 'delivered', date: new Date().toISOString().split('T')[0], userId: 'user1' },
+                { id: 'ORD002', product: 'Batangas Rice', qty: 5, total: 275, farmer: 'Anna Reyes', status: 'shipped', date: new Date().toISOString().split('T')[0], userId: 'user2' }
+            ];
             
-            // 3. Load Workshops
+            // Workshops
             const storedWorkshops = localStorage.getItem('rrjfarm_workshops');
-            if (storedWorkshops) {
-                allWorkshops = JSON.parse(storedWorkshops);
-            } else {
-                allWorkshops = [
-                    { id: 1, title: 'Organic Pest Control', date: '2026-03-25', price: 500, slots: 20, remaining: 12 },
-                    { id: 2, title: 'Vermicomposting 101', date: '2026-04-05', price: 300, slots: 25, remaining: 18 },
-                    { id: 3, title: 'Small-Scale Chicken Raising', date: '2026-04-12', price: 700, slots: 15, remaining: 8 }
-                ];
-            }
+            allWorkshops = storedWorkshops ? JSON.parse(storedWorkshops) : [
+                { id: 1, title: 'Organic Pest Control', date: '2026-03-25', price: 500, slots: 20, remaining: 12 },
+                { id: 2, title: 'Vermicomposting 101', date: '2026-04-05', price: 300, slots: 25, remaining: 18 },
+                { id: 3, title: 'Small-Scale Chicken Raising', date: '2026-04-12', price: 700, slots: 15, remaining: 8 }
+            ];
             
-            // 4. Load Workshop Registrations
+            // Workshop Registrations
             const storedRegistrations = localStorage.getItem('rrjfarm_registered_workshops');
-            if (storedRegistrations) {
-                workshopRegistrations = JSON.parse(storedRegistrations);
-            } else {
-                workshopRegistrations = [];
-            }
+            workshopRegistrations = storedRegistrations ? JSON.parse(storedRegistrations) : [];
             
-            // 5. Load Subscriptions
+            // Subscriptions
             const storedSubscriptions = localStorage.getItem('rrjfarm_user_subscriptions');
-            if (storedSubscriptions) {
-                allSubscriptions = JSON.parse(storedSubscriptions);
-            } else {
-                allSubscriptions = [];
-            }
+            allSubscriptions = storedSubscriptions ? JSON.parse(storedSubscriptions) : [];
             
-            // 6. Load Land Applications
+            // Land Applications
             const storedApplications = localStorage.getItem('rrjfarm_land_applications');
-            if (storedApplications) {
-                landApplications = JSON.parse(storedApplications);
-            } else {
-                landApplications = [];
-            }
+            landApplications = storedApplications ? JSON.parse(storedApplications) : [];
             
-            // 7. Load Rent Transactions
+            // Rent Transactions
             const storedRentals = localStorage.getItem('rrjfarm_rent_transactions');
-            if (storedRentals) {
-                rentalTransactions = JSON.parse(storedRentals);
-            } else {
-                rentalTransactions = [];
-            }
+            rentalTransactions = storedRentals ? JSON.parse(storedRentals) : [];
             
             updateAnalytics();
         }
         
-        // ============ UPDATE ANALYTICS ============
         function updateAnalytics() {
-            // Active Members: approved users na may subscription (basic/premium) OR land_stewardship na approved
-            const activeMembers = allUsers.filter(u => {
-                if (u.status !== 'approved') return false;
-                if (u.subscription === 'land_stewardship') return true;
-                return u.subscription === 'basic' || u.subscription === 'premium';
-            });
-            
+            const activeMembers = allUsers.filter(u => u.status === 'approved' && (u.subscription === 'basic' || u.subscription === 'premium' || u.subscription === 'land_stewardship'));
             const farmerMembers = allUsers.filter(u => u.status === 'approved' && u.role === 'farmer');
-            const totalSales = allOrders.reduce((sum, o) => sum + o.total, 0) + 
-                               workshopRegistrations.reduce((sum, w) => sum + (w.price || 0), 0) +
-                               rentalTransactions.reduce((sum, r) => sum + r.amount, 0) +
-                               allSubscriptions.reduce((sum, s) => sum + s.amount, 0);
+            const totalSales = allOrders.reduce((sum, o) => sum + o.total, 0) + workshopRegistrations.reduce((sum, w) => sum + (w.price || 0), 0) + rentalTransactions.reduce((sum, r) => sum + r.amount, 0) + allSubscriptions.reduce((sum, s) => sum + s.amount, 0);
             const pendingApplicants = landApplications.filter(a => a.status === 'Pending');
-            const activeSubscriptions = allSubscriptions.filter(s => s.status === 'Active');
-            const workshopEnrollees = workshopRegistrations.length;
             
             document.getElementById('totalMembers').innerText = allUsers.length;
             document.getElementById('activeMembers').innerText = activeMembers.length;
@@ -296,8 +264,8 @@
             document.getElementById('totalOrders').innerText = allOrders.length;
             document.getElementById('totalSales').innerHTML = `₱${totalSales.toLocaleString()}`;
             document.getElementById('pendingApplicants').innerText = pendingApplicants.length;
-            document.getElementById('activeSubscriptions').innerText = activeSubscriptions.length;
-            document.getElementById('workshopEnrollees').innerText = workshopEnrollees;
+            document.getElementById('activeSubscriptions').innerText = allSubscriptions.filter(s => s.status === 'Active').length;
+            document.getElementById('workshopEnrollees').innerText = workshopRegistrations.length;
             
             loadMembersList();
             loadTransactionsList();
@@ -307,32 +275,26 @@
             loadSubscriptionsList();
         }
         
-        function refreshAllData() {
-            loadAllData();
-            showToast('Data refreshed from Member Dashboard!');
-        }
+        function refreshAllData() { loadAllData(); showToast('Data refreshed from Member Dashboard!'); }
         
-        // ============ MEMBERS LIST ============
+        // ============ MEMBERS ============
         function loadMembersList() {
             const search = document.getElementById('memberSearch')?.value.toLowerCase() || '';
             let filtered = allUsers.filter(u => u.role !== 'admin');
             if (search) filtered = filtered.filter(m => m.name?.toLowerCase().includes(search) || m.email?.toLowerCase().includes(search));
             
-            document.getElementById('membersList').innerHTML = filtered.map(m => {
-                const statusClass = m.status === 'approved' ? 'status-active' : 'status-pending';
-                const statusText = m.status === 'approved' ? 'Active' : 'Pending';
-                const subscriptionText = m.subscription === 'none' ? 'None' : m.subscription;
-                return `<tr>
+            document.getElementById('membersList').innerHTML = filtered.map(m => `
+                <tr>
                     <td>${m.id || 'N/A'}</td>
                     <td>${m.name || 'N/A'}</td>
                     <td>${m.email || 'N/A'}</td>
                     <td>${m.role === 'farmer' ? '🌾 Farmer' : (m.role === 'admin' ? 'Admin' : 'Regular')}</td>
-                    <td>${subscriptionText}</td>
-                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                    <td>${m.subscription || 'none'}</td>
+                    <td><span class="status-badge ${m.status === 'approved' ? 'status-active' : 'status-pending'}">${m.status === 'approved' ? 'Active' : 'Pending'}</span></td>
                     <td>${m.createdAt ? new Date(m.createdAt).toLocaleDateString() : 'N/A'}</td>
                     <td><button class="btn-danger" onclick="removeMember('${m.id}')">Remove</button></td>
-                </tr>`;
-            }).join('');
+                </tr>
+            `).join('');
         }
         
         function removeMember(userId) {
@@ -347,67 +309,26 @@
         
         function filterMembers() { loadMembersList(); }
         
-        // ============ TRANSACTIONS LIST ============
+        // ============ TRANSACTIONS with CSV ============
+        function getAllTransactions() {
+            let all = [];
+            allOrders.forEach(o => all.push({ id: o.id, type: 'order', user: o.userId || 'Customer', item: o.product, amount: o.total, date: o.date }));
+            workshopRegistrations.forEach(w => all.push({ id: 'WKS_' + w.id, type: 'workshop', user: w.participantName || w.name, item: w.workshopTitle, amount: w.price || 0, date: w.date }));
+            rentalTransactions.forEach(r => all.push({ id: r.id, type: 'rent', user: r.userName, item: r.item, amount: r.amount, date: r.date }));
+            allSubscriptions.forEach(s => all.push({ id: s.id, type: 'subscription', user: s.subscriberEmail, item: `${s.plan} Plan`, amount: s.amount, date: s.startDate }));
+            return all;
+        }
+        
         function loadTransactionsList() {
-            let allTransactions = [];
-            
-            // Orders
-            allOrders.forEach(o => allTransactions.push({
-                id: o.id,
-                type: 'order',
-                user: o.userId || 'Customer',
-                item: o.product,
-                amount: o.total,
-                date: o.date
-            }));
-            
-            // Workshop Registrations
-            workshopRegistrations.forEach(w => allTransactions.push({
-                id: 'WKS_' + w.id,
-                type: 'workshop',
-                user: w.participantName || w.name,
-                item: w.workshopTitle,
-                amount: w.price || 0,
-                date: w.date
-            }));
-            
-            // Rent Transactions
-            rentalTransactions.forEach(r => allTransactions.push({
-                id: r.id,
-                type: 'rent',
-                user: r.userName,
-                item: r.item,
-                amount: r.amount,
-                date: r.date
-            }));
-            
-            // Subscriptions
-            allSubscriptions.forEach(s => allTransactions.push({
-                id: s.id,
-                type: 'subscription',
-                user: s.subscriberEmail,
-                item: `${s.plan} Plan`,
-                amount: s.amount,
-                date: s.startDate
-            }));
-            
-            if (currentTransactionFilter !== 'all') {
-                allTransactions = allTransactions.filter(t => t.type === currentTransactionFilter);
-            }
-            
-            allTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+            let all = getAllTransactions();
+            if (currentTransactionFilter !== 'all') all = all.filter(t => t.type === currentTransactionFilter);
+            const search = document.getElementById('transactionSearch')?.value.toLowerCase() || '';
+            if (search) all = all.filter(t => t.id.toLowerCase().includes(search) || t.user.toLowerCase().includes(search));
+            all.sort((a, b) => new Date(b.date) - new Date(a.date));
             
             const typeIcons = { order: '📦', workshop: '🎓', rent: '🚜', subscription: '🔄' };
-            
-            document.getElementById('transactionsList').innerHTML = allTransactions.map(t => `
-                <tr>
-                    <td style="font-family: monospace;">${t.id}</td>
-                    <td>${typeIcons[t.type]} ${t.type}</td>
-                    <td>${t.user}</td>
-                    <td>${t.item}</td>
-                    <td>₱${t.amount.toLocaleString()}</td>
-                    <td>${t.date}</td>
-                </tr>
+            document.getElementById('transactionsList').innerHTML = all.map(t => `
+                <tr><td style="font-family: monospace;">${t.id}</td><td>${typeIcons[t.type]} ${t.type}</td><td>${t.user}</td><td>${t.item}</td><td>₱${t.amount.toLocaleString()}</td><td>${t.date}</td></tr>
             `).join('');
         }
         
@@ -418,46 +339,119 @@
             loadTransactionsList();
         }
         
+        function filterTransactionsList() { loadTransactionsList(); }
+        
+        // ============ CSV EXPORT ============
+        function exportToCSV() {
+            const all = getAllTransactions();
+            all.sort((a, b) => new Date(b.date) - new Date(a.date));
+            const headers = ['Transaction ID', 'Type', 'User', 'Item/Description', 'Amount (₱)', 'Date'];
+            const rows = all.map(t => [t.id, t.type, t.user, t.item, t.amount, t.date]);
+            const csvContent = [headers, ...rows].map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n');
+            const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute('download', `rrjfarm_transactions_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast('Transactions exported!');
+        }
+        
+        function downloadTemplate() {
+            const headers = ['Transaction ID', 'Type', 'User', 'Item/Description', 'Amount (₱)', 'Date'];
+            const sampleRows = [
+                ['ORD999', 'order', 'John Doe', 'Fresh Tomatoes', '500', '2026-05-13'],
+                ['SUB999', 'subscription', 'jane@email.com', 'Member Plan', '1500', '2026-05-13'],
+                ['WKS999', 'workshop', 'Mike Lee', 'Organic Pest Control', '299', '2026-05-13'],
+                ['RENT999', 'rent', 'Carlos Mendoza', 'Farm Tractor', '2500', '2026-05-13']
+            ];
+            const csvContent = [headers, ...sampleRows].map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n');
+            const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute('download', 'rrjfarm_transactions_template.csv');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast('Template downloaded!');
+        }
+        
+        function parseCSVLine(line) {
+            const result = [];
+            let inQuote = false;
+            let currentField = '';
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') { inQuote = !inQuote; }
+                else if (char === ',' && !inQuote) { result.push(currentField); currentField = ''; }
+                else { currentField += char; }
+            }
+            result.push(currentField);
+            return result.map(f => f.replace(/^"|"$/g, '').replace(/""/g, '"'));
+        }
+        
+        function openImportModal() { document.getElementById('importModal').classList.add('active'); document.getElementById('csvFileInput').value = ''; document.getElementById('importPreview').innerHTML = ''; }
+        function closeImportModal() { document.getElementById('importModal').classList.remove('active'); }
+        
+        function processImport() {
+            const fileInput = document.getElementById('csvFileInput');
+            if (!fileInput.files || fileInput.files.length === 0) { alert('Please select a CSV file'); return; }
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                const lines = content.split('\n').filter(line => line.trim());
+                if (lines.length < 2) { alert('CSV must have header and data rows'); return; }
+                let importedOrders = 0, importedSubs = 0, importedWorkshops = 0, importedRents = 0;
+                for (let i = 1; i < lines.length; i++) {
+                    const values = parseCSVLine(lines[i]);
+                    if (values.length < 6) continue;
+                    const id = values[0].trim();
+                    const type = values[1].trim().toLowerCase();
+                    const user = values[2].trim();
+                    const item = values[3].trim();
+                    const amount = parseFloat(values[4]);
+                    const date = values[5].trim();
+                    if (isNaN(amount)) continue;
+                    
+                    const newTx = { id, user, item, amount, date };
+                    if (type === 'order' && !allOrders.find(o => o.id === id)) { allOrders.push({ ...newTx, product: item, total: amount, status: 'completed' }); importedOrders++; }
+                    else if (type === 'subscription' && !allSubscriptions.find(s => s.id === id)) { allSubscriptions.push({ ...newTx, plan: item.includes('Member') ? 'member' : 'researcher', status: 'Active', subscriberEmail: user, amount: amount, startDate: date }); importedSubs++; }
+                    else if (type === 'workshop' && !workshopRegistrations.find(w => w.id === id)) { workshopRegistrations.push({ id, participantName: user, workshopTitle: item, price: amount, date, status: 'Confirmed' }); importedWorkshops++; }
+                    else if (type === 'rent' && !rentalTransactions.find(r => r.id === id)) { rentalTransactions.push({ id, userName: user, item, amount, date, status: 'Completed' }); importedRents++; }
+                }
+                localStorage.setItem('rrjfarm_orders', JSON.stringify(allOrders));
+                localStorage.setItem('rrjfarm_user_subscriptions', JSON.stringify(allSubscriptions));
+                localStorage.setItem('rrjfarm_registered_workshops', JSON.stringify(workshopRegistrations));
+                localStorage.setItem('rrjfarm_rent_transactions', JSON.stringify(rentalTransactions));
+                showToast(`Imported: ${importedOrders} orders, ${importedSubs} subscriptions, ${importedWorkshops} workshops, ${importedRents} rentals`);
+                loadAllData();
+                closeImportModal();
+            };
+            reader.readAsText(file, 'UTF-8');
+        }
+        
         // ============ LAND APPLICANTS ============
         function loadApplicantsList() {
-            const pendingApplicants = landApplications.filter(a => a.status === 'Pending');
-            const approvedApplicants = landApplications.filter(a => a.status === 'Approved');
-            const rejectedApplicants = landApplications.filter(a => a.status === 'Rejected');
+            const pending = landApplications.filter(a => a.status === 'Pending');
+            const approved = landApplications.filter(a => a.status === 'Approved');
+            const rejected = landApplications.filter(a => a.status === 'Rejected');
             
             let html = '';
-            
-            if (pendingApplicants.length > 0) {
-                html += `<h4 style="margin: 1rem 0 0.5rem; color:#ff8c00;">⏳ Pending (${pendingApplicants.length})</h4>`;
-                html += pendingApplicants.map(a => `
-                    <div class="participant-item" style="background:#fff8e1;">
-                        <div><strong>${a.name}</strong><br><small>${a.email}</small><br><small>Purpose: ${a.purpose} | Lot: ${a.lotSize}ha</small></div>
-                        <div><button class="btn-info" onclick="reviewApplicant(${a.id})">Review</button><button class="btn-success" onclick="approveApplicant(${a.id})">Approve</button><button class="btn-danger" onclick="rejectApplicant(${a.id})">Reject</button></div>
-                    </div>
-                `).join('');
+            if (pending.length > 0) {
+                html += `<h4 style="margin:1rem 0 0.5rem; color:#ff8c00;">⏳ Pending (${pending.length})</h4>`;
+                html += pending.map(a => `<div class="participant-item" style="background:#fff8e1;"><div><strong>${a.name}</strong><br><small>${a.email}</small><br><small>Purpose: ${a.purpose} | Lot: ${a.lotSize}ha</small></div><div><button class="btn-info" onclick="reviewApplicant(${a.id})">Review</button><button class="btn-success" onclick="approveApplicant(${a.id})">Approve</button><button class="btn-danger" onclick="rejectApplicant(${a.id})">Reject</button></div></div>`).join('');
             }
-            
-            if (approvedApplicants.length > 0) {
-                html += `<h4 style="margin: 1rem 0 0.5rem; color:#28a745;">✅ Approved (${approvedApplicants.length})</h4>`;
-                html += approvedApplicants.map(a => `
-                    <div class="participant-item">
-                        <div><strong>${a.name}</strong><br><small>${a.email}</small><br><small>Approved: ${a.appliedAt ? new Date(a.appliedAt).toLocaleDateString() : 'N/A'}</small></div>
-                    </div>
-                `).join('');
+            if (approved.length > 0) {
+                html += `<h4 style="margin:1rem 0 0.5rem; color:#28a745;">✅ Approved (${approved.length})</h4>`;
+                html += approved.map(a => `<div class="participant-item"><div><strong>${a.name}</strong><br><small>${a.email}</small></div></div>`).join('');
             }
-            
-            if (rejectedApplicants.length > 0) {
-                html += `<h4 style="margin: 1rem 0 0.5rem; color:#dc3545;">❌ Rejected (${rejectedApplicants.length})</h4>`;
-                html += rejectedApplicants.map(a => `
-                    <div class="participant-item">
-                        <div><strong>${a.name}</strong><br><small>${a.email}</small></div>
-                    </div>
-                `).join('');
+            if (rejected.length > 0) {
+                html += `<h4 style="margin:1rem 0 0.5rem; color:#dc3545;">❌ Rejected (${rejected.length})</h4>`;
+                html += rejected.map(a => `<div class="participant-item"><div><strong>${a.name}</strong><br><small>${a.email}</small></div></div>`).join('');
             }
-            
-            if (landApplications.length === 0) {
-                html = '<div class="empty-state">No land stewardship applications yet.</div>';
-            }
-            
+            if (landApplications.length === 0) html = '<div class="empty-state">No land stewardship applications yet.</div>';
             document.getElementById('applicantsList').innerHTML = html;
         }
         
@@ -467,7 +461,7 @@
                 <div class="review-field"><label>Name</label><div class="value">${currentReviewApplicant.name}</div></div>
                 <div class="review-field"><label>Email</label><div class="value">${currentReviewApplicant.email}</div></div>
                 <div class="review-field"><label>Phone</label><div class="value">${currentReviewApplicant.phone || 'N/A'}</div></div>
-                <div class="review-field"><label>Purpose/Role</label><div class="value">${currentReviewApplicant.purpose || 'Land Steward'}</div></div>
+                <div class="review-field"><label>Purpose</label><div class="value">${currentReviewApplicant.purpose || 'Land Steward'}</div></div>
                 <div class="review-field"><label>Farm Size</label><div class="value">${currentReviewApplicant.lotSize || 'N/A'} hectares</div></div>
                 <div class="review-field"><label>Location</label><div class="value">${currentReviewApplicant.municipality || currentReviewApplicant.location || 'N/A'}, ${currentReviewApplicant.province || ''}</div></div>
                 <div class="review-field"><label>Experience</label><div class="value">${currentReviewApplicant.experience || 'Not provided'}</div></div>
@@ -480,21 +474,9 @@
             if (applicant) {
                 applicant.status = 'Approved';
                 localStorage.setItem('rrjfarm_land_applications', JSON.stringify(landApplications));
-                
-                // Add as new member
-                const newMember = {
-                    id: 'M' + Date.now(),
-                    name: applicant.name,
-                    email: applicant.email,
-                    role: applicant.purpose === 'Farmer' ? 'farmer' : 'regular',
-                    subscription: 'land_stewardship',
-                    status: 'approved',
-                    profileCompleted: true,
-                    createdAt: Date.now()
-                };
+                const newMember = { id: 'M' + Date.now(), name: applicant.name, email: applicant.email, role: applicant.purpose === 'Farmer' ? 'farmer' : 'regular', subscription: 'land_stewardship', status: 'approved', profileCompleted: true, createdAt: Date.now() };
                 allUsers.push(newMember);
                 localStorage.setItem('rrjfarm_users', JSON.stringify(allUsers));
-                
                 showToast(`${applicant.name} approved and added as member!`);
                 loadAllData();
             }
@@ -502,43 +484,19 @@
         
         function rejectApplicant(id) {
             const applicant = landApplications.find(a => a.id === id);
-            if (applicant) {
-                applicant.status = 'Rejected';
-                localStorage.setItem('rrjfarm_land_applications', JSON.stringify(landApplications));
-                showToast(`${applicant.name} rejected`);
-                loadAllData();
-            }
+            if (applicant) { applicant.status = 'Rejected'; localStorage.setItem('rrjfarm_land_applications', JSON.stringify(landApplications)); showToast(`${applicant.name} rejected`); loadAllData(); }
         }
         
-        function submitReview() {
-            const decision = document.getElementById('reviewDecision').value;
-            if (decision === 'Approve') {
-                approveApplicant(currentReviewApplicant.id);
-            } else {
-                rejectApplicant(currentReviewApplicant.id);
-            }
-            closeReviewModal();
-        }
-        
+        function submitReview() { if (document.getElementById('reviewDecision').value === 'Approve') approveApplicant(currentReviewApplicant.id); else rejectApplicant(currentReviewApplicant.id); closeReviewModal(); }
         function closeReviewModal() { document.getElementById('reviewModal').classList.remove('active'); }
         
         // ============ WORKSHOPS ============
         function loadWorkshopsList() {
-            document.getElementById('workshopsListAdmin').innerHTML = allWorkshops.map(w => `
-                <div class="participant-item">
-                    <div><strong>${w.title}</strong><br><small>${w.date} | ₱${w.price} | Slots: ${w.remaining}/${w.slots}</small></div>
-                    <div><button class="btn-danger" onclick="deleteWorkshop(${w.id})">Delete</button></div>
-                </div>
-            `).join('');
+            document.getElementById('workshopsListAdmin').innerHTML = allWorkshops.map(w => `<div class="participant-item"><div><strong>${w.title}</strong><br><small>${w.date} | ₱${w.price} | Slots: ${w.remaining}/${w.slots}</small></div><div><button class="btn-danger" onclick="deleteWorkshop(${w.id})">Delete</button></div></div>`).join('');
         }
         
         function loadWorkshopRegistrations() {
-            document.getElementById('workshopRegistrationsList').innerHTML = workshopRegistrations.map(r => `
-                <div class="participant-item">
-                    <div><strong>${r.participantName || r.name}</strong><br><small>${r.workshopTitle} | ${r.date}</small></div>
-                    <span class="status-badge status-active">Confirmed</span>
-                </div>
-            `).join('') || '<div class="empty-state">No workshop registrations yet.</div>';
+            document.getElementById('workshopRegistrationsList').innerHTML = workshopRegistrations.map(r => `<div class="participant-item"><div><strong>${r.participantName || r.name}</strong><br><small>${r.workshopTitle} | ${r.date}</small></div><span class="status-badge status-active">Confirmed</span></div>`).join('') || '<div class="empty-state">No workshop registrations yet.</div>';
         }
         
         function openWorkshopModal() { document.getElementById('workshopModal').classList.add('active'); }
@@ -546,14 +504,7 @@
         
         document.getElementById('workshopForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
-            const newWorkshop = {
-                id: Date.now(),
-                title: document.getElementById('workshopTitle').value,
-                date: document.getElementById('workshopDate').value,
-                price: parseInt(document.getElementById('workshopPrice').value),
-                slots: parseInt(document.getElementById('workshopSlots').value),
-                remaining: parseInt(document.getElementById('workshopSlots').value)
-            };
+            const newWorkshop = { id: Date.now(), title: document.getElementById('workshopTitle').value, date: document.getElementById('workshopDate').value, price: parseInt(document.getElementById('workshopPrice').value), slots: parseInt(document.getElementById('workshopSlots').value), remaining: parseInt(document.getElementById('workshopSlots').value) };
             allWorkshops.push(newWorkshop);
             localStorage.setItem('rrjfarm_workshops', JSON.stringify(allWorkshops));
             showToast('Workshop added!');
@@ -562,24 +513,12 @@
             this.reset();
         });
         
-        function deleteWorkshop(id) {
-            if (confirm('Delete this workshop?')) {
-                allWorkshops = allWorkshops.filter(w => w.id !== id);
-                localStorage.setItem('rrjfarm_workshops', JSON.stringify(allWorkshops));
-                showToast('Workshop deleted');
-                loadAllData();
-            }
-        }
+        function deleteWorkshop(id) { if (confirm('Delete workshop?')) { allWorkshops = allWorkshops.filter(w => w.id !== id); localStorage.setItem('rrjfarm_workshops', JSON.stringify(allWorkshops)); showToast('Workshop deleted'); loadAllData(); } }
         
         // ============ SUBSCRIPTIONS ============
         function loadSubscriptionsList() {
             const activeSubs = allSubscriptions.filter(s => s.status === 'Active');
-            document.getElementById('subscriptionsList').innerHTML = activeSubs.map(s => `
-                <div class="participant-item">
-                    <div><strong>${s.subscriberEmail || s.userName}</strong><br><small>${s.plan} Plan | ₱${s.amount}/month</small><br><small>Started: ${s.startDate} | Next: ${s.nextBilling}</small></div>
-                    <span class="status-badge status-active">Active</span>
-                </div>
-            `).join('') || '<div class="empty-state">No active subscriptions.</div>';
+            document.getElementById('subscriptionsList').innerHTML = activeSubs.map(s => `<div class="participant-item"><div><strong>${s.subscriberEmail || s.user}</strong><br><small>${s.plan} Plan | ₱${s.amount}/month</small><br><small>Started: ${s.startDate}</small></div><span class="status-badge status-active">Active</span></div>`).join('') || '<div class="empty-state">No active subscriptions.</div>';
         }
         
         // ============ TAB SWITCHING ============
@@ -594,6 +533,7 @@
         window.switchTab = switchTab;
         window.filterMembers = filterMembers;
         window.filterTransactionsByType = filterTransactionsByType;
+        window.filterTransactionsList = filterTransactionsList;
         window.openWorkshopModal = openWorkshopModal;
         window.closeWorkshopModal = closeWorkshopModal;
         window.reviewApplicant = reviewApplicant;
@@ -605,6 +545,11 @@
         window.removeMember = removeMember;
         window.refreshAllData = refreshAllData;
         window.handleLogout = handleLogout;
+        window.exportToCSV = exportToCSV;
+        window.downloadTemplate = downloadTemplate;
+        window.openImportModal = openImportModal;
+        window.closeImportModal = closeImportModal;
+        window.processImport = processImport;
         
         loadAllData();
     </script>
