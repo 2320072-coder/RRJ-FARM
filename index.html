@@ -19,7 +19,6 @@
         .nav-menu a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; padding: 0.5rem 0; }
         .nav-menu a:hover, .nav-menu a.active { color: #ffd700; border-bottom: 2px solid #ffd700; }
         
-        /* Login Reminder Modal */
         .reminder-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
         .reminder-modal.active { display: flex; }
         .reminder-content { background: white; border-radius: 32px; max-width: 400px; width: 90%; padding: 1.5rem; text-align: center; animation: fadeUp 0.3s ease; }
@@ -38,6 +37,7 @@
         .hero-stats { display: flex; gap: 1.5rem; background: rgba(255,255,255,0.15); border-radius: 20px; padding: 1.2rem; justify-content: center; align-items: center; flex-wrap: wrap; }
         .hero-stat .number { font-size: 1.8rem; font-weight: 800; color: white; }
         .hero-stat .label { font-size: 0.7rem; color: rgba(255,255,255,0.8); }
+        .live-badge { background: #ffd700; color: #1a2e1a; font-size: 0.6rem; padding: 0.2rem 0.5rem; border-radius: 20px; margin-left: 0.5rem; vertical-align: middle; }
         
         .stats-premium { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin: 2rem 0; }
         .stat-card { background: white; padding: 1.2rem; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: all 0.3s; }
@@ -47,10 +47,13 @@
         .stat-icon { font-size: 2rem; margin-bottom: 0.5rem; }
         
         .member-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
-        .member-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 1.2rem; text-align: center; }
+        .member-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 1.2rem; text-align: center; position: relative; }
         .member-card i { font-size: 2rem; color: #2d6a2d; margin-bottom: 0.5rem; }
         .member-card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
         .member-card p { font-size: 0.8rem; color: #666; margin-bottom: 0.3rem; }
+        .member-role { display: inline-block; background: #e8f0e8; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; margin: 0.5rem 0; }
+        .approved-badge { background: #28a745; color: white; font-size: 0.6rem; padding: 0.2rem 0.5rem; border-radius: 20px; margin-left: 0.5rem; }
+        .new-badge { position: absolute; top: 10px; right: 10px; background: #ffc107; color: #1a2e1a; font-size: 0.6rem; padding: 0.2rem 0.5rem; border-radius: 20px; font-weight: bold; }
         
         .workshop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
         .workshop-card { background: white; border-radius: 20px; padding: 1.2rem; border-left: 4px solid #ffd700; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
@@ -67,7 +70,6 @@
         .full-width { grid-column: span 2; }
         .btn-submit-white { background: #2d6a2d; color: white; padding: 0.8rem; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; width: 100%; font-size: 1rem; margin-top: 0.5rem; }
         
-        /* Location Dropdown */
         .location-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .price-note { font-size: 0.7rem; color: #2d6a2d; margin-top: 0.2rem; }
         
@@ -81,7 +83,6 @@
         @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         
-        /* Mobile Responsive Fixes */
         @media (max-width: 900px) { 
             .container { padding: 0 1rem; }
             .hero-grid { grid-template-columns: 1fr; text-align: center; padding: 1.5rem; }
@@ -127,7 +128,7 @@
                     <ul>
                         <li><a href="index.html" class="active">Home</a></li>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="index.html#members">Members</a></li>
+                        <li><a href="#members">Members</a></li>
                         <li><a href="marketplace.html">Marketplace</a></li>
                         <li><a href="workshops.html">Workshops</a></li>
                         <li><a href="cooperative.html">Cooperative</a></li>
@@ -153,9 +154,10 @@
                         </div>
                     </div>
                     <div class="hero-stats">
-                        <div class="hero-stat"><div class="number">30</div><div class="label">Active Members</div></div>
-                        <div class="hero-stat"><div class="number">6</div><div class="label">Farmer-Members</div></div>
-                        <div class="hero-stat"><div class="number">₱217k</div><div class="label">Total Sales</div></div>
+                        <div class="hero-stat"><div class="number" id="liveActiveMembers">0</div><div class="label">Active Members <span class="live-badge">LIVE</span></div></div>
+                        <div class="hero-stat"><div class="number" id="liveFarmerMembers">0</div><div class="label">Farmer-Members</div></div>
+                        <div class="hero-stat"><div class="number" id="liveTotalSales">₱0</div><div class="label">Total Sales</div></div>
+                        <div class="hero-stat"><div class="number" id="liveStudentsCount">0</div><div class="label">Students/Researchers</div></div>
                     </div>
                 </div>
             </div>
@@ -167,7 +169,8 @@
             </div>
 
             <section id="members">
-                <h2>Our Stewardship Members</h2>
+                <h2>🌱 Our Stewardship Members</h2>
+                <p style="margin-bottom: 1rem; color: #666;">Meet our land stewards and farmers building a sustainable future.</p>
                 <div class="member-grid" id="memberGrid"></div>
             </section>
 
@@ -242,7 +245,6 @@
         </div>
     </main>
 
-    <!-- LOGIN REMINDER MODAL -->
     <div id="reminderModal" class="reminder-modal">
         <div class="reminder-content">
             <div class="reminder-icon">⚠️</div>
@@ -269,7 +271,7 @@
     <div id="successToast" class="success-toast"></div>
 
     <script>
-        // Complete Municipality List by Province
+        // ============ COMPLETE MUNICIPALITY DATA ============
         const municipalitiesData = {
             Batangas: [
                 "Agoncillo", "Alitagtag", "Balayan", "Balete", "Batangas City", "Bauan", "Calaca", "Calatagan", 
@@ -316,37 +318,38 @@
             }
         }
 
-                const members = [
-            { name: "Maria Santos", location: "Lipa City, Batangas", farmType: "Vegetable & Herb Production", role: "land_steward" },
-            { name: "Jose Dela Cruz", location: "Tanauan City, Batangas", farmType: "Backyard Poultry & Vegetables", role: "farmer" },
-            { name: "Anna Reyes", location: "Malvar, Batangas", farmType: "Rice & Integrated Farming", role: "coop_member" },
-            { name: "Carlos Mendoza", location: "Sto. Tomas, Batangas", farmType: "Organic Vegetables & Herbs", role: "land_steward" },
-            { name: "Luzviminda Fernandez", location: "Batangas City, Batangas", farmType: "Container Gardening & Microgreens", role: "land_steward" },
-            { name: "Ramon Garcia", location: "San Jose, Batangas", farmType: "Fruit Trees & Native Pigs", role: "farmer" },
-            { name: "Patricia Lim", location: "Rosario, Batangas", farmType: "Medicinal Plants & Herbs", role: "land_steward" },
-            { name: "Fernando Aquino", location: "Ibaan, Batangas", farmType: "Coffee & Cacao Production", role: "coop_member" },
-            { name: "Isabella Cruz", location: "San Juan, Batangas", farmType: "Duck Raising & Egg Production", role: "land_steward" },
-            { name: "Gregory Villanueva", location: "Lobo, Batangas", farmType: "Mushroom Cultivation", role: "land_steward" },
-            { name: "Fe Rodriguez", location: "Nasugbu, Batangas", farmType: "Pineapple & Coconut Integration", role: "farmer" },
-            { name: "Rogelio Manalo", location: "Calatagan, Batangas", farmType: "Saltwater Fishpond", role: "coop_member" },
-            { name: "Leticia Gomez", location: "Balayan, Batangas", farmType: "Dragon Fruit Plantation", role: "land_steward" },
-            { name: "Emilio Santiago", location: "Taal, Batangas", farmType: "Permaculture Farming", role: "land_steward" },
-            { name: "Carmela Villar", location: "Laurel, Batangas", farmType: "Cut Flowers & Ornamentals", role: "land_steward" },
-            { name: "Rolando Mercado", location: "Los Banos, Laguna", farmType: "Dairy Goat Farm", role: "coop_member" },
-            { name: "Belen Cruz", location: "Calamba City, Laguna", farmType: "Backyard Vermicomposting", role: "land_steward" },
-            { name: "Danilo Reyes", location: "Santa Cruz, Laguna", farmType: "Coconut Plantation", role: "farmer" },
-            { name: "Gloria Ramos", location: "Pagsanjan, Laguna", farmType: "Native Vegetable Seeds", role: "land_steward" },
-            { name: "Ricardo Torres", location: "Bay, Laguna", farmType: "Hydroponic Lettuce", role: "coop_member" },
-            { name: "Marilyn Santiago", location: "San Pablo City, Laguna", farmType: "Organic Strawberry", role: "land_steward" },
-            { name: "Ramon Dimagiba", location: "Liliw, Laguna", farmType: "Integrated Rice-Duck", role: "farmer" },
-            { name: "Lorna Austria", location: "Nagcarlan, Laguna", farmType: "Organic Ginger & Turmeric", role: "land_steward" },
-            { name: "Amor Perez", location: "Lucena City, Quezon", farmType: "Organic Ube & Rootcrops", role: "land_steward" },
-            { name: "Ernesto Bernardo", location: "Sariaya, Quezon", farmType: "Coconut & Nipa Plantation", role: "coop_member" },
-            { name: "Susan Flores", location: "Tayabas City, Quezon", farmType: "Organic Rice Terraces", role: "land_steward" },
-            { name: "Bernard Jimenez", location: "Candelaria, Quezon", farmType: "Free-Range Chicken", role: "farmer" },
-            { name: "Victoria Llamas", location: "Lucban, Quezon", farmType: "Organic Cacao & Tablea", role: "land_steward" },
-            { name: "Leonardo Cruz", location: "Infanta, Quezon", farmType: "Mangrove & Aquasilviculture", role: "coop_member" },
-            { name: "Helena Mercado", location: "Gumaca, Quezon", farmType: "Organic Pineapple Fiber", role: "land_steward" }
+        // ============ COMPLETE LIST OF EXISTING STEWARD MEMBERS (PRESERVED) ============
+        const existingStewardMembers = [
+            { name: "Maria Santos", location: "Lipa City, Batangas", farmType: "Vegetable & Herb Production", role: "land_steward", lotSize: "1.5" },
+            { name: "Jose Dela Cruz", location: "Tanauan City, Batangas", farmType: "Backyard Poultry & Vegetables", role: "farmer", lotSize: "2" },
+            { name: "Anna Reyes", location: "Malvar, Batangas", farmType: "Rice & Integrated Farming", role: "coop_member", lotSize: "3" },
+            { name: "Carlos Mendoza", location: "Sto. Tomas, Batangas", farmType: "Organic Vegetables & Herbs", role: "land_steward", lotSize: "1" },
+            { name: "Luzviminda Fernandez", location: "Batangas City, Batangas", farmType: "Container Gardening & Microgreens", role: "land_steward", lotSize: "0.5" },
+            { name: "Ramon Garcia", location: "San Jose, Batangas", farmType: "Fruit Trees & Native Pigs", role: "farmer", lotSize: "2.5" },
+            { name: "Patricia Lim", location: "Rosario, Batangas", farmType: "Medicinal Plants & Herbs", role: "land_steward", lotSize: "1" },
+            { name: "Fernando Aquino", location: "Ibaan, Batangas", farmType: "Coffee & Cacao Production", role: "coop_member", lotSize: "2" },
+            { name: "Isabella Cruz", location: "San Juan, Batangas", farmType: "Duck Raising & Egg Production", role: "land_steward", lotSize: "1" },
+            { name: "Gregory Villanueva", location: "Lobo, Batangas", farmType: "Mushroom Cultivation", role: "land_steward", lotSize: "0.5" },
+            { name: "Fe Rodriguez", location: "Nasugbu, Batangas", farmType: "Pineapple & Coconut Integration", role: "farmer", lotSize: "3" },
+            { name: "Rogelio Manalo", location: "Calatagan, Batangas", farmType: "Saltwater Fishpond", role: "coop_member", lotSize: "2" },
+            { name: "Leticia Gomez", location: "Balayan, Batangas", farmType: "Dragon Fruit Plantation", role: "land_steward", lotSize: "1.5" },
+            { name: "Emilio Santiago", location: "Taal, Batangas", farmType: "Permaculture Farming", role: "land_steward", lotSize: "2" },
+            { name: "Carmela Villar", location: "Laurel, Batangas", farmType: "Cut Flowers & Ornamentals", role: "land_steward", lotSize: "1" },
+            { name: "Rolando Mercado", location: "Los Banos, Laguna", farmType: "Dairy Goat Farm", role: "coop_member", lotSize: "2" },
+            { name: "Belen Cruz", location: "Calamba City, Laguna", farmType: "Backyard Vermicomposting", role: "land_steward", lotSize: "0.5" },
+            { name: "Danilo Reyes", location: "Santa Cruz, Laguna", farmType: "Coconut Plantation", role: "farmer", lotSize: "4" },
+            { name: "Gloria Ramos", location: "Pagsanjan, Laguna", farmType: "Native Vegetable Seeds", role: "land_steward", lotSize: "1" },
+            { name: "Ricardo Torres", location: "Bay, Laguna", farmType: "Hydroponic Lettuce", role: "coop_member", lotSize: "0.5" },
+            { name: "Marilyn Santiago", location: "San Pablo City, Laguna", farmType: "Organic Strawberry", role: "land_steward", lotSize: "1" },
+            { name: "Ramon Dimagiba", location: "Liliw, Laguna", farmType: "Integrated Rice-Duck", role: "farmer", lotSize: "2" },
+            { name: "Lorna Austria", location: "Nagcarlan, Laguna", farmType: "Organic Ginger & Turmeric", role: "land_steward", lotSize: "1" },
+            { name: "Amor Perez", location: "Lucena City, Quezon", farmType: "Organic Ube & Rootcrops", role: "land_steward", lotSize: "1.5" },
+            { name: "Ernesto Bernardo", location: "Sariaya, Quezon", farmType: "Coconut & Nipa Plantation", role: "coop_member", lotSize: "3" },
+            { name: "Susan Flores", location: "Tayabas City, Quezon", farmType: "Organic Rice Terraces", role: "land_steward", lotSize: "2" },
+            { name: "Bernard Jimenez", location: "Candelaria, Quezon", farmType: "Free-Range Chicken", role: "farmer", lotSize: "1.5" },
+            { name: "Victoria Llamas", location: "Lucban, Quezon", farmType: "Organic Cacao & Tablea", role: "land_steward", lotSize: "2" },
+            { name: "Leonardo Cruz", location: "Infanta, Quezon", farmType: "Mangrove & Aquasilviculture", role: "coop_member", lotSize: "3" },
+            { name: "Helena Mercado", location: "Gumaca, Quezon", farmType: "Organic Pineapple Fiber", role: "land_steward", lotSize: "1.5" }
         ];
         
         const workshopsList = [
@@ -355,6 +358,139 @@
             { title: "Backyard Beekeeping", date: "June 15, 2026", price: 800, category: "livestock" }
         ];
         
+        // ============ MAIN SYNC FUNCTION - PRESERVES EXISTING MEMBERS ============
+        function syncWithAdminDashboard() {
+            console.log('🔄 Syncing homepage with Admin Dashboard...');
+            
+            // Get data from localStorage (shared with Admin Dashboard)
+            const users = JSON.parse(localStorage.getItem('rrjfarm_users') || '[]');
+            const subscriptions = JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions') || '[]');
+            const landApplications = JSON.parse(localStorage.getItem('rrjfarm_land_applications') || '[]');
+            const orders = JSON.parse(localStorage.getItem('rrjfarm_orders') || '[]');
+            const workshopRegs = JSON.parse(localStorage.getItem('rrjfarm_registered_workshops') || '[]');
+            const rentTrans = JSON.parse(localStorage.getItem('rrjfarm_rent_transactions') || '[]');
+            
+            // ============ 1. ACTIVE MEMBERS ============
+            const approvedUsers = users.filter(u => u.status === 'approved');
+            const approvedLandStewards = landApplications.filter(app => app.status === 'Approved');
+            const totalActiveMembers = approvedUsers.length + approvedLandStewards.length;
+            
+            // ============ 2. FARMER MEMBERS ============
+            const farmerStewards = approvedLandStewards.filter(app => app.purpose === 'Farmer');
+            const farmerUsers = approvedUsers.filter(u => u.role === 'farmer');
+            const totalFarmerMembers = farmerStewards.length + farmerUsers.length;
+            
+            // ============ 3. STUDENTS/RESEARCHERS ============
+            const studentSubscriptions = subscriptions.filter(s => 
+                s.status === 'Active' && (s.plan === 'researcher' || s.plan === 'student')
+            );
+            const totalStudents = studentSubscriptions.length;
+            
+            // ============ 4. TOTAL SALES ============
+            const orderSales = orders.reduce((sum, o) => sum + (o.total || 0), 0);
+            const workshopSales = workshopRegs.reduce((sum, w) => sum + (w.price || 0), 0);
+            const subscriptionSales = subscriptions.reduce((sum, s) => sum + (s.amount || 0), 0);
+            const rentSales = rentTrans.reduce((sum, r) => sum + (r.amount || 0), 0);
+            const totalSales = orderSales + workshopSales + subscriptionSales + rentSales;
+            
+            // ============ UPDATE HOMEPAGE STATS ============
+            document.getElementById('liveActiveMembers').innerText = totalActiveMembers;
+            document.getElementById('liveFarmerMembers').innerText = totalFarmerMembers;
+            document.getElementById('liveTotalSales').innerHTML = `₱${totalSales.toLocaleString()}`;
+            document.getElementById('liveStudentsCount').innerText = totalStudents;
+            
+            console.log(`📊 Stats: ${totalActiveMembers} Active, ${totalFarmerMembers} Farmers, ${totalStudents} Students, ₱${totalSales.toLocaleString()}`);
+            
+            // ============ LOAD MEMBERS - PRESERVE EXISTING + ADD APPROVED ============
+            loadMembersWithApprovedStewards(approvedLandStewards);
+        }
+        
+        function loadMembersWithApprovedStewards(approvedStewards) {
+            const memberGrid = document.getElementById('memberGrid');
+            if (!memberGrid) return;
+            
+            // Start with ALL existing steward members (preserved)
+            let allMembers = [...existingStewardMembers];
+            
+            // Track names to avoid duplicates
+            const existingNames = new Set(existingStewardMembers.map(m => m.name.toLowerCase()));
+            
+            // Add approved stewards from admin (only if not already in existing list)
+            approvedStewards.forEach(steward => {
+                if (!existingNames.has(steward.name.toLowerCase())) {
+                    const isNew = new Date(steward.appliedAt).getTime() > Date.now() - 7 * 24 * 60 * 60 * 1000;
+                    allMembers.push({
+                        name: steward.name,
+                        location: `${steward.municipality || 'Batangas'}, ${steward.province || 'Batangas'}`,
+                        farmType: getFarmTypeByPurpose(steward.purpose),
+                        role: 'approved_land_steward',
+                        lotSize: steward.lotSize,
+                        purpose: steward.purpose,
+                        isNew: isNew,
+                        appliedAt: steward.appliedAt
+                    });
+                    console.log(`✅ Added new approved steward: ${steward.name}`);
+                }
+            });
+            
+            // Render all members
+            memberGrid.innerHTML = allMembers.map(m => {
+                const isNewApproved = m.isNew === true;
+                const roleText = getRoleText(m);
+                const roleIcon = getRoleIcon(m);
+                const approvedBadge = m.role === 'approved_land_steward' ? '<span class="approved-badge">✓ Approved</span>' : '';
+                const newBadge = isNewApproved ? '<span class="new-badge">NEW</span>' : '';
+                const displayLotSize = m.lotSize ? `<p><i class="fas fa-ruler-combined"></i> ${m.lotSize} hectare farm</p>` : '';
+                
+                return `
+                    <div class="member-card">
+                        ${newBadge}
+                        <i class="fas fa-user-circle"></i>
+                        <h3>${m.name} ${approvedBadge}</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> ${m.location}</p>
+                        <p><i class="fas fa-seedling"></i> ${m.farmType}</p>
+                        ${displayLotSize}
+                        <span class="member-role">${roleIcon} ${roleText}</span>
+                        <button class="btn-contact" onclick="handleContactMember('${m.name.replace(/'/g, "\\'")}')">Contact Member</button>
+                    </div>
+                `;
+            }).join('');
+            
+            console.log(`📇 Displaying ${allMembers.length} total members (${existingStewardMembers.length} existing + ${approvedStewards.filter(s => !existingNames.has(s.name.toLowerCase())).length} new)`);
+        }
+        
+        function getFarmTypeByPurpose(purpose) {
+            switch(purpose) {
+                case 'Farmer': return 'Farming & Produce';
+                case 'Homesteader': return 'Homesteading & Self-Sufficiency';
+                case 'Researcher': return 'Research & Development';
+                case 'Student': return 'Learning & Education';
+                default: return 'Sustainable Agriculture';
+            }
+        }
+        
+        function getRoleText(member) {
+            if (member.role === 'approved_land_steward') {
+                return `🌱 ${member.purpose || 'Land Steward'}`;
+            } else if (member.role === 'land_steward') {
+                return '🌾 Land Steward';
+            } else if (member.role === 'farmer') {
+                return '👨‍🌾 Farmer Member';
+            } else if (member.role === 'coop_member') {
+                return '🤝 Coop Member';
+            }
+            return '🌱 Steward';
+        }
+        
+        function getRoleIcon(member) {
+            if (member.role === 'approved_land_steward') return '🌱';
+            if (member.role === 'land_steward') return '🌾';
+            if (member.role === 'farmer') return '👨‍🌾';
+            if (member.role === 'coop_member') return '🤝';
+            return '🌱';
+        }
+        
+        // ============ EXISTING FUNCTIONS ============
         function redirectToLogin() {
             closeReminderModal();
             window.location.href = 'login.html';
@@ -369,22 +505,6 @@
             t.innerHTML = msg; 
             t.style.display = 'block'; 
             setTimeout(() => t.style.display = 'none', 3000); 
-        }
-        
-                function loadMembers() {
-            const memberGrid = document.getElementById('memberGrid');
-            if (!memberGrid) return;
-            
-            memberGrid.innerHTML = members.map(m => `
-                <div class="member-card">
-                    <i class="fas fa-user-circle"></i>
-                    <h3>${m.name}</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> ${m.location}</p>
-                    <p><i class="fas fa-seedling"></i> ${m.farmType}</p>
-                    <span class="member-role">${m.role === 'land_steward' ? '🌾 Land Steward' : m.role === 'farmer' ? '👨‍🌾 Farmer' : '🤝 Coop Member'}</span>
-                    <button class="btn-contact" onclick="handleContactMember('${m.name}')">Contact Member</button>
-                </div>
-            `).join('');
         }
         
         function handleContactMember(memberName) {
@@ -418,15 +538,19 @@
             window.location.href = `workshops.html?register=${encodeURIComponent(workshopTitle)}`;
         }
         
+        // Application Form Submit - Save to localStorage for Admin
         document.getElementById('applicationForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
             
             const name = document.getElementById('appName').value;
             const email = document.getElementById('appEmail').value;
+            const phone = document.getElementById('appPhone').value;
+            const address = document.getElementById('appAddress').value;
             const lotSize = document.getElementById('appLotSize').value;
             const province = document.getElementById('appProvince').value;
             const municipality = document.getElementById('appMunicipality').value;
             const purpose = document.getElementById('appPurpose').value;
+            const experience = document.getElementById('appExperience').value;
             
             if (!province || !municipality) {
                 const msg = document.getElementById('formMessage');
@@ -438,6 +562,25 @@
                 setTimeout(() => { msg.innerHTML = ''; msg.style.padding = '0'; }, 3000);
                 return;
             }
+            
+            // Save to localStorage for Admin Dashboard
+            const existingApps = JSON.parse(localStorage.getItem('rrjfarm_land_applications') || '[]');
+            const newApplication = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                phone: phone,
+                address: address,
+                lotSize: lotSize,
+                province: province,
+                municipality: municipality,
+                purpose: purpose,
+                experience: experience,
+                status: 'Pending',
+                appliedAt: new Date().toISOString()
+            };
+            existingApps.push(newApplication);
+            localStorage.setItem('rrjfarm_land_applications', JSON.stringify(existingApps));
             
             const msg = document.getElementById('formMessage');
             const lotSizeText = document.getElementById('appLotSize').options[document.getElementById('appLotSize').selectedIndex]?.text || lotSize;
@@ -454,11 +597,31 @@
             document.getElementById('appMunicipality').innerHTML = '<option value="">Select Municipality</option>';
             
             setTimeout(() => { msg.innerHTML = ''; msg.style.padding = '0'; }, 5000);
+            
+            // Refresh the homepage display
+            setTimeout(syncWithAdminDashboard, 500);
         });
         
-        loadMembers();
+        // Load workshops on page load
         loadWorkshops();
         
+        // Initial sync
+        syncWithAdminDashboard();
+        
+        // Listen for storage changes (when Admin approves)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'rrjfarm_land_applications' || e.key === 'rrjfarm_users' || 
+                e.key === 'rrjfarm_user_subscriptions') {
+                console.log('📡 Storage change detected, refreshing homepage...');
+                syncWithAdminDashboard();
+                showToast('🔄 Homepage updated with latest data!');
+            }
+        });
+        
+        // Auto-refresh every 30 seconds
+        setInterval(syncWithAdminDashboard, 30000);
+        
+        // Expose functions globally
         window.handleContactMember = handleContactMember;
         window.handleWorkshopRegister = handleWorkshopRegister;
         window.redirectToLogin = redirectToLogin;
