@@ -19,7 +19,6 @@
         .nav-menu a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; padding: 0.5rem 0; font-size: 0.85rem; }
         .nav-menu a:hover, .nav-menu a.active { color: #ffd700; border-bottom: 2px solid #ffd700; }
         
-        /* REMINDER MODAL */
         .reminder-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
         .reminder-modal.active { display: flex; }
         .reminder-content { background: white; border-radius: 28px; max-width: 400px; width: 90%; padding: 1.5rem; text-align: center; animation: fadeUp 0.3s ease; }
@@ -41,6 +40,8 @@
         .hero-stat { text-align: center; }
         .hero-stat .number { font-size: 1.5rem; font-weight: 800; color: #2d6a2d; }
         .hero-stat .label { font-size: 0.65rem; color: #4a5b4a; }
+        .live-badge { background: #ffd700; color: #1a2e1a; font-size: 0.55rem; padding: 0.15rem 0.4rem; border-radius: 20px; margin-left: 0.3rem; vertical-align: middle; }
+        .info-icon { color: #2d6a2d; cursor: help; margin-left: 0.3rem; font-size: 0.7rem; }
         
         .section-header { text-align: center; margin: 2rem 0 1.5rem; }
         .section-header h2 { font-size: 1.6rem; color: #1a2e1a; margin-bottom: 0.3rem; }
@@ -58,9 +59,10 @@
         .profit-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; flex-wrap: wrap; }
         .profit-header i { font-size: 1.5rem; color: #ff8c00; }
         .profit-header h3 { font-size: 1.2rem; color: #1a2e1a; }
-        .profit-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+        .profit-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
         .profit-item { background: #f0f4e8; padding: 0.8rem; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.8rem; }
         .profit-item .value { font-weight: 800; color: #2d6a2d; }
+        .profit-note { background: #e8f0e8; padding: 0.5rem; border-radius: 12px; font-size: 0.7rem; color: #666; margin-top: 0.5rem; text-align: center; }
         
         .voting-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
         .proposal-card-premium { background: white; border-radius: 20px; padding: 1.2rem; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
@@ -97,7 +99,6 @@
         .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem 1.2rem; border-radius: 50px; display: none; z-index: 1500; animation: slideInRight 0.3s ease; font-size: 0.8rem; }
         @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         
-        /* Mobile Responsive */
         @media (max-width: 900px) {
             .container { padding: 0 1rem; }
             .hero-grid { grid-template-columns: 1fr; text-align: center; padding: 1.2rem; }
@@ -164,29 +165,36 @@
                         </div>
                     </div>
                     <div class="hero-stats">
-                        <div class="hero-stat"><div class="number">30</div><div class="label">Active Members</div></div>
-                        <div class="hero-stat"><div class="number">6</div><div class="label">Farmer-Members</div></div>
-                        <div class="hero-stat"><div class="number">₱217k</div><div class="label">Total Sales</div></div>
-                        <div class="hero-stat"><div class="number">15%</div><div class="label">Profit Sharing</div></div>
+                        <div class="hero-stat"><div class="number" id="coopActiveMembers">30</div><div class="label">Active Members <span class="live-badge">LIVE</span></div></div>
+                        <div class="hero-stat"><div class="number" id="coopFarmerMembers">6</div><div class="label">Farmer-Members</div></div>
+                        <div class="hero-stat"><div class="number" id="coopTotalSales">₱217k</div><div class="label">Total Sales</div></div>
+                        <div class="hero-stat"><div class="number" id="coopProfitShare">15%</div><div class="label">Profit Sharing</div></div>
                     </div>
                 </div>
             </div>
 
             <div class="stats-grid">
-                <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-number">30</div><div class="stat-label">Total Members</div></div>
-                <div class="stat-card"><div class="stat-icon">🌾</div><div class="stat-number">6</div><div class="stat-label">Farmer Members</div></div>
-                <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-number">₱217k</div><div class="stat-label">2026 Sales</div></div>
+                <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-number" id="coopTotalMembers">30</div><div class="stat-label">Total Members</div></div>
+                <div class="stat-card"><div class="stat-icon">🌾</div><div class="stat-number" id="coopTotalFarmers">6</div><div class="stat-label">Farmer Members</div></div>
+                <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-number" id="coopSalesAmount">₱217k</div><div class="stat-label">2026 Sales</div></div>
                 <div class="stat-card"><div class="stat-icon">🏆</div><div class="stat-number">15%</div><div class="stat-label">Patronage Refund</div></div>
             </div>
 
             <div class="profit-sharing-premium">
-                <div class="profit-header"><i class="fas fa-chart-line"></i><h3>Profit Sharing & Patronage Refund</h3></div>
+                <div class="profit-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Profit Sharing & Patronage Refund <i class="fas fa-info-circle info-icon" title="Under RA 9520, 15% of net surplus is distributed to members based on their transaction volume"></i></h3>
+                </div>
                 <p style="color: #4a5b4a; margin-bottom: 1rem; font-size: 0.85rem;">Under RA 9520, cooperative members receive patronage refunds based on their transactions with the cooperative. The more you transact, the higher your share!</p>
                 <div class="profit-list">
-                    <div class="profit-item"><span class="label">Q1 2026 Patronage Refund</span><span class="value">8% of purchases</span></div>
-                    <div class="profit-item"><span class="label">Q2 2026 (Projected)</span><span class="value">10-12% of purchases</span></div>
-                    <div class="profit-item"><span class="label">Total Distributed to Members</span><span class="value">₱187,500</span></div>
-                    <div class="profit-item"><span class="label">Year-End Bonus (Projected)</span><span class="value">₱250,000+</span></div>
+                    <div class="profit-item"><span class="label">💰 Total Net Surplus</span><span class="value" id="netSurplus">₱0</span></div>
+                    <div class="profit-item"><span class="label">🎯 Profit Sharing Fund (15%)</span><span class="value" id="profitFund">₱0</span></div>
+                    <div class="profit-item"><span class="label">📊 Q1 2026 (Jan-Mar) Refund</span><span class="value" id="profitQ1">₱0</span></div>
+                    <div class="profit-item"><span class="label">📈 Q2 2026 (Apr-Jun) Projected</span><span class="value" id="profitQ2">₱0</span></div>
+                </div>
+                <div class="profit-note">
+                    <i class="fas fa-calculator"></i> <strong>How is this calculated?</strong><br>
+                    Your individual refund = (Your transactions ÷ Total coop transactions) × Net Surplus × 15%
                 </div>
             </div>
 
@@ -283,6 +291,107 @@
             '003': { yes: 98, no: 58 }
         };
         
+        // ============ COOPERATIVE PAGE SYNC WITH ADMIN DASHBOARD ============
+        
+        // Helper function to get sales by quarter
+        function getSalesByQuarter(transactions, quarter) {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let startMonth, endMonth;
+            
+            switch(quarter) {
+                case 1: startMonth = 0; endMonth = 2; break;  // Jan-Mar
+                case 2: startMonth = 3; endMonth = 5; break;  // Apr-Jun
+                case 3: startMonth = 6; endMonth = 8; break;  // Jul-Sep
+                case 4: startMonth = 9; endMonth = 11; break; // Oct-Dec
+                default: return 0;
+            }
+            
+            return transactions.filter(t => {
+                const txDate = new Date(t.date);
+                return txDate.getFullYear() === currentYear && 
+                       txDate.getMonth() >= startMonth && 
+                       txDate.getMonth() <= endMonth;
+            }).reduce((sum, t) => sum + (t.amount || t.total || t.price || 0), 0);
+        }
+        
+        function syncCooperativePageWithAdminDashboard() {
+            console.log('🔄 Syncing Cooperative page with Admin Dashboard...');
+            
+            // Get data from localStorage
+            const users = JSON.parse(localStorage.getItem('rrjfarm_users') || '[]');
+            const subscriptions = JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions') || '[]');
+            const landApplications = JSON.parse(localStorage.getItem('rrjfarm_land_applications') || '[]');
+            const orders = JSON.parse(localStorage.getItem('rrjfarm_orders') || '[]');
+            const workshopRegs = JSON.parse(localStorage.getItem('rrjfarm_registered_workshops') || '[]');
+            const rentTrans = JSON.parse(localStorage.getItem('rrjfarm_rent_transactions') || '[]');
+            
+            // Convert all transactions to unified format for quarterly calculation
+            const allTransactions = [
+                ...orders.map(o => ({ date: o.date, amount: o.total || 0, type: 'order' })),
+                ...workshopRegs.map(w => ({ date: w.date, amount: w.price || 0, type: 'workshop' })),
+                ...subscriptions.map(s => ({ date: s.startDate, amount: s.amount || 0, type: 'subscription' })),
+                ...rentTrans.map(r => ({ date: r.date, amount: r.amount || 0, type: 'rent' }))
+            ];
+            
+            // Calculate quarterly sales
+            const q1Sales = getSalesByQuarter(allTransactions, 1);
+            const q2Sales = getSalesByQuarter(allTransactions, 2);
+            const q3Sales = getSalesByQuarter(allTransactions, 3);
+            const q4Sales = getSalesByQuarter(allTransactions, 4);
+            
+            // Total sales (all time)
+            const totalSales = allTransactions.reduce((sum, t) => sum + t.amount, 0);
+            
+            // Expenses (sample - 30% of sales for operations)
+            const totalExpenses = totalSales * 0.3;
+            const q1Expenses = q1Sales * 0.3;
+            const q2Expenses = q2Sales * 0.3;
+            
+            // Net Surplus
+            const totalNetSurplus = totalSales - totalExpenses;
+            const q1NetSurplus = q1Sales - q1Expenses;
+            const q2NetSurplus = q2Sales - q2Expenses;
+            
+            // Profit Sharing Fund (15% of net surplus)
+            const profitSharePercent = 15;
+            const totalProfitFund = totalNetSurplus * (profitSharePercent / 100);
+            const q1ProfitFund = q1NetSurplus * (profitSharePercent / 100);
+            const q2ProfitFund = q2NetSurplus * (profitSharePercent / 100);
+            
+            // Active Members
+            const approvedUsers = users.filter(u => u.status === 'approved');
+            const approvedLandStewards = landApplications.filter(app => app.status === 'Approved');
+            const totalActiveMembers = approvedUsers.length + approvedLandStewards.length;
+            
+            // Farmer Members
+            const farmerStewards = approvedLandStewards.filter(app => app.purpose === 'Farmer');
+            const farmerUsers = approvedUsers.filter(u => u.role === 'farmer');
+            const totalFarmerMembers = farmerStewards.length + farmerUsers.length;
+            
+            // ============ UPDATE UI ============
+            // Hero stats
+            document.getElementById('coopActiveMembers').innerText = totalActiveMembers;
+            document.getElementById('coopFarmerMembers').innerText = totalFarmerMembers;
+            document.getElementById('coopTotalSales').innerHTML = `₱${totalSales.toLocaleString()}`;
+            document.getElementById('coopProfitShare').innerText = `${profitSharePercent}%`;
+            
+            // Stats grid
+            document.getElementById('coopTotalMembers').innerText = totalActiveMembers;
+            document.getElementById('coopTotalFarmers').innerText = totalFarmerMembers;
+            document.getElementById('coopSalesAmount').innerHTML = `₱${totalSales.toLocaleString()}`;
+            
+            // Profit sharing display - NOW BASED ON ACTUAL QUARTERLY DATA
+            document.getElementById('netSurplus').innerHTML = `₱${totalNetSurplus.toLocaleString()}`;
+            document.getElementById('profitFund').innerHTML = `₱${totalProfitFund.toLocaleString()}`;
+            document.getElementById('profitQ1').innerHTML = q1ProfitFund > 0 ? `₱${q1ProfitFund.toLocaleString()}` : 'Calculating...';
+            document.getElementById('profitQ2').innerHTML = q2ProfitFund > 0 ? `₱${q2ProfitFund.toLocaleString()}` : 'Projected based on Q2 sales';
+            
+            console.log(`📊 Cooperative Stats: ${totalActiveMembers} Active Members, ${totalFarmerMembers} Farmers`);
+            console.log(`💰 Sales: Q1=₱${q1Sales}, Q2=₱${q2Sales}, Total=₱${totalSales}`);
+            console.log(`🎯 Profit Fund: Q1=₱${q1ProfitFund}, Q2=₱${q2ProfitFund}, Total=₱${totalProfitFund}`);
+        }
+        
         // ========== LOGIN & MEMBERSHIP CHECK FUNCTIONS ==========
         function isUserLoggedIn() {
             return localStorage.getItem('rrjfarm_current_user') !== null;
@@ -327,7 +436,7 @@
         function updateProgressBars() {
             for (let prop in votes) {
                 const total = votes[prop].yes + votes[prop].no;
-                const yesPercent = (votes[prop].yes / total) * 100;
+                const yesPercent = total > 0 ? (votes[prop].yes / total) * 100 : 0;
                 document.getElementById(`progress${prop}`).style.width = `${yesPercent}%`;
                 document.getElementById(`yes${prop}`).innerText = votes[prop].yes;
                 document.getElementById(`no${prop}`).innerText = votes[prop].no;
@@ -353,11 +462,31 @@
             }, 3000);
         }
         
+        // Run sync on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            syncCooperativePageWithAdminDashboard();
+            updateProgressBars();
+        });
+        
+        // Listen for storage changes
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'rrjfarm_land_applications' || e.key === 'rrjfarm_users' || 
+                e.key === 'rrjfarm_user_subscriptions' || e.key === 'rrjfarm_orders' ||
+                e.key === 'rrjfarm_registered_workshops' || e.key === 'rrjfarm_rent_transactions') {
+                console.log('📡 Detected storage change, refreshing Cooperative page...');
+                syncCooperativePageWithAdminDashboard();
+            }
+        });
+        
+        // Auto-refresh every 30 seconds
+        setInterval(syncCooperativePageWithAdminDashboard, 30000);
+        
         updateProgressBars();
         
         window.checkLoginAndVote = checkLoginAndVote;
         window.redirectToLogin = redirectToLogin;
         window.closeReminderModal = closeReminderModal;
+        window.syncCooperativePageWithAdminDashboard = syncCooperativePageWithAdminDashboard;
     </script>
 </body>
 </html>
