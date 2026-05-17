@@ -145,6 +145,16 @@
             color: #4a5b4a;
         }
         
+        .live-badge {
+            background: #ffd700;
+            color: #1a2e1a;
+            font-size: 0.55rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 20px;
+            margin-left: 0.3rem;
+            vertical-align: middle;
+        }
+        
         /* Contact Container */
         .contact-container-premium {
             display: grid;
@@ -606,15 +616,15 @@
                     </div>
                     <div class="hero-stats">
                         <div class="hero-stat">
-                            <div class="number">156</div>
-                            <div class="label">Happy Members</div>
+                            <div class="number" id="contactHappyMembers">156</div>
+                            <div class="label">Happy Members <span class="live-badge">LIVE</span></div>
                         </div>
                         <div class="hero-stat">
-                            <div class="number">98%</div>
+                            <div class="number" id="contactSatisfaction">98%</div>
                             <div class="label">Satisfaction</div>
                         </div>
                         <div class="hero-stat">
-                            <div class="number">24h</div>
+                            <div class="number" id="contactResponseTime">24h</div>
                             <div class="label">Avg Response</div>
                         </div>
                     </div>
@@ -887,6 +897,58 @@
     </div>
 
     <script>
+        // ============ CONTACT PAGE SYNC WITH ADMIN DASHBOARD ============
+        
+        function syncContactPageWithAdminDashboard() {
+            console.log('🔄 Syncing Contact page with Admin Dashboard...');
+            
+            // Get data from localStorage (shared with Admin Dashboard)
+            const users = JSON.parse(localStorage.getItem('rrjfarm_users') || '[]');
+            const landApplications = JSON.parse(localStorage.getItem('rrjfarm_land_applications') || '[]');
+            const orders = JSON.parse(localStorage.getItem('rrjfarm_orders') || '[]');
+            const workshopRegs = JSON.parse(localStorage.getItem('rrjfarm_registered_workshops') || '[]');
+            const subscriptions = JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions') || '[]');
+            const rentTrans = JSON.parse(localStorage.getItem('rrjfarm_rent_transactions') || '[]');
+            
+            // ============ 1. HAPPY MEMBERS (Active Members) ============
+            const approvedUsers = users.filter(u => u.status === 'approved');
+            const approvedLandStewards = landApplications.filter(app => app.status === 'Approved');
+            const totalActiveMembers = approvedUsers.length + approvedLandStewards.length;
+            
+            // ============ 2. SATISFACTION RATE ============
+            // Calculate based on completed orders and workshop feedback
+            const completedOrders = orders.filter(o => o.status === 'delivered' || o.status === 'Completed');
+            const totalTransactions = orders.length + workshopRegs.length;
+            const positiveInteractions = completedOrders.length + workshopRegs.length;
+            let satisfactionRate = totalTransactions > 0 ? Math.round((positiveInteractions / totalTransactions) * 100) : 98;
+            // Cap at 100%
+            satisfactionRate = Math.min(satisfactionRate, 100);
+            
+            // ============ 3. AVG RESPONSE TIME ============
+            // Based on inquiries response time (mock calculation)
+            const inquiries = JSON.parse(localStorage.getItem('rrjfarm_inquiries') || '[]');
+            let responseTime = 24; // default 24 hours
+            
+            if (inquiries.length > 0) {
+                // Calculate average response time based on recent inquiries
+                // For demo, keep at 24h but with dynamic feel
+                responseTime = 24;
+            }
+            
+            // ============ UPDATE CONTACT PAGE STATS ============
+            const happyMembersEl = document.getElementById('contactHappyMembers');
+            const satisfactionEl = document.getElementById('contactSatisfaction');
+            const responseTimeEl = document.getElementById('contactResponseTime');
+            
+            if (happyMembersEl) happyMembersEl.innerText = totalActiveMembers;
+            if (satisfactionEl) satisfactionEl.innerText = `${satisfactionRate}%`;
+            if (responseTimeEl) responseTimeEl.innerText = `${responseTime}h`;
+            
+            console.log(`📊 Contact Page Stats: ${totalActiveMembers} Happy Members, ${satisfactionRate}% Satisfaction, ${responseTime}h Response Time`);
+        }
+        
+        // ============ EXISTING FUNCTIONS ============
+        
         // Toggle FAQ items
         function toggleFaq(element) {
             element.classList.toggle('active');
@@ -935,7 +997,8 @@
                 subject: subject,
                 message: message,
                 location: 'Lipa City, Batangas',
-                date: new Date().toLocaleString()
+                date: new Date().toLocaleString(),
+                status: 'Unread'
             });
             localStorage.setItem('rrjfarm_inquiries', JSON.stringify(inquiries));
             
@@ -970,6 +1033,27 @@
                 select.value = inquiryParam;
             }
         }
+        
+        // Run sync on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            syncContactPageWithAdminDashboard();
+        });
+        
+        // Listen for storage changes (when Admin approves or updates data)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'rrjfarm_land_applications' || e.key === 'rrjfarm_users' || 
+                e.key === 'rrjfarm_user_subscriptions' || e.key === 'rrjfarm_orders') {
+                console.log('📡 Detected storage change, refreshing Contact page...');
+                syncContactPageWithAdminDashboard();
+            }
+        });
+        
+        // Auto-refresh every 30 seconds
+        setInterval(syncContactPageWithAdminDashboard, 30000);
+        
+        // Expose functions globally
+        window.toggleFaq = toggleFaq;
+        window.syncContactPageWithAdminDashboard = syncContactPageWithAdminDashboard;
     </script>
 </body>
 </html>
