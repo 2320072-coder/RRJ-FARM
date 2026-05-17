@@ -27,6 +27,7 @@
         .hero-stat { text-align: center; }
         .hero-stat .number { font-size: 1.8rem; font-weight: 800; color: #2d6a2d; }
         .hero-stat .label { font-size: 0.7rem; color: #4a5b4a; }
+        .live-badge { background: #ffd700; color: #1a2e1a; font-size: 0.6rem; padding: 0.2rem 0.5rem; border-radius: 20px; margin-left: 0.5rem; vertical-align: middle; }
         .hero-badge { background: #f0f4e8; display: inline-block; padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.8rem; margin-top: 1rem; }
         
         .mission-vision { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
@@ -57,6 +58,9 @@
         .footer-links ul { list-style: none; }
         .footer-links a { color: #a8c8a8; text-decoration: none; font-size: 0.8rem; line-height: 1.8; }
         .footer-bottom { text-align: center; padding-top: 1.5rem; border-top: 1px solid #2a4a2a; font-size: 0.7rem; }
+        
+        .success-toast { position: fixed; bottom: 20px; right: 20px; background: #2d6a2d; color: white; padding: 0.8rem 1.2rem; border-radius: 50px; display: none; z-index: 1500; animation: slideInRight 0.3s ease; font-size: 0.8rem; }
+        @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         
         /* Mobile Responsive */
         @media (max-width: 900px) {
@@ -118,15 +122,15 @@
                     </div>
                     <div class="hero-stats">
                         <div class="hero-stat">
-                            <div class="number">30</div>
-                            <div class="label">Active Members</div>
+                            <div class="number" id="aboutActiveMembers">30</div>
+                            <div class="label">Active Members <span class="live-badge">LIVE</span></div>
                         </div>
                         <div class="hero-stat">
-                            <div class="number">23</div>
+                            <div class="number" id="aboutStewardedLots">23</div>
                             <div class="label">Stewarded Lots</div>
                         </div>
                         <div class="hero-stat">
-                            <div class="number">92%</div>
+                            <div class="number" id="aboutSatisfaction">92%</div>
                             <div class="label">Satisfaction</div>
                         </div>
                     </div>
@@ -223,5 +227,94 @@
             </div>
         </div>
     </footer>
+
+    <div id="successToast" class="success-toast"></div>
+
+    <script>
+        // ============ ABOUT PAGE SYNC WITH ADMIN DASHBOARD ============
+        
+        function showToast(msg) { 
+            let t = document.getElementById('successToast'); 
+            t.innerHTML = msg; 
+            t.style.display = 'block'; 
+            setTimeout(() => t.style.display = 'none', 3000); 
+        }
+        
+        function syncAboutPageWithAdminDashboard() {
+            console.log('🔄 Syncing About page with Admin Dashboard...');
+            
+            // Get data from localStorage (shared with Admin Dashboard)
+            const users = JSON.parse(localStorage.getItem('rrjfarm_users') || '[]');
+            const subscriptions = JSON.parse(localStorage.getItem('rrjfarm_user_subscriptions') || '[]');
+            const landApplications = JSON.parse(localStorage.getItem('rrjfarm_land_applications') || '[]');
+            const orders = JSON.parse(localStorage.getItem('rrjfarm_orders') || '[]');
+            const workshopRegs = JSON.parse(localStorage.getItem('rrjfarm_registered_workshops') || '[]');
+            const rentTrans = JSON.parse(localStorage.getItem('rrjfarm_rent_transactions') || '[]');
+            
+            // ============ 1. ACTIVE MEMBERS ============
+            // Active Members = approved users from rrjfarm_users + approved land stewards
+            const approvedUsers = users.filter(u => u.status === 'approved');
+            const approvedLandStewards = landApplications.filter(app => app.status === 'Approved');
+            const totalActiveMembers = approvedUsers.length + approvedLandStewards.length;
+            
+            // ============ 2. STEWARDED LOTS ============
+            // Count unique land stewards (each steward typically stewards 1 lot)
+            // Also count from approved land applications
+            const uniqueStewards = new Set();
+            approvedLandStewards.forEach(steward => uniqueStewards.add(steward.name));
+            approvedUsers.forEach(user => {
+                if (user.role === 'farmer' || user.subscription === 'land_stewardship') {
+                    uniqueStewards.add(user.name);
+                }
+            });
+            const totalStewardedLots = uniqueStewards.size;
+            
+            // ============ 3. SATISFACTION RATE ============
+            // Calculate based on completed orders and workshop feedback
+            const completedOrders = orders.filter(o => o.status === 'delivered' || o.status === 'Completed');
+            const totalTransactions = orders.length + workshopRegs.length;
+            const positiveInteractions = completedOrders.length + workshopRegs.length;
+            const satisfactionRate = totalTransactions > 0 ? Math.round((positiveInteractions / totalTransactions) * 100) : 92;
+            
+            // ============ UPDATE ABOUT PAGE STATS ============
+            const activeEl = document.getElementById('aboutActiveMembers');
+            const lotsEl = document.getElementById('aboutStewardedLots');
+            const satisfactionEl = document.getElementById('aboutSatisfaction');
+            
+            if (activeEl) activeEl.innerText = totalActiveMembers;
+            if (lotsEl) lotsEl.innerText = totalStewardedLots;
+            if (satisfactionEl) satisfactionEl.innerText = `${satisfactionRate}%`;
+            
+            console.log(`📊 About Page Stats: ${totalActiveMembers} Active Members, ${totalStewardedLots} Stewarded Lots, ${satisfactionRate}% Satisfaction`);
+            
+            // Also update the timeline "First 32 members" text if needed
+            const timelineItem = document.querySelector('.timeline-item:nth-child(2)');
+            if (timelineItem && totalActiveMembers > 0) {
+                // Optional: Update timeline with actual member count
+                // timelineItem.innerHTML = `<strong>2024</strong> - Pilot Launch: First ${totalActiveMembers} members joined the Community Land Trust.`;
+            }
+        }
+        
+        // Run sync on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            syncAboutPageWithAdminDashboard();
+        });
+        
+        // Listen for storage changes (when Admin approves or updates data)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'rrjfarm_land_applications' || e.key === 'rrjfarm_users' || 
+                e.key === 'rrjfarm_user_subscriptions' || e.key === 'rrjfarm_orders') {
+                console.log('📡 Detected storage change, refreshing About page...');
+                syncAboutPageWithAdminDashboard();
+                showToast('🔄 About page updated with latest data!');
+            }
+        });
+        
+        // Auto-refresh every 30 seconds
+        setInterval(syncAboutPageWithAdminDashboard, 30000);
+        
+        // Expose function globally
+        window.syncAboutPageWithAdminDashboard = syncAboutPageWithAdminDashboard;
+    </script>
 </body>
 </html>
